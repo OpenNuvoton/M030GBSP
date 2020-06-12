@@ -114,7 +114,7 @@ int main(void)
             u32thermalData = ~u32thermalData;
             u32thermalData++;
             u32thermalData &= 0x7FF;
-            u32thermalData *= TS_DEGREE_PER_BIT;
+            u32thermalData *= TS_DEGREE_PER_LSB;
             u32digiPart = u32thermalData / 10000;
             u32deciPart = u32thermalData % 10000;
             printf("\nMeasured sensor data = -%d.%d !!!\n\n", u32digiPart, u32deciPart);
@@ -123,7 +123,7 @@ int main(void)
         {
             /* positive tempature*/
             u32thermalData &= 0x7FF;
-            u32thermalData *= TS_DEGREE_PER_BIT;
+            u32thermalData *= TS_DEGREE_PER_LSB;
             u32digiPart = u32thermalData / 10000;
             u32deciPart = u32thermalData % 10000;
             printf("\nMeasured sensor data = %d.%d !!!\n\n", u32digiPart, u32deciPart);
