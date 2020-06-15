@@ -23,7 +23,8 @@
     Memory Mapped Structure for FMC Controller
 @{ */
 
-typedef struct {
+typedef struct
+{
 
 
     /**
@@ -165,10 +166,10 @@ typedef struct {
      * |        |          |Others = Frequency <= 50MHz.
     */
     __IO uint32_t FTCTL;
-		
-	  __IO uint32_t ICPCTL;                     /*!< Offset: 0x001C   ICP Enabled Control Register                       */
 
-		
+    __IO uint32_t ICPCTL;                     /*!< Offset: 0x001C   ICP Enabled Control Register                       */
+
+
     /// @cond HIDDEN_SYMBOLS
     __I  uint32_t RESERVED0[8];
     /// @endcond //HIDDEN_SYMBOLS

@@ -40,8 +40,8 @@ void SystemCoreClockUpdate(void)
     uint32_t u32Freq;
     uint32_t u32HclkDiv;
 
-		/* HCLK only from HIRC */
-		u32Freq = __HIRC;
+    /* HCLK only from HIRC */
+    u32Freq = __HIRC;
 
     u32HclkDiv = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
 
