@@ -199,8 +199,10 @@ extern void SystemInit(void);
 #define WDT_BASE            (APB1_BASE      + 0x40000)                  /*!< Watch Dog Timer Base Address                     */
 #define WWDT_BASE           (APB1_BASE      + 0x40100)                  /*!< Window Watch Dog Timer Base Address              */
 #define ADC_BASE            (APB1_BASE      + 0x43000)                  /*!< ADC Base Address                                 */
-#define DAC01_BASE          (APB1_BASE      + 0x47000)                  /*!< DAC01 Base Address                               */
-#define DAC23_BASE          (APB1_BASE      + 0x4B000)                  /*!< DAC23 Base Address                               */
+#define DAC0_BASE           (APB1_BASE      + 0x47000)                  /*!< DAC0 Base Address                                */
+#define DAC1_BASE           (APB1_BASE      + 0x47040)                  /*!< DAC1 Base Address                                */
+#define DAC2_BASE           (APB1_BASE      + 0x4B000)                  /*!< DAC2 Base Address                                */
+#define DAC3_BASE           (APB1_BASE      + 0x4B040)                  /*!< DAC3 Base Address                                */
 
 #define TIMER0_BASE         (APB1_BASE      + 0x50000)                  /*!< Timer0 Base Address                              */
 #define TIMER1_BASE         (APB1_BASE      + 0x50020)                  /*!< Timer1 Base Address                              */
@@ -252,8 +254,10 @@ extern void SystemInit(void);
 
 #define ADC                 ((ADC_T *) ADC_BASE)                        /*!< ADC Configuration Struct                         */
 
-#define DAC01               ((DAC_T *) DAC01_BASE)                      /*!< DAC01 Configuration Struct                       */
-#define DAC23               ((DAC_T *) DAC23_BASE)                      /*!< DAC23 Configuration Struct                       */
+#define DAC0                ((DAC_T *) DAC0_BASE)                       /*!< DAC01 Configuration Struct                       */
+#define DAC1                ((DAC_T *) DAC1_BASE)                       /*!< DAC01 Configuration Struct                       */
+#define DAC2                ((DAC_T *) DAC2_BASE)                       /*!< DAC23 Configuration Struct                       */
+#define DAC3                ((DAC_T *) DAC3_BASE)                       /*!< DAC23 Configuration Struct                       */
 
 #define CLK                 ((CLK_T *) CLK_BASE)                        /*!< System Clock Controller Configuration Struct     */
 
