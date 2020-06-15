@@ -317,7 +317,7 @@ void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src)
   */
 void TIMER_SetTriggerTarget(TIMER_T *timer, uint32_t u32Mask)
 {
-    timer->CTL = (timer->CTL & ~(TIMER_CTL_TRGBPWM_Msk | TIMER_CTL_TRGADC_Msk | TIMER_CTL_TRGPDMA_Msk)) | (u32Mask);
+    timer->CTL = (timer->CTL & ~(TIMER_CTL_TRGBPWM_Msk | TIMER_CTL_TRGDAC_Msk | TIMER_CTL_TRGADC_Msk | TIMER_CTL_TRGPDMA_Msk)) | (u32Mask);
 }
 
 /*@}*/ /* end of group TIMER_EXPORTED_FUNCTIONS */
