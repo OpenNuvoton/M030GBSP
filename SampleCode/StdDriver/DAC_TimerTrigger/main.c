@@ -3,7 +3,6 @@
  * @version  V0.10
  * @brief    Demonstrate how to trigger DAC by timer.
  *
- * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
@@ -27,15 +26,15 @@ extern void initialise_monitor_handles(void);
 
 void DAC01_IRQHandler(void)
 {
-    if (DAC_GET_INT_FLAG(DAC01, 0))
+    if (DAC_GET_INT_FLAG(DAC0, 0))
     {
         if (g_u32Index == g_u32ArraySize)
             g_u32Index = 0;
         else
         {
-            DAC_WRITE_DATA(DAC01, 0, g_au16Sine[g_u32Index++]);
+            DAC_WRITE_DATA(DAC0, 0, g_au16Sine[g_u32Index++]);
             /* Clear the DAC conversion complete finish flag */
-            DAC_CLR_INT_FLAG(DAC01, 0);
+            DAC_CLR_INT_FLAG(DAC0, 0);
         }
     }
 
@@ -111,19 +110,19 @@ int32_t main(void)
     printf("Hit any key to start!\n");
     getchar();
     /* Set the timer 0 trigger,DAC and enable D/A converter */
-    DAC_Open(DAC01, 0, DAC_TIMER0_TRIGGER);
+    DAC_Open(DAC0, 0, DAC_TIMER0_TRIGGER);
 
     /* The DAC conversion settling time is 1us */
-    DAC_SetDelayTime(DAC01, 1);
+    DAC_SetDelayTime(DAC0, 1);
 
     /* Set DAC 12-bit holding data */
-    DAC_WRITE_DATA(DAC01, 0, g_au16Sine[g_u32Index]);
+    DAC_WRITE_DATA(DAC0, 0, g_au16Sine[g_u32Index]);
 
     /* Clear the DAC conversion complete finish flag for safe */
-    DAC_CLR_INT_FLAG(DAC01, 0);
+    DAC_CLR_INT_FLAG(DAC0, 0);
 
     /* Enable the DAC interrupt.  */
-    DAC_ENABLE_INT(DAC01, 0);
+    DAC_ENABLE_INT(DAC0, 0);
     NVIC_EnableIRQ(DAC01_IRQn);
 
     /* Configure Timer 0 frequency to 1000Hz and start it. */

@@ -3,7 +3,6 @@
  * @version  V0.10
  * @brief    Demonstrate how to PDMA and trigger DAC by Timer.
  *
- * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
@@ -96,7 +95,7 @@ int32_t main(void)
     PDMA_SetTransferCnt(PDMA, 0, PDMA_WIDTH_16, g_u32ArraySize);
 
     /* transfer width is one word(32 bit) */
-    PDMA_SetTransferAddr(PDMA, 0, (uint32_t)&g_au16Sine[0], PDMA_SAR_INC, (uint32_t)&DAC01->DAT, PDMA_DAR_FIX);
+    PDMA_SetTransferAddr(PDMA, 0, (uint32_t)&g_au16Sine[0], PDMA_SAR_INC, (uint32_t)&DAC0->DAT, PDMA_DAR_FIX);
 
     /* Select channel 0 request source from DAC */
     PDMA_SetTransferMode(PDMA, 0, PDMA_DAC0_TX, FALSE, 0);
@@ -105,16 +104,16 @@ int32_t main(void)
     PDMA_SetBurstType(PDMA, 0, PDMA_REQ_SINGLE, PDMA_BURST_128);
 
     /* Set the timer 0 trigger DAC and enable D/A converter */
-    DAC_Open(DAC01, 0, DAC_TIMER0_TRIGGER);
+    DAC_Open(DAC0, 0, DAC_TIMER0_TRIGGER);
 
     /* The DAC conversion settling time is 1us */
-    DAC_SetDelayTime(DAC01, 1);
+    DAC_SetDelayTime(DAC0, 1);
 
     /* Clear the DAC conversion complete finish flag for safe */
-    DAC_CLR_INT_FLAG(DAC01, 0);
+    DAC_CLR_INT_FLAG(DAC0, 0);
 
     /* Enable the PDMA Mode */
-    DAC_ENABLE_PDMA(DAC01);
+    DAC_ENABLE_PDMA(DAC0);
 
     /* Enable Timer0 counting to start D/A conversion */
     TIMER_Open(TIMER0, TIMER_PERIODIC_MODE, 1000);
