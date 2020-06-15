@@ -30,7 +30,7 @@ extern "C"
 /** @addtogroup TS_EXPORTED_CONSTANTS TS Exported Constants
   @{
 */
-#define TS_DEGREE_PER_BIT		625ul		 /*!< 0.0625 degree per bit \hideinitializer */
+#define TS_DEGREE_PER_LSB		625ul		 /*!< 0.0625 degree per LSB \hideinitializer */
 
 /*@}*/ /* end of group TS_EXPORTED_CONSTANTS */
 
