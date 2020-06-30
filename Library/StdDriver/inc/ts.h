@@ -151,7 +151,15 @@ extern "C"
   * @return     None.
   * @details    Set thermal sensor offset register
   */
-#define TS_SET_OFFSET(offset)	(SYS->TSTRIM = (SYS->TSTRIM &= ~SYS_TSTRIM_TSOFFSET_Msk) | ((offset&0xFFFul)<<SYS_TSTRIM_TSOFFSET_Pos))
+#define TS_SET_OFFSET(offset)	(SYS->TSTRIM = ((SYS->TSTRIM &= ~SYS_TSTRIM_TSOFFSET_Msk) | ((offset&0xFFFul)<<SYS_TSTRIM_TSOFFSET_Pos)))
+
+/**
+  * @brief      Get offset register.
+  * @param[in]  None
+  * @return     Offset value (12-bit)
+  * @details    Get thermal sensor offset register
+  */
+#define TS_GET_OFFSET(offset)	((SYS->TSTRIM & SYS_TSTRIM_TSOFFSET_Msk)>>SYS_TSTRIM_TSOFFSET_Pos)
 
 /**
   * @brief      Get offset register.
@@ -167,7 +175,15 @@ extern "C"
   * @return     None.
   * @details    Set thermal sensor fine tune register
   */
-#define TS_SET_TUNE(tune)	(SYS->TSTRIM = (SYS->TSTRIM &= ~SYS_TSTRIM_TSTUNE_Msk) | ((tune&0xFul)<<SYS_TSTRIM_TSTUNE_Pos))
+#define TS_SET_TUNE(tune)	(SYS->TSTRIM = ((SYS->TSTRIM &= ~SYS_TSTRIM_TSTUNE_Msk) | ((tune&0xFul)<<SYS_TSTRIM_TSTUNE_Pos)))
+
+/**
+  * @brief      Get fine tune register.
+  * @param[in]  Fine tune value (4-bit)
+  * @return     None.
+  * @details    Get thermal sensor fine tune register
+  */
+#define TS_GET_TUNE(tune)	((SYS->TSTRIM & SYS_TSTRIM_TSTUNE_Msk)>>SYS_TSTRIM_TSTUNE_Pos)
 
 /**
   * @brief      Get fine tune register.
