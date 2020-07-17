@@ -80,7 +80,7 @@ void SYS_Init(void)
                     (SYS_GPB_MFPH_PB12MFP_UART0_RXD | SYS_GPB_MFPH_PB13MFP_UART0_TXD);
 
     /* Set PA multi-function pins for DAC voltage output */
-    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~SYS_GPA_MFPL_PA0MFP_Msk) | SYS_GPA_MFPL_PA0MFP_DAC0;
+    SYS->GPA_MFPL = (SYS->GPA_MFPL & ~SYS_GPA_MFPL_PA0MFP_Msk) | SYS_GPA_MFPL_PA0MFP_DAC0_OUT;
 
     /* Set PA.0 to input mode */
     PA->MODE &= ~(GPIO_MODE_MODE0_Msk) ;
