@@ -103,7 +103,7 @@ int32_t main(void)
     printf("+------------------------------------------------------------------------+\n");
     printf("  This sample code will output waveform with BPWM1 channel 0~5.\n");
     printf("  I/O configuration:\n");
-    printf("    waveform output pin: BPWM1_CH0(PA.0), BPWM1_CH1(PA.1), BPWM1_CH2(PA.2), BPWM1_CH3(PA.3), BPWM1_CH4(PF.5), BPWM1_CH5(PF.4)\n");
+    printf("    waveform output pin: BPWM1_CH0(PF.3), BPWM1_CH1(PF.2), BPWM1_CH2(PA.12), BPWM1_CH3(PA.13), BPWM1_CH4(PA.14), BPWM1_CH5(PA.15)\n");
 
 
     /* BPWM1 channel 0~5 frequency and duty configuration are as follows */

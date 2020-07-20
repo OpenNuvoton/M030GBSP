@@ -90,26 +90,28 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 */
 /* PA.0 MFP */
 #define SYS_GPA_MFPL_PA0MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for GPIO          \hideinitializer */
-#define SYS_GPA_MFPL_PA0MFP_DAC0        (0x01UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for DAC0          \hideinitializer */
+#define SYS_GPA_MFPL_PA0MFP_DAC0_OUT    (0x01UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for DAC0_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA0MFP_SPI0_MOSI   (0x04UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for SPI0_MOSI     \hideinitializer */
 #define SYS_GPA_MFPL_PA0MFP_UART0_RXD   (0x07UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for UART0_RXD     \hideinitializer */
 
 /* PA.1 MFP */
 #define SYS_GPA_MFPL_PA1MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for GPIO          \hideinitializer */
-#define SYS_GPA_MFPL_PA1MFP_DAC1        (0x01UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for DAC0          \hideinitializer */
+#define SYS_GPA_MFPL_PA1MFP_DAC1_OUT    (0x01UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for DAC1_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA1MFP_SPI0_MISO   (0x04UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for SPI0_MISO     \hideinitializer */
 #define SYS_GPA_MFPL_PA1MFP_UART0_TXD   (0x07UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for UART0_TXD     \hideinitializer */
 
 /* PA.2 MFP */
 #define SYS_GPA_MFPL_PA2MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for GPIO          \hideinitializer */
-#define SYS_GPA_MFPL_PA2MFP_DAC2        (0x01UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for DAC0          \hideinitializer */
+#define SYS_GPA_MFPL_PA2MFP_DAC2_OUT    (0x01UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for DAC2_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA2MFP_SPI0_CLK    (0x04UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for SPI0_CLK      \hideinitializer */
+#define SYS_GPA_MFPL_PA2MFP_I2C0_SMBSUS (0x07UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for I2C0_SMBSUS   \hideinitializer */
 #define SYS_GPA_MFPL_PA2MFP_I2C1_SDA    (0x09UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for I2C1_SDA      \hideinitializer */
 
 /* PA.3 MFP */
 #define SYS_GPA_MFPL_PA3MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for GPIO          \hideinitializer */
-#define SYS_GPA_MFPL_PA3MFP_DAC3        (0x01UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for DAC0          \hideinitializer */
+#define SYS_GPA_MFPL_PA3MFP_DAC3_OUT    (0x01UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for DAC3_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_SPI0_SS     (0x04UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for SPI0_SS       \hideinitializer */
+#define SYS_GPA_MFPL_PA3MFP_I2C0_SMBAL  (0x07UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for I2C0_SMBAL    \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_I2C1_SCL    (0x09UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for I2C1_SCL      \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_CLKO        (0x0EUL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPB_MFPL PA3 setting for CLKO          \hideinitializer */
 
