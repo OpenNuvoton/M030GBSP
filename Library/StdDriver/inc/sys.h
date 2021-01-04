@@ -38,6 +38,8 @@ extern "C"
 #define GPIO_RST    ((0x4<<24)|SYS_IPRST1_GPIORST_Pos)      /*!< GPIO  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define TMR0_RST    ((0x4<<24)|SYS_IPRST1_TMR0RST_Pos)      /*!< TMR0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define TMR1_RST    ((0x4<<24)|SYS_IPRST1_TMR1RST_Pos)      /*!< TMR1  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define TMR2_RST    ((0x4<<24)|SYS_IPRST1_TMR2RST_Pos)      /*!< TMR2  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define TMR3_RST    ((0x4<<24)|SYS_IPRST1_TMR3RST_Pos)      /*!< TMR3  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define I2C0_RST    ((0x4<<24)|SYS_IPRST1_I2C0RST_Pos)      /*!< I2C0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define I2C1_RST    ((0x4<<24)|SYS_IPRST1_I2C1RST_Pos)      /*!< I2C1  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define SPI0_RST    ((0x4<<24)|SYS_IPRST1_SPI0RST_Pos)      /*!< SPI0  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
@@ -47,6 +49,9 @@ extern "C"
 #define DAC01_RST   ((0x8<<24)|SYS_IPRST2_DAC01RST_Pos)     /*!< DAC01 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define DAC23_RST   ((0x8<<24)|SYS_IPRST2_DAC23RST_Pos)     /*!< DAC23 reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define BPWM_RST    ((0x8<<24)|SYS_IPRST2_BPWMRST_Pos)      /*!< BPWM  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define MANCH_RST   ((0x8<<24)|SYS_IPRST2_MANCHRST_Pos)     /*!< MANCH reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define TMR4_RST    ((0x8<<24)|SYS_IPRST2_TMR4RST_Pos)      /*!< TMR4  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
+#define TMR5_RST    ((0x8<<24)|SYS_IPRST2_TMR5RST_Pos)      /*!< TMR5  reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 #define TS_RST      ((0x8<<24)|SYS_IPRST2_TSRST_Pos)        /*!< TS    reset is one of the \ref SYS_ResetModule parameter   \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
@@ -93,12 +98,16 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPA_MFPL_PA0MFP_DAC0_OUT    (0x01UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for DAC0_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA0MFP_SPI0_MOSI   (0x04UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for SPI0_MOSI     \hideinitializer */
 #define SYS_GPA_MFPL_PA0MFP_UART0_RXD   (0x07UL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for UART0_RXD     \hideinitializer */
+#define SYS_GPA_MFPL_PA0MFP_BPWM1_CH0   (0x0CUL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for BPWM1_CH0     \hideinitializer */
+#define SYS_GPA_MFPL_PA0MFP_BPWM1_CH4   (0x0FUL<<SYS_GPA_MFPL_PA0MFP_Pos)   /*!< GPA_MFPL PA0 setting for BPWM1_CH4     \hideinitializer */
 
 /* PA.1 MFP */
 #define SYS_GPA_MFPL_PA1MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for GPIO          \hideinitializer */
 #define SYS_GPA_MFPL_PA1MFP_DAC1_OUT    (0x01UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for DAC1_OUT      \hideinitializer */
 #define SYS_GPA_MFPL_PA1MFP_SPI0_MISO   (0x04UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for SPI0_MISO     \hideinitializer */
 #define SYS_GPA_MFPL_PA1MFP_UART0_TXD   (0x07UL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for UART0_TXD     \hideinitializer */
+#define SYS_GPA_MFPL_PA1MFP_BPWM1_CH1   (0x0CUL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for BPWM1_CH1     \hideinitializer */
+#define SYS_GPA_MFPL_PA1MFP_MANCH_RXD   (0x0FUL<<SYS_GPA_MFPL_PA1MFP_Pos)   /*!< GPA_MFPL PA1 setting for MANCH_RXD     \hideinitializer */
 
 /* PA.2 MFP */
 #define SYS_GPA_MFPL_PA2MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for GPIO          \hideinitializer */
@@ -106,6 +115,8 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPA_MFPL_PA2MFP_SPI0_CLK    (0x04UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for SPI0_CLK      \hideinitializer */
 #define SYS_GPA_MFPL_PA2MFP_I2C0_SMBSUS (0x07UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for I2C0_SMBSUS   \hideinitializer */
 #define SYS_GPA_MFPL_PA2MFP_I2C1_SDA    (0x09UL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for I2C1_SDA      \hideinitializer */
+#define SYS_GPA_MFPL_PA2MFP_BPWM1_CH2   (0x0CUL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for BPWM1_CH2     \hideinitializer */
+#define SYS_GPA_MFPL_PA2MFP_MANCH_TXD   (0x0FUL<<SYS_GPA_MFPL_PA2MFP_Pos)   /*!< GPA_MFPL PA2 setting for MANCH_TXD     \hideinitializer */
 
 /* PA.3 MFP */
 #define SYS_GPA_MFPL_PA3MFP_GPIO        (0x00UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for GPIO          \hideinitializer */
@@ -113,27 +124,34 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPA_MFPL_PA3MFP_SPI0_SS     (0x04UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for SPI0_SS       \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_I2C0_SMBAL  (0x07UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for I2C0_SMBAL    \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_I2C1_SCL    (0x09UL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for I2C1_SCL      \hideinitializer */
+#define SYS_GPA_MFPL_PA3MFP_BPWM1_CH3   (0x0CUL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for BPWM1_CH3     \hideinitializer */
 #define SYS_GPA_MFPL_PA3MFP_CLKO        (0x0EUL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPB_MFPL PA3 setting for CLKO          \hideinitializer */
+#define SYS_GPA_MFPL_PA3MFP_BPWM1_CH5   (0x0FUL<<SYS_GPA_MFPL_PA3MFP_Pos)   /*!< GPA_MFPL PA3 setting for BPWM1_CH5     \hideinitializer */
 
 /* PA.12 MFP */
 #define SYS_GPA_MFPH_PA12MFP_GPIO       (0x00UL<<SYS_GPA_MFPH_PA12MFP_Pos)  /*!< GPA_MFPH PA12 setting for GPIO         \hideinitializer */
 #define SYS_GPA_MFPH_PA12MFP_I2C1_SCL   (0x04UL<<SYS_GPA_MFPH_PA12MFP_Pos)  /*!< GPA_MFPH PA12 setting for I2C1_SCL     \hideinitializer */
 #define SYS_GPA_MFPH_PA12MFP_BPWM1_CH2  (0x0BUL<<SYS_GPA_MFPH_PA12MFP_Pos)  /*!< GPA_MFPH PA12 setting for BPWM1_CH2    \hideinitializer */
+#define SYS_GPA_MFPH_PA12MFP_TM4        (0x0EUL<<SYS_GPA_MFPH_PA12MFP_Pos)  /*!< GPA_MFPH PA12 setting for TM4          \hideinitializer */
 
 /* PA.13 MFP */
 #define SYS_GPA_MFPH_PA13MFP_GPIO       (0x00UL<<SYS_GPA_MFPH_PA13MFP_Pos)  /*!< GPA_MFPH PA13 setting for GPIO         \hideinitializer */
 #define SYS_GPA_MFPH_PA13MFP_I2C1_SDA   (0x04UL<<SYS_GPA_MFPH_PA13MFP_Pos)  /*!< GPA_MFPH PA13 setting for I2C1_SDA     \hideinitializer */
 #define SYS_GPA_MFPH_PA13MFP_BPWM1_CH3  (0x0BUL<<SYS_GPA_MFPH_PA13MFP_Pos)  /*!< GPA_MFPH PA13 setting for BPWM1_CH3    \hideinitializer */
+#define SYS_GPA_MFPH_PA13MFP_TM5        (0x0EUL<<SYS_GPA_MFPH_PA13MFP_Pos)  /*!< GPA_MFPH PA13 setting for TM5          \hideinitializer */
 
 /* PA.14 MFP */
 #define SYS_GPA_MFPH_PA14MFP_GPIO       (0x00UL<<SYS_GPA_MFPH_PA14MFP_Pos)  /*!< GPA_MFPH PA14 setting for GPIO         \hideinitializer */
 #define SYS_GPA_MFPH_PA14MFP_UART0_TXD  (0x03UL<<SYS_GPA_MFPH_PA14MFP_Pos)  /*!< GPA_MFPH PA14 setting for UART0_TXD    \hideinitializer */
+#define SYS_GPA_MFPH_PA14MFP_I2C1_SCL   (0x04UL<<SYS_GPA_MFPH_PA14MFP_Pos)  /*!< GPA_MFPH PA14 setting for I2C1_SCL     \hideinitializer */
 #define SYS_GPA_MFPH_PA14MFP_BPWM1_CH4  (0x0BUL<<SYS_GPA_MFPH_PA14MFP_Pos)  /*!< GPA_MFPH PA14 setting for BPWM1_CH4    \hideinitializer */
+#define SYS_GPA_MFPH_PA14MFP_TM4_EXT    (0x0EUL<<SYS_GPA_MFPH_PA14MFP_Pos)  /*!< GPA_MFPH PA14 setting for TM4_EXT      \hideinitializer */
 
 /* PA.15 MFP */
 #define SYS_GPA_MFPH_PA15MFP_GPIO       (0x00UL<<SYS_GPA_MFPH_PA15MFP_Pos)  /*!< GPA_MFPH PA15 setting for GPIO         \hideinitializer */
 #define SYS_GPA_MFPH_PA15MFP_UART0_RXD  (0x03UL<<SYS_GPA_MFPH_PA15MFP_Pos)  /*!< GPA_MFPH PA15 setting for UART0_RXD    \hideinitializer */
 #define SYS_GPA_MFPH_PA15MFP_BPWM1_CH5  (0x0BUL<<SYS_GPA_MFPH_PA15MFP_Pos)  /*!< GPA_MFPH PA15 setting for BPWM1_CH5    \hideinitializer */
+#define SYS_GPA_MFPH_PA15MFP_TM5_EXT    (0x0EUL<<SYS_GPA_MFPH_PA15MFP_Pos)  /*!< GPA_MFPH PA15 setting for TM5_EXT      \hideinitializer */
 
 /* PB.0 MFP */
 #define SYS_GPB_MFPL_PB0MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB0MFP_Pos)   /*!< GPB_MFPL PB0 setting for GPIO          \hideinitializer */
@@ -144,6 +162,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPB_MFPL_PB1MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB1MFP_ADC0_CH1    (0x01UL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for ADC0_CH1      \hideinitializer */
 #define SYS_GPB_MFPL_PB1MFP_UART0_RXD   (0x03UL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for UART0_RXD     \hideinitializer */
+#define SYS_GPB_MFPL_PB1MFP_I2C1_SDA    (0x04UL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for I2C1_SDA      \hideinitializer */
 #define SYS_GPB_MFPL_PB1MFP_I2C1_SCL    (0x09UL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for I2C1_SCL      \hideinitializer */
 #define SYS_GPB_MFPL_PB1MFP_BPWM1_CH4   (0x0EUL<<SYS_GPB_MFPL_PB1MFP_Pos)   /*!< GPB_MFPL PB1 setting for BPWM1_CH4     \hideinitializer */
 
@@ -151,16 +170,23 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPB_MFPL_PB2MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB2MFP_ADC0_CH2    (0x01UL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for ADC0_CH2      \hideinitializer */
 #define SYS_GPB_MFPL_PB2MFP_I2C1_SDA    (0x04UL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for I2C1_SDA      \hideinitializer */
+#define SYS_GPB_MFPL_PB2MFP_TM5         (0x05UL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for TM5           \hideinitializer */
+#define SYS_GPB_MFPL_PB2MFP_I2C1_SCL    (0x09UL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for I2C1_SCL      \hideinitializer */
 #define SYS_GPB_MFPL_PB2MFP_BPWM1_CH3   (0x0AUL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for BPWM1_CH3     \hideinitializer */
 #define SYS_GPB_MFPL_PB2MFP_TM1         (0x0CUL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for TM1           \hideinitializer */
+#define SYS_GPB_MFPL_PB2MFP_MANCH_RXD   (0x0DUL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for MANCH_RXD     \hideinitializer */
+#define SYS_GPB_MFPL_PB2MFP_TM3         (0x0EUL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for TM3           \hideinitializer */
 #define SYS_GPB_MFPL_PB2MFP_INT3        (0x0FUL<<SYS_GPB_MFPL_PB2MFP_Pos)   /*!< GPB_MFPL PB2 setting for INT3          \hideinitializer */
 
 /* PB.3 MFP */
 #define SYS_GPB_MFPL_PB3MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_ADC0_CH3    (0x01UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for ADC0_CH3      \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_I2C1_SCL    (0x04UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for I2C1_SCL      \hideinitializer */
+#define SYS_GPB_MFPL_PB3MFP_TM4         (0x09UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for TM4           \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_BPWM1_CH2   (0x0AUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for BPWM1_CH2     \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_TM0         (0x0CUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for TM0           \hideinitializer */
+#define SYS_GPB_MFPL_PB3MFP_MANCH_TXD   (0x0DUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for MANCH_TXD     \hideinitializer */
+#define SYS_GPB_MFPL_PB3MFP_TM2         (0x0EUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for TM2           \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_INT2        (0x0FUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for INT2          \hideinitializer */
 
 /* PB.4 MFP */
@@ -180,12 +206,14 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 /* PB.6 MFP */
 #define SYS_GPB_MFPL_PB6MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB6MFP_Pos)   /*!< GPB_MFPL PB6 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB6MFP_ADC0_CH6    (0x01UL<<SYS_GPB_MFPL_PB6MFP_Pos)   /*!< GPB_MFPL PB6 setting for ADC0_CH6      \hideinitializer */
+#define SYS_GPB_MFPL_PB6MFP_MANCH_RXD   (0x09UL<<SYS_GPB_MFPL_PB6MFP_Pos)   /*!< GPB_MFPL PB6 setting for MANCH_RXD     \hideinitializer */
 #define SYS_GPB_MFPL_PB6MFP_BPWM1_CH5   (0x0AUL<<SYS_GPB_MFPL_PB6MFP_Pos)   /*!< GPB_MFPL PB6 setting for BPWM1_CH5     \hideinitializer */
 #define SYS_GPB_MFPL_PB6MFP_INT4        (0x0DUL<<SYS_GPB_MFPL_PB6MFP_Pos)   /*!< GPB_MFPL PB6 setting for INT4          \hideinitializer */
 
 /* PB.7 MFP */
 #define SYS_GPB_MFPL_PB7MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB7MFP_Pos)   /*!< GPB_MFPL PB7 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB7MFP_ADC0_CH7    (0x01UL<<SYS_GPB_MFPL_PB7MFP_Pos)   /*!< GPB_MFPL PB7 setting for ADC0_CH7      \hideinitializer */
+#define SYS_GPB_MFPL_PB7MFP_MANCH_TXD   (0x09UL<<SYS_GPB_MFPL_PB7MFP_Pos)   /*!< GPB_MFPL PB7 setting for MANCH_TXD     \hideinitializer */
 #define SYS_GPB_MFPL_PB7MFP_BPWM1_CH4   (0x0AUL<<SYS_GPB_MFPL_PB7MFP_Pos)   /*!< GPB_MFPL PB7 setting for BPWM1_CH4     \hideinitializer */
 #define SYS_GPB_MFPL_PB7MFP_INT5        (0x0DUL<<SYS_GPB_MFPL_PB7MFP_Pos)   /*!< GPB_MFPL PB7 setting for INT5          \hideinitializer */
 
@@ -215,19 +243,28 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPB_MFPH_PB11MFP_UART0_TXD  (0x06UL<<SYS_GPB_MFPH_PB11MFP_Pos)  /*!< GPB_MFPH PB11 setting for UART0_TXD    \hideinitializer */
 #define SYS_GPB_MFPH_PB11MFP_I2C1_SCL   (0x07UL<<SYS_GPB_MFPH_PB11MFP_Pos)  /*!< GPB_MFPH PB11 setting for I2C1_SCL     \hideinitializer */
 #define SYS_GPB_MFPH_PB11MFP_BPWM1_CH0  (0x0AUL<<SYS_GPB_MFPH_PB11MFP_Pos)  /*!< GPB_MFPH PB11 setting for BPWM1_CH0    \hideinitializer */
+#define SYS_GPB_MFPH_PB11MFP_EXTCLK_IN  (0x0EUL<<SYS_GPB_MFPH_PB11MFP_Pos)  /*!< GPB_MFPH PB11 setting for EXTCLK_IN    \hideinitializer */
+#define SYS_GPB_MFPH_PB11MFP_MANCH_RXD  (0x0FUL<<SYS_GPB_MFPH_PB11MFP_Pos)  /*!< GPB_MFPH PB11 setting for MANCH_RXD    \hideinitializer */
 
 /* PB.12 MFP */
 #define SYS_GPB_MFPH_PB12MFP_GPIO       (0x00UL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for GPIO         \hideinitializer */
 #define SYS_GPB_MFPH_PB12MFP_ADC0_CH12  (0x01UL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for ADC0_CH12    \hideinitializer */
 #define SYS_GPB_MFPH_PB12MFP_SPI0_MOSI  (0x04UL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for SPI0_MOSI    \hideinitializer */
 #define SYS_GPB_MFPH_PB12MFP_UART0_RXD  (0x06UL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for UART0_RXD    \hideinitializer */
+#define SYS_GPB_MFPH_PB12MFP_EXTCLK_IN  (0x09UL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for EXTCLK_IN    \hideinitializer */
+#define SYS_GPB_MFPH_PB12MFP_TM5_EXT    (0x0AUL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for TM5_EXT      \hideinitializer */
+#define SYS_GPB_MFPH_PB12MFP_BPWM1_CH2  (0x0CUL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for BPWM1_CH2    \hideinitializer */
+#define SYS_GPB_MFPH_PB12MFP_TM3_EXT    (0x0DUL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for TM3_EXT      \hideinitializer */
 #define SYS_GPB_MFPH_PB12MFP_TM1_EXT    (0x0EUL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for TM1_EXT      \hideinitializer */
+#define SYS_GPB_MFPH_PB12MFP_MANCH_TXD  (0x0FUL<<SYS_GPB_MFPH_PB12MFP_Pos)  /*!< GPB_MFPH PB12 setting for MANCH_TXD    \hideinitializer */
 
 /* PB.13 MFP */
 #define SYS_GPB_MFPH_PB13MFP_GPIO       (0x00UL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for GPIO         \hideinitializer */
 #define SYS_GPB_MFPH_PB13MFP_ADC0_CH13  (0x01UL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for ADC0_CH13    \hideinitializer */
 #define SYS_GPB_MFPH_PB13MFP_SPI0_MISO  (0x04UL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for SPI0_MISO    \hideinitializer */
 #define SYS_GPB_MFPH_PB13MFP_UART0_TXD  (0x06UL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for UART0_TXD    \hideinitializer */
+#define SYS_GPB_MFPH_PB13MFP_TM4_EXT    (0x0AUL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for TM4_EXT      \hideinitializer */
+#define SYS_GPB_MFPH_PB13MFP_TM2_EXT    (0x0DUL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for TM2_EXT      \hideinitializer */
 #define SYS_GPB_MFPH_PB13MFP_TM0_EXT    (0x0EUL<<SYS_GPB_MFPH_PB13MFP_Pos)  /*!< GPB_MFPH PB13 setting for TM0_EXT      \hideinitializer */
 
 /* PB.14 MFP */
@@ -247,6 +284,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 
 /* PC.1 MFP */
 #define SYS_GPC_MFPL_PC1MFP_GPIO        (0x00UL<<SYS_GPC_MFPL_PC1MFP_Pos)   /*!< GPC_MFPL PC1 setting for GPIO          \hideinitializer */
+#define SYS_GPC_MFPL_PC1MFP_I2C1_SCL    (0x04UL<<SYS_GPC_MFPL_PC1MFP_Pos)   /*!< GPC_MFPL PC1 setting for I2C1_SCL      \hideinitializer */
 #define SYS_GPC_MFPL_PC1MFP_I2C0_SCL    (0x09UL<<SYS_GPC_MFPL_PC1MFP_Pos)   /*!< GPC_MFPL PC1 setting for I2C0_SCL      \hideinitializer */
 #define SYS_GPC_MFPL_PC1MFP_ADC0_ST     (0x0FUL<<SYS_GPC_MFPL_PC1MFP_Pos)   /*!< GPC_MFPL PC1 setting for ADC0_ST       \hideinitializer */
 
@@ -264,6 +302,7 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPF_MFPL_PF3MFP_GPIO        (0x00UL<<SYS_GPF_MFPL_PF3MFP_Pos)   /*!< GPF_MFPL PF3 setting for GPIO          \hideinitializer */
 #define SYS_GPF_MFPL_PF3MFP_UART0_TXD   (0x03UL<<SYS_GPF_MFPL_PF3MFP_Pos)   /*!< GPF_MFPL PF3 setting for UART0_TXD     \hideinitializer */
 #define SYS_GPF_MFPL_PF3MFP_I2C0_SCL    (0x04UL<<SYS_GPF_MFPL_PF3MFP_Pos)   /*!< GPF_MFPL PF3 setting for I2C0_SCL      \hideinitializer */
+#define SYS_GPF_MFPL_PF3MFP_EXTCLK_IN   (0x09UL<<SYS_GPF_MFPL_PF3MFP_Pos)   /*!< GPF_MFPL PF3 setting for EXTCLK_IN     \hideinitializer */
 #define SYS_GPF_MFPL_PF3MFP_BPWM1_CH0   (0x0BUL<<SYS_GPF_MFPL_PF3MFP_Pos)   /*!< GPF_MFPL PF3 setting for BPWM1_CH0     \hideinitializer */
 
 /*@}*/ /* end of group SYS_EXPORTED_CONSTANTS */
