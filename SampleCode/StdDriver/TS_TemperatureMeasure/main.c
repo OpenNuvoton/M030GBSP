@@ -3,7 +3,7 @@
  * @version  V1.00
  * $Revision: 2 $
  * $Date: 20/06/11 7:12p $
- * @brief    Measure the current temperture by thermal sensor.
+ * @brief    Measure the current temperature by sensor.
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0
@@ -21,7 +21,7 @@
 /* Global variables                                                                                        */
 /*---------------------------------------------------------------------------------------------------------*/
 uint32_t volatile done;
-uint32_t volatile u32thermalData;
+uint32_t volatile u32tempData;
 
 /* Function prototype declaration */
 void SYS_Init(void);
@@ -34,7 +34,7 @@ void TEMP_IRQHandler(void)
         done = 1;
 
         /* get tsensor data */
-        u32thermalData = TS_GET_DATA();
+        u32tempData = TS_GET_DATA();
 
         /* clear complete flag*/
         TS_CLR_COMPLETE_FLAG();
@@ -108,24 +108,24 @@ int main(void)
         while(!done);
 
         /* Read thermal data */
-        if (u32thermalData & 0x800)
+        if (u32tempData & 0x800)
         {
             /* negative tempature (2's complement)*/
-            u32thermalData = ~u32thermalData;
-            u32thermalData++;
-            u32thermalData &= 0x7FF;
-            u32thermalData *= TS_DEGREE_PER_LSB;
-            u32digiPart = u32thermalData / 10000;
-            u32deciPart = u32thermalData % 10000;
+            u32tempData = ~u32tempData;
+            u32tempData++;
+            u32tempData &= 0x7FF;
+            u32tempData *= TS_DEGREE_PER_LSB;
+            u32digiPart = u32tempData / 10000;
+            u32deciPart = u32tempData % 10000;
             printf("\nMeasured sensor data = -%d.%d !!!\n\n", u32digiPart, u32deciPart);
         }
         else
         {
             /* positive tempature*/
-            u32thermalData &= 0x7FF;
-            u32thermalData *= TS_DEGREE_PER_LSB;
-            u32digiPart = u32thermalData / 10000;
-            u32deciPart = u32thermalData % 10000;
+            u32tempData &= 0x7FF;
+            u32tempData *= TS_DEGREE_PER_LSB;
+            u32digiPart = u32tempData / 10000;
+            u32deciPart = u32tempData % 10000;
             printf("\nMeasured sensor data = %d.%d !!!\n\n", u32digiPart, u32deciPart);
         }
     }
