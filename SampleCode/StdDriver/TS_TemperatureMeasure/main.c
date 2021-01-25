@@ -3,7 +3,7 @@
  * @version  V1.00
  * $Revision: 2 $
  * $Date: 20/06/11 7:12p $
- * @brief    Measure the current temperature by sensor.
+ * @brief    Measure the current temperature by Temperature Sensor.
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0
@@ -33,7 +33,7 @@ void TEMP_IRQHandler(void)
     {
         done = 1;
 
-        /* get tsensor data */
+        /* get TS data */
         u32tempData = TS_GET_DATA();
 
         /* clear complete flag*/
@@ -46,14 +46,13 @@ void TEMP_IRQHandler(void)
     }
 }
 
-
-/* ------------- */
-/* Main function */
-/* ------------- */
+/*---------------------------------------------------------------------------------------------------------*/
+/*  MAIN function                                                                                          */
+/*---------------------------------------------------------------------------------------------------------*/
 int main(void)
 {
-    uint8_t  u8Option;
-    uint32_t  u32digiPart, u32deciPart;
+    uint8_t u8Option;
+    uint32_t u32digiPart, u32deciPart;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -67,10 +66,7 @@ int main(void)
     /* Configure UART0: 115200, 8-bit word, no parity bit, 1 stop bit. */
     UART_Open(UART0, 115200);
 
-    /*---------------------------------------------------------------------------------------------------------*/
-    /* Init TS                                                                                                 */
-    /*---------------------------------------------------------------------------------------------------------*/
-    /* Enable Tsensor */
+    /* Enable TS */
     TS_ENABLE();
 
     /* Clear TSEOC bit */
@@ -79,7 +75,7 @@ int main(void)
     /* Disable TS interrupt */
     NVIC_DisableIRQ(TEMP_IRQn);
 
-    /* Clear interrupr flag */
+    /* Clear interrupt flag */
     TS_CLR_INT_FLAG();
 
     /* Enable TS interrupt */
@@ -101,16 +97,16 @@ int main(void)
         }
         done = 0;
 
-        /* Enable TSensor tranform */
+        /* Enable TS transform */
         TS_TRIGGER();
 
-        /* Wait to tranform completely */
+        /* Wait to transform completely */
         while(!done);
 
-        /* Read thermal data */
+        /* Read temperature data */
         if (u32tempData & 0x800)
         {
-            /* negative tempature (2's complement)*/
+            /* negative temperature (2's complement)*/
             u32tempData = ~u32tempData;
             u32tempData++;
             u32tempData &= 0x7FF;
@@ -121,7 +117,7 @@ int main(void)
         }
         else
         {
-            /* positive tempature*/
+            /* positive temperature*/
             u32tempData &= 0x7FF;
             u32tempData *= TS_DEGREE_PER_LSB;
             u32digiPart = u32tempData / 10000;

@@ -130,15 +130,6 @@ extern "C"
 #define TS_DISABLE_INT()    (SYS->TSCTL &= ~SYS_TSCTL_TSIEN_Msk)
 
 
-/**
-  * @brief      Get fine tune register.
-  * @param[in]  Fine tune value (4-bit)
-  * @return     None.
-  * @details    Get temperature sensor fine tune register
-  */
-#define TS_GET_TUNE(tune)   ((SYS->TSTRIM & SYS_TSTRIM_TSTUNE_Msk)>>SYS_TSTRIM_TSTUNE_Pos)
-
-
 /* Function prototype declaration */
 
 /*@}*/ /* end of group TS_EXPORTED_FUNCTIONS */
