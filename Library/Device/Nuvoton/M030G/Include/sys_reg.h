@@ -32,7 +32,8 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[31:0]  |PDID      |Part Device Identification Number (Read Only)
-     * |        |          |This register reflects device part number code. Software can read this register to identify which device is used.
+     * |        |          |This register reflects device part number code.
+     * |        |          |Software can read this register to identify which device is used.
      * @var SYS_T::RSTSTS
      * Offset: 0x04  System Reset Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -52,8 +53,8 @@ typedef struct
      * |        |          |The WDT reset flag is set by the "Reset Signal" from the Watchdog Timer or Window Watchdog Timer to indicate the previous reset source.
      * |        |          |0 = No reset from watchdog timer or window watchdog timer.
      * |        |          |1 = The watchdog timer or window watchdog timer had issued the reset signal to reset the system.
-     * |        |          |Note1: Write 1 to clear this bit to 0.
-     * |        |          |Note2: Watchdog Timer register RSTF(WDT_CTL[2]) bit is set if the system has been reset by WDT time-out reset
+     * |        |          |Note 1: Write 1 to clear this bit to 0.
+     * |        |          |Note 2: Watchdog Timer register RSTF(WDT_CTL[2]) bit is set if the system has been reset by WDT time-out reset
      * |        |          |Window Watchdog Timer register WWDTRF(WWDT_STATUS[1]) bit is set if the system has been reset by WWDT time-out reset.
      * |[3]     |LVRF      |LVR Reset Flag
      * |        |          |The LVR reset flag is set by the "Reset Signal" from the Low Voltage Reset Controller to indicate the previous reset source.
@@ -78,23 +79,23 @@ typedef struct
      * |[8]     |CPULKRF   |CPU Lockup Reset Flag
      * |        |          |0 = No reset from CPU lockup happened.
      * |        |          |1 = The Cortex-M0 lockup happened and chip is reset.
-     * |        |          |Note1: Write 1 to clear this bit to 0.
-     * |        |          |Note2: When CPU lockup happened under ICE is connected, This flag will set to 1 but chip will not reset.
+     * |        |          |Note 1: Write 1 to clear this bit to 0.
+     * |        |          |Note 2: When CPU lockup happened under ICE is connected, this flag will set to 1 but chip will not reset.
      * @var SYS_T::IPRST0
      * Offset: 0x08  Peripheral  Reset Control Register 0
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |CHIPRST   |Chip One-shot Reset (Write Protect)
-     * |        |          |Setting this bit will reset the whole chip, including Processor core and all peripherals, and this bit will automatically return to 0 after the 2 clock cycles.
-     * |        |          |The CHIPRST is same as the POR reset, all the chip controllers is reset and the chip setting from flash are also reload.
+     * |        |          |Setting this bit will reset the whole chip, including processor core and all peripherals, and this bit will automatically return to 0 after the 2 clock cycles.
+     * |        |          |The CHIPRST is same as the POR reset, all the chip controllers is reset and the chip setting from Flash are also reload.
      * |        |          |About the difference between CHIPRST and SYSRESETREQ(AIRCR[2]), please refer to section 6.2.2.
      * |        |          |0 = Chip normal operation.
      * |        |          |1 = Chip one-shot reset.
-     * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by power on reset.
+     * |        |          |Note 1: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 2: Reset by power on reset.
      * |[1]     |CPURST    |Processor Core One-shot Reset (Write Protect)
-     * |        |          |Setting this bit will only reset the processor core and Flash Memory Controller(FMC), and this bit will automatically return to 0 after the 2 clock cycles.
+     * |        |          |Setting this bit will only reset the processor core and Flash Memory Controller(FMC), and this bit will automatically return to 0 after 2 clock cycles.
      * |        |          |0 = Processor core normal operation.
      * |        |          |1 = Processor core one-shot reset.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
@@ -124,6 +125,12 @@ typedef struct
      * |[3]     |TMR1RST   |Timer1 Controller Reset
      * |        |          |0 = Timer1 controller normal operation.
      * |        |          |1 = Timer1 controller reset.
+     * |[4]     |TMR2RST   |Timer2 Controller Reset
+     * |        |          |0 = Timer2 controller normal operation.
+     * |        |          |1 = Timer2 controller reset.
+     * |[5]     |TMR3RST   |Timer3 Controller Reset
+     * |        |          |0 = Timer3 controller normal operation.
+     * |        |          |1 = Timer3 controller reset.
      * |[8]     |I2C0RST   |I2C0 Controller Reset
      * |        |          |0 = I2C0 controller normal operation.
      * |        |          |1 = I2C0 controller reset.
@@ -153,6 +160,15 @@ typedef struct
      * |[19]    |BPWMRST   |BPWM Controller Reset
      * |        |          |0 = BPWM controller normal operation.
      * |        |          |1 = BPWM controller reset.
+     * |[24]    |MANCHRST  |Manchester Codec Reset
+     * |        |          |0 = Manchester codec normal operation.
+     * |        |          |1 = Manchester codec reset.
+     * |[28]    |TMR4RST   |Timer4 Controller Reset
+     * |        |          |0 = Timer4 controller normal operation.
+     * |        |          |1 = Timer4 controller reset.
+     * |[29]    |TMR5RST   |Timer5 Controller Reset
+     * |        |          |0 = Timer5 controller normal operation.
+     * |        |          |1 = Timer5 controller reset.
      * |[31]    |TSRST     |Temperature Sensor Reset
      * |        |          |0 = Temperature Sensor normal operation.
      * |        |          |1 = Temperature Sensor reset.
@@ -164,35 +180,39 @@ typedef struct
      * |[0]     |BODEN     |Brown-out Detector Enable Bit (Write Protect)
      * |        |          |0 = Brown-out Detector function Disabled.
      * |        |          |1 = Brown-out Detector function Enabled.
-     * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by power on reset.
+     * |        |          |Note 1: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 2: Reset by power on reset.
      * |[3]     |BODRSTEN  |Brown-out Reset Enable Bit (Write Protect)
      * |        |          |0 = Brown-out "INTERRUPT" function Enabled.
      * |        |          |1 = Brown-out "RESET" function Enabled.
-     * |        |          |Note1: While the Brown-out Detector function is enabled (BODEN high) and BOD reset function is enabled (BODRSTEN high), BOD will assert a signal to reset chip when the detected voltage is lower than the threshold (BODOUT high).
-     * |        |          |While the BOD function is enabled (BODEN high) and BOD interrupt function is enabled (BODRSTEN low), BOD will assert an interrupt if BODOUT is high. BOD interrupt will keep till to the BODEN set to 0. BOD interrupt can be blocked by disabling the NVIC BOD interrupt or disabling BOD function (set BODEN low).
-     * |        |          |Note2: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note3: Reset by power on reset.
+     * |        |          |Note 1: While the Brown-out Detector function is enabled (BODEN is 1) and BOD reset function is enabled (BODRSTEN is 1), BOD will assert a signal to reset chip when the detected voltage is lower than the threshold (BODOUT is 1).
+     * |        |          |While the BOD function is enabled (BODEN is 1) and BOD interrupt function is enabled (BODRSTEN is 0), BOD will assert an interrupt if BODOUT is 1.
+     * |        |          |BOD interrupt will keep untill the BODEN set to 0.
+     * |        |          |BOD interrupt can be blocked by disabling the NVIC BOD interrupt or disabling BOD function (set BODEN to 0).
+     * |        |          |Note 2: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 3: Reset by power on reset.
      * |[4]     |BODIF     |Brown-out Detector Interrupt Flag
      * |        |          |0 = Brown-out Detector does not detect any voltage draft at VDD down through or up through the voltage of BODVL setting.
      * |        |          |1 = When Brown-out Detector detects the VDD is dropped down through the voltage of BODVL setting or the VDD is raised up through the voltage of BODVL setting, this bit is set to 1 and the brown-out interrupt is requested if brown-out interrupt is enabled.
      * |        |          |Note: Write 1 to clear this bit to 0.
      * |[5]     |BODLPM    |Brown-out Detector Low Power Mode (Write Protect)
      * |        |          |0 = BOD operate in normal mode (Default).
-     * |        |          |1 = BOD Low Power mode Enabled.
-     * |        |          |Note1: The BOD consumes about 100uA in normal mode, the low power mode can reduce the current to about 1/10 but slow the BOD response.
-     * |        |          |Note2: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |1 = BOD low power mode Enabled.
+     * |        |          |Note 1: The BOD consumes about 2uA in normal mode, the BOD low power mode can reduce the current to about 1/30 but slow the BOD response.
+     * |        |          |Note 2: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[6]     |BODOUT    |Brown-out Detector Output Status
      * |        |          |0 = Brown-out Detector output status is 0.
      * |        |          |It means the detected voltage is higher than BODVL setting or BODEN is 0.
      * |        |          |1 = Brown-out Detector output status is 1.
-     * |        |          |It means the detected voltage is lower than BODVL setting. If the BODEN is 0, BOD function disabled , this bit always responds 0000.
+     * |        |          |It means the detected voltage is lower than BODVL setting.
+     * |        |          |If the BODEN is 0, BOD function disabled , this bit always responds 0000.
      * |[7]     |LVREN     |Low Voltage Reset Enable Bit (Write Protect)
-     * |        |          |The LVR function resets the chip when the input power voltage is lower than LVR circuit setting. LVR function is enabled by default.
+     * |        |          |The LVR function resets the chip when the input power voltage is lower than LVR circuit setting.
+     * |        |          |LVR function is enabled by default.
      * |        |          |0 = Low Voltage Reset function Disabled.
      * |        |          |1 = Low Voltage Reset function Enabled.
-     * |        |          |Note1: After enabling the bit, the LVR function will be active with 200us delay for LVR output stable (Default).
-     * |        |          |Note2: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 1: After enabling the bit, the LVR function will be active with 200us delay for LVR output stable (Default).
+     * |        |          |Note 2: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[10:8]  |BODDGSEL  |Brown-out Detector Output De-glitch Time Select (Write Protect)
      * |        |          |000 = BOD output is sampled by LIRC/4 clock.
      * |        |          |001 = 64 system clock (HCLK).
@@ -216,15 +236,16 @@ typedef struct
      * |[16]    |BODVL     |Brown-out Detector Threshold Voltage Select (Write Protect)
      * |        |          |0 = Brown-Out Detector threshold voltage is 2.5V.
      * |        |          |1 = Brown-Out Detector threshold voltage is 2.7V.
-     * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: Reset by power on reset.
+     * |        |          |Note 1: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 2: Reset by power on reset.
      * @var SYS_T::PORCTL
      * Offset: 0x24  Power-On-reset Controller Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |POROFF    |Power-on Reset Enable Bit (Write Protect)
-     * |        |          |When powered on, the POR circuit generates a reset signal to reset the whole chip function, but noise on the power may cause the POR active again. User can disable internal POR circuit to avoid unpredictable noise to cause chip reset by writing 0x5AA5 to this field.
+     * |        |          |When powered on, the POR circuit generates a reset signal to reset the whole chip function, but noise on the power may cause the POR active again.
+     * |        |          |User can disable internal POR circuit to avoid unpredictable noise to cause chip reset by writing 0x5AA5 to this field.
      * |        |          |The POR function will be active again when this field is set to another value or chip is reset by other reset source, including:
      * |        |          |nRESET, Watchdog, LVR reset, BOD reset, ICE reset command and the software-chip reset function.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
@@ -242,14 +263,12 @@ typedef struct
      * |        |          |1 = VREF output voltage value is 2.5V.
      * |        |          |Note: This bit is write protected. Refer to the SYS_REGLCTL register.
      * |[6]     |PRELOADEN |VREF Pre-load Enable Bit (Write Protect)
-     * |        |          |This bit is set automatically if software set VREFEN (SYS_VREFCR[0]) to 1.
+     * |        |          |This bit is set automatically if software set VREFEN (SYS_VREFCTL[0]) to 1.
      * |        |          |0 = VREF Pre-load function Disabled. (Default).
      * |        |          |1 = VREF Pre-load function Enabled.
-     * |        |          |Note1: This bit is write protected. Refer to the SYS_REGLCTL register.
-     * |        |          |Note2: PRELOADEN should be cleared after 2ms of VREFEN enabled, if VREF capacitor 4.7uF and VREF initial=0V.
-     * |        |          |Note3: PRELOADEN should be cleared after 15ms of VREFEN enabled, if VREF capacitor 4.7uF and VREF initial=3.6V.
-     * |        |          |Note4: PRELOADEN should be cleared after 480us of VREFEN enabled, if VREF capacitor 1uF and VREF initial=0V.
-     * |        |          |Note5: PRELOADEN should be cleared after 3.2ms of VREFEN enabled, if VREF capacitor 1uF and VREF initial=3.6V.
+     * |        |          |Note 1: This bit is write protected. Refer to the SYS_REGLCTL register.
+     * |        |          |Note 2: PRELOADEN should be cleared after 2ms of VREFEN enabled, if VREF capacitor is 4.7uF and VREF initial is 0V.
+     * |        |          |Note 3: PRELOADEN should be cleared after 480us of VREFEN enabled, if VREF capacitor is 1uF and VREF initial is 0V.
      * |[8]     |SCPDIS    |VREF Short Circuit Protection Disable Control (Write Protect)
      * |        |          |0 = VREF Short Circuit Protection function Enabled. (Default).
      * |        |          |1 = VREF Short Circuit Protection function Disabled.
@@ -311,6 +330,59 @@ typedef struct
      * |[3:0]   |PF0MFP    |PF.0 Multi-function Pin Selection
      * |[11:8]  |PF2MFP    |PF.2 Multi-function Pin Selection
      * |[15:12] |PF3MFP    |PF.3 Multi-function Pin Selection
+     * @var SYS_T::MODCTL
+     * Offset: 0xC0  Modulation Control Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[16]    |MANCHMODEN0|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[17]    |MANCHMODEN1|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[18]    |MANCHMODEN2|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[19]    |MANCHMODEN3|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[20]    |MANCHMODEN4|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[21]    |MANCHMODEN5|Manchester Modulation Function Enable
+     * |        |          |Each of these bits is used to enable Manchester modulation function with BPWM1_CHn output.
+     * |        |          |0 = Modulation Function Disabled.
+     * |        |          |1 = Modulation Function Enabled.
+     * |[24]    |MANCHMODL0|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
+     * |[25]    |MANCHMODL1|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
+     * |[26]    |MANCHMODL2|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
+     * |[27]    |MANCHMODL3|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
+     * |[28]    |MANCHMODL4|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
+     * |[29]    |MANCHMODL5|Manchester Modulation at Data Low
+     * |        |          |Each of these bits is used to select Manchester modulation with BPWM1_CHn at MANCH_TXD data high or low.
+     * |        |          |0 = Manchester modulation with BPWM1_CHn at MANCH_TXD data high.
+     * |        |          |1 = Manchester modulation with BPWM1_CHn at MANCH_TXD data low.
      * @var SYS_T::SRAM_BISTCTL
      * Offset: 0xD0  System SRAM BIST Test Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -331,7 +403,7 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[0]     |SRBISTEF  |System SRAM BIST Fail Flag
+     * |[0]     |SRBISTFF  |System SRAM BIST Fail Flag
      * |        |          |0 = System SRAM BIST test pass.
      * |        |          |1 = System SRAM BIST test fail.
      * |[7]     |PDMABISTF |PDMA SRAM BIST Failed Flag
@@ -350,10 +422,12 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[7:0]   |REGLCTL   |Register Lock Control Code (Write Only)
      * |        |          |Some registers have write-protection function.
-     * |        |          |Writing these registers have to disable the protected function by writing the sequence value "59h", "16h", "88h" to this field. After this sequence is completed, the REGLCTL bit will be set to 1 and write-protection registers can be normal write.
+     * |        |          |Writing these registers have to disable the protected function by writing the sequence value "59h", "16h", "88h" to this field.
+     * |        |          |After this sequence is completed, the REGLCTL bit will be set to 1 and write-protection registers can be normal write.
      * |        |          |REGLCTL[0]
      * |        |          |Register Lock Control Disable Index (Read Only)
-     * |        |          |0 = Write-protection Enabled for writing protected registers. Any write to the protected register is ignored.
+     * |        |          |0 = Write-protection Enabled for writing protected registers.
+     * |        |          |Any write to the protected register is ignored.
      * |        |          |1 = Write-protection Disabled for writing protected registers.
      * @var SYS_T::TSCTL
      * Offset: 0x140  Temperature Sensor Control Register
@@ -394,7 +468,7 @@ typedef struct
      * |        |          |Note: Write 1 to clear this bit to 0.
      * |[27:16] |TSDATA    |Temperature Sensor Conversion Data Bits (Read Only)
      * |        |          |This field present the conversion result of Temperature Sensor, ranges from -40u00B0C to 105u00B0C.
-     * |        |          |Note: Negative temperature is represented by twos complement format, and per LSB difference is equivalent to 0.0625u00B0C
+     * |        |          |Note: Negative temperature is represented by 2's complement format, and per LSB difference is equivalent to 0.0625u00B0C
      * @var SYS_T::POR18DISAN
      * Offset: 0x1E8  Analog POR18 Disable Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -415,7 +489,7 @@ typedef struct
     __IO uint32_t BODCTL;               /*!< [0x0018] Brown-out Detector Control Register                           */
     __I  uint32_t RESERVE1[2];
     __IO uint32_t PORCTL;               /*!< [0x0024] Power-On-reset Controller Register                            */
-    __IO uint32_t VREFCTL;               /*!< [0x0028] Voltage Reference Control Register                               */
+    __IO uint32_t VREFCTL;               /*!< [0x0028] Voltage Reference Control Register                           */
     __I  uint32_t RESERVE2[1];
     __IO uint32_t GPA_MFPL;             /*!< [0x0030] GPIOA Low Byte Multiple Function Control Register             */
     __IO uint32_t GPA_MFPH;             /*!< [0x0034] GPIOA High Byte Multiple Function Control Register            */
@@ -424,15 +498,17 @@ typedef struct
     __IO uint32_t GPC_MFPL;             /*!< [0x0040] GPIOC Low Byte Multiple Function Control Register             */
     __I  uint32_t RESERVE3[5];
     __IO uint32_t GPF_MFPL;             /*!< [0x0058] GPIOF Low Byte Multiple Function Control Register             */
-    __I  uint32_t RESERVE4[29];
+    __I  uint32_t RESERVE4[25];
+    __IO uint32_t MODCTL;                /*!< [0x00c0] Modulation Control Register                                  */
+    __I  uint32_t RESERVE5[3];
     __IO uint32_t SRAM_BISTCTL;         /*!< [0x00d0] System SRAM BIST Test Control Register                        */
     __I  uint32_t SRAM_BISTSTS;         /*!< [0x00d4] System SRAM BIST Test Status Register                         */
-    __I  uint32_t RESERVE5[10];
+    __I  uint32_t RESERVE6[10];
     __O  uint32_t REGLCTL;              /*!< [0x0100] Register Lock Control Register                                */
-    __I  uint32_t RESERVE6[15];
+    __I  uint32_t RESERVE7[15];
     __IO uint32_t TSCTL;                /*!< [0x0140] Temperature Sensor Control Register                           */
     __IO uint32_t TSDATA;               /*!< [0x0144] Temperature Sensor Data Register                              */
-    __I  uint32_t RESERVE7[40];
+    __I  uint32_t RESERVE8[40];
     __IO uint32_t POR18DISAN;           /*!< [0x01e8] Analog POR18 Disable Control Register                         */
 } SYS_T;
 
@@ -570,6 +646,12 @@ typedef struct
 #define SYS_IPRST1_TMR1RST_Pos          (3)                                             /*!< SYS_T::IPRST1: TMR1RST Position        */
 #define SYS_IPRST1_TMR1RST_Msk          (0x1ul << SYS_IPRST1_TMR1RST_Pos)               /*!< SYS_T::IPRST1: TMR1RST Mask            */
 
+#define SYS_IPRST1_TMR2RST_Pos           (4)                                            /*!< SYS_T::IPRST1: TMR2RST Position        */
+#define SYS_IPRST1_TMR2RST_Msk           (0x1ul << SYS_IPRST1_TMR2RST_Pos)              /*!< SYS_T::IPRST1: TMR2RST Mask            */
+
+#define SYS_IPRST1_TMR3RST_Pos           (5)                                            /*!< SYS_T::IPRST1: TMR3RST Position        */
+#define SYS_IPRST1_TMR3RST_Msk           (0x1ul << SYS_IPRST1_TMR3RST_Pos)              /*!< SYS_T::IPRST1: TMR3RST Mask            */
+
 #define SYS_IPRST1_I2C0RST_Pos          (8)                                             /*!< SYS_T::IPRST1: I2C0RST Position        */
 #define SYS_IPRST1_I2C0RST_Msk          (0x1ul << SYS_IPRST1_I2C0RST_Pos)               /*!< SYS_T::IPRST1: I2C0RST Mask            */
 
@@ -593,6 +675,15 @@ typedef struct
 
 #define SYS_IPRST2_BPWMRST_Pos          (19)                                            /*!< SYS_T::IPRST2: BPWMRST Position        */
 #define SYS_IPRST2_BPWMRST_Msk          (0x1ul << SYS_IPRST2_BPWMRST_Pos)               /*!< SYS_T::IPRST2: BPWMRST Mask            */
+
+#define SYS_IPRST2_MANCHRST_Pos          (24)                                           /*!< SYS_T::IPRST2: MANCHRST Position       */
+#define SYS_IPRST2_MANCHRST_Msk          (0x1ul << SYS_IPRST2_MANCHRST_Pos)             /*!< SYS_T::IPRST2: MANCHRST Mask           */
+
+#define SYS_IPRST2_TMR4RST_Pos           (28)                                           /*!< SYS_T::IPRST2: TMR4RST Position        */
+#define SYS_IPRST2_TMR4RST_Msk           (0x1ul << SYS_IPRST2_TMR4RST_Pos)              /*!< SYS_T::IPRST2: TMR4RST Mask            */
+
+#define SYS_IPRST2_TMR5RST_Pos           (29)                                           /*!< SYS_T::IPRST2: TMR5RST Position        */
+#define SYS_IPRST2_TMR5RST_Msk           (0x1ul << SYS_IPRST2_TMR5RST_Pos)              /*!< SYS_T::IPRST2: TMR5RST Mask            */
 
 #define SYS_IPRST2_TSRST_Pos            (31)                                            /*!< SYS_T::IPRST2: TSRST Position          */
 #define SYS_IPRST2_TSRST_Msk            (0x1ul << SYS_IPRST2_TSRST_Pos)                 /*!< SYS_T::IPRST2: TSRST Mask              */
@@ -723,14 +814,50 @@ typedef struct
 #define SYS_GPF_MFPL_PF3MFP_Pos         (12)                                            /*!< SYS_T::GPF_MFPL: PF3MFP Position       */
 #define SYS_GPF_MFPL_PF3MFP_Msk         (0xful << SYS_GPF_MFPL_PF3MFP_Pos)              /*!< SYS_T::GPF_MFPL: PF3MFP Mask           */
 
+#define SYS_MODCTL_MANCHMODEN0_Pos       (16)                                           /*!< SYS_T::MODCTL: MANCHMODEN0 Position    */
+#define SYS_MODCTL_MANCHMODEN0_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN0_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN0 Mask        */
+
+#define SYS_MODCTL_MANCHMODEN1_Pos       (17)                                           /*!< SYS_T::MODCTL: MANCHMODEN1 Position    */
+#define SYS_MODCTL_MANCHMODEN1_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN1_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN1 Mask        */
+
+#define SYS_MODCTL_MANCHMODEN2_Pos       (18)                                           /*!< SYS_T::MODCTL: MANCHMODEN2 Position    */
+#define SYS_MODCTL_MANCHMODEN2_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN2_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN2 Mask        */
+
+#define SYS_MODCTL_MANCHMODEN3_Pos       (19)                                           /*!< SYS_T::MODCTL: MANCHMODEN3 Position    */
+#define SYS_MODCTL_MANCHMODEN3_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN3_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN3 Mask        */
+
+#define SYS_MODCTL_MANCHMODEN4_Pos       (20)                                           /*!< SYS_T::MODCTL: MANCHMODEN4 Position    */
+#define SYS_MODCTL_MANCHMODEN4_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN4_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN4 Mask        */
+
+#define SYS_MODCTL_MANCHMODEN5_Pos       (21)                                           /*!< SYS_T::MODCTL: MANCHMODEN5 Position    */
+#define SYS_MODCTL_MANCHMODEN5_Msk       (0x1ul << SYS_MODCTL_MANCHMODEN5_Pos)          /*!< SYS_T::MODCTL: MANCHMODEN5 Mask        */
+
+#define SYS_MODCTL_MANCHMODL0_Pos        (24)                                           /*!< SYS_T::MODCTL: MANCHMODL0 Position     */
+#define SYS_MODCTL_MANCHMODL0_Msk        (0x1ul << SYS_MODCTL_MANCHMODL0_Pos)           /*!< SYS_T::MODCTL: MANCHMODL0 Mask         */
+
+#define SYS_MODCTL_MANCHMODL1_Pos        (25)                                           /*!< SYS_T::MODCTL: MANCHMODL1 Position     */
+#define SYS_MODCTL_MANCHMODL1_Msk        (0x1ul << SYS_MODCTL_MANCHMODL1_Pos)           /*!< SYS_T::MODCTL: MANCHMODL1 Mask         */
+
+#define SYS_MODCTL_MANCHMODL2_Pos        (26)                                           /*!< SYS_T::MODCTL: MANCHMODL2 Position     */
+#define SYS_MODCTL_MANCHMODL2_Msk        (0x1ul << SYS_MODCTL_MANCHMODL2_Pos)           /*!< SYS_T::MODCTL: MANCHMODL2 Mask         */
+
+#define SYS_MODCTL_MANCHMODL3_Pos        (27)                                           /*!< SYS_T::MODCTL: MANCHMODL3 Position     */
+#define SYS_MODCTL_MANCHMODL3_Msk        (0x1ul << SYS_MODCTL_MANCHMODL3_Pos)           /*!< SYS_T::MODCTL: MANCHMODL3 Mask         */
+
+#define SYS_MODCTL_MANCHMODL4_Pos        (28)                                           /*!< SYS_T::MODCTL: MANCHMODL4 Position     */
+#define SYS_MODCTL_MANCHMODL4_Msk        (0x1ul << SYS_MODCTL_MANCHMODL4_Pos)           /*!< SYS_T::MODCTL: MANCHMODL4 Mask         */
+
+#define SYS_MODCTL_MANCHMODL5_Pos        (29)                                           /*!< SYS_T::MODCTL: MANCHMODL5 Position     */
+#define SYS_MODCTL_MANCHMODL5_Msk        (0x1ul << SYS_MODCTL_MANCHMODL5_Pos)           /*!< SYS_T::MODCTL: MANCHMODL5 Mask         */
+
 #define SYS_SRAM_BISTCTL_SRBIST_Pos     (0)                                             /*!< SYS_T::SRAM_BISTCTL: SRBIST Position   */
 #define SYS_SRAM_BISTCTL_SRBIST_Msk     (0x1ul << SYS_SRAM_BISTCTL_SRBIST_Pos)          /*!< SYS_T::SRAM_BISTCTL: SRBIST Mask       */
 
 #define SYS_SRAM_BISTCTL_PDMABIST_Pos   (7)                                             /*!< SYS_T::SRAM_BISTCTL: PDMABIST Position */
 #define SYS_SRAM_BISTCTL_PDMABIST_Msk   (0x1ul << SYS_SRAM_BISTCTL_PDMABIST_Pos)        /*!< SYS_T::SRAM_BISTCTL: PDMABIST Mask     */
 
-#define SYS_SRAM_BISTSTS_SRBISTEF_Pos   (0)                                             /*!< SYS_T::SRAM_BISTSTS: SRBISTEF Position */
-#define SYS_SRAM_BISTSTS_SRBISTEF_Msk   (0x1ul << SYS_SRAM_BISTSTS_SRBISTEF_Pos)        /*!< SYS_T::SRAM_BISTSTS: SRBISTEF Mask     */
+#define SYS_SRAM_BISTSTS_SRBISTFF_Pos    (0)                                            /*!< SYS_T::SRAM_BISTSTS: SRBISTFF Position */
+#define SYS_SRAM_BISTSTS_SRBISTFF_Msk    (0x1ul << SYS_SRAM_BISTSTS_SRBISTFF_Pos)       /*!< SYS_T::SRAM_BISTSTS: SRBISTFF Mask     */
 
 #define SYS_SRAM_BISTSTS_PDMABISTF_Pos  (7)                                             /*!< SYS_T::SRAM_BISTSTS: PDMABISTF Position*/
 #define SYS_SRAM_BISTSTS_PDMABISTF_Msk  (0x1ul << SYS_SRAM_BISTSTS_PDMABISTF_Pos)       /*!< SYS_T::SRAM_BISTSTS: PDMABISTF Mask    */

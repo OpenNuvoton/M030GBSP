@@ -34,11 +34,13 @@ typedef struct
      * |[15:0]  |RSLT      |A/D Conversion Result (Read Only)
      * |        |          |This field contains conversion result of ADC.
      * |[16]    |OVERRUN   |Overrun Flag (Read Only)
-     * |        |          |If converted data in RSLT bits has not been read before new conversion result is loaded to this register, OVERRUN bit is set to 1. It is cleared by hardware after ADDR register is read.
-     * |        |          |0 = Data in RSLT bits is not overwrote.
-     * |        |          |1 = Data in RSLT bits is overwrote.
+     * |        |          |If converted data in RSLT bits has not been read before new conversion result is loaded to this register, OVERRUN bit is set to 1
+     * |        |          |It is cleared by hardware after ADDR register is read.
+     * |        |          |0 = Data in RSLT bits is not overwritten.
+     * |        |          |1 = Data in RSLT bits is overwritten.
      * |[17]    |VALID     |Valid Flag (Read Only)
-     * |        |          |This bit will be set to 1 when the conversion of the corresponding channel is completed. This bit will be cleared to 0 by hardware after ADDR register is read.
+     * |        |          |This bit will be set to 1 when the conversion of the corresponding channel is completed.
+     * |        |          |This bit will be cleared to 0 by hardware after ADDR register is read.
      * |        |          |0 = Data in RSLT bits is not valid.
      * |        |          |1 = Data in RSLT bits is valid.
      * @var ADC_T::ADCR
@@ -49,7 +51,8 @@ typedef struct
      * |[0]     |ADEN      |A/D Converter Enable Bit
      * |        |          |0 = A/D converter Disabled.
      * |        |          |1 = A/D converter Enabled.
-     * |        |          |Note: Before starting A/D conversion function, this bit should be set to 1. Clear it to 0 to disable A/D converter analog circuit to save power consumption.
+     * |        |          |Note: Before starting A/D conversion function, this bit should be set to 1.
+     * |        |          |Clear it to 0 to disable A/D converter analog circuit to save power consumption.
      * |[1]     |ADIE      |A/D Interrupt Enable Bit
      * |        |          |A/D conversion end interrupt request is generated if ADIE bit is set to 1.
      * |        |          |0 = A/D interrupt function Disabled.
@@ -59,27 +62,30 @@ typedef struct
      * |        |          |01 = Burst conversion.
      * |        |          |10 = Single-cycle Scan.
      * |        |          |11 = Continuous Scan.
-     * |        |          |Note1: When changing the operation mode, software should clear ADST bit first.
-     * |        |          |Note2: In Burst mode, the A/D result data is always at ADC Data Register 0.
+     * |        |          |Note 1: When changing the operation mode, software should clear ADST bit first.
+     * |        |          |Note 2: In Burst mode, the A/D result data is always at ADC Data Register 0.
      * |[5:4]   |TRGS      |Hardware Trigger Source
      * |        |          |00 = A/D conversion is started by external STADC pin.
-     * |        |          |01 = Timer0 ~ Timer1 overflow pulse trigger.
+     * |        |          |01 = Timer0 ~ Timer5 overflow pulse trigger.
      * |        |          |10 = A/D conversion is started by BPWM trigger.
      * |        |          |11 = Reserved.
      * |        |          |Note: Software should clear TRGEN bit and ADST bit to 0 before changing TRGS bits.
      * |[7:6]   |TRGCOND   |External Trigger Condition
-     * |        |          |These two bits decide external pin STADC trigger event is level or edge. The signal must be kept at stable state at least 8 PCLKs for level trigger and at least 4 PCLKs for edge trigger.
+     * |        |          |These two bits decide external pin STADC trigger event is level or edge.
+     * |        |          |The signal must be kept at stable state at least 8 PCLKs for level trigger and at least 4 PCLKs for edge trigger.
      * |        |          |00 = Low level.
      * |        |          |01 = High level.
      * |        |          |10 = Falling edge.
      * |        |          |11 = Rising edge.
      * |[8]     |TRGEN     |External Trigger Enable Bit
-     * |        |          |Enable or disable triggering of A/D conversion by external STADC pin, BPWM trigger and Timer trigger. If external trigger is enabled, the ADST bit can be set to 1 by the selected hardware trigger source.
+     * |        |          |Enable or disable triggering of A/D conversion by external STADC pin, BPWM trigger and Timer trigger.
+     * |        |          |If external trigger is enabled, the ADST bit can be set to 1 by the selected hardware trigger source.
      * |        |          |0 = External trigger Disabled.
      * |        |          |1 = External trigger Enabled.
      * |        |          |Note: The ADC external trigger function is only supported in Single-cycle Scan mode.
      * |[9]     |PTEN      |PDMA Transfer Enable Bit
-     * |        |          |When A/D conversion is completed, the converted data is loaded into ADDR0~15, ADDR29. Software can enable this bit to generate a PDMA data transfer request.
+     * |        |          |When A/D conversion is completed, the converted data is loaded into ADDR0~15, ADDR29.
+     * |        |          |Software can enable this bit to generate a PDMA data transfer request.
      * |        |          |0 = PDMA data transfer Disabled.
      * |        |          |1 = PDMA data transfer in ADDR0~15, ADDR29 Enabled.
      * |        |          |Note: When PTEN=1, software must set ADIE=0 to disable interrupt.
@@ -89,19 +95,23 @@ typedef struct
      * |        |          |The Vplus of differential input paired channel x is from ADC0_CHy pin; Vminus is from ADC0_CHz pin, x=0,1..7, y=2*x, z=y+1.
      * |        |          |0 = Single-end analog input mode.
      * |        |          |1 = Differential analog input mode.
-     * |        |          |Note: In Differential Input mode, only the even number of the two corresponding channels needs to be enabled in ADCHER register. The conversion result will be placed to the corresponding data register of the enabled channel.
+     * |        |          |Note: In Differential Input mode, only the even number of the two corresponding channels needs to be enabled in ADCHER register.
+     * |        |          |The conversion result will be placed to the corresponding data register of the enabled channel.
      * |[11]    |ADST      |A/D Conversion Start or Calibration Start
-     * |        |          |ADST bit can be set to 1 from four sources: software, external pin STADC, BPWM trigger and Timer trigger. ADST bit will be cleared to 0 by hardware automatically at the ends of Single mode, Single-cycle Scan mode and Calibration mode. In Continuous Scan mode and Burst mode, A/D conversion is continuously performed until software writes 0 to this bit or chip is reset.
+     * |        |          |ADST bit can be set to 1 from four sources: software, external pin STADC, BPWM trigger and Timer trigger.
+     * |        |          |ADST bit will be cleared to 0 by hardware automatically at the ends of Single mode, Single-cycle Scan mode and Calibration mode.
+     * |        |          |In Continuous Scan mode and Burst mode, A/D conversion is continuously performed until software writes 0 to this bit or chip is reset.
      * |        |          |0 = Conversion stops and A/D converter enters idle state.
-     * |        |          |1 = Conversion starts or Calibration Start.
-     * |        |          |Note1: When ADST become from 1 to 0, ADC macro will reset to initial state. After macro reset to initial state, user should wait at most 2 ADC clock and set this bit to start next conversion.
-     * |        |          |Note2: Calibration Start only if CALEN (ADC_ADCALR[0]) = 1.
+     * |        |          |1 = Conversion or calibration starts.
+     * |        |          |Note 1: When ADST is from 1 to 0, ADC macro will reset to initial state.
+     * |        |          |After macro reset to initial state, user should wait at most 2 ADC clock and set this bit to start the next conversion.
+     * |        |          |Note 2: Calibration starts only if CALEN (ADC_ADCALR[0]) = 1.
      * |[12]    |RESET     |ADC RESET (Write Protect)
      * |        |          |If user writes this bit, the ADC analog macro will reset
      * |        |          |Calibration data in macro will be deleted, but registers in ADC controller will keep.
      * |        |          |Note: This bit is cleared by hardware.
      * |[31]    |DMOF      |Differential Input Mode Output Format
-     * |        |          |If user enables differential input mode, the conversion result can be expressed with binary straight format (unsigned format) or 2's complement format (signed format).
+     * |        |          |If differential input mode is enabled, the conversion result can be expressed with binary straight format (unsigned format) or 2's complement format (signed format).
      * |        |          |0 = A/D Conversion result will be filled in RSLT at ADDRx registers with unsigned format (straight binary format).
      * |        |          |1 = A/D Conversion result will be filled in RSLT at ADDRx registers with 2's complement format.
      * @var ADC_T::ADCHER
@@ -112,11 +122,11 @@ typedef struct
      * |[31:0]  |CHEN      |Analog Input Channel Enable Control
      * |        |          |Set ADCHER[15:0] bits to enable the corresponding analog input channel 15 ~ 0
      * |        |          |If DIFFEN bit is set to 1, only the even number channel needs to be enabled.
-     * |        |          |Besides, set ADCHER[29] bit will enable internal channel for band-gap voltage respectively
+     * |        |          |Besides, setting the ADCHER[29] bit will enable internal channel for band-gap voltage.
      * |        |          |Other bits are reserved.
      * |        |          |0 = Channel Disabled.
      * |        |          |1 = Channel Enabled.
-     * |        |          |Note: If the internal channel for band-gap voltage (CHEN[29]) is active, the maximum sampling rate will be 300k SPS.
+     * |        |          |Note: If the internal channel for band-gap voltage (CHEN[29]) is active, the maximum sampling rate will be 300 KSPS.
      * @var ADC_T::ADCMPR
      * Offset: 0x88/0x8C  ADC Compare Register 0/1
      * ---------------------------------------------------------------------------------------------------
@@ -151,10 +161,12 @@ typedef struct
      * |        |          |01101 = Channel 13 conversion result is selected to be compared.
      * |        |          |01110 = Channel 14 conversion result is selected to be compared.
      * |        |          |01111 = Channel 15 conversion result is selected to be compared.
+     * |        |          |11100 = Floating detect channel conversion result is selected to be compared.
      * |        |          |11101 = Band-gap voltage conversion result is selected to be compared.
      * |        |          |Others = Reserved.
      * |[11:8]  |CMPMATCNT |Compare Match Count
-     * |        |          |When the specified A/D channel analog conversion result matches the compare condition defined by CMPCOND bit, the internal match counter will increase 1. When the internal counter reaches the value to (CMPMATCNT +1), the CMPFx bit will be set.
+     * |        |          |When the specified A/D channel analog conversion result matches the compare condition defined by CMPCOND bit, the internal match counter will increase 1.
+     * |        |          |When the internal counter reaches the value to (CMPMATCNT +1), the CMPFx bit will be set.
      * |[15]    |CMPWEN    |Compare Window Mode Enable Bit
      * |        |          |0 = Compare Window Mode Disabled.
      * |        |          |1 = Compare Window Mode Enabled.
@@ -169,16 +181,17 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[0]     |ADF       |A/D Conversion End Flag
      * |        |          |A status flag that indicates the end of A/D conversion. Software can write 1 to clear this bit.
-     * |        |          |ADF bit is set to 1 at the following three conditions:
+     * |        |          |The ADF bit is set to 1 at the following three conditions:
      * |        |          |1. When A/D conversion ends in Single mode.
      * |        |          |2. When A/D conversion ends on all specified channels in Single-cycle Scan mode and Continuous Scan mode.
-     * |        |          |3. When more than or equal to 8 samples in FIFO in Burst mode.
+     * |        |          |3. When more than or equal to 4 samples in FIFO in Burst mode.
      * |[1]     |CMPF0     |Compare Flag 0
-     * |        |          |When the A/D conversion result of the selected channel meets setting condition in ADCMPR0 register then this bit is set to 1. This bit is cleared by writing 1 to it.
+     * |        |          |When the A/D conversion result of the selected channel meets setting condition in ADCMPR0 register then this bit is set to 1.
+     * |        |          |This bit is cleared by writing 1 to it.
      * |        |          |0 = Conversion result in ADDR does not meet ADCMPR0 setting.
      * |        |          |1 = Conversion result in ADDR meets ADCMPR0 setting.
      * |[2]     |CMPF1     |Compare Flag 1
-     * |        |          |When the A/D conversion result of the selected channel meets setting condition in ADCMPR1 register then this bit is set to 1; it is cleared by writing 1 to it.
+     * |        |          |When the A/D conversion result of the selected channel meets setting condition in ADCMPR1 register, this bit is set to 1; it is cleared by writing 1 to it.
      * |        |          |0 = Conversion result in ADDR does not meet ADCMPR1 setting.
      * |        |          |1 = Conversion result in ADDR meets ADCMPR1 setting.
      * |[7]     |BUSY      |BUSY/IDLE (Read Only)
@@ -195,14 +208,16 @@ typedef struct
      * |        |          |0 = ADC is not ready for conversion may be in power down state or in the progress of start up.
      * |        |          |1 = ADC is ready for conversion.
      * |[31:27] |CHANNEL   |Current Conversion Channel (Read Only)
-     * |        |          |When BUSY=1, this filed reflects current conversion channel. When BUSY=0, it shows the number of the next converted channel.
+     * |        |          |When BUSY=1, this field reflects current conversion channel.
+     * |        |          |When BUSY=0, it shows the number of the next converted channel.
      * @var ADC_T::ADSR1
      * Offset: 0x94  ADC Status Register1
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[31:0]  |VALID     |Data Valid Flag (Read Only)
-     * |        |          |VALID[29, 15:0] are the mirror of the VALID bits in ADDR29[17], ADDR15[17]~ ADDR0[17]. The other bits are reserved.
+     * |        |          |VALID[29, 15:0] are the mirror of the VALID bits in ADDR29[17], ADDR15[17]~ ADDR0[17].
+     * |        |          |The other bits are reserved.
      * |        |          |Note: When ADC is in burst mode and any conversion result is valid, VALID[29, 15:0] will be set to 1.
      * @var ADC_T::ADSR2
      * Offset: 0x98  ADC Status Register2
@@ -210,7 +225,8 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[31:0]  |OVERRUN   |Overrun Flag (Read Only)
-     * |        |          |OVERRUN[29, 15:0] are the mirror of the OVERRUN bit in ADDR29[16], ADDR15[16] ~ ADDR0[16]. The other bits are reserved.
+     * |        |          |OVERRUN[29, 15:0] are the mirror of the OVERRUN bit in ADDR29[16], ADDR15[16] ~ ADDR0[16].
+     * |        |          |The other bits are reserved.
      * |        |          |Note: When ADC is in burst mode and the FIFO is overrun, OVERRUN[29, 15:0] will be set to 1.
      * @var ADC_T::ESMPCTL
      * Offset: 0xA0  ADC Extend Sample Time Control Register
@@ -228,15 +244,15 @@ typedef struct
      * |[0]     |PRECHEN   |Precharge Enable Bit
      * |        |          |0 = Channel precharge Disabled.
      * |        |          |1 = Channel precharge Enabled.
-     * |        |          |Note: Analog input voltage is 1/2 VREF when PRECHEN and DISCHEN are all enabled.
+     * |        |          |Note: Analog input voltage is 1/2 VREF when PRECHEN and DISCHEN are both enabled.
      * |[1]     |DISCHEN   |Discharge Enable Bit
      * |        |          |0 = Channel discharge Disabled.
      * |        |          |1 = Channel discharge Enabled.
-     * |        |          |Note: Analog input voltage is 1/2 VREF when PRECHEN and DISCHEN are all enabled.
+     * |        |          |Note: Analog input voltage is 1/2 VREF when PRECHEN and DISCHEN are both enabled.
      * |[8]     |FDETCHEN  |Floating Detect Channel Enable Bit
      * |        |          |0 = Floating Detect Channel Disabled.
      * |        |          |1 = Floating Detect Channel Enabled.
-     * |        |          |Note: if FDETCHEN is enabled, internal channel 28 is always turned on.
+     * |        |          |Note: if FDETCHEN is enabled, internal channel is always turned on.
      * @var ADC_T::ADPDMA
      * Offset: 0x100  ADC PDMA Current Transfer Data Register
      * ---------------------------------------------------------------------------------------------------
@@ -244,27 +260,27 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[17:0]  |CURDAT    |ADC PDMA Current Transfer Data Register (Read Only)
      * |        |          |When PDMA transferring, read this register can monitor current PDMA transfer data.
-     * |        |          |Current PDMA transfer data could be the content of ADDR0 ~ ADDR15 and ADDR29 registers.
+     * |        |          |Current PDMA transfer data could be the content of ADDR0 ~ ADDR15, and ADDR29 registers.
      * @var ADC_T::ADCALR
      * Offset: 0x180  ADC Calibration Mode Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |CALEN     |Calibration Function Enable Bit
-     * |        |          |0 = Calibration function Disable.
-     * |        |          |1 = Calibration function Enable.
-     * |        |          |Note: If chip power off, calibration function should be executed again.
-     * |[1]     |CALIE     |Calibration Interrupt Enable
-     * |        |          |If calibration function is enabled and the calibration finish, CALIF bit will be asserted, in the meanwhile, if CALIE bit is set to 1, a calibration interrupt request is generated.
-     * |        |          |0 = Calibration function Interrupt Disable.
-     * |        |          |1 = Calibration function Interrupt Enable.
+     * |        |          |0 = Calibration function Disabled.
+     * |        |          |1 = Calibration function Enabled.
+     * |        |          |Note: If chip is powered off, calibration function should be executed again.
+     * |[1]     |CALIE     |Calibration Interrupt Enable Bit
+     * |        |          |If calibration function is enabled and the calibration is finished, CALIF bit will be asserted, in the meanwhile, if CALIE bit is set to 1, a calibration interrupt request is generated.
+     * |        |          |0 = Calibration function Interrupt Disabled.
+     * |        |          |1 = Calibration function Interrupt Enabled.
      * @var ADC_T::ADCALSTSR
      * Offset: 0x184  ADC Calibration Status Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |CALIF     |Calibration Finish Interrupt Flag
-     * |        |          |If calibration finish, this flag will be set to 1. It is cleared by writing 1 to it.
+     * |        |          |If calibration is finished, this flag will be set to 1. It is cleared by writing 1 to it.
      */
     __I  uint32_t ADDR[30];              /*!< [0x0000-0x0074] ADC Data Register 0 ~ 29                                  */
     __I  uint32_t RESERVE1[2];
