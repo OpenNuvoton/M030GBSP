@@ -46,11 +46,35 @@
   *
   * @details    This function will enable the CRC controller by specify CRC operation mode, attribute, initial seed and write data length. \n
   *             After that, user can start to perform CRC calculate by calling CRC_WRITE_DATA macro or CRC_DAT register directly.
+  * @note       M031G supports programmable polynomial function, CRC_Open will set default Polynomial value which supported by M030G \n
+  *             and user can call CRC_SET_POLYNOMIAL to set polynomial value after CRC_Open. \n
   */
 void CRC_Open(uint32_t u32Mode, uint32_t u32Attribute, uint32_t u32Seed, uint32_t u32DataLen)
 {
     CRC->SEED = u32Seed;
+
+    if(((SYS->PDID & 0xF000) >> 12) == 0x01)     /*!< Chip series is M031G */
+    {
+        switch(u32Mode)
+        {
+        case CRC_CCITT:
+            u32Mode = CRC_16;
+            CRC->POLYNOMIAL = 0x1021;
+            break;
+        case CRC_8:
+            CRC->POLYNOMIAL = 0x7;
+            break;
+        case CRC_16:
+            CRC->POLYNOMIAL = 0x8005;
+            break;
+        case CRC_32:
+            CRC->POLYNOMIAL = 0x04C11DB7;
+            break;
+        }
+    }
+
     CRC->CTL = u32Mode | u32Attribute | u32DataLen | CRC_CTL_CRCEN_Msk;
+
 
     /* Setting CRCRST bit will reload the initial seed value(CRC_SEED register) to CRC controller */
     CRC->CTL |= CRC_CTL_CHKSINIT_Msk;

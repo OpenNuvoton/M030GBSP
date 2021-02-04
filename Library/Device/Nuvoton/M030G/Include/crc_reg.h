@@ -91,11 +91,19 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[31:0]  |CHECKSUM  |CRC Checksum Results
      * |        |          |This field indicates the CRC checksum result.
+     * @var CRC_T::POLYNOMIAL
+     * Offset: 0x10  CRC Polynomial Register
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[31:0]  |POLYNOMIAL|CRC Polynomial Value Results
+     * |        |          |This field indicates the value of CRC polynomial.
      */
     __IO uint32_t CTL;                   /*!< [0x0000] CRC Control Register                                             */
     __IO uint32_t DAT;                   /*!< [0x0004] CRC Write Data Register                                          */
     __IO uint32_t SEED;                  /*!< [0x0008] CRC Seed Register                                                */
     __I  uint32_t CHECKSUM;              /*!< [0x000c] CRC Checksum Register                                            */
+    __IO uint32_t POLYNOMIAL;            /*!< [0x0010] CRC Polynomial Register                                          */
 
 } CRC_T;
 
@@ -103,7 +111,6 @@ typedef struct
     @addtogroup CRC_CONST CRC Bit Field Definition
     Constant Definitions for CRC Controller
 @{ */
-
 
 #define CRC_CTL_CRCEN_Pos                (0)                                               /*!< CRC_T::CTL: CRCEN Position             */
 #define CRC_CTL_CRCEN_Msk                (0x1ul << CRC_CTL_CRCEN_Pos)                      /*!< CRC_T::CTL: CRCEN Mask                 */
@@ -137,6 +144,9 @@ typedef struct
 
 #define CRC_CHECKSUM_CHECKSUM_Pos        (0)                                               /*!< CRC_T::CHECKSUM: CHECKSUM Position     */
 #define CRC_CHECKSUM_CHECKSUM_Msk        (0xfffffffful << CRC_CHECKSUM_CHECKSUM_Pos)       /*!< CRC_T::CHECKSUM: CHECKSUM Mask         */
+
+#define CRC_POLYNOMIAL_POLYNOMIAL_Pos    (0)                                               /*!< CRC_T::POLYNOMIAL: POLYNOMIAL Position */
+#define CRC_POLYNOMIAL_POLYNOMIAL_Msk    (0xfffffffful << CRC_POLYNOMIAL_POLYNOMIAL_Pos)   /*!< CRC_T::POLYNOMIAL: POLYNOMIAL Mask     */
 
 /**@}*/ /* CRC_CONST */
 /**@}*/ /* end of CRC register group */

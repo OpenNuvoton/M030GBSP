@@ -98,6 +98,20 @@ extern "C"
  */
 #define CRC_WRITE_DATA(u32Data)   (CRC->DAT = (u32Data))
 
+/**
+  * @brief      Set CRC Polynomial Value
+  *
+  * @param[in]  u32Polynomial     Polynomial Value
+  *
+  * @return     None
+  *
+  * @details    This macro is used to set CRC Polynomial value.
+  *
+  * @note       User can write Polynomial value directly to CRC Polynomial Register(CRC_POLYNOMIAL) by this macro to perform CRC operation.
+  * \hideinitializer
+  */
+#define CRC_SET_POLYNOMIAL(u32Polynomial)   (CRC->POLYNOMIAL = (u32Polynomial))
+
 void CRC_Open(uint32_t u32Mode, uint32_t u32Attribute, uint32_t u32Seed, uint32_t u32DataLen);
 uint32_t CRC_GetChecksum(void);
 
