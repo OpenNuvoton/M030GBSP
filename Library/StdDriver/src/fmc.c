@@ -35,14 +35,14 @@
   */
 void FMC_Close(void)
 {
-FMC->ISPCTL &= ~FMC_ISPCTL_ISPEN_Msk;
+    FMC->ISPCTL &= ~FMC_ISPCTL_ISPEN_Msk;
 }
 
 
 /**
-  * @brief Execute FMC_ISPCMD_PAGE_ERASE command to erase a flash page. The page size is 4096 bytes.
+  * @brief Execute FMC_ISPCMD_PAGE_ERASE command to erase a flash page. The page size is 512 bytes.
   * @param[in]  u32PageAddr Address of the flash page to be erased.
-  *             It must be a 4096 bytes aligned address.
+  *             It must be a 512 bytes aligned address.
   * @return ISP page erase success or not.
   * @retval   0  Success
   * @retval   -1  Erase failed
@@ -73,7 +73,7 @@ int32_t FMC_Erase(uint32_t u32PageAddr)
 }
 
 /**
-  * @brief Execute FMC_ISPCMD_PAGE_ERASE command to erase SPROM. The page size is 4096 bytes.
+  * @brief Execute FMC_ISPCMD_PAGE_ERASE command to erase SPROM. The page size is 512 bytes.
   * @return   SPROM page erase success or not.
   * @retval   0  Success
   * @retval   -1  Erase failed
