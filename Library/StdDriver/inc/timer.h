@@ -462,6 +462,38 @@ static __INLINE uint32_t TIMER_GetCounter(TIMER_T *timer)
     return timer->CNT;
 }
 
+/**
+  * @brief      Enable Manchester Edge Trigger Timer
+  *
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *
+  * @return     None
+  *
+  * @details    This function is used to enable the Manchester edge trigger timer function.
+  *
+  * \hideinitializer
+  */
+static __INLINE void TIMER_EnableFromManch(TIMER_T *timer)
+{
+    timer->EXTCTL |= TIMER_CTL_MTRGTMEN_Msk;
+}
+
+/**
+  * @brief      Disable Manchester Edge Trigger Timer
+  *
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *
+  * @return     None
+  *
+  * @details    This function is used to disable the Manchester edge trigger timer function.
+  *
+  * \hideinitializer
+  */
+static __INLINE void TIMER_DisableFromManch(TIMER_T *timer)
+{
+    timer->EXTCTL &= ~TIMER_CTL_MTRGTMEN_Msk;
+}
+
 uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq);
 void TIMER_Close(TIMER_T *timer);
 void TIMER_Delay(TIMER_T *timer, uint32_t u32Usec);
