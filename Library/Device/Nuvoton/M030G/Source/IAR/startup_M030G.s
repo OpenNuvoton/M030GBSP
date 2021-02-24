@@ -52,12 +52,12 @@ __vector_table
     DCD     EINT135_IRQHandler
     DCD     GPAB_IRQHandler
     DCD     GPCF_IRQHandler
-    DCD     Default_Handler
-    DCD     Default_Handler
+    DCD     TMR4_IRQHandler             ; Timer 4 interrupt
+    DCD     TMR5_IRQHandler             ; Timer 5 interrupt
     DCD     TMR0_IRQHandler             ; Timer 0 interrupt
     DCD     TMR1_IRQHandler             ; Timer 1 interrupt
-    DCD     Default_Handler
-    DCD     Default_Handler
+    DCD     TMR2_IRQHandler             ; Timer 2 interrupt
+    DCD     TMR3_IRQHandler             ; Timer 3 interrupt
 	DCD     UART0_IRQHandler
 	DCD     Default_Handler
 	DCD     SPI0_IRQHandler
@@ -126,8 +126,12 @@ Reset_Handler
     PUBWEAK EINT135_IRQHandler
     PUBWEAK GPAB_IRQHandler
     PUBWEAK GPCF_IRQHandler
+    PUBWEAK TMR4_IRQHandler
+    PUBWEAK TMR5_IRQHandler
     PUBWEAK TMR0_IRQHandler
     PUBWEAK TMR1_IRQHandler
+    PUBWEAK TMR2_IRQHandler
+    PUBWEAK TMR3_IRQHandler
     PUBWEAK UART0_IRQHandler
     PUBWEAK SPI0_IRQHandler
     PUBWEAK I2C0_IRQHandler
@@ -152,8 +156,12 @@ EINT024_IRQHandler
 EINT135_IRQHandler
 GPAB_IRQHandler
 GPCF_IRQHandler
+TMR4_IRQHandler
+TMR5_IRQHandler
 TMR0_IRQHandler
 TMR1_IRQHandler
+TMR2_IRQHandler
+TMR3_IRQHandler
 UART0_IRQHandler
 SPI0_IRQHandler
 I2C0_IRQHandler

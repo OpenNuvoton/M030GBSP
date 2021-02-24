@@ -98,6 +98,36 @@ void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin)
     port->INTEN &= ~((0x00010001UL) << u32Pin);
 }
 
+/**
+ * @brief       Set GPIO Pull-up control
+ *
+ * @param[in]   port        GPIO port. It could be PA, PB, PC or PF.
+ * @param[in]   u32PinMask  The single or multiple pins of specified GPIO port.
+ *                          It could be BIT0 ~ BIT3, BIT12 ~ BIT15 for PA.
+ *                          It could be BIT0 ~ BIT15 for PB.
+ *                          It could be BIT1 for PC.
+ *                          It could be BIT0, BIT2 and BIT3 for PF.
+ * @param[in]   u32Mode     The pin mode of specified GPIO pin. It could be
+ *                          \ref GPIO_PUSEL_DISABLE
+ *                          \ref GPIO_PUSEL_PULL_UP
+ *
+ * @return      None
+ *
+ * @details     Set the pin mode of specified GPIO pin.
+ */
+void GPIO_SetPullCtl(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode)
+{
+    uint32_t i;
+
+    for(i = 0ul; i < GPIO_PIN_MAX; i++)
+    {
+        if(u32PinMask & (1ul << i))
+        {
+            port->PUSEL = (port->PUSEL & ~(0x1ul << (i))) | (u32Mode << (i));
+        }
+    }
+}
+
 
 /*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
 

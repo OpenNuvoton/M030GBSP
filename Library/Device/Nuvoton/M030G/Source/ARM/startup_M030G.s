@@ -63,12 +63,12 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     EINT135_IRQHandler
                 DCD     GPAB_IRQHandler
                 DCD     GPCF_IRQHandler
-                DCD     Default_Handler
-                DCD     Default_Handler
+                DCD     TMR4_IRQHandler
+                DCD     TMR5_IRQHandler
                 DCD     TMR0_IRQHandler
                 DCD     TMR1_IRQHandler
-                DCD     Default_Handler
-                DCD     Default_Handler
+                DCD     TMR2_IRQHandler
+                DCD     TMR3_IRQHandler
                 DCD     UART0_IRQHandler
                 DCD     Default_Handler
                 DCD     SPI0_IRQHandler
@@ -165,8 +165,12 @@ Default_Handler PROC
                 EXPORT  EINT135_IRQHandler        [WEAK]
                 EXPORT  GPAB_IRQHandler           [WEAK]
                 EXPORT  GPCF_IRQHandler           [WEAK]
+                EXPORT  TMR4_IRQHandler           [WEAK]
+                EXPORT  TMR5_IRQHandler           [WEAK]
                 EXPORT  TMR0_IRQHandler           [WEAK]
                 EXPORT  TMR1_IRQHandler           [WEAK]
+                EXPORT  TMR2_IRQHandler           [WEAK]
+                EXPORT  TMR3_IRQHandler           [WEAK]
                 EXPORT  UART0_IRQHandler          [WEAK]
                 EXPORT  SPI0_IRQHandler           [WEAK]
                 EXPORT  I2C0_IRQHandler           [WEAK]
@@ -185,8 +189,12 @@ EINT024_IRQHandler
 EINT135_IRQHandler
 GPAB_IRQHandler
 GPCF_IRQHandler
+TMR4_IRQHandler
+TMR5_IRQHandler
 TMR0_IRQHandler
 TMR1_IRQHandler
+TMR2_IRQHandler
+TMR3_IRQHandler
 UART0_IRQHandler
 SPI0_IRQHandler
 I2C0_IRQHandler

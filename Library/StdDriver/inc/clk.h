@@ -49,6 +49,7 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKSEL0 constant definitions.  (Write-protection)                                                      */
 /*---------------------------------------------------------------------------------------------------------*/
+#define CLK_CLKSEL0_HCLKSEL_PLL           (0x02UL<<CLK_CLKSEL0_HCLKSEL_Pos)     /*!< Setting clock source as PLL output                     \hideinitializer */
 #define CLK_CLKSEL0_HCLKSEL_HIRC          (0x07UL<<CLK_CLKSEL0_HCLKSEL_Pos)     /*!< Setting clock source as internal high speed RC clock   \hideinitializer */
 
 #define CLK_CLKSEL0_STCLKSEL_HCLK_DIV2    (0x03UL<<CLK_CLKSEL0_STCLKSEL_Pos)    /*!< Setting SysTick clock source as HCLK/2                     \hideinitializer */
@@ -67,6 +68,7 @@ extern "C"
 #define CLK_CLKSEL1_CLKOSEL_HCLK         (0x2UL<<CLK_CLKSEL1_CLKOSEL_Pos)       /*!< Setting CLKO clock source as HCLK                          \hideinitializer */
 #define CLK_CLKSEL1_CLKOSEL_HIRC         (0x3UL<<CLK_CLKSEL1_CLKOSEL_Pos)       /*!< Setting CLKO clock source as external internal high speed RC clock \hideinitializer */
 #define CLK_CLKSEL1_CLKOSEL_LIRC         (0x4UL<<CLK_CLKSEL1_CLKOSEL_Pos)       /*!< Setting CLKO clock source as external internal low speed RC clock  \hideinitializer */
+#define CLK_CLKSEL1_CLKOSEL_PLL          (0x6UL<<CLK_CLKSEL1_CLKOSEL_Pos)       /*!< Setting CLKO clock source as PLL                       \hideinitializer */
 
 #define CLK_CLKSEL1_TMR0SEL_PCLK0        (0x2UL<<CLK_CLKSEL1_TMR0SEL_Pos)       /*!< Setting Timer 0 clock source as PCLK0                          \hideinitializer */
 #define CLK_CLKSEL1_TMR0SEL_EXT_TRG      (0x3UL<<CLK_CLKSEL1_TMR0SEL_Pos)       /*!< Setting Timer 0 clock source as external trigger               \hideinitializer */
@@ -78,6 +80,17 @@ extern "C"
 #define CLK_CLKSEL1_TMR1SEL_LIRC         (0x5UL<<CLK_CLKSEL1_TMR1SEL_Pos)       /*!< Setting Timer 1 clock source as internal low speed RC clock    \hideinitializer */
 #define CLK_CLKSEL1_TMR1SEL_HIRC         (0x7UL<<CLK_CLKSEL1_TMR1SEL_Pos)       /*!< Setting Timer 1 clock source as internal high speed RC clock   \hideinitializer */
 
+#define CLK_CLKSEL1_TMR2SEL_PCLK1        (0x2UL<<CLK_CLKSEL1_TMR2SEL_Pos)       /*!< Setting Timer 2 clock source as PCLK1                      \hideinitializer */
+#define CLK_CLKSEL1_TMR2SEL_EXT_TRG      (0x3UL<<CLK_CLKSEL1_TMR2SEL_Pos)       /*!< Setting Timer 2 clock source as external trigger           \hideinitializer */
+#define CLK_CLKSEL1_TMR2SEL_LIRC         (0x5UL<<CLK_CLKSEL1_TMR2SEL_Pos)       /*!< Setting Timer 2 clock source as internal low speed RC clock    \hideinitializer */
+#define CLK_CLKSEL1_TMR2SEL_HIRC         (0x7UL<<CLK_CLKSEL1_TMR2SEL_Pos)       /*!< Setting Timer 2 clock source as internal high speed RC clock   \hideinitializer */
+
+#define CLK_CLKSEL1_TMR3SEL_PCLK1        (0x2UL<<CLK_CLKSEL1_TMR3SEL_Pos)       /*!< Setting Timer 3 clock source as PCLK1                      \hideinitializer */
+#define CLK_CLKSEL1_TMR3SEL_EXT_TRG      (0x3UL<<CLK_CLKSEL1_TMR3SEL_Pos)       /*!< Setting Timer 3 clock source as external trigger           \hideinitializer */
+#define CLK_CLKSEL1_TMR3SEL_LIRC         (0x5UL<<CLK_CLKSEL1_TMR3SEL_Pos)       /*!< Setting Timer 3 clock source as internal low speed RC clock    \hideinitializer */
+#define CLK_CLKSEL1_TMR3SEL_HIRC         (0x7UL<<CLK_CLKSEL1_TMR3SEL_Pos)       /*!< Setting Timer 3 clock source as internal high speed RC clock   \hideinitializer */
+
+#define CLK_CLKSEL1_UART0SEL_PLL         (0x1UL<<CLK_CLKSEL1_UART0SEL_Pos)      /*!< Setting UART0 clock source as external PLL     \hideinitializer */
 #define CLK_CLKSEL1_UART0SEL_HIRC        (0x3UL<<CLK_CLKSEL1_UART0SEL_Pos)      /*!< Setting UART0 clock source as external internal high speed RC clock    \hideinitializer */
 #define CLK_CLKSEL1_UART0SEL_PCLK0       (0x4UL<<CLK_CLKSEL1_UART0SEL_Pos)      /*!< Setting UART0 clock source as external PCLK0   \hideinitializer */
 #define CLK_CLKSEL1_UART0SEL_LIRC        (0x5UL<<CLK_CLKSEL1_UART0SEL_Pos)      /*!< Setting UART0 clock source as external LIRC    \hideinitializer */
@@ -85,9 +98,24 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKSEL2 constant definitions.                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
+#define CLK_CLKSEL2_SPI0SEL_PLL          (0x1UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as PLL    \hideinitializer */
 #define CLK_CLKSEL2_SPI0SEL_PCLK1        (0x2UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as PCLK1  \hideinitializer */
 #define CLK_CLKSEL2_SPI0SEL_HIRC         (0x3UL<<CLK_CLKSEL2_SPI0SEL_Pos)       /*!< Setting SPI clock source as HIRC   \hideinitializer */
 
+#define CLK_CLKSEL2_BPWM1SEL_PLL         (0x0UL<<CLK_CLKSEL2_BPWM1SEL_Pos)      /*!< Setting BPWM1 clock source as PLL   \hideinitializer */
+#define CLK_CLKSEL2_BPWM1SEL_PCLK1       (0x1UL<<CLK_CLKSEL2_BPWM1SEL_Pos)      /*!< Setting BPWM1 clock source as PCLK1 \hideinitializer */
+
+#define CLK_CLKSEL2_TMR4SEL_PCLK0        (0x2UL<<CLK_CLKSEL2_TMR4SEL_Pos)       /*!< Setting Timer 4 clock source as PCLK0                          \hideinitializer */
+#define CLK_CLKSEL2_TMR4SEL_EXT_TRG      (0x3UL<<CLK_CLKSEL2_TMR4SEL_Pos)       /*!< Setting Timer 4 clock source as external trigger               \hideinitializer */
+#define CLK_CLKSEL2_TMR4SEL_LIRC         (0x5UL<<CLK_CLKSEL2_TMR4SEL_Pos)       /*!< Setting Timer 4 clock source as internal low speed RC clock    \hideinitializer */
+#define CLK_CLKSEL2_TMR4SEL_HIRC         (0x7UL<<CLK_CLKSEL2_TMR4SEL_Pos)       /*!< Setting Timer 4 clock source as internal high speed RC clock   \hideinitializer */
+
+#define CLK_CLKSEL2_TMR5SEL_PCLK0        (0x2UL<<CLK_CLKSEL2_TMR5SEL_Pos)       /*!< Setting Timer 5 clock source as PCLK0                          \hideinitializer */
+#define CLK_CLKSEL2_TMR5SEL_EXT_TRG      (0x3UL<<CLK_CLKSEL2_TMR5SEL_Pos)       /*!< Setting Timer 5 clock source as external trigger               \hideinitializer */
+#define CLK_CLKSEL2_TMR5SEL_LIRC         (0x5UL<<CLK_CLKSEL2_TMR5SEL_Pos)       /*!< Setting Timer 5 clock source as internal low speed RC clock    \hideinitializer */
+#define CLK_CLKSEL2_TMR5SEL_HIRC         (0x7UL<<CLK_CLKSEL2_TMR5SEL_Pos)       /*!< Setting Timer 5 clock source as internal high speed RC clock   \hideinitializer */
+
+#define CLK_CLKSEL2_ADCSEL_PLL           (0x1UL<<CLK_CLKSEL2_ADCSEL_Pos)        /*!< Setting ADC clock source as PLL    \hideinitializer */
 #define CLK_CLKSEL2_ADCSEL_PCLK1         (0x2UL<<CLK_CLKSEL2_ADCSEL_Pos)        /*!< Setting ADC clock source as PCLK1  \hideinitializer */
 #define CLK_CLKSEL2_ADCSEL_HIRC          (0x3UL<<CLK_CLKSEL2_ADCSEL_Pos)        /*!< Setting ADC clock source as HIRC   \hideinitializer */
 
@@ -105,11 +133,28 @@ extern "C"
 #define CLK_PCLKDIV_APB0DIV_DIV2       (0x1UL<<CLK_PCLKDIV_APB0DIV_Pos)     /*!< PCLKDIV Setting for APB0 clock divider  2. \hideinitializer */
 #define CLK_PCLKDIV_APB0DIV_DIV4       (0x2UL<<CLK_PCLKDIV_APB0DIV_Pos)     /*!< PCLKDIV Setting for APB0 clock divider  4. \hideinitializer */
 #define CLK_PCLKDIV_APB0DIV_DIV8       (0x3UL<<CLK_PCLKDIV_APB0DIV_Pos)     /*!< PCLKDIV Setting for APB0 clock divider  8. \hideinitializer */
+#define CLK_PCLKDIV_APB0DIV_DIV16      (0x4UL<<CLK_PCLKDIV_APB0DIV_Pos)     /*!< PCLKDIV Setting for APB0 clock divider 16. \hideinitializer */
 
 #define CLK_PCLKDIV_APB1DIV_DIV1       (0x0UL<<CLK_PCLKDIV_APB1DIV_Pos)     /*!< PCLKDIV Setting for APB1 clock divider  1. \hideinitializer */
 #define CLK_PCLKDIV_APB1DIV_DIV2       (0x1UL<<CLK_PCLKDIV_APB1DIV_Pos)     /*!< PCLKDIV Setting for APB1 clock divider  2. \hideinitializer */
 #define CLK_PCLKDIV_APB1DIV_DIV4       (0x2UL<<CLK_PCLKDIV_APB1DIV_Pos)     /*!< PCLKDIV Setting for APB1 clock divider  4. \hideinitializer */
 #define CLK_PCLKDIV_APB1DIV_DIV8       (0x3UL<<CLK_PCLKDIV_APB1DIV_Pos)     /*!< PCLKDIV Setting for APB1 clock divider  8. \hideinitializer */
+#define CLK_PCLKDIV_APB1DIV_DIV16      (0x4UL<<CLK_PCLKDIV_APB1DIV_Pos)     /*!< PCLKDIV Setting for APB1 clock divider 16. \hideinitializer */
+
+/*---------------------------------------------------------------------------------------------------------*/
+/*  PLLCTL constant definitions. PLL = FIN * NF / NR / NO                                                  */
+/*---------------------------------------------------------------------------------------------------------*/
+#define CLK_PLLCTL_NR(x)        ((x-2)<<CLK_PLLCTL_INDIV_Pos)   /*!< For PLL input divider. x must be constant and 2 <= x <= 7 since constraint 1.6MHz < FIN/NR < 16MHz and NR = INDIV+2 >= 2   \hideinitializer */
+#define CLK_PLLCTL_NF(x)        ((x-2)<<CLK_PLLCTL_FBDIV_Pos)   /*!< For PLL feedback divider. x must be constant and 17 <= x/NR <= 41 since constraint 200MHz < FIN*NF/NR < 500MHz.            \hideinitializer */
+
+#define CLK_PLLCTL_NO_1         (0x0UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 1    \hideinitializer */
+#define CLK_PLLCTL_NO_2         (0x1UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 2    \hideinitializer */
+#define CLK_PLLCTL_NO_4         (0x3UL << CLK_PLLCTL_OUTDIV_Pos)    /*!< For PLL output divider is 4    \hideinitializer */
+
+#define CLK_PLLCTL_64MHz_HIRC_DIV4  (CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(64)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 64MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
+#define CLK_PLLCTL_68MHz_HIRC_DIV4  (CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(68)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 68MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
+#define CLK_PLLCTL_72MHz_HIRC_DIV4  (CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(72)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 72MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
+#define CLK_PLLCTL_96MHz_HIRC_DIV4  (CLK_PLLCTL_NR(3)  | CLK_PLLCTL_NF(96)     | CLK_PLLCTL_NO_4)    /*!< Predefined PLLCTL setting for 96MHz PLL output with HIRC_DIV4(12MHz IRC)   \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  MODULE constant definitions.                                                                           */
@@ -166,6 +211,14 @@ extern "C"
                         MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_TMR1SEL_Pos)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA) |MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR1 Module    \hideinitializer */
 
+#define TMR2_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_TMR2CKEN_Pos) |\
+                        MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_TMR2SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR2 Module    \hideinitializer */
+
+#define TMR3_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_TMR3CKEN_Pos) |\
+                        MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_TMR3SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR3 Module    \hideinitializer */
+
 #define CLKO_MODULE    (MODULE_APBCLK_ENC( 1)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK0_CLKOCKEN_Pos) |\
                         MODULE_CLKSEL_ENC( 1)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL1_CLKOSEL_Pos)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA) |MODULE_CLKDIV_Pos_ENC(NA))      /*!< CLKO Module    \hideinitializer */
@@ -203,6 +256,18 @@ extern "C"
                         MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
                         MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< BPWM1 Module    \hideinitializer */
 
+#define MANCH_MODULE   (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_MANCHCKEN_Pos)|\
+                        MODULE_CLKSEL_ENC(NA)|MODULE_CLKSEL_Msk_ENC(NA)|MODULE_CLKSEL_Pos_ENC(NA)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA)|MODULE_CLKDIV_Pos_ENC(NA))      /*!< Manchester Module  \hideinitializer */
+
+#define TMR4_MODULE    (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_TMR4CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_TMR4SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA) |MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR4 Module    \hideinitializer */
+
+#define TMR5_MODULE    (MODULE_APBCLK_ENC( 2)|MODULE_IP_EN_Pos_ENC(CLK_APBCLK1_TMR5CKEN_Pos)|\
+                        MODULE_CLKSEL_ENC( 2)|MODULE_CLKSEL_Msk_ENC(0x7)|MODULE_CLKSEL_Pos_ENC(CLK_CLKSEL2_TMR5SEL_Pos)|\
+                        MODULE_CLKDIV_ENC(NA)|MODULE_CLKDIV_Msk_ENC(NA) |MODULE_CLKDIV_Pos_ENC(NA))      /*!< TMR5 Module    \hideinitializer */
+
 /*@}*/ /* end of group CLK_EXPORTED_CONSTANTS */
 
 /** @addtogroup CLK_EXPORTED_FUNCTIONS CLK Exported Functions
@@ -214,26 +279,44 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 
 /**
-  * @brief  Get current HCLK clock frquency.
-  * @param  None.
-  * @return HCLK clock frquency. The clock UNIT is in Hz.
+  * @brief    Get PLL Clock Output Frequency
+  * @param    None
+  * @return   PLL clock output frequency
+  * @details  To get actual PLL clock output frequency. The clock uint is in Hz.
   * \hideinitializer
   */
-static __INLINE uint32_t CLK_GetHCLKFreq(void)
+static __INLINE uint32_t CLK_GetPLLClockFreq(void)
 {
-    uint32_t u32Freqout, u32AHBDivider, u32ClkSel;
+    uint32_t u32PllFreq;
+    uint32_t u32FIN, u32NF, u32NR, u32NO;
+    uint8_t au8NoTbl[4] = {1, 2, 2, 4}; /* OUTDIV :DEF: {1, 2, 2, 4} */
+    uint32_t u32Reg;
 
-    u32Freqout = 0;
-    u32ClkSel = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
+    u32PllFreq = 0;
+    u32Reg = CLK->PLLCTL;
 
-    if (u32ClkSel == CLK_CLKSEL0_HCLKSEL_HIRC)
-    { /* internal HIRC oscillator clock */
-        u32Freqout = __HIRC;
+    if ((u32Reg & (CLK_PLLCTL_PD_Msk | CLK_PLLCTL_OE_Msk)) == 0)
+    {
+        /* PLL is enabled and output enabled */
+        u32FIN = (__HIRC >> 2);
+
+        if (u32Reg & CLK_PLLCTL_BP_Msk)
+        {
+            /* PLL is in bypass mode */
+            u32PllFreq = u32FIN;
+        }
+        else
+        {
+            /* PLL is in normal work mode */
+            u32NO = au8NoTbl[((u32Reg & CLK_PLLCTL_OUTDIV_Msk) >> CLK_PLLCTL_OUTDIV_Pos)];
+            u32NF  = ((u32Reg & CLK_PLLCTL_FBDIV_Msk) >> CLK_PLLCTL_FBDIV_Pos) + 2;
+            u32NR  = ((u32Reg & CLK_PLLCTL_INDIV_Msk) >> CLK_PLLCTL_INDIV_Pos) + 2;
+            /* u32FIN is shifted 2 bits to avoid overflow */
+            u32PllFreq = (((u32FIN >> 2) * u32NF) / (u32NR * u32NO) << 2);
+        }
     }
 
-    u32AHBDivider = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
-
-    return (u32Freqout / u32AHBDivider);
+    return u32PllFreq;
 }
 
 
@@ -296,6 +379,7 @@ static __INLINE uint32_t CLK_GetUARTFreq(void)
 uint32_t CLK_WaitClockReady(uint32_t);
 void CLK_DisableCKO(void);
 void CLK_EnableCKO(uint32_t u32ClkSrc, uint32_t u32ClkDiv, uint32_t u32ClkDivBy1En);
+uint32_t CLK_GetHCLKFreq(void);
 uint32_t CLK_GetCPUFreq(void);
 void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv);
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk);
@@ -305,6 +389,8 @@ void CLK_EnableXtalRC(uint32_t u32ClkMask);
 void CLK_DisableModuleClock(uint32_t u32ModuleIdx);
 void CLK_EnableModuleClock(uint32_t u32ModuleIdx);
 void CLK_SetModuleClock(uint32_t u32ModuleIdx, uint32_t u32ClkSrc, uint32_t u32ClkDiv);
+void CLK_DisablePLL(void);
+uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq);
 void CLK_SetSysTickClockSrc(uint32_t u32ClkSrc);
 void CLK_DisableSysTick(void);
 void CLK_EnableSysTick(uint32_t u32ClkSrc, uint32_t u32Count);

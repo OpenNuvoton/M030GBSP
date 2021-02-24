@@ -87,8 +87,12 @@ typedef enum IRQn
     EINT135_IRQn              = 3,        /*!< EINT1, EINT3 and EINT5 Interrupt                     */
     GPIO_PAPB_IRQn            = 4,        /*!< GPIO_PAPB Interrupt                                  */
     GPIO_PCPF_IRQn            = 5,        /*!< GPIO_PCPF Interrupt                                  */
+    TMR4_IRQn                 = 6,        /*!< TIMER4 Interrupt                                     */
+    TMR5_IRQn                 = 7,        /*!< TIMER5 Interrupt                                     */
     TMR0_IRQn                 = 8,        /*!< TIMER0 Interrupt                                     */
     TMR1_IRQn                 = 9,        /*!< TIMER1 Interrupt                                     */
+    TMR2_IRQn                 = 10,       /*!< TIMER2 Interrupt                                     */
+    TMR3_IRQn                 = 11,       /*!< TIMER3 Interrupt                                     */
     UART0_IRQn                = 12,       /*!< UART0 Interrupt                                      */
     SPI0_IRQn                 = 14,       /*!< SPI0 Interrupt                                       */
     I2C0_IRQn                 = 18,       /*!< I2C0 Interrupt                                       */
@@ -208,6 +212,8 @@ extern void SystemInit(void);
 #define TIMER1_BASE         (APB1_BASE      + 0x50020)                  /*!< Timer1 Base Address                              */
 #define TIMER2_BASE         (APB2_BASE      + 0x51000)                  /*!< Timer2 Base Address                              */
 #define TIMER3_BASE         (APB2_BASE      + 0x51020)                  /*!< Timer3 Base Address                              */
+#define TIMER4_BASE         (APB2_BASE      + 0x52000)                  /*!< Timer4 Base Address                              */
+#define TIMER5_BASE         (APB2_BASE      + 0x52020)                  /*!< Timer5 Base Address                              */
 
 #define BPWM1_BASE          (APB2_BASE      + 0x5B000)                  /*!< BPWM1 Base Address                               */
 #define SPI0_BASE           (APB1_BASE      + 0x61000)                  /*!< SPI0 Base Address                                */
@@ -242,6 +248,8 @@ extern void SystemInit(void);
 #define TIMER1              ((TIMER_T *) TIMER1_BASE)                   /*!< TIMER1 Configuration Struct                      */
 #define TIMER2              ((TIMER_T *) TIMER2_BASE)                   /*!< TIMER2 Configuration Struct                      */
 #define TIMER3              ((TIMER_T *) TIMER3_BASE)                   /*!< TIMER3 Configuration Struct                      */
+#define TIMER4              ((TIMER_T *) TIMER4_BASE)                   /*!< TIMER4 Configuration Struct                      */
+#define TIMER5              ((TIMER_T *) TIMER5_BASE)                   /*!< TIMER5 Configuration Struct                      */
 
 #define WDT                 ((WDT_T *) WDT_BASE)                        /*!< Watch Dog Timer Configuration Struct             */
 
@@ -479,6 +487,11 @@ typedef volatile unsigned short vu16;
 #define GET_BYTE1(u32Param)    (((u32Param) & BYTE1_Msk) >>  8) /*!< Extract Byte 1 (Bit  8~15) from parameter u32Param */
 #define GET_BYTE2(u32Param)    (((u32Param) & BYTE2_Msk) >> 16) /*!< Extract Byte 2 (Bit 16~23) from parameter u32Param */
 #define GET_BYTE3(u32Param)    (((u32Param) & BYTE3_Msk) >> 24) /*!< Extract Byte 3 (Bit 24~31) from parameter u32Param */
+
+/* Chip Series number definitions */
+#define GET_CHIP_SERIES_NUM    ((SYS->PDID & 0xF000) >> 12)     /*!< Extract chip series number from PDID */
+#define CHIP_SERIES_NUM_M030G  (0x0UL)                          /*!< Chip series number for M030G */
+#define CHIP_SERIES_NUM_M031G  (0x1UL)                          /*!< Chip series number for M031G */
 
 /*@}*/ /* end of group Legacy_Constants */
 

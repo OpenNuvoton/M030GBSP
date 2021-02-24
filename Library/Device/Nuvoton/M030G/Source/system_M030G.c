@@ -22,7 +22,7 @@
 uint32_t SystemCoreClock  = __HSI;              /*!< System Clock Frequency (Core Clock) */
 uint32_t CyclesPerUs      = (__HSI / 1000000);  /*!< Cycles per micro second             */
 uint32_t PllClock         = __HSI;              /*!< PLL Output Clock Frequency          */
-const uint32_t gau32ClkSrcTbl[] = {0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, __HIRC};
+const uint32_t gau32ClkSrcTbl[] = {0UL, 0UL, __HSI, 0UL, 0UL, 0UL, 0UL, __HIRC};
 
 
 /**
@@ -37,11 +37,24 @@ const uint32_t gau32ClkSrcTbl[] = {0UL, 0UL, 0UL, 0UL, 0UL, 0UL, 0UL, __HIRC};
  */
 void SystemCoreClockUpdate(void)
 {
-    uint32_t u32Freq;
+    uint32_t u32Freq, u32ClkSrc;
     uint32_t u32HclkDiv;
 
-    /* HCLK only from HIRC */
-    u32Freq = __HIRC;
+    u32ClkSrc = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
+
+    /* Update PLL Clock */
+    PllClock = CLK_GetPLLClockFreq();
+
+    if(u32ClkSrc != CLK_CLKSEL0_HCLKSEL_PLL)
+    {
+        /* Use the clock sources directly */
+        u32Freq = gau32ClkSrcTbl[u32ClkSrc];
+    }
+    else
+    {
+        /* Use PLL clock */
+        u32Freq = PllClock;
+    }
 
     u32HclkDiv = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
 

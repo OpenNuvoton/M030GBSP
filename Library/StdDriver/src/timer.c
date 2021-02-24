@@ -27,6 +27,7 @@
   * @brief      Open Timer with Operate Mode and Frequency
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32Mode     Operation mode. Possible options are
   *                         - \ref TIMER_ONESHOT_MODE
   *                         - \ref TIMER_PERIODIC_MODE
@@ -68,7 +69,8 @@ uint32_t TIMER_Open(TIMER_T *timer, uint32_t u32Mode, uint32_t u32Freq)
 /**
   * @brief      Stop Timer Counting
   *
-  * @param[in]  timer   The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   *
   * @return     None
   *
@@ -84,6 +86,7 @@ void TIMER_Close(TIMER_T *timer)
   * @brief      Create a specify Delay Time
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32Usec     Delay period in micro seconds. Valid values are between 100~1000000 (100 micro second ~ 1 second).
   *
   * @return     None
@@ -148,6 +151,7 @@ void TIMER_Delay(TIMER_T *timer, uint32_t u32Usec)
   * @brief      Enable Timer Capture Function
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32CapMode  Timer capture mode. Could be
   *                         - \ref TIMER_CAPTURE_FREE_COUNTING_MODE
   *                         - \ref TIMER_CAPTURE_COUNTER_RESET_MODE
@@ -171,7 +175,8 @@ void TIMER_EnableCapture(TIMER_T *timer, uint32_t u32CapMode, uint32_t u32Edge)
 /**
   * @brief      Disable Timer Capture Function
   *
-  * @param[in]  timer   The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   *
   * @return     None
   *
@@ -186,6 +191,7 @@ void TIMER_DisableCapture(TIMER_T *timer)
   * @brief      Enable Timer Counter Function
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32Edge     Detection edge of counter pin. Could be ether
   *                         - \ref TIMER_COUNTER_FALLING_EDGE, or
   *                         - \ref TIMER_COUNTER_RISING_EDGE
@@ -205,7 +211,8 @@ void TIMER_EnableEventCounter(TIMER_T *timer, uint32_t u32Edge)
 /**
   * @brief      Disable Timer Counter Function
   *
-  * @param[in]  timer   The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   *
   * @return     None
   *
@@ -219,7 +226,8 @@ void TIMER_DisableEventCounter(TIMER_T *timer)
 /**
   * @brief      Get Timer Clock Frequency
   *
-  * @param[in]  timer   The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   *
   * @return     Timer clock frequency
   *
@@ -235,10 +243,18 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer)
         u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR0SEL_Msk) >> CLK_CLKSEL1_TMR0SEL_Pos;
     else if(timer == TIMER1)
         u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR1SEL_Msk) >> CLK_CLKSEL1_TMR1SEL_Pos;
+    if(timer == TIMER2)
+        u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR2SEL_Msk) >> CLK_CLKSEL1_TMR2SEL_Pos;
+    else if(timer == TIMER3)
+        u32Src = (CLK->CLKSEL1 & CLK_CLKSEL1_TMR3SEL_Msk) >> CLK_CLKSEL1_TMR3SEL_Pos;
+    if(timer == TIMER4)
+        u32Src = (CLK->CLKSEL2 & CLK_CLKSEL2_TMR4SEL_Msk) >> CLK_CLKSEL2_TMR4SEL_Pos;
+    else if(timer == TIMER5)
+        u32Src = (CLK->CLKSEL2 & CLK_CLKSEL2_TMR5SEL_Msk) >> CLK_CLKSEL2_TMR5SEL_Pos;
 
     if(u32Src == 2)
     {
-        if ((timer == TIMER0) || (timer == TIMER1))
+        if ((timer == TIMER0) || (timer == TIMER1) || (timer == TIMER4) || (timer == TIMER5))
             return CLK_GetPCLK0Freq();
         else
             return CLK_GetPCLK1Freq();
@@ -251,6 +267,7 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer)
   * @brief      Enable the Timer Frequency Counter Function
   *
   * @param[in]  timer           The pointer of the specified Timer module. It could be TIMER0.
+  *                             For M031G, it could be TIMER0, TIMER2, TIMER4.
   * @param[in]  u32DropCount    This parameter has no effect in M030G series BSP.
   * @param[in]  u32Timeout      This parameter has no effect in M030G series BSP.
   * @param[in]  u32EnableInt    Enable interrupt assertion after capture complete or not. Valid values are TRUE and FALSE.
@@ -258,7 +275,7 @@ uint32_t TIMER_GetModuleClock(TIMER_T *timer)
   * @return     None
   *
   * @details    This function is used to calculate input event frequency. After enable
-  *             this function, a pair of timers, TIMER0 and TIMER1, or TIMER2 and TIMER3
+  *             this function, a pair of timers, TIMER0 and TIMER1, or TIMER2 and TIMER3, or TIMER4 and TIMER5
   *             will be configured for this function. The mode used to calculate input
   *             event frequency is mentioned as "Inter Timer Trigger Mode" in Technical
   *             Reference Manual
@@ -267,7 +284,12 @@ void TIMER_EnableFreqCounter(TIMER_T *timer, uint32_t u32DropCount, uint32_t u32
 {
     TIMER_T *t;    /* store the timer base to configure compare value */
 
-    t = (timer == TIMER0) ? TIMER1 : TIMER3;
+    if (timer == TIMER2)
+        t = TIMER3;
+    else if (timer == TIMER4)
+        t = TIMER5;
+    else
+        t = TIMER1;
 
     t->CMP = 0xFFFFFF;
     t->EXTCTL = u32EnableInt ? TIMER_EXTCTL_CAPIEN_Msk : 0;
@@ -280,6 +302,7 @@ void TIMER_EnableFreqCounter(TIMER_T *timer, uint32_t u32DropCount, uint32_t u32
   * @brief      Disable the Timer Frequency Counter Function
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0.
+  *                         For M031G, it could be TIMER0, TIMER2, TIMER4.
   *
   * @return     None
   */
@@ -292,6 +315,7 @@ void TIMER_DisableFreqCounter(TIMER_T *timer)
   * @brief      Select Other Modules Triggered Source
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32Src      Selects the interrupt source to trigger other modules. Could be:
   *                         - \ref TIMER_TRGSRC_TIMEOUT_EVENT
   *                         - \ref TIMER_TRGSRC_CAPTURE_EVENT
@@ -307,6 +331,7 @@ void TIMER_SetTriggerSource(TIMER_T *timer, uint32_t u32Src)
   * @brief      Set Modules Trigger by Timer Interrupt Event
   *
   * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
+  *                         For M031G, it could be TIMER0 ~ TIMER5.
   * @param[in]  u32Mask     The mask of modules (BPWM, DAC, ADC and PDMA) trigger by timer. Is the combination of
   *                         - \ref TIMER_TRG_TO_BPWM
   *                         - \ref TIMER_TRG_TO_DAC

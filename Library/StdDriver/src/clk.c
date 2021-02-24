@@ -43,6 +43,7 @@ void CLK_DisableCKO(void)
   *             - \ref CLK_CLKSEL1_CLKOSEL_HCLK
   *             - \ref CLK_CLKSEL1_CLKOSEL_HIRC
   *             - \ref CLK_CLKSEL1_CLKOSEL_LIRC
+  *             - \ref CLK_CLKSEL1_CLKOSEL_PLL
   * @param[in]  u32ClkDiv is divider selection for output frequency.
   * @param[in]  u32ClkDivBy1En is frequency divided by one enable.
   * @return     None
@@ -135,6 +136,18 @@ uint32_t CLK_GetPCLK1Freq(void)
 }
 
 /**
+  * @brief      Get HCLK frequency
+  * @param      None
+  * @return     HCLK frequency
+  * @details    This function get HCLK frequency. The frequency unit is Hz.
+  */
+uint32_t CLK_GetHCLKFreq(void)
+{
+    SystemCoreClockUpdate();
+    return SystemCoreClock;
+}
+
+/**
   * @brief      Get CPU frequency
   * @param      None
   * @return     CPU frequency
@@ -149,25 +162,57 @@ uint32_t CLK_GetCPUFreq(void)
 /**
   * @brief      Set HCLK frequency
   * @param[in]  u32Hclk is HCLK frequency. The range of u32Hclk is 48MHz.
+  *             NOTE: For M031G, the HCLK frequency up to 72MHz.
   * @return     HCLK frequency
   * @details    This function is used to set HCLK frequency. The frequency unit is Hz. \n
-  *             It would set HCLK clock divider as 1 and switch HCLK clock source to HIRC. \n
+  *             It would set HCLK clock divider as 1 and switch HCLK clock source to HIRC or PLL. \n
   *             The register write-protection function should be disabled before using this function.
   */
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 {
-    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
-    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
-    CLK->CLKSEL0 = (CLK->CLKSEL0 & ~(CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
-    CLK->CLKDIV0 &= (~CLK_CLKDIV0_HCLKDIV_Msk);
+    if ((u32Hclk == FREQ_48MHZ) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M030G))
+    {
+        /* Set HIRC as core clock */
+        CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
+        CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+        CLK->CLKSEL0 = (CLK->CLKSEL0 & ~(CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
+        CLK->CLKDIV0 &= (~CLK_CLKDIV0_HCLKDIV_Msk);
 
-    /* Return actually HCLK frequency is HIRC / 1 */
-    return __HIRC;
+        /* Return actually HCLK frequency is HIRC / 1 */
+        return __HIRC;
+    }
+    else
+    {
+        /* Set PLL as core clock */
+        if(u32Hclk > FREQ_72MHZ)
+            u32Hclk = FREQ_72MHZ;
+        if(u32Hclk < FREQ_51MHZ)
+            u32Hclk = FREQ_51MHZ;
+
+        /* Switch HCLK clock source to HIRC clock for safe */
+        CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
+        CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+        CLK->CLKSEL0 |= CLK_CLKSEL0_HCLKSEL_Msk;
+        CLK->CLKDIV0 &= (~CLK_CLKDIV0_HCLKDIV_Msk);
+
+        /* Configure PLL setting */
+        u32Hclk = CLK_EnablePLL(NULL, u32Hclk);
+
+        /* Select HCLK clock source to PLL,
+           Select HCLK clock source divider as 1
+           and update system core clock
+        */
+        CLK_SetHCLK(CLK_CLKSEL0_HCLKSEL_PLL, CLK_CLKDIV0_HCLK(1));
+
+        /* Return actually HCLK frequency is PLL frequency divide 1 */
+        return u32Hclk;
+    }
 }
 
 /**
   * @brief      Set HCLK clock source and HCLK clock divider
   * @param[in]  u32ClkSrc is HCLK clock source. Including :
+  *             - \ref CLK_CLKSEL0_HCLKSEL_PLL
   *             - \ref CLK_CLKSEL0_HCLKSEL_HIRC
   * @param[in]  u32ClkDiv is HCLK clock divider. Including :
   *             - \ref CLK_CLKDIV0_HCLK(x)
@@ -218,6 +263,7 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
   * |\ref CLKO_MODULE    |\ref CLK_CLKSEL1_CLKOSEL_HCLK         | x                        |
   * |\ref CLKO_MODULE    |\ref CLK_CLKSEL1_CLKOSEL_HIRC         | x                        |
   * |\ref CLKO_MODULE    |\ref CLK_CLKSEL1_CLKOSEL_LIRC         | x                        |
+  * |\ref CLKO_MODULE    |\ref CLK_CLKSEL1_CLKOSEL_PLL          | x                        |
   * |\ref TMR0_MODULE    |\ref CLK_CLKSEL1_TMR0SEL_PCLK0        | x                        |
   * |\ref TMR0_MODULE    |\ref CLK_CLKSEL1_TMR0SEL_EXT_TRG      | x                        |
   * |\ref TMR0_MODULE    |\ref CLK_CLKSEL1_TMR0SEL_LIRC         | x                        |
@@ -226,11 +272,31 @@ void CLK_SetHCLK(uint32_t u32ClkSrc, uint32_t u32ClkDiv)
   * |\ref TMR1_MODULE    |\ref CLK_CLKSEL1_TMR1SEL_EXT_TRG      | x                        |
   * |\ref TMR1_MODULE    |\ref CLK_CLKSEL1_TMR1SEL_LIRC         | x                        |
   * |\ref TMR1_MODULE    |\ref CLK_CLKSEL1_TMR1SEL_HIRC         | x                        |
+  * |\ref TMR2_MODULE    |\ref CLK_CLKSEL1_TMR2SEL_PCLK1        | x                        |
+  * |\ref TMR2_MODULE    |\ref CLK_CLKSEL1_TMR2SEL_EXT_TRG      | x                        |
+  * |\ref TMR2_MODULE    |\ref CLK_CLKSEL1_TMR2SEL_LIRC         | x                        |
+  * |\ref TMR2_MODULE    |\ref CLK_CLKSEL1_TMR2SEL_HIRC         | x                        |
+  * |\ref TMR3_MODULE    |\ref CLK_CLKSEL1_TMR3SEL_PCLK1        | x                        |
+  * |\ref TMR3_MODULE    |\ref CLK_CLKSEL1_TMR3SEL_EXT_TRG      | x                        |
+  * |\ref TMR3_MODULE    |\ref CLK_CLKSEL1_TMR3SEL_LIRC         | x                        |
+  * |\ref TMR3_MODULE    |\ref CLK_CLKSEL1_TMR3SEL_HIRC         | x                        |
+  * |\ref TMR4_MODULE    |\ref CLK_CLKSEL2_TMR4SEL_PCLK0        | x                        |
+  * |\ref TMR4_MODULE    |\ref CLK_CLKSEL2_TMR4SEL_EXT_TRG      | x                        |
+  * |\ref TMR4_MODULE    |\ref CLK_CLKSEL2_TMR4SEL_LIRC         | x                        |
+  * |\ref TMR4_MODULE    |\ref CLK_CLKSEL2_TMR4SEL_HIRC         | x                        |
+  * |\ref TMR5_MODULE    |\ref CLK_CLKSEL2_TMR5SEL_PCLK0        | x                        |
+  * |\ref TMR5_MODULE    |\ref CLK_CLKSEL2_TMR5SEL_EXT_TRG      | x                        |
+  * |\ref TMR5_MODULE    |\ref CLK_CLKSEL2_TMR5SEL_LIRC         | x                        |
+  * |\ref TMR5_MODULE    |\ref CLK_CLKSEL2_TMR5SEL_HIRC         | x                        |
+  * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_PLL         |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_HIRC        |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_PCLK0       |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref UART0_MODULE   |\ref CLK_CLKSEL1_UART0SEL_LIRC        |\ref CLK_CLKDIV0_UART0(x) |
   * |\ref SPI0_MODULE    |\ref CLK_CLKSEL2_SPI0SEL_PCLK1        | x                        |
   * |\ref SPI0_MODULE    |\ref CLK_CLKSEL2_SPI0SEL_HIRC         | x                        |
+  * |\ref BPWM1_MODULE   |\ref CLK_CLKSEL2_BPWM1SEL_PLL         | x                        |
+  * |\ref BPWM1_MODULE   |\ref CLK_CLKSEL2_BPWM1SEL_PCLK1       | x                        |
+  * |\ref ADC_MODULE     |\ref CLK_CLKSEL2_ADCSEL_PLL           |\ref CLK_CLKDIV0_ADC(x)   |
   * |\ref ADC_MODULE     |\ref CLK_CLKSEL2_ADCSEL_PCLK1         |\ref CLK_CLKDIV0_ADC(x)   |
   * |\ref ADC_MODULE     |\ref CLK_CLKSEL2_ADCSEL_HIRC          |\ref CLK_CLKDIV0_ADC(x)   |
   */
@@ -306,6 +372,10 @@ void CLK_DisableXtalRC(uint32_t u32ClkMask)
   *             - \ref WWDT_MODULE
   *             - \ref TMR0_MODULE
   *             - \ref TMR1_MODULE
+  *             - \ref TMR2_MODULE
+  *             - \ref TMR3_MODULE
+  *             - \ref TMR4_MODULE
+  *             - \ref TMR5_MODULE
   *             - \ref CLKO_MODULE
   *             - \ref I2C0_MODULE
   *             - \ref I2C1_MODULE
@@ -315,6 +385,7 @@ void CLK_DisableXtalRC(uint32_t u32ClkMask)
   *             - \ref DAC01_MODULE
   *             - \ref DAC23_MODULE
   *             - \ref BPWM1_MODULE
+  *             - \ref MANCH_MODULE
   * @return     None
   * @details    This function enable module clock.
   */
@@ -335,6 +406,10 @@ void CLK_EnableModuleClock(uint32_t u32ModuleIdx)
   *             - \ref WWDT_MODULE
   *             - \ref TMR0_MODULE
   *             - \ref TMR1_MODULE
+  *             - \ref TMR2_MODULE
+  *             - \ref TMR3_MODULE
+  *             - \ref TMR4_MODULE
+  *             - \ref TMR5_MODULE
   *             - \ref CLKO_MODULE
   *             - \ref I2C0_MODULE
   *             - \ref I2C1_MODULE
@@ -344,6 +419,7 @@ void CLK_EnableModuleClock(uint32_t u32ModuleIdx)
   *             - \ref DAC01_MODULE
   *             - \ref DAC23_MODULE
   *             - \ref BPWM1_MODULE
+  *             - \ref MANCH_MODULE
   * @return     None
   * @details    This function disable module clock.
   */
@@ -354,12 +430,145 @@ void CLK_DisableModuleClock(uint32_t u32ModuleIdx)
     *(volatile uint32_t *)((uint32_t)&CLK->AHBCLK + (u32ClkTbl[MODULE_APBCLK(u32ModuleIdx)]))  &= ~(1 << MODULE_IP_EN_Pos(u32ModuleIdx));
 }
 
+/**
+  * @brief      Set PLL frequency
+  * @param[in]  u32PllClkSrc is PLL clock source. It is unused in M031G.
+  * @param[in]  u32PllFreq is PLL frequency. The frequency unit is Hz.
+  * @return     Actual PLL frequency
+  * @details    This function is used to configure PLLCTL register to set specified PLL frequency. \n
+  *             The register write-protection function should be disabled before using this function.
+  */
+uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
+{
+    uint32_t u32PllSrcClk, u32NR, u32NF, u32NO, u32CLK_SRC, u32Outdiv;
+    uint32_t u32Tmp, u32Tmp2, u32Tmp3, u32Min, u32MinNF, u32MinNR;
+    uint32_t u32PLL_UpperLimit;
+
+    /* Disable PLL first to avoid unstable when setting PLL */
+    CLK_DisablePLL();
+
+    /* PLL source clock is from HIRC/4 */
+    /* Enable HIRC clock */
+    CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
+
+    /* Wait for HIRC clock ready */
+    CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+
+    /* Select PLL source clock from HIRC */
+    u32CLK_SRC = 0;     /* PLL source clock always from HIRC for M031G */
+    u32PllSrcClk = __HIRC >> 2;
+
+    /* u32NR start from 2 since NR = INDIV + 2 */
+    u32NR = 2;
+
+    /* Select "NO" according to request frequency */
+    /* Constraint: PLL output frequency must <= 72MHz */
+    /*             PLL output frequency must > 50.14MHz to meet all constraints */
+    u32PLL_UpperLimit = FREQ_72MHZ;
+
+    if((u32PllFreq <= u32PLL_UpperLimit) && (u32PllFreq >= FREQ_51MHZ))
+    {
+        if (u32PllFreq <= FREQ_72MHZ)
+        {
+            u32NO = 4;
+            u32Outdiv = 3;
+            u32PllFreq = u32PllFreq << 2;   /* u32PllFreq = (FIN * NF / NR) now */
+        }
+        else
+        {
+            u32NO = 2;
+            u32Outdiv = 2;
+            u32PllFreq = u32PllFreq << 1;   /* u32PllFreq = (FIN * NF / NR) now */
+        }
+    }
+    else
+    {
+        /* Wrong frequency request. Just return default setting. */
+        goto lexit;
+    }
+
+    /* Find best solution */
+    u32Min = (uint32_t) 0xFFFFFFFF; /* initial u32Min to max value of uint32_t */
+    u32MinNR = 0;
+    u32MinNF = 0;
+    for(; u32NR <= 33; u32NR++) /* max NR = 33 since NR = INDIV + 2 and INDIV = 0 ~ 31 */
+    {
+        u32Tmp = u32PllSrcClk / u32NR;
+        /* Constraint 2: 800KHz < (FIN / (2*NR)) < 8MHz */
+        if((u32Tmp > 1600000) && (u32Tmp < 16000000))
+        {
+            for(u32NF = 2; u32NF <= 513; u32NF++) /* NF = 2~513 since NF = FBDIV + 2 and FBDIV = 0 ~ 511 */
+            {
+                u32Tmp2 = u32Tmp * u32NF;
+                /* Constraint 3: 200MHz < (FIN * NF / NR) < 500MHz */
+                if((u32Tmp2 >= 200000000) && (u32Tmp2 < 500000000))
+                {
+                    u32Tmp3 = (u32Tmp2 > u32PllFreq) ? u32Tmp2 - u32PllFreq : u32PllFreq - u32Tmp2;
+                    if(u32Tmp3 < u32Min)
+                    {
+                        u32Min = u32Tmp3;
+                        u32MinNR = u32NR;
+                        u32MinNF = u32NF;
+
+                        /* Break when get good results */
+                        if(u32Min == 0)
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Enable and apply new PLL setting. */
+    CLK->PLLCTL = u32CLK_SRC |
+                  (u32Outdiv << CLK_PLLCTL_OUTDIV_Pos) |
+                  ((u32MinNR - 2) << CLK_PLLCTL_INDIV_Pos) |
+                  ((u32MinNF - 2) << CLK_PLLCTL_FBDIV_Pos);
+
+    /* Wait for PLL clock stable */
+    CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
+
+    /* Return actual PLL output clock frequency */
+    return (u32PllSrcClk / (u32NO * u32MinNR) * u32MinNF);
+
+lexit:
+
+    /* Apply default PLL setting and return */
+    CLK->PLLCTL = CLK_PLLCTL_72MHz_HIRC_DIV4;
+
+    /* Wait for PLL clock stable */
+    CLK_WaitClockReady(CLK_STATUS_PLLSTB_Msk);
+
+    return CLK_GetPLLClockFreq();
+}
+
+/**
+  * @brief      Disable PLL
+  * @param      None
+  * @return     None
+  * @details    This function set PLL in Power-down mode. \n
+  *             If the current HCLK is PLL, this function will switch HCLK to HIRC before disable PLL. \n
+  *             The register write-protection function should be disabled before using this function.
+  */
+void CLK_DisablePLL(void)
+{
+    /* Switch HCLK to HIRC before disable PLL if current HCLK is PLL */
+    if ((CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk) == CLK_CLKSEL0_HCLKSEL_PLL)
+    {
+        CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;
+        CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
+        CLK->CLKSEL0 = (CLK->CLKSEL0 & (~CLK_CLKSEL0_HCLKSEL_Msk)) | CLK_CLKSEL0_HCLKSEL_HIRC;
+    }
+
+    CLK->PLLCTL |= CLK_PLLCTL_PD_Msk;
+}
 
 /**
   * @brief      This function check selected clock source status
   * @param[in]  u32ClkMask is selected clock source. Including :
   *             - \ref CLK_STATUS_HIRCSTB_Msk
   *             - \ref CLK_STATUS_LIRCSTB_Msk
+  *             - \ref CLK_STATUS_PLLSTB_Msk
   * @retval     0  clock is not stable
   * @retval     1  clock is stable
   * @details    To wait for clock ready by specified clock source stable flag or timeout (~300ms)

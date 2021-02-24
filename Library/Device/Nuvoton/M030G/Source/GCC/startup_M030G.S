@@ -73,31 +73,31 @@ __Vectors:
 	.long	EINT135_IRQHandler    /*  3: EINT1                      */
 	.long	GPAB_IRQHandler       /*  4: GPAB                       */
 	.long	GPCF_IRQHandler       /*  5: GPCDEF                     */
-	.long	Default_Handler       /*  6: PWM0                       */
-	.long	Default_Handler       /*  7: Reserved                       */
+	.long	TMR4_IRQHandler       /*  6: TIMER4                     */
+	.long	TMR5_IRQHandler       /*  7: TIMER5                     */
 	.long	TMR0_IRQHandler       /*  8: TIMER0                     */
 	.long	TMR1_IRQHandler       /*  9: TIMER1                     */
-	.long	Default_Handler       /* 10: TIMER2                     */
-	.long	Default_Handler       /* 11: TIMER3                     */
-	.long	UART0_IRQHandler      /* 12: UART0                     */
-	.long	Default_Handler       /* 13: UART1                     */
-	.long	SPI0_IRQHandler       /* 14: Reserved                       */
-	.long	Default_Handler       /* 15: CAN0                      */
+	.long	TMR2_IRQHandler       /* 10: TIMER2                     */
+	.long	TMR3_IRQHandler       /* 11: TIMER3                     */
+	.long	UART0_IRQHandler      /* 12: UART0                      */
+	.long	Default_Handler       /* 13: UART1                      */
+	.long	SPI0_IRQHandler       /* 14: Reserved                   */
+	.long	Default_Handler       /* 15: CAN0                       */
 	.long	Default_Handler       /* 16: Reserved                   */
-	.long	Default_Handler       /* 17: Reserved                     */
-	.long	I2C0_IRQHandler       /* 18: Reserved                       */
-	.long	I2C1_IRQHandler       /* 19: Reserved                       */
-	.long	Default_Handler       /* 20: Reserved                      */
-	.long	BPWM_IRQHandler       /* 21: Reserved                      */
-	.long	Default_Handler      /* 22: USCI0                     */
-	.long	DAC01_IRQHandler       /* 23: Reserved                       */
-	.long	DAC23_IRQHandler       /* 24: DAC0                   */
-	.long	TEMP_IRQHandler     /* 25: ACMP01                     */
+	.long	Default_Handler       /* 17: Reserved                   */
+	.long	I2C0_IRQHandler       /* 18: Reserved                   */
+	.long	I2C1_IRQHandler       /* 19: Reserved                   */
+	.long	Default_Handler       /* 20: Reserved                   */
+	.long	BPWM_IRQHandler       /* 21: Reserved                   */
+	.long	Default_Handler       /* 22: USCI0                      */
+	.long	DAC01_IRQHandler      /* 23: Reserved                   */
+	.long	DAC23_IRQHandler      /* 24: DAC0                       */
+	.long	TEMP_IRQHandler       /* 25: ACMP01                     */
 	.long	PDMA_IRQHandler       /* 26: PDMA                       */
-	.long	Default_Handler      /* 27: USCI1                     */
+	.long	Default_Handler       /* 27: USCI1                      */
 	.long	PWRWU_IRQHandler      /* 28: PWRWU                      */
 	.long	ADC_IRQHandler        /* 29: ADC                        */
-	.long	Default_Handler     /* 30: CLK Fail Detect            */
+	.long	Default_Handler       /* 30: CLK Fail Detect            */
 	.long	Default_Handler       /* 31: RTC                        */
 
 	.size	__Vectors, . - __Vectors
@@ -300,8 +300,12 @@ Default_Handler:
     def_irq_handler	EINT135_IRQHandler
     def_irq_handler	GPAB_IRQHandler
     def_irq_handler	GPCF_IRQHandler
+    def_irq_handler	TMR4_IRQHandler
+    def_irq_handler	TMR5_IRQHandler
     def_irq_handler	TMR0_IRQHandler
     def_irq_handler	TMR1_IRQHandler
+    def_irq_handler	TMR2_IRQHandler
+    def_irq_handler	TMR3_IRQHandler
     def_irq_handler	UART0_IRQHandler
     def_irq_handler	SPI0_IRQHandler
     def_irq_handler	I2C0_IRQHandler

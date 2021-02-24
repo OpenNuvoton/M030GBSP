@@ -107,8 +107,8 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  GPIO Pull-up And Pull-down Type Constant Definitions                                                   */
 /*---------------------------------------------------------------------------------------------------------*/
-#define GPIO_PUSEL_DISABLE      0x0UL   /*!< GPIO PUSEL setting for Disable Mode */
-#define GPIO_PUSEL_PULL_UP      0x1UL   /*!< GPIO PUSEL setting for Pull-up Mode */
+#define GPIO_PUSEL_DISABLE      0x0UL   /*!< GPIO PUSEL setting for Disable Mode \hideinitializer */
+#define GPIO_PUSEL_PULL_UP      0x1UL   /*!< GPIO PUSEL setting for Pull-up Mode \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  GPIO_DBCTL Constant Definitions                                                                        */
@@ -355,6 +355,7 @@ extern "C"
 void GPIO_SetMode(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode);
 void GPIO_EnableInt(GPIO_T *port, uint32_t u32Pin, uint32_t u32IntAttribs);
 void GPIO_DisableInt(GPIO_T *port, uint32_t u32Pin);
+void GPIO_SetPullCtl(GPIO_T *port, uint32_t u32PinMask, uint32_t u32Mode);
 
 
 /*@}*/ /* end of group GPIO_EXPORTED_FUNCTIONS */
