@@ -82,7 +82,9 @@ uint32_t SPI_Open(SPI_T *spi,
         /* Check clock source of SPI */
         if(spi == SPI0)
         {
-            if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
+            if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PLL)
+                u32ClkSrc = CLK_GetPLLClockFreq(); /* Clock source is PLL */
+            else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
                 u32ClkSrc = u32HCLKFreq / ((CLK->PCLKDIV & CLK_PCLKDIV_APB0DIV_Msk)+1);
             else
                 u32ClkSrc = 48000000; /* Clock source is HIRC48 */
@@ -242,7 +244,9 @@ uint32_t SPI_SetBusClock(SPI_T *spi, uint32_t u32BusClock)
     /* Check clock source of SPI */
     if(spi == SPI0)
     {
-        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
+        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PLL)
+            u32ClkSrc = CLK_GetPLLClockFreq(); /* Clock source is PLL */
+        else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
             u32ClkSrc = CLK_GetHCLKFreq() / ((CLK->PCLKDIV & CLK_PCLKDIV_APB0DIV_Msk)+1);
         else
             u32ClkSrc = 48000000; /* Clock source is HIRC48 */
@@ -326,7 +330,9 @@ uint32_t SPI_GetBusClock(SPI_T *spi)
     /* Check clock source of SPI */
     if(spi == SPI0)
     {
-        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
+        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PLL)
+            u32ClkSrc = CLK_GetPLLClockFreq(); /* Clock source is PLL */
+        else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
             u32ClkSrc = u32HCLKFreq / ((CLK->PCLKDIV & CLK_PCLKDIV_APB0DIV_Msk)+1);
         else
             u32ClkSrc = 48000000; /* Clock source is HIRC48 */
@@ -647,7 +653,9 @@ static uint32_t SPII2S_GetSourceClockFreq(SPI_T *i2s)
 
     if(i2s == SPI0)
     {
-        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
+        if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PLL)
+            u32Freq = CLK_GetPLLClockFreq(); /* Clock source is PLL */
+        else if((CLK->CLKSEL2 & CLK_CLKSEL2_SPI0SEL_Msk) == CLK_CLKSEL2_SPI0SEL_PCLK1)
         {
             /* Get system clock frequency */
             u32HCLKFreq = CLK_GetHCLKFreq();
