@@ -26,7 +26,7 @@ extern "C"
 /** @addtogroup PDMA_EXPORTED_CONSTANTS PDMA Exported Constants
   @{
 */
-#define PDMA_CH_MAX    5UL   /*!< Specify Maximum Channels of PDMA  \hideinitializer */
+#define PDMA_CH_MAX    7UL   /*!< Specify Maximum Channels of PDMA  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Operation Mode Constant Definitions                                                                    */
@@ -86,10 +86,17 @@ extern "C"
 #define PDMA_I2C1_RX     31UL /*!<DMA Connect to I2C1_RX \hideinitializer */
 #define PDMA_TMR0        32UL /*!<DMA Connect to TMR0 \hideinitializer */
 #define PDMA_TMR1        33UL /*!<DMA Connect to TMR1 \hideinitializer */
+#define PDMA_TMR2        34UL /*!<DMA Connect to TMR2 \hideinitializer */
+#define PDMA_TMR3        35UL /*!<DMA Connect to TMR3 \hideinitializer */
 #define PDMA_DAC0_TX     46UL /*!<DMA Connect to DAC0_TX \hideinitializer */
 #define PDMA_DAC1_TX     47UL /*!<DMA Connect to DAC1_TX \hideinitializer */
 #define PDMA_DAC2_TX     48UL /*!<DMA Connect to DAC2_TX \hideinitializer */
 #define PDMA_DAC3_TX     49UL /*!<DMA Connect to DAC3_TX \hideinitializer */
+#define PDMA_TMR4        50UL /*!<DMA Connect to TMR4 \hideinitializer */
+#define PDMA_TMR5        51UL /*!<DMA Connect to TMR5 \hideinitializer */
+#define PDMA_MANCH_MTX   52UL /*!<DMA Connect to PDMA_MANCH_MTX \hideinitializer */
+#define PDMA_MANCH_TX    53UL /*!<DMA Connect to MANCH_TX \hideinitializer */
+#define PDMA_MANCH_RX    54UL /*!<DMA Connect to MANCH_RX \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Interrupt Type Constant Definitions                                                                    */

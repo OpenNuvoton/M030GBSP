@@ -95,6 +95,7 @@ typedef enum IRQn
     TMR3_IRQn                 = 11,       /*!< TIMER3 Interrupt                                     */
     UART0_IRQn                = 12,       /*!< UART0 Interrupt                                      */
     SPI0_IRQn                 = 14,       /*!< SPI0 Interrupt                                       */
+    MANCH_IRQn                = 17,       /*!< Manchester Interrupt                                 */
     I2C0_IRQn                 = 18,       /*!< I2C0 Interrupt                                       */
     I2C1_IRQn                 = 19,       /*!< I2C1 Interrupt                                       */
     BPWM_IRQn                 = 21,       /*!< BPWM Interrupt                                       */
@@ -161,6 +162,7 @@ extern void SystemInit(void);
 #include "uart_reg.h"
 #include "wdt_reg.h"
 #include "wwdt_reg.h"
+#include "manch_reg.h"
 
 
 /******************************************************************************/
@@ -221,6 +223,7 @@ extern void SystemInit(void);
 #define I2C0_BASE           (APB1_BASE      + 0x80000)                  /*!< I2C0 Base Address                                */
 #define I2C1_BASE           (APB2_BASE      + 0x81000)                  /*!< I2C1 Base Address                                */
 
+#define MANCH_BASE          (APB2_BASE      + 0xBC000)                  /*!< MANCH Base Address                               */
 
 /**@}*/ /* PERIPHERAL */
 
@@ -283,6 +286,7 @@ extern void SystemInit(void);
 
 #define PDMA                ((PDMA_T *) PDMA_BASE)                      /*!< PDMA Configuration Struct                        */
 
+#define MANCH               ((MANCH_T *) MANCH_BASE)                    /*!< MANCH Configuration Struct                       */
 
 /**@}*/ /* end of group PMODULE */
 
@@ -514,6 +518,7 @@ typedef volatile unsigned short vu16;
 #include "wdt.h"
 #include "wwdt.h"
 #include "ts.h"
+#include "manch.h"
 
 #endif  // __M030G_H__
 

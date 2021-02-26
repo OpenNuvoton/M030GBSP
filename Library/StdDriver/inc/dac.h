@@ -6,7 +6,7 @@
  * @brief    M030G series DAC driver header file
  *
  * @note
- * SPDX-License-Identifier: Apache-2.0 
+ * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2019 Nuvoton Technology Corp. All rights reserved.
  *
 *****************************************************************************/
@@ -44,21 +44,30 @@ extern "C"
 #define DAC_CTL_LALIGN_LEFT_ALIGN    (1UL<<DAC_CTL_LALIGN_Pos)   /*!< Left alignment */
 
 #define DAC_WRITE_DAT_TRIGGER      (0UL)    /*!< Write DAC_DAT trigger */
-#define DAC_SOFTWARE_TRIGGER       (0UL|DAC_CTL_TRGEN_Msk)    /*!< Software trigger */
 #define DAC_LOW_LEVEL_TRIGGER      ((0UL<<DAC_CTL_ETRGSEL_Pos)|(1UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< STDAC pin low level trigger */
 #define DAC_HIGH_LEVEL_TRIGGER     ((1UL<<DAC_CTL_ETRGSEL_Pos)|(1UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< STDAC pin high level trigger */
 #define DAC_FALLING_EDGE_TRIGGER   ((2UL<<DAC_CTL_ETRGSEL_Pos)|(1UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< STDAC pin falling edge trigger */
 #define DAC_RISING_EDGE_TRIGGER    ((3UL<<DAC_CTL_ETRGSEL_Pos)|(1UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< STDAC pin rising edge trigger */
-#define DAC_TIMER0_TRIGGER         ((2UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 0 trigger */
-#define DAC_TIMER1_TRIGGER         ((3UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 1 trigger */
-#define DAC_TIMER2_TRIGGER         ((4UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 2 trigger */
-#define DAC_TIMER3_TRIGGER         ((5UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 3 trigger */
-#define DAC_PWM0_TRIGGER           ((6UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< PWM0 trigger */
-//#define DAC_PWM1_TRIGGER           ((7UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< PWM1 trigger */
+
+#define DAC_SOFTWARE_TRIGGER       (0UL|DAC_CTL_TRGEN_Msk)                         /*!< Software trigger \hideinitializer */
+#define DAC_TIMER0_TRIGGER         ((2UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 0 trigger \hideinitializer */
+#define DAC_TIMER1_TRIGGER         ((3UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 1 trigger \hideinitializer */
+#define DAC_TIMER2_TRIGGER         ((1UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 2 trigger \hideinitializer */
+#define DAC_TIMER3_TRIGGER         ((4UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 3 trigger \hideinitializer */
+#define DAC_TIMER4_TRIGGER         ((5UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 4 trigger \hideinitializer */
+#define DAC_TIMER5_TRIGGER         ((7UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< Timer 5 trigger \hideinitializer */
+#define DAC_BPWM1_TRIGGER          ((6UL<<DAC_CTL_TRGSEL_Pos)|DAC_CTL_TRGEN_Msk)   /*!< BPWM1 trigger \hideinitializer */
 
 #define DAC_TRIGGER_MODE_DISABLE   (0UL<<DAC_CTL_TRGEN_Pos)   /*!< Trigger mode disable */
 #define DAC_TRIGGER_MODE_ENABLE    (1UL<<DAC_CTL_TRGEN_Pos)   /*!< Trigger mode enable */
 
+/*---------------------------------------------------------------------------------------------------------*/
+/*  DAC_ADGCTL Constant Definitions                                                                            */
+/*---------------------------------------------------------------------------------------------------------*/
+#define DAC_AUTO_SINE_0SAMPLES     (0UL)    /*!< 0 sample per sine waveform in MANCH_TX carrier cycle \hideinitializer */
+#define DAC_AUTO_SINE_8SAMPLES     (1UL)    /*!< 8 samples per sine waveform in MANCH_TX carrier cycle \hideinitializer */
+#define DAC_AUTO_SINE_16SAMPLES    (2UL)    /*!< 16 samples per sine waveform in MANCH_TX carrier cycle \hideinitializer */
+#define DAC_AUTO_SINE_32SAMPLES    (3UL)    /*!< 32 samples per sine waveform in MANCH_TX carrier cycle \hideinitializer */
 
 /*@}*/ /* end of group DAC_EXPORTED_CONSTANTS */
 
@@ -246,9 +255,88 @@ extern "C"
   */
 #define DAC_DISABLE_GROUP_MODE(dac) ((dac)->CTL &= ~DAC_CTL_GRPMODE_Msk)
 
+/**
+  * @brief      Enable DAC reset retention
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC controller registers only reset by POR, LVR, BOD and Lockup reset sources, but not
+  *             NRESET, WDT, CHIP and MCU reset sources.
+  * @note       This mode is write protected. Refer to the SYS_REGLCTL register.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_ENABLE_RESET_RETENTION(dac) ((dac)->CTL |= DAC_CTL_RETEN_Msk)
+
+/**
+  * @brief      Disable DAC reset retention
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC controller registers reset by POR, NRESET, WDT, LVR, BOD, Lockup, CHIP and MCU
+  *             reset sources..
+  * @note       This mode is write protected. Refer to the SYS_REGLCTL register.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_DISABLE_RESET_RETENTION(dac) ((dac)->CTL &= ~DAC_CTL_RETEN_Msk)
+
+/**
+  * @brief      Enable DAC auto generate sine waveform
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC0 will generate sine waveform per MANCH_TXD carrier cycle.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_ENABLE_AUTO_SINE(dac) ((dac)->ADGCTL |= DAC_ADGCTL_AUTOEN_Msk)
+
+/**
+  * @brief      Disable DAC auto generate sine waveform
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC0 will not generate sine waveform per MANCH_TXD carrier cycle.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_DISABLE_AUTO_SINE(dac) ((dac)->ADGCTL &= ~DAC_ADGCTL_AUTOEN_Msk)
+
+/**
+  * @brief      Select MANCH_TX high to generate sine waveform
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC will generate sine waveform while MANCH_TXD is in high level.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_AUTO_SINE_MANCH_TX_HIGH(dac) ((dac)->ADGCTL &= ~DAC_ADGCTL_CPOSEL_Msk)
+
+/**
+  * @brief      Select MANCH_TX low to generate sine waveform
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @return     None
+  * @details    DAC will generate sine waveform while MANCH_TXD is in low level.
+  * @note       Only DAC0 has this control bit.
+  * \hideinitializer
+  */
+#define DAC_AUTO_SINE_MANCH_TX_LOW(dac) ((dac)->ADGCTL |= DAC_ADGCTL_CPOSEL_Msk)
+
+/**
+  * @brief      Set settle time directly
+  * @param[in]  dac     The pointer of the specified DAC module.
+  * @param[in]  u32SettleTime Settle time
+  * @return     None
+  * @note       Don't more than 10-bit width
+  * \hideinitializer
+  */
+#define DAC_SET_SETTLE_TIME(dac, u32SettleTime) ((dac)->TCTL = (u32SettleTime-1))
+
+
 void DAC_Open(DAC_T *dac, uint32_t u32Ch, uint32_t u32TrgSrc);
 void DAC_Close(DAC_T *dac, uint32_t u32Ch);
 float DAC_SetDelayTime(DAC_T *dac, uint32_t u16Delay);
+void DAC_SetAutoSineSampleNum(DAC_T *dac, uint32_t u32SampleNum);
+void DAC_SetAutoSineSampleContent(DAC_T *dac, uint16_t *pu32SampleBase, uint32_t u32SampleNum);
+void DAC_SetAutoSineFreq(DAC_T *dac, uint32_t u32SineFreq);
+
 
 /*@}*/ /* end of group DAC_EXPORTED_FUNCTIONS */
 

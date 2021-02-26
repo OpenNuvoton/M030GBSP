@@ -1260,8 +1260,8 @@ typedef struct
     __I  uint32_t RESERVE9[2];
     __IO uint32_t DACTRGEN;
 
-    __IO uint32_t EADCTS0;               /*!< [0x00f8] BPWM Trigger EADC Source Select Register 0                       */
-    __IO uint32_t EADCTS1;               /*!< [0x00fc] BPWM Trigger EADC Source Select Register 1                       */
+    __IO uint32_t ADCTS0;                /*!< [0x00f8] BPWM Trigger ADC Source Select Register 0                        */
+    __IO uint32_t ADCTS1;                /*!< [0x00fc] BPWM Trigger ADC Source Select Register 1                        */
     __I  uint32_t RESERVE10[4];
     __IO uint32_t SSCTL;                 /*!< [0x0110] BPWM Synchronous Start Control Register                          */
     __O  uint32_t SSTRG;                 /*!< [0x0114] BPWM Synchronous Start Trigger Register                          */
@@ -1598,41 +1598,83 @@ typedef struct
 #define BPWM_INTSTS_CMPDIF5_Pos         (29)                                              /*!< BPWM_T::INTSTS: CMPDIF5 Position      */
 #define BPWM_INTSTS_CMPDIF5_Msk         (0x1ul << BPWM_INTSTS_CMPDIF5_Pos)               /*!< BPWM_T::INTSTS: CMPDIF5 Mask          */
 
-#define BPWM_EADCTS0_TRGSEL0_Pos        (0)                                               /*!< BPWM_T::EADCTS0: TRGSEL0 Position     */
-#define BPWM_EADCTS0_TRGSEL0_Msk        (0xful << BPWM_EADCTS0_TRGSEL0_Pos)              /*!< BPWM_T::EADCTS0: TRGSEL0 Mask         */
+#define BPWM_DACTRGEN_ZTE_Pos            (0)                                               /*!< BPWM_T::DACTRGEN: ZTE Position         */
+#define BPWM_DACTRGEN_ZTE_Msk            (0x1ul << BPWM_DACTRGEN_ZTE_Pos)                  /*!< BPWM_T::DACTRGEN: ZTE Mask             */
 
-#define BPWM_EADCTS0_TRGEN0_Pos         (7)                                               /*!< BPWM_T::EADCTS0: TRGEN0 Position      */
-#define BPWM_EADCTS0_TRGEN0_Msk         (0x1ul << BPWM_EADCTS0_TRGEN0_Pos)               /*!< BPWM_T::EADCTS0: TRGEN0 Mask          */
+#define BPWM_DACTRGEN_PTE_Pos            (8)                                               /*!< BPWM_T::DACTRGEN: PTE Position         */
+#define BPWM_DACTRGEN_PTE_Msk            (0x1ul << BPWM_DACTRGEN_PTE_Pos)                  /*!< BPWM_T::DACTRGEN: PTE Mask             */
 
-#define BPWM_EADCTS0_TRGSEL1_Pos        (8)                                               /*!< BPWM_T::EADCTS0: TRGSEL1 Position     */
-#define BPWM_EADCTS0_TRGSEL1_Msk        (0xful << BPWM_EADCTS0_TRGSEL1_Pos)              /*!< BPWM_T::EADCTS0: TRGSEL1 Mask         */
+#define BPWM_DACTRGEN_CUTRGE0_Pos        (16)                                              /*!< BPWM_T::DACTRGEN: CUTRGE0 Position     */
+#define BPWM_DACTRGEN_CUTRGE0_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE0_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE0 Mask         */
 
-#define BPWM_EADCTS0_TRGEN1_Pos         (15)                                              /*!< BPWM_T::EADCTS0: TRGEN1 Position      */
-#define BPWM_EADCTS0_TRGEN1_Msk         (0x1ul << BPWM_EADCTS0_TRGEN1_Pos)               /*!< BPWM_T::EADCTS0: TRGEN1 Mask          */
+#define BPWM_DACTRGEN_CUTRGE1_Pos        (17)                                              /*!< BPWM_T::DACTRGEN: CUTRGE1 Position     */
+#define BPWM_DACTRGEN_CUTRGE1_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE1_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE1 Mask         */
 
-#define BPWM_EADCTS0_TRGSEL2_Pos        (16)                                              /*!< BPWM_T::EADCTS0: TRGSEL2 Position     */
-#define BPWM_EADCTS0_TRGSEL2_Msk        (0xful << BPWM_EADCTS0_TRGSEL2_Pos)              /*!< BPWM_T::EADCTS0: TRGSEL2 Mask         */
+#define BPWM_DACTRGEN_CUTRGE2_Pos        (18)                                              /*!< BPWM_T::DACTRGEN: CUTRGE2 Position     */
+#define BPWM_DACTRGEN_CUTRGE2_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE2_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE2 Mask         */
 
-#define BPWM_EADCTS0_TRGEN2_Pos         (23)                                              /*!< BPWM_T::EADCTS0: TRGEN2 Position      */
-#define BPWM_EADCTS0_TRGEN2_Msk         (0x1ul << BPWM_EADCTS0_TRGEN2_Pos)               /*!< BPWM_T::EADCTS0: TRGEN2 Mask          */
+#define BPWM_DACTRGEN_CUTRGE3_Pos        (19)                                              /*!< BPWM_T::DACTRGEN: CUTRGE3 Position     */
+#define BPWM_DACTRGEN_CUTRGE3_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE3_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE3 Mask         */
 
-#define BPWM_EADCTS0_TRGSEL3_Pos        (24)                                              /*!< BPWM_T::EADCTS0: TRGSEL3 Position     */
-#define BPWM_EADCTS0_TRGSEL3_Msk        (0xful << BPWM_EADCTS0_TRGSEL3_Pos)              /*!< BPWM_T::EADCTS0: TRGSEL3 Mask         */
+#define BPWM_DACTRGEN_CUTRGE4_Pos        (20)                                              /*!< BPWM_T::DACTRGEN: CUTRGE4 Position     */
+#define BPWM_DACTRGEN_CUTRGE4_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE4_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE4 Mask         */
 
-#define BPWM_EADCTS0_TRGEN3_Pos         (31)                                              /*!< BPWM_T::EADCTS0: TRGEN3 Position      */
-#define BPWM_EADCTS0_TRGEN3_Msk         (0x1ul << BPWM_EADCTS0_TRGEN3_Pos)               /*!< BPWM_T::EADCTS0: TRGEN3 Mask          */
+#define BPWM_DACTRGEN_CUTRGE5_Pos        (21)                                              /*!< BPWM_T::DACTRGEN: CUTRGE5 Position     */
+#define BPWM_DACTRGEN_CUTRGE5_Msk        (0x1ul << BPWM_DACTRGEN_CUTRGE5_Pos)              /*!< BPWM_T::DACTRGEN: CUTRGE5 Mask         */
 
-#define BPWM_EADCTS1_TRGSEL4_Pos        (0)                                               /*!< BPWM_T::EADCTS1: TRGSEL4 Position     */
-#define BPWM_EADCTS1_TRGSEL4_Msk        (0xful << BPWM_EADCTS1_TRGSEL4_Pos)              /*!< BPWM_T::EADCTS1: TRGSEL4 Mask         */
+#define BPWM_DACTRGEN_CDTRGE0_Pos        (24)                                              /*!< BPWM_T::DACTRGEN: CDTRGE0 Position     */
+#define BPWM_DACTRGEN_CDTRGE0_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE0_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE0 Mask         */
 
-#define BPWM_EADCTS1_TRGEN4_Pos         (7)                                               /*!< BPWM_T::EADCTS1: TRGEN4 Position      */
-#define BPWM_EADCTS1_TRGEN4_Msk         (0x1ul << BPWM_EADCTS1_TRGEN4_Pos)               /*!< BPWM_T::EADCTS1: TRGEN4 Mask          */
+#define BPWM_DACTRGEN_CDTRGE1_Pos        (25)                                              /*!< BPWM_T::DACTRGEN: CDTRGE1 Position     */
+#define BPWM_DACTRGEN_CDTRGE1_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE1_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE1 Mask         */
 
-#define BPWM_EADCTS1_TRGSEL5_Pos        (8)                                               /*!< BPWM_T::EADCTS1: TRGSEL5 Position     */
-#define BPWM_EADCTS1_TRGSEL5_Msk        (0xful << BPWM_EADCTS1_TRGSEL5_Pos)              /*!< BPWM_T::EADCTS1: TRGSEL5 Mask         */
+#define BPWM_DACTRGEN_CDTRGE2_Pos        (26)                                              /*!< BPWM_T::DACTRGEN: CDTRGE2 Position     */
+#define BPWM_DACTRGEN_CDTRGE2_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE2_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE2 Mask         */
 
-#define BPWM_EADCTS1_TRGEN5_Pos         (15)                                              /*!< BPWM_T::EADCTS1: TRGEN5 Position      */
-#define BPWM_EADCTS1_TRGEN5_Msk         (0x1ul << BPWM_EADCTS1_TRGEN5_Pos)               /*!< BPWM_T::EADCTS1: TRGEN5 Mask          */
+#define BPWM_DACTRGEN_CDTRGE3_Pos        (27)                                              /*!< BPWM_T::DACTRGEN: CDTRGE3 Position     */
+#define BPWM_DACTRGEN_CDTRGE3_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE3_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE3 Mask         */
+
+#define BPWM_DACTRGEN_CDTRGE4_Pos        (28)                                              /*!< BPWM_T::DACTRGEN: CDTRGE4 Position     */
+#define BPWM_DACTRGEN_CDTRGE4_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE4_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE4 Mask         */
+
+#define BPWM_DACTRGEN_CDTRGE5_Pos        (29)                                              /*!< BPWM_T::DACTRGEN: CDTRGE5 Position     */
+#define BPWM_DACTRGEN_CDTRGE5_Msk        (0x1ul << BPWM_DACTRGEN_CDTRGE5_Pos)              /*!< BPWM_T::DACTRGEN: CDTRGE5 Mask         */
+
+#define BPWM_ADCTS0_TRGSEL0_Pos          (0)                                               /*!< BPWM_T::ADCTS0: TRGSEL0 Position       */
+#define BPWM_ADCTS0_TRGSEL0_Msk          (0xful << BPWM_ADCTS0_TRGSEL0_Pos)                /*!< BPWM_T::ADCTS0: TRGSEL0 Mask           */
+
+#define BPWM_ADCTS0_TRGEN0_Pos           (7)                                               /*!< BPWM_T::ADCTS0: TRGEN0 Position        */
+#define BPWM_ADCTS0_TRGEN0_Msk           (0x1ul << BPWM_ADCTS0_TRGEN0_Pos)                 /*!< BPWM_T::ADCTS0: TRGEN0 Mask            */
+
+#define BPWM_ADCTS0_TRGSEL1_Pos          (8)                                               /*!< BPWM_T::ADCTS0: TRGSEL1 Position       */
+#define BPWM_ADCTS0_TRGSEL1_Msk          (0xful << BPWM_ADCTS0_TRGSEL1_Pos)                /*!< BPWM_T::ADCTS0: TRGSEL1 Mask           */
+
+#define BPWM_ADCTS0_TRGEN1_Pos           (15)                                              /*!< BPWM_T::ADCTS0: TRGEN1 Position        */
+#define BPWM_ADCTS0_TRGEN1_Msk           (0x1ul << BPWM_ADCTS0_TRGEN1_Pos)                 /*!< BPWM_T::ADCTS0: TRGEN1 Mask            */
+
+#define BPWM_ADCTS0_TRGSEL2_Pos          (16)                                              /*!< BPWM_T::ADCTS0: TRGSEL2 Position       */
+#define BPWM_ADCTS0_TRGSEL2_Msk          (0xful << BPWM_ADCTS0_TRGSEL2_Pos)                /*!< BPWM_T::ADCTS0: TRGSEL2 Mask           */
+
+#define BPWM_ADCTS0_TRGEN2_Pos           (23)                                              /*!< BPWM_T::ADCTS0: TRGEN2 Position        */
+#define BPWM_ADCTS0_TRGEN2_Msk           (0x1ul << BPWM_ADCTS0_TRGEN2_Pos)                 /*!< BPWM_T::ADCTS0: TRGEN2 Mask            */
+
+#define BPWM_ADCTS0_TRGSEL3_Pos          (24)                                              /*!< BPWM_T::ADCTS0: TRGSEL3 Position       */
+#define BPWM_ADCTS0_TRGSEL3_Msk          (0xful << BPWM_ADCTS0_TRGSEL3_Pos)                /*!< BPWM_T::ADCTS0: TRGSEL3 Mask           */
+
+#define BPWM_ADCTS0_TRGEN3_Pos           (31)                                              /*!< BPWM_T::ADCTS0: TRGEN3 Position        */
+#define BPWM_ADCTS0_TRGEN3_Msk           (0x1ul << BPWM_ADCTS0_TRGEN3_Pos)                 /*!< BPWM_T::ADCTS0: TRGEN3 Mask            */
+
+#define BPWM_ADCTS1_TRGSEL4_Pos          (0)                                               /*!< BPWM_T::ADCTS1: TRGSEL4 Position       */
+#define BPWM_ADCTS1_TRGSEL4_Msk          (0xful << BPWM_ADCTS1_TRGSEL4_Pos)                /*!< BPWM_T::ADCTS1: TRGSEL4 Mask           */
+
+#define BPWM_ADCTS1_TRGEN4_Pos           (7)                                               /*!< BPWM_T::ADCTS1: TRGEN4 Position        */
+#define BPWM_ADCTS1_TRGEN4_Msk           (0x1ul << BPWM_ADCTS1_TRGEN4_Pos)                 /*!< BPWM_T::ADCTS1: TRGEN4 Mask            */
+
+#define BPWM_ADCTS1_TRGSEL5_Pos          (8)                                               /*!< BPWM_T::ADCTS1: TRGSEL5 Position       */
+#define BPWM_ADCTS1_TRGSEL5_Msk          (0xful << BPWM_ADCTS1_TRGSEL5_Pos)                /*!< BPWM_T::ADCTS1: TRGSEL5 Mask           */
+
+#define BPWM_ADCTS1_TRGEN5_Pos           (15)                                              /*!< BPWM_T::ADCTS1: TRGEN5 Position        */
+#define BPWM_ADCTS1_TRGEN5_Msk           (0x1ul << BPWM_ADCTS1_TRGEN5_Pos)                 /*!< BPWM_T::ADCTS1: TRGEN5 Mask            */
 
 #define BPWM_SSCTL_SSEN0_Pos            (0)                                               /*!< BPWM_T::SSCTL: SSEN0 Position         */
 #define BPWM_SSCTL_SSEN0_Msk            (0x1ul << BPWM_SSCTL_SSEN0_Pos)                  /*!< BPWM_T::SSCTL: SSEN0 Mask             */
@@ -1646,23 +1688,23 @@ typedef struct
 #define BPWM_STATUS_CNTMAX0_Pos         (0)                                               /*!< BPWM_T::STATUS: CNTMAX0 Position      */
 #define BPWM_STATUS_CNTMAX0_Msk         (0x1ul << BPWM_STATUS_CNTMAX0_Pos)               /*!< BPWM_T::STATUS: CNTMAX0 Mask          */
 
-#define BPWM_STATUS_EADCTRG0_Pos        (16)                                              /*!< BPWM_T::STATUS: EADCTRG0 Position     */
-#define BPWM_STATUS_EADCTRG0_Msk        (0x1ul << BPWM_STATUS_EADCTRG0_Pos)              /*!< BPWM_T::STATUS: EADCTRG0 Mask         */
+#define BPWM_STATUS_ADCTRG0_Pos          (16)                                              /*!< BPWM_T::STATUS: ADCTRG0 Position       */
+#define BPWM_STATUS_ADCTRG0_Msk          (0x1ul << BPWM_STATUS_ADCTRG0_Pos)                /*!< BPWM_T::STATUS: ADCTRG0 Mask           */
 
-#define BPWM_STATUS_EADCTRG1_Pos        (17)                                              /*!< BPWM_T::STATUS: EADCTRG1 Position     */
-#define BPWM_STATUS_EADCTRG1_Msk        (0x1ul << BPWM_STATUS_EADCTRG1_Pos)              /*!< BPWM_T::STATUS: EADCTRG1 Mask         */
+#define BPWM_STATUS_ADCTRG1_Pos          (17)                                              /*!< BPWM_T::STATUS: ADCTRG1 Position       */
+#define BPWM_STATUS_ADCTRG1_Msk          (0x1ul << BPWM_STATUS_ADCTRG1_Pos)                /*!< BPWM_T::STATUS: ADCTRG1 Mask           */
 
-#define BPWM_STATUS_EADCTRG2_Pos        (18)                                              /*!< BPWM_T::STATUS: EADCTRG2 Position     */
-#define BPWM_STATUS_EADCTRG2_Msk        (0x1ul << BPWM_STATUS_EADCTRG2_Pos)              /*!< BPWM_T::STATUS: EADCTRG2 Mask         */
+#define BPWM_STATUS_ADCTRG2_Pos          (18)                                              /*!< BPWM_T::STATUS: ADCTRG2 Position       */
+#define BPWM_STATUS_ADCTRG2_Msk          (0x1ul << BPWM_STATUS_ADCTRG2_Pos)                /*!< BPWM_T::STATUS: ADCTRG2 Mask           */
 
-#define BPWM_STATUS_EADCTRG3_Pos        (19)                                              /*!< BPWM_T::STATUS: EADCTRG3 Position     */
-#define BPWM_STATUS_EADCTRG3_Msk        (0x1ul << BPWM_STATUS_EADCTRG3_Pos)              /*!< BPWM_T::STATUS: EADCTRG3 Mask         */
+#define BPWM_STATUS_ADCTRG3_Pos          (19)                                              /*!< BPWM_T::STATUS: ADCTRG3 Position       */
+#define BPWM_STATUS_ADCTRG3_Msk          (0x1ul << BPWM_STATUS_ADCTRG3_Pos)                /*!< BPWM_T::STATUS: ADCTRG3 Mask           */
 
-#define BPWM_STATUS_EADCTRG4_Pos        (20)                                              /*!< BPWM_T::STATUS: EADCTRG4 Position     */
-#define BPWM_STATUS_EADCTRG4_Msk        (0x1ul << BPWM_STATUS_EADCTRG4_Pos)              /*!< BPWM_T::STATUS: EADCTRG4 Mask         */
+#define BPWM_STATUS_ADCTRG4_Pos          (20)                                              /*!< BPWM_T::STATUS: ADCTRG4 Position       */
+#define BPWM_STATUS_ADCTRG4_Msk          (0x1ul << BPWM_STATUS_ADCTRG4_Pos)                /*!< BPWM_T::STATUS: ADCTRG4 Mask           */
 
-#define BPWM_STATUS_EADCTRG5_Pos        (21)                                              /*!< BPWM_T::STATUS: EADCTRG5 Position     */
-#define BPWM_STATUS_EADCTRG5_Msk        (0x1ul << BPWM_STATUS_EADCTRG5_Pos)              /*!< BPWM_T::STATUS: EADCTRG5 Mask         */
+#define BPWM_STATUS_ADCTRG5_Pos          (21)                                              /*!< BPWM_T::STATUS: ADCTRG5 Position       */
+#define BPWM_STATUS_ADCTRG5_Msk          (0x1ul << BPWM_STATUS_ADCTRG5_Pos)                /*!< BPWM_T::STATUS: ADCTRG5 Mask           */
 
 #define BPWM_STATUS_DACTRGF_Pos         (24)                                              /*!< BPWM_T::STATUS: DACTRGF Position     */
 #define BPWM_STATUS_DACTRGF_Msk         (0x1ul << BPWM_STATUS_DACTRGF_Pos)               /*!< BPWM_T::STATUS: DACTRGF Mask         */
@@ -1870,9 +1912,6 @@ typedef struct
 
 #define BPWM_CAPIF_CAPFIF5_Pos          (13)                                              /*!< BPWM_T::CAPIF: CAPFIF5 Position       */
 #define BPWM_CAPIF_CAPFIF5_Msk          (0x1ul << BPWM_CAPIF_CAPFIF5_Pos)                /*!< BPWM_T::CAPIF: CAPFIF5 Mask           */
-
-#define BPWM_SELFTEST_SELFTEST_Pos      (31)                                              /*!< BPWM_T::SELFTEST: SELFTEST Position   */
-#define BPWM_SELFTEST_SELFTEST_Msk      (0x1ul << BPWM_SELFTEST_SELFTEST_Pos)            /*!< BPWM_T::SELFTEST: SELFTEST Mask       */
 
 #define BPWM_PBUF_PBUF_Pos              (0)                                               /*!< BPWM_T::PBUF: PBUF Position           */
 #define BPWM_PBUF_PBUF_Msk              (0xfffful << BPWM_PBUF_PBUF_Pos)                 /*!< BPWM_T::PBUF: PBUF Mask               */

@@ -38,13 +38,24 @@
  */
 uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32UnitTimeNsec, uint32_t u32CaptureEdge)
 {
+    uint32_t u32Src;
     uint32_t u32PWMClockSrc;
     uint32_t u32NearestUnitTimeNsec;
     uint16_t u16Prescale = 1, u16CNR = 0xFFFF;
 
-    /* clock source is from PCLK */
-    SystemCoreClockUpdate();
-    u32PWMClockSrc = SystemCoreClock;
+    u32Src = CLK->CLKSEL2 & CLK_CLKSEL2_BPWM1SEL_Msk;
+
+    if (u32Src == 0)
+    {
+        //clock source is from PLL clock
+        u32PWMClockSrc = CLK_GetPLLClockFreq();
+    }
+    else
+    {
+        //clock source is from PCLK
+        SystemCoreClockUpdate();
+        u32PWMClockSrc = SystemCoreClock;
+    }
 
     u32PWMClockSrc /= 1000;
 
@@ -92,13 +103,24 @@ uint32_t BPWM_ConfigCaptureChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_
  */
 uint32_t BPWM_ConfigOutputChannel(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32Frequency, uint32_t u32DutyCycle)
 {
+    uint32_t u32Src;
     uint32_t u32PWMClockSrc;
     uint32_t i;
     uint16_t u16Prescale = 1, u16CNR = 0xFFFF;
 
-    /* clock source is from PCLK */
-    SystemCoreClockUpdate();
-    u32PWMClockSrc = SystemCoreClock;
+    u32Src = CLK->CLKSEL2 & CLK_CLKSEL2_BPWM1SEL_Msk;
+
+    if (u32Src == 0)
+    {
+        //clock source is from PLL clock
+        u32PWMClockSrc = CLK_GetPLLClockFreq();
+    }
+    else
+    {
+        //clock source is from PCLK
+        SystemCoreClockUpdate();
+        u32PWMClockSrc = SystemCoreClock;
+    }
 
     for (u16Prescale = 1; u16Prescale < 0xFFF; u16Prescale++)   //prescale could be 0~0xFFF
     {
@@ -209,13 +231,13 @@ void BPWM_EnableADCTrigger(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32Con
 {
     if (u32ChannelNum < 4)
     {
-        (bpwm)->EADCTS0 &= ~((BPWM_EADCTS0_TRGSEL0_Msk) << (u32ChannelNum * 8));
-        (bpwm)->EADCTS0 |= ((BPWM_EADCTS0_TRGEN0_Msk | u32Condition) << (u32ChannelNum * 8));
+        (bpwm)->ADCTS0 &= ~((BPWM_ADCTS0_TRGSEL0_Msk) << (u32ChannelNum * 8));
+        (bpwm)->ADCTS0 |= ((BPWM_ADCTS0_TRGEN0_Msk | u32Condition) << (u32ChannelNum * 8));
     }
     else
     {
-        (bpwm)->EADCTS1 &= ~((BPWM_EADCTS1_TRGSEL4_Msk) << ((u32ChannelNum - 4) * 8));
-        (bpwm)->EADCTS1 |= ((BPWM_EADCTS1_TRGEN4_Msk | u32Condition) << ((u32ChannelNum - 4) * 8));
+        (bpwm)->ADCTS1 &= ~((BPWM_ADCTS1_TRGSEL4_Msk) << ((u32ChannelNum - 4) * 8));
+        (bpwm)->ADCTS1 |= ((BPWM_ADCTS1_TRGEN4_Msk | u32Condition) << ((u32ChannelNum - 4) * 8));
     }
 }
 
@@ -232,11 +254,11 @@ void BPWM_DisableADCTrigger(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
     if (u32ChannelNum < 4)
     {
-        (bpwm)->EADCTS0 &= ~(BPWM_EADCTS0_TRGEN0_Msk << (u32ChannelNum * 8));
+        (bpwm)->ADCTS0 &= ~(BPWM_ADCTS0_TRGEN0_Msk << (u32ChannelNum * 8));
     }
     else
     {
-        (bpwm)->EADCTS1 &= ~(BPWM_EADCTS1_TRGEN4_Msk << ((u32ChannelNum - 4) * 8));
+        (bpwm)->ADCTS1 &= ~(BPWM_ADCTS1_TRGEN4_Msk << ((u32ChannelNum - 4) * 8));
     }
 }
 
@@ -252,7 +274,7 @@ void BPWM_DisableADCTrigger(BPWM_T *bpwm, uint32_t u32ChannelNum)
  */
 void BPWM_ClearADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32Condition)
 {
-    (bpwm)->STATUS = (BPWM_STATUS_EADCTRG0_Msk << u32ChannelNum);
+    (bpwm)->STATUS = (BPWM_STATUS_ADCTRG0_Msk << u32ChannelNum);
 }
 
 /**
@@ -267,7 +289,7 @@ void BPWM_ClearADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum, uint32_t u32
  */
 uint32_t BPWM_GetADCTriggerFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
 {
-    return (((bpwm)->STATUS & (BPWM_STATUS_EADCTRG0_Msk << u32ChannelNum)) ? 1 : 0);
+    return (((bpwm)->STATUS & (BPWM_STATUS_ADCTRG0_Msk << u32ChannelNum)) ? 1 : 0);
 }
 
 /**
@@ -400,6 +422,7 @@ uint32_t BPWM_GetCaptureIntFlag(BPWM_T *bpwm, uint32_t u32ChannelNum)
     return (((((bpwm)->CAPIF & (BPWM_CAPIF_CAPFIF0_Msk << u32ChannelNum)) ? 1 : 0) << 1) | \
             (((bpwm)->CAPIF & (BPWM_CAPIF_CAPRIF0_Msk << u32ChannelNum)) ? 1 : 0));
 }
+
 /**
  * @brief Enable duty interrupt of selected channel
  * @param[in] bpwm The pointer of the specified BPWM module

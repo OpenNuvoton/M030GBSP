@@ -3,7 +3,7 @@
  * @version  V3.00
  * @brief    M030G series BPWM driver header file
  *
- * SPDX-License-Identifier: Apache-2.0 
+ * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
  *
  *****************************************************************************/
@@ -63,6 +63,8 @@ extern "C"
 #define BPWM_CLKSRC_TIMER1                        (2UL)    /*!< BPWM Clock source selects to TIMER1 overflow */
 #define BPWM_CLKSRC_TIMER2                        (3UL)    /*!< BPWM Clock source selects to TIMER2 overflow */
 #define BPWM_CLKSRC_TIMER3                        (4UL)    /*!< BPWM Clock source selects to TIMER3 overflow */
+#define BPWM_CLKSRC_TIMER4                        (5UL)    /*!< BPWM Clock source selects to TIMER4 overflow */
+#define BPWM_CLKSRC_TIMER5                        (6UL)    /*!< BPWM Clock source selects to TIMER5 overflow */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Output Level Constant Definitions                                                                      */
@@ -75,10 +77,10 @@ extern "C"
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Synchronous Start Function Control Constant Definitions                                                */
 /*---------------------------------------------------------------------------------------------------------*/
-#define BPWM_SSCTL_SSRC_PWM0                     	(0UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM0 */
-#define BPWM_SSCTL_SSRC_PWM1                     	(1UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM1 */
-#define BPWM_SSCTL_SSRC_BPWM0                      	(2UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM0 */
-#define BPWM_SSCTL_SSRC_BPWM1                      	(3UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM1 */
+#define BPWM_SSCTL_SSRC_PWM0                        (0UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM0 */
+#define BPWM_SSCTL_SSRC_PWM1                        (1UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from BPWM1 */
+#define BPWM_SSCTL_SSRC_BPWM0                       (2UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM0 */
+#define BPWM_SSCTL_SSRC_BPWM1                       (3UL<<BPWM_SSCTL_SSRC_Pos)    /*!< Synchronous start source comes from PWM1 */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Trigger Source Select Constant Definitions                                                             */
