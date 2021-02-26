@@ -112,7 +112,8 @@ int32_t main(void)
     printf("  This sample code will send MANCH encoded data with sinusoidal waveform \n");
     printf("  by selected DAC0. We can compare DAC0 output with TX (PB.7) to confirm \n");
     printf("  whether the waveform to be correct or not. Please also connect TX (PB.7)\n");
-    printf("  to RX (PB.6) at the same time.\n\n");
+    printf("  to RX (PB.6) at the same time.\n");
+    printf("  Please note that only DAC0 can generate sinusoidal waveform automatically.\n\n");
     printf("  Press any key when to be ready.\n\n");
     getchar();
 
@@ -205,27 +206,31 @@ int32_t main(void)
         DAC_ENABLE_RIGHT_ALIGN(dac);
 
         /* Set sample number per sine waveform */
+        /* Note: only DAC0 supports this function */
         DAC_SetAutoSineSampleNum(dac, SAMPLE32_PER_SINE);
         u32SampleNumPerSine = 32;
 
-        /* Set sine waveform frequency; sample number per sine waveform must be given in advanced */
+        /* Set sine waveform frequency; sample number per sine waveform must be given in advance */
+        /* Note: only DAC0 supports this function */
         DAC_SetAutoSineFreq(dac, SINE_FREQ_IN_HZ);
 
         /* Set TX level with frequency modulation */
-        //    DAC_AUTO_SINE_MANCH_TX_HIGH(dac);
+        /* Note: only DAC0 supports this function */
+        // DAC_AUTO_SINE_MANCH_TX_HIGH(dac);
         DAC_AUTO_SINE_MANCH_TX_LOW(dac);
 
         /* Prepare and set sine waveform data to DAC0 ADCTL[] registers */
         for (ii = 0; ii < SINE_SAMPLE; ii++)
         {
             /* Add 1.0 to offset sine result from [-1, 1] to [0, 2],
-                 and divide with 2.0 to compress to [0, 1] */
+               and divided with 2.0 to compress to [0, 1] */
             g_sineBuf[ii] = (uint16_t)((sin((double)(((ii+1) * PI)/(SINE_SAMPLE/2)))+1.0)/ 2.0)*0xFFF;
         }
 
         DAC_SetAutoSineSampleContent(dac, g_sineBuf, u32SampleNumPerSine);
 
         /* Enable sine waveform mode */
+        /* Note: only DAC0 supports this function */
         DAC_ENABLE_AUTO_SINE(dac);
 
         /*--------------------------------------------------------------------------------------*/

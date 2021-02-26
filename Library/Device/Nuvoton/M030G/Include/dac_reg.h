@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     dac_reg.h
  * @version  V1.00
- * @brief    CLK register definition header file
+ * @brief    DAC register definition header file
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2018 Nuvoton Technology Corp. All rights reserved.
@@ -27,24 +27,23 @@ typedef struct
 {
 
     /**
-     * CTL
-     * ===================================================================================================
+     * @var DAC_T::CTL
      * Offset: 0x00  DAC Control Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[0]     |DACEN     |DAC Enable Bit
-     * |        |          |0 = DAC is Disabled.
-     * |        |          |1 = DAC is Enabled.
+     * |        |          |0 = DAC Disabled.
+     * |        |          |1 = DAC Enabled.
      * |[1]     |DACIEN    |DAC Interrupt Enable Bit
-     * |        |          |0 = Interrupt is Disabled.
-     * |        |          |1 = Interrupt is Enabled.
+     * |        |          |0 = DAC interrupt Disabled.
+     * |        |          |1 = DAC interrupt Enabled.
      * |[2]     |DMAEN     |DMA Mode Enable Bit
      * |        |          |0 = DMA mode Disabled.
      * |        |          |1 = DMA mode Enabled.
-     * |[3]     |DMAURIEN  |DMA Under-Run Interrupt Enable Bit
-     * |        |          |0 = DMA under run interrupt Disabled.
-     * |        |          |1 = DMA under run interrupt Enabled.
+     * |[3]     |DMAURIEN  |DMA Under-run Interrupt Enable Bit
+     * |        |          |0 = DMA under-run interrupt Disabled.
+     * |        |          |1 = DMA under-run interrupt Enabled.
      * |[4]     |TRGEN     |Trigger Mode Enable Bit
      * |        |          |0 = DAC event trigger mode Disabled.
      * |        |          |1 = DAC event trigger mode Enabled.
@@ -60,7 +59,7 @@ typedef struct
      * |[8]     |BYPASS    |Bypass Buffer Mode
      * |        |          |0 = Output voltage buffer Enabled.
      * |        |          |1 = Output voltage buffer Disabled.
-     * |[10]    |LALIGN    |DAC Data Left-Aligned Enabled Control
+     * |[10]    |LALIGN    |DAC Data Left-aligned Enabled Bit
      * |        |          |0 = Right alignment.
      * |        |          |1 = Left alignment.
      * |[13:12] |ETRGSEL   |External Pin Trigger Selection
@@ -156,86 +155,20 @@ typedef struct
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
+     * |[15:0]  |AUTODATA  |Data Input of Auto Data Generation Function
+     * |        |          |Software needs to write appropriate data value to these bits for DAC auto data generation
+     * |        |          |
      */
-    __IO uint32_t CTL;
-    /**
-     * SWTRG
-     * ===================================================================================================
-     * Offset: 0x04  DAC Software Trigger Control Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[0]     |SWTRG     |Software Trigger
-     * |        |          |0 = Software trigger Disabled.
-     * |        |          |1 = Software trigger Enabled.
-     * |        |          |User writes this bit to generate one shot pulse and it is cleared to 0 by hardware automatically; Reading this bit will always get 0.
-     */
-    __IO uint32_t SWTRG;
-    /**
-     * DAT
-     * ===================================================================================================
-     * Offset: 0x08  DAC Data Holding Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |DAC_DAT   |DAC 12-Bit Holding Data
-     * |        |          |These bits are written by user software which specifies 12-bit conversion data for DAC output.
-     * |        |          |The unused bits (DAC_DAT[3:0] in left-alignment mode and DAC_DAT[15:12] in right alignment mode) are ignored by DAC controller hardware.
-     * |        |          |12 bit left alignment: user has to load data into DAC_DAT[15:4] bits.
-     * |        |          |12 bit right alignment: user has to load data into DAC_DAT[11:0] bits.
-     */
-    __IO uint32_t DAT;
-    /**
-     * DATOUT
-     * ===================================================================================================
-     * Offset: 0x0C  DAC Data Output Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[11:0]  |DATOUT    |DAC 12-Bit Output Data
-     * |        |          |These bits are current digital data for DAC output conversion.
-     * |        |          |It is loaded from DAC_DAT register and user cannot write it directly.
-     */
-    __I  uint32_t DATOUT;
-    /**
-     * STATUS
-     * ===================================================================================================
-     * Offset: 0x10  DAC Status Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[0]     |FINISH    |DAC Conversion Complete Finish Flag
-     * |        |          |0 = DAC is in conversion state.
-     * |        |          |1 = DAC conversion finish.
-     * |        |          |This bit set to 1 when conversion time counter counts to SETTLET.
-     * |        |          |It is cleared to 0 when DAC starts a new conversion.
-     * |        |          |User writes 1 to clear this bit to 0.
-     * |[1]     |DMAUDR    |DMA Under Run Interrupt Flag
-     * |        |          |0 = No DMA under-run error condition occurred.
-     * |        |          |1 = DMA under-run error condition occurred.
-     * |        |          |User writes 1 to clear this bit.
-     * |[8]     |BUSY      |DAC Busy Flag (Read Only)
-     * |        |          |0 = DAC is ready for next conversion.
-     * |        |          |1 = DAC is busy in conversion.
-     * |        |          |This is read only bit.
-     */
-    __IO uint32_t STATUS;
-    /**
-     * TCTL
-     * ===================================================================================================
-     * Offset: 0x14  DAC Timing Control Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[9:0]   |SETTLET   |DAC Output Settling Time
-     * |        |          |User software needs to write appropriate value to these bits to meet DAC conversion settling time base on PCLK (APB clock) speed.
-     * |        |          |For example, DAC controller clock speed is 72MHz and DAC conversion setting time is 1 us, SETTLET value must be greater than 0x48.
-     */
-    __IO uint32_t TCTL;
+    __IO uint32_t CTL;                   /*!< [0x0000] DAC Control Register                                            */
+    __IO uint32_t SWTRG;                 /*!< [0x0004] DAC Software Trigger Control Register                           */
+    __IO uint32_t DAT;                   /*!< [0x0008] DAC Data Holding Register                                       */
+    __I  uint32_t DATOUT;                /*!< [0x000c] DAC Data Output Register                                        */
+    __IO uint32_t STATUS;                /*!< [0x0010] DAC Status Register                                             */
+    __IO uint32_t TCTL;                  /*!< [0x0014] DAC Timing Control Register                                     */
     __I  uint32_t RESERVE0[1];
-    __IO uint32_t ADGCTL;                /*!< [0x001c] DAC0 Auto Data Generator Control Register (o                       */
+    __IO uint32_t ADGCTL;                /*!< [0x001c] DAC0 Auto Data Generator Control Register (o                    */
     __I  uint32_t RESERVE1[16];
-    __IO uint32_t ADCTL[32];             /*!< [0x0060] DAC0 Auto Data Control Register0                                 */
+    __IO uint32_t ADCTL[32];             /*!< [0x0060] DAC0 Auto Data Control Register0                                */
 
 } DAC_T;
 
