@@ -42,13 +42,13 @@ typedef struct
      * |        |          |SI must be cleared by software.
      * |        |          |Clear SI by writing 1 to this bit.
      * |[4]     |STO       |I2C STOP Control
-     * |        |          |In Master mode, setting STO to transmit a STOP condition to bus then I2C controller will check the bus condition if a STOP condition is detected.
+     * |        |          |In Master mode, setting STO will transmit a STOP condition to bus and then I2C controller will check the bus condition if a STOP condition is detected.
      * |        |          |This bit will be cleared by hardware automatically.
      * |[5]     |STA       |I2C START Control
-     * |        |          |Setting STA to logic 1 to enter Master mode, the I2C hardware sends a START or repeat START condition to bus when the bus is free.
+     * |        |          |Setting STA to logic 1 will enter Master mode, and the I2C hardware sends a START or repeat START condition to bus when the bus is free.
      * |[6]     |I2CEN     |I2C Controller Enable Bit
      * |        |          |Set to enable I2C serial function controller.
-     * |        |          |When I2CEN=1 the I2C serial function enable.
+     * |        |          |When I2CEN=1 the I2C serial function is enabled.
      * |        |          |The multi-function pin function must set to SDA, and SCL of I2C function first.
      * |        |          |0 = I2C controller Disabled.
      * |        |          |1 = I2C controller Enabled.
@@ -57,21 +57,21 @@ typedef struct
      * |        |          |1 = I2C interrupt Enabled.
      * |[9:8]   |DPBITSEL  |Data Phase Bit Count Select
      * |        |          |00 = DPCIF never set by hardware.
-     * |        |          |01 = When I2C is transfer data and bit count equal to 6, DPCIF will be set by hardward.
-     * |        |          |10 = When I2C is transfer data and bit count equal to 7, DPCIF will be set by hardward.
-     * |        |          |11 = When I2C is transfer data and bit count equal to 8, DPCIF will be set by hardward.
-     * |[12]    |DPCINTEN  |Data Phase Count Interrupt Eanble Bit
+     * |        |          |01 = When I2C is transfer data and bit count equal to 6, DPCIF will be set by hardware.
+     * |        |          |10 = When I2C is transfer data and bit count equal to 7, DPCIF will be set by hardware.
+     * |        |          |11 = When I2C is transfer data and bit count equal to 8, DPCIF will be set by hardware.
+     * |[12]    |DPCINTEN  |Data Phase Count Interrupt Enable Bit
      * |        |          |0 = Data Phase Count Interrupt Disabled.
      * |        |          |1 = Data Phase Count Interrupt Enabled.
-     * |[13]    |SRCINTEN  |Slave Read Command Interrupt Eanble Bit
+     * |[13]    |SRCINTEN  |Slave Read Command Interrupt Enable Bit
      * |        |          |0 = Slave Read Command Interrupt Disabled.
      * |        |          |1 = Slave Read Command Interrupt Enabled.
      * |[14]    |DPCIF     |Data Phase Count Interrupt Flag
-     * |        |          |This bit is set by hardware when I2C transfer bit count equal to DPBITSEL setting.
-     * |        |          |This bit is cleared by write 1 to it.
+     * |        |          |This bit is set by hardware when I2C transfer bit count is equal to DPBITSEL setting.
+     * |        |          |Note:This bit is cleared by writing 1 to it.
      * |[15]    |SARCIF    |Slave Address Read Command Interrupt Flag
-     * |        |          |This bit is set by hardware when I2C receive address match read command.
-     * |        |          |This bit is cleared by write 1 to it.
+     * |        |          |This bit is set by hardware when I2C receive address is matched with read command.
+     * |        |          |Note:This bit is cleared by writing 1 to it.
      * @var I2C_T::ADDR0
      * Offset: 0x04  I2C Slave Address Register0
      * ---------------------------------------------------------------------------------------------------
@@ -178,44 +178,44 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[7:1]   |ADDRMSK   |I2C Address Mask
-     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register).
-     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care).
-     * |        |          |I2C bus controllers support multiple address recognition with four address mask register.
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exactly the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |I2C bus controllers support multiple address recognition with four address mask registers.
      * |        |          |When the bit in the address mask register is set to one, it means the received corresponding address bit is don't-care.
-     * |        |          |If the bit is set to zero, that means the received corresponding register bit should be exact the same as address register.
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
      * @var I2C_T::ADDRMSK1
      * Offset: 0x28  I2C Slave Address Mask Register1
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[7:1]   |ADDRMSK   |I2C Address Mask
-     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register).
-     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care).
-     * |        |          |I2C bus controllers support multiple address recognition with four address mask register.
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exactly the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |I2C bus controllers support multiple address recognition with four address mask registers.
      * |        |          |When the bit in the address mask register is set to one, it means the received corresponding address bit is don't-care.
-     * |        |          |If the bit is set to zero, that means the received corresponding register bit should be exact the same as address register.
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
      * @var I2C_T::ADDRMSK2
      * Offset: 0x2C  I2C Slave Address Mask Register2
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[7:1]   |ADDRMSK   |I2C Address Mask
-     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register).
-     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care).
-     * |        |          |I2C bus controllers support multiple address recognition with four address mask register.
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exactly the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |I2C bus controllers support multiple address recognition with four address mask registers.
      * |        |          |When the bit in the address mask register is set to one, it means the received corresponding address bit is don't-care.
-     * |        |          |If the bit is set to zero, that means the received corresponding register bit should be exact the same as address register.
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
      * @var I2C_T::ADDRMSK3
      * Offset: 0x30  I2C Slave Address Mask Register3
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[7:1]   |ADDRMSK   |I2C Address Mask
-     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exact the same as address register).
-     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care).
-     * |        |          |I2C bus controllers support multiple address recognition with four address mask register.
+     * |        |          |0 = Mask Disabled (the received corresponding register bit should be exactly the same as address register.).
+     * |        |          |1 = Mask Enabled (the received corresponding address bit is don't care.).
+     * |        |          |I2C bus controllers support multiple address recognition with four address mask registers.
      * |        |          |When the bit in the address mask register is set to one, it means the received corresponding address bit is don't-care.
-     * |        |          |If the bit is set to zero, that means the received corresponding register bit should be exact the same as address register.
+     * |        |          |If the bit is set to 0, that means the received corresponding register bit should be exactly the same as address register.
      * @var I2C_T::WKCTL
      * Offset: 0x3C  I2C Wake-up Control Register
      * ---------------------------------------------------------------------------------------------------
@@ -225,10 +225,10 @@ typedef struct
      * |        |          |0 = I2C wake-up function Disabled.
      * |        |          |1= I2C wake-up function Enabled.
      * |[7]     |NHDBUSEN  |I2C No Hold BUS Enable Bit
-     * |        |          |0 = I2C hold bus after wake-up.
-     * |        |          |1= I2C don't hold bus after wake-up.
-     * |        |          |Note: The I2C controller could respond when WKIF event is not clear, it may cause error data transmitted or received.
-     * |        |          |If data transmitted or received when WKIF event is not clear, user must reset I2C controller and execute the original operation again.
+     * |        |          |0 = I2C holds bus after wake-up.
+     * |        |          |1= I2C does not hold bus after wake-up.
+     * |        |          |Note: The I2C controller could respond when WKIF event is not cleared. It may cause error data transmitted or received.
+     * |        |          |If data transmitted or received when WKIF event is not cleared, user must reset I2C controller and execute the original operation again.
      * @var I2C_T::WKSTS
      * Offset: 0x40  I2C Wake-up Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -238,9 +238,9 @@ typedef struct
      * |        |          |When chip is woken up from Power-down mode by I2C, this bit is set to 1.
      * |        |          |Software can write 1 to clear this bit.
      * |[1]     |WKAKDONE  |Wakeup Address Frame Acknowledge Bit Done
-     * |        |          |0 = The ACK bit cycle of address match frame isn't done.
+     * |        |          |0 = The ACK bit cycle of address match frame is not done.
      * |        |          |1 = The ACK bit cycle of address match frame is done in power-down.
-     * |        |          |Note: This bit can't release WKIF. Software can write 1 to clear this bit.
+     * |        |          |Note: This bit cannot release WKIF. Software can write 1 to clear this bit.
      * |[2]     |WRSTSWK   |Read/Write Status Bit in Address Wakeup Frame (Read Only)
      * |        |          |0 = Write command be record on the address match wakeup frame.
      * |        |          |1 = Read command be record on the address match wakeup frame.
@@ -266,19 +266,19 @@ typedef struct
      * |        |          |It is used to improve the performance of the I2C bus.
      * |        |          |It only support in slave mode
      * |[8]     |PDMASTR   |PDMA Stretch Bit
-     * |        |          |0 = I2C send STOP automatically after PDMA transfer done. (only master TX)
+     * |        |          |0 = I2C send STOP automatically after PDMA transfer done. (Only master TX)
      * |        |          |1 = I2C SCL bus is stretched by hardware after PDMA transfer done if the SI is not cleared.
-     * |        |          |(only master TX)
+     * |        |          |(Only master TX)
      * @var I2C_T::STATUS1
      * Offset: 0x48  I2C Status Register 1
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[8]     |ONBUSY    |On Bus Busy (Read Only)
-     * |        |          |Indicates that a communication is in progress on the bus.
+     * |        |          |Indicate that a communication is in progress on the bus.
      * |        |          |It is set by hardware when a START condition is detected.
      * |        |          |It is cleared by hardware when a STOP condition is detected.
-     * |        |          |0 = The bus is IDLE (both SCLK and SDA High).
+     * |        |          |0 = The bus is idle (both SCLK and SDA High).
      * |        |          |1 = The bus is busy.
      * @var I2C_T::TMCTL
      * Offset: 0x4C  I2C Timing Configure Control Register

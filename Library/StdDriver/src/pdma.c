@@ -129,10 +129,17 @@ void PDMA_SetTransferAddr(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32SrcAddr, uin
  *                - \ref PDMA_I2C1_RX
  *                - \ref PDMA_TMR0
  *                - \ref PDMA_TMR1
+ *                - \ref PDMA_TMR2
+ *                - \ref PDMA_TMR3
  *                - \ref PDMA_DAC0_TX
  *                - \ref PDMA_DAC1_TX
  *                - \ref PDMA_DAC2_TX
  *                - \ref PDMA_DAC3_TX
+ *                - \ref PDMA_TMR4
+ *                - \ref PDMA_TMR5
+ *                - \ref PDMA_MANCH_MTX
+ *                - \ref PDMA_MANCH_TX
+ *                - \ref PDMA_MANCH_RX
  * @param[in]   u32ScatterEn    Scatter-gather mode enable
  * @param[in]   u32DescAddr     Scatter-gather descriptor address
  *
@@ -163,7 +170,15 @@ void PDMA_SetTransferMode(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32Peripheral, 
         break;
 
     case 4ul:
-        pdma->REQSEL4 = (pdma->REQSEL4 & ~PDMA_REQSEL4_REQSRC4_Msk) | u32Peripheral;
+        pdma->REQSEL4_6 = (pdma->REQSEL4_6 & ~PDMA_REQSEL4_6_REQSRC4_Msk) | u32Peripheral;
+        break;
+
+    case 5ul:
+        pdma->REQSEL4_6 = (pdma->REQSEL4_6 & ~PDMA_REQSEL4_6_REQSRC5_Msk) | (u32Peripheral << PDMA_REQSEL4_6_REQSRC5_Pos);
+        break;
+
+    case 6ul:
+        pdma->REQSEL4_6 = (pdma->REQSEL4_6 & ~PDMA_REQSEL4_6_REQSRC6_Msk) | (u32Peripheral << PDMA_REQSEL4_6_REQSRC6_Pos);
         break;
 
     default:
