@@ -170,7 +170,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CMPDAT1
      * Offset: 0x54  BPWM Comparator Register 1
@@ -178,7 +178,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CMPDAT2
      * Offset: 0x58  BPWM Comparator Register 2
@@ -186,7 +186,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CMPDAT3
      * Offset: 0x5C  BPWM Comparator Register 3
@@ -194,7 +194,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CMPDAT4
      * Offset: 0x60  BPWM Comparator Register 4
@@ -202,7 +202,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CMPDAT5
      * Offset: 0x64  BPWM Comparator Register 5
@@ -210,7 +210,7 @@ typedef struct
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger EADC.
+     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
      * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
      * @var BPWM_T::CNT
      * Offset: 0x90  BPWM Counter Register
@@ -663,12 +663,91 @@ typedef struct
      * |        |          |Each bit n controls the corresponding BPWM channel n.
      * |        |          |Flag is set by hardware when BPWM counter down count and reaches BPWM_CMPDATn, software can clear this bit by writing 1 to it.
      * |        |          |Note1: If CMPDAT equal to PERIOD, this flag is not working in down counter type selection.
-     * @var BPWM_T::EADCTS0
-     * Offset: 0xF8  BPWM Trigger EADC Source Select Register 0
+     * @var BPWM_T::DACTRGEN
+     * Offset: 0xF4  BPWM Trigger DAC Enable Register
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[3:0]   |TRGSEL0   |BPWM_CH0 Trigger EADC Source Select
+     * |[0]     |ZTE       |BPWM Zero Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to zero if this bit is set to1.
+     * |        |          |0 = BPWM period point trigger DAC function Disabled.
+     * |        |          |1 = BPWM period point trigger DAC function Enabled.
+     * |[8]     |PTE       |BPWM Period Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to (PERIODn+1) if this bit is set to1.
+     * |        |          |0 = BPWM period point trigger DAC function Disabled.
+     * |        |          |1 = BPWM period point trigger DAC function Enabled.
+     * |[16]    |CUTRGE0   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[17]    |CUTRGE1   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[18]    |CUTRGE2   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[19]    |CUTRGE3   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[20]    |CUTRGE4   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[21]    |CUTRGE5   |BPWM Compare Up Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter counts up to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Up point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Up point trigger DAC function Enabled.
+     * |        |          |Note: This bit should keep at 0 when BPWM counter operating in down counter type..
+     * |[24]    |CDTRGE0   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * |[25]    |CDTRGE1   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * |[26]    |CDTRGE2   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * |[27]    |CDTRGE3   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * |[28]    |CDTRGE4   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * |[29]    |CDTRGE5   |BPWM Compare Down Count Point Trigger DAC Enable Bits
+     * |        |          |BPWM can trigger DAC to start action when BPWM counter down count to CMP if this bit is set to1.
+     * |        |          |0 = BPWM Compare Down count point trigger DAC function Disabled.
+     * |        |          |1 = BPWM Compare Down count point trigger DAC function Enabled.
+     * |        |          |Note1: This bit should keep at 0 when BPWM counter operating in up counter type.
+     * |        |          |Note2: In complementary mode, CDTRGEN1, 3, 5 is used as another CDTRGEN for channel 0, 2, 4.
+     * @var BPWM_T::ADCTS0
+     * Offset: 0xF8  BPWM Trigger ADC Source Select Register 0
+     * ---------------------------------------------------------------------------------------------------
+     * |Bits    |Field     |Descriptions
+     * | :----: | :----:   | :---- |
+     * |[3:0]   |TRGSEL0   |BPWM_CH0 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH0 zero point.
      * |        |          |0001 = BPWM_CH0 period point.
      * |        |          |0010 = BPWM_CH0 zero or period point.
@@ -680,8 +759,8 @@ typedef struct
      * |        |          |1000 = BPWM_CH1 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH1 down-count CMPDAT point.
      * |        |          |Others reserved
-     * |[7]     |TRGEN0    |BPWM_CH0 Trigger EADC enable bit
-     * |[11:8]  |TRGSEL1   |BPWM_CH1 Trigger EADC Source Select
+     * |[7]     |TRGEN0    |BPWM_CH0 Trigger ADC enable bit
+     * |[11:8]  |TRGSEL1   |BPWM_CH1 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH0 zero point.
      * |        |          |0001 = BPWM_CH0 period point.
      * |        |          |0010 = BPWM_CH0 zero or period point.
@@ -693,8 +772,8 @@ typedef struct
      * |        |          |1000 = BPWM_CH1 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH1 down-count CMPDAT point.
      * |        |          |Others reserved
-     * |[15]    |TRGEN1    |BPWM_CH1 Trigger EADC enable bit
-     * |[19:16] |TRGSEL2   |BPWM_CH2 Trigger EADC Source Select
+     * |[15]    |TRGEN1    |BPWM_CH1 Trigger ADC enable bit
+     * |[19:16] |TRGSEL2   |BPWM_CH2 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH2 zero point.
      * |        |          |0001 = BPWM_CH2 period point.
      * |        |          |0010 = BPWM_CH2 zero or period point.
@@ -706,8 +785,8 @@ typedef struct
      * |        |          |1000 = BPWM_CH3 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH3 down-count CMPDAT point.
      * |        |          |Others reserved
-     * |[23]    |TRGEN2    |BPWM_CH2 Trigger EADC enable bit
-     * |[27:24] |TRGSEL3   |BPWM_CH3 Trigger EADC Source Select
+     * |[23]    |TRGEN2    |BPWM_CH2 Trigger ADC enable bit
+     * |[27:24] |TRGSEL3   |BPWM_CH3 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH2 zero point.
      * |        |          |0001 = BPWM_CH2 period point.
      * |        |          |0010 = BPWM_CH2 zero or period point.
@@ -719,13 +798,13 @@ typedef struct
      * |        |          |1000 = BPWM_CH3 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH3 down-count CMPDAT point.
      * |        |          |Others reserved.
-     * |[31]    |TRGEN3    |BPWM_CH3 Trigger EADC enable bit
-     * @var BPWM_T::EADCTS1
-     * Offset: 0xFC  BPWM Trigger EADC Source Select Register 1
+     * |[31]    |TRGEN3    |BPWM_CH3 Trigger ADC enable bit
+     * @var BPWM_T::ADCTS1
+     * Offset: 0xFC  BPWM Trigger ADC Source Select Register 1
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[3:0]   |TRGSEL4   |BPWM_CH4 Trigger EADC Source Select
+     * |[3:0]   |TRGSEL4   |BPWM_CH4 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH4 zero point.
      * |        |          |0001 = BPWM_CH4 period point.
      * |        |          |0010 = BPWM_CH4 zero or period point.
@@ -737,8 +816,8 @@ typedef struct
      * |        |          |1000 = BPWM_CH5 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH5 down-count CMPDAT point.
      * |        |          |Others reserved
-     * |[7]     |TRGEN4    |BPWM_CH4 Trigger EADC enable bit
-     * |[11:8]  |TRGSEL5   |BPWM_CH5 Trigger EADC Source Select
+     * |[7]     |TRGEN4    |BPWM_CH4 Trigger ADC enable bit
+     * |[11:8]  |TRGSEL5   |BPWM_CH5 Trigger ADC Source Select
      * |        |          |0000 = BPWM_CH4 zero point.
      * |        |          |0001 = BPWM_CH4 period point.
      * |        |          |0010 = BPWM_CH4 zero or period point.
@@ -750,29 +829,7 @@ typedef struct
      * |        |          |1000 = BPWM_CH5 up-count CMPDAT point.
      * |        |          |1001 = BPWM_CH5 down-count CMPDAT point.
      * |        |          |Others reserved
-     * |[15]    |TRGEN5    |BPWM_CH5 Trigger EADC enable bit
-     * @var BPWM_T::SSCTL
-     * Offset: 0x110  BPWM Synchronous Start Control Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[0]     |SSEN0     |BPWM Synchronous Start Function Enable 0
-     * |        |          |When synchronous start function is enabled, the BPWM_CH0 counter enable bit (CNTEN0) can be enabled by writing BPWM synchronous start trigger bit (CNTSEN).
-     * |        |          |0 = BPWM synchronous start function disabled.
-     * |        |          |1 = BPWM synchronous start function enabled.
-     * |[9:8]   |SSRC      |BPWM Synchronous Start Source Select
-     * |        |          |00 = Synchronous start source come from PWM0.
-     * |        |          |01 = Synchronous start source come from PWM1.
-     * |        |          |10 = Synchronous start source come from BPWM0.
-     * |        |          |11 = Synchronous start source come from BPWM1.
-     * @var BPWM_T::SSTRG
-     * Offset: 0x114  BPWM Synchronous Start Trigger Register
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[0]     |CNTSEN    |BPWM Counter Synchronous Start Enable (Write Only)
-     * |        |          |BPWM counter synchronous enable function is used to make PWM or BPWM channels start counting at the same time.
-     * |        |          |Writing this bit to 1 will also set the counter enable bit if correlated BPWM channel counter synchronous start function is enabled.
+     * |[15]    |TRGEN5    |BPWM_CH5 Trigger ADC enable bit
      * @var BPWM_T::STATUS
      * Offset: 0x120  BPWM Status Register
      * ---------------------------------------------------------------------------------------------------
@@ -781,30 +838,30 @@ typedef struct
      * |[0]     |CNTMAX0   |Time-base Counter 0 Equal to 0xFFFF Latched Status
      * |        |          |0 = indicates the time-base counter never reached its maximum value 0xFFFF.
      * |        |          |1 = indicates the time-base counter reached its maximum value, software can write 1 to clear this bit.
-     * |[16]    |EADCTRG0  |EADC Start of Conversion Status
+     * |[16]    |ADCTRG0  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
-     * |[17]    |EADCTRG1  |EADC Start of Conversion Status
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |[17]    |ADCTRG1  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
-     * |[18]    |EADCTRG2  |EADC Start of Conversion Status
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |[18]    |ADCTRG2  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
-     * |[19]    |EADCTRG3  |EADC Start of Conversion Status
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |[19]    |ADCTRG3  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
-     * |[20]    |EADCTRG4  |EADC Start of Conversion Status
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |[20]    |ADCTRG4  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
-     * |[21]    |EADCTRG5  |EADC Start of Conversion Status
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |[21]    |ADCTRG5  |ADC Start of Conversion Status
      * |        |          |Each bit n controls the corresponding BPWM channel n.
-     * |        |          |0 = Indicates no EADC start of conversion trigger event has occurred.
-     * |        |          |1 = Indicates an EADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
+     * |        |          |0 = Indicates no ADC start of conversion trigger event has occurred.
+     * |        |          |1 = Indicates an ADC start of conversion trigger event has occurred, software can write 1 to clear this bit.
      * @var BPWM_T::CAPINEN
      * Offset: 0x200  BPWM Capture Input Enable Register
      * ---------------------------------------------------------------------------------------------------
@@ -1156,16 +1213,6 @@ typedef struct
      * |        |          |This bit is writing 1 to clear. Each bit n controls the corresponding BPWM channel n.
      * |        |          |0 = No capture falling latch condition happened.
      * |        |          |1 = Capture falling latch condition happened, this flag will be set to high.
-     * @var BPWM_T::SELFTEST
-     * Offset: 0x300  BPWM Self-test Mode Enable
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[31]    |SELFTEST  |BPWM Self-test Mode Enable (Write Protect)
-     * |        |          |When BPWM self-test mode enabled, the BPWM0 capture input source comes from BPWM1 output, and BPWM1 capture input source comes from BPWM0 output.
-     * |        |          |0 = BPWM self-test mode disabled.
-     * |        |          |1 = BPWM self-test mode enabled.
-     * |        |          |Note: This register is write protected. Refer toSYS_REGLCTL register.
      * @var BPWM_T::PBUF
      * Offset: 0x304  BPWM PERIOD Buffer
      * ---------------------------------------------------------------------------------------------------
@@ -1215,20 +1262,6 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
      * |        |          |Used as CMP active register.
-     * @var BPWM_T::VERSION
-     * Offset: 0xFFC  BPWM RTL Design Version Number
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |MINOR     |RTL Design MINOR Version Number (Read Only)
-     * |        |          |Minor version number is dependent on ECO version control.
-     * |        |          |0x0000: (current Minor Version Number).
-     * |[23:16] |SUB       |RTL Design SUB Version Number (Read Only)
-     * |        |          |Sub version number is relative to key feature.
-     * |        |          |0x02: (current Sub Version Number).
-     * |[31:24] |MAJOR     |RTL Design MAJOR Version Number (Read Only)
-     * |        |          |Major version number is correlated to Product Line.
-     * |        |          |0x01: (current Major Version Number).
      */
     __IO uint32_t CTL0;                  /*!< [0x0000] BPWM Control Register 0                                          */
     __IO uint32_t CTL1;                  /*!< [0x0004] BPWM Control Register 1                                          */
@@ -1241,7 +1274,7 @@ typedef struct
     __I  uint32_t RESERVE2[2];
     __IO uint32_t PERIOD;                /*!< [0x0030] BPWM Period Register                                             */
     __I  uint32_t RESERVE3[7];
-    __IO uint32_t CMPDAT[6];               /*!< [0x0050] BPWM Comparator Register 0                                       */
+    __IO uint32_t CMPDAT[6];             /*!< [0x0050] BPWM Comparator Register 0                                       */
     __I  uint32_t RESERVE4[10];
     __I  uint32_t CNT;                   /*!< [0x0090] BPWM Counter Register                                            */
     __I  uint32_t RESERVE5[7];
@@ -1256,18 +1289,13 @@ typedef struct
     __IO uint32_t INTEN;                 /*!< [0x00e0] BPWM Interrupt Enable Register                                   */
     __I  uint32_t RESERVE8[1];
     __IO uint32_t INTSTS;                /*!< [0x00e8] BPWM Interrupt Flag Register                                     */
-//    __I  uint32_t RESERVE9[3];
     __I  uint32_t RESERVE9[2];
-    __IO uint32_t DACTRGEN;
-
+    __IO uint32_t DACTRGEN;              /*!< [0x00f4] BPWM Trigger DAC Enable Register                                 */
     __IO uint32_t ADCTS0;                /*!< [0x00f8] BPWM Trigger ADC Source Select Register 0                        */
     __IO uint32_t ADCTS1;                /*!< [0x00fc] BPWM Trigger ADC Source Select Register 1                        */
-    __I  uint32_t RESERVE10[4];
-    __IO uint32_t SSCTL;                 /*!< [0x0110] BPWM Synchronous Start Control Register                          */
-    __O  uint32_t SSTRG;                 /*!< [0x0114] BPWM Synchronous Start Trigger Register                          */
-    __I  uint32_t RESERVE11[2];
+    __I  uint32_t RESERVE10[8];
     __IO uint32_t STATUS;                /*!< [0x0120] BPWM Status Register                                             */
-    __I  uint32_t RESERVE12[55];
+    __I  uint32_t RESERVE11[55];
     __IO uint32_t CAPINEN;               /*!< [0x0200] BPWM Capture Input Enable Register                               */
     __IO uint32_t CAPCTL;                /*!< [0x0204] BPWM Capture Control Register                                    */
     __I  uint32_t CAPSTS;                /*!< [0x0208] BPWM Capture Status Register                                     */
@@ -1283,16 +1311,13 @@ typedef struct
     __I  uint32_t FCAPDAT4;              /*!< [0x0230] BPWM Falling Capture Data Register 4                             */
     __I  uint32_t RCAPDAT5;              /*!< [0x0234] BPWM Rising Capture Data Register 5                              */
     __I  uint32_t FCAPDAT5;              /*!< [0x0238] BPWM Falling Capture Data Register 5                             */
-    __I  uint32_t RESERVE13[5];
+    __I  uint32_t RESERVE12[5];
     __IO uint32_t CAPIEN;                /*!< [0x0250] BPWM Capture Interrupt Enable Register                           */
     __IO uint32_t CAPIF;                 /*!< [0x0254] BPWM Capture Interrupt Flag Register                             */
-    __I  uint32_t RESERVE14[42];
-    __IO uint32_t SELFTEST;              /*!< [0x0300] BPWM Self-test Mode Enable                                       */
+    __I  uint32_t RESERVE13[43];
     __I  uint32_t PBUF;                  /*!< [0x0304] BPWM PERIOD Buffer                                               */
-    __I  uint32_t RESERVE15[5];
-    __I  uint32_t CMPBUF[6];               /*!< [0x031c] BPWM CMPDAT 0 Buffer                                             */
-    __I  uint32_t RESERVE16[818];
-    __I  uint32_t VERSION;               /*!< [0x0ffc] BPWM RTL Design Version Number                                   */
+    __I  uint32_t RESERVE14[5];
+    __I  uint32_t CMPBUF[6];             /*!< [0x031c] BPWM CMPDAT 0 Buffer                                             */
 
 } BPWM_T;
 
@@ -1676,15 +1701,6 @@ typedef struct
 #define BPWM_ADCTS1_TRGEN5_Pos           (15)                                              /*!< BPWM_T::ADCTS1: TRGEN5 Position        */
 #define BPWM_ADCTS1_TRGEN5_Msk           (0x1ul << BPWM_ADCTS1_TRGEN5_Pos)                 /*!< BPWM_T::ADCTS1: TRGEN5 Mask            */
 
-#define BPWM_SSCTL_SSEN0_Pos            (0)                                               /*!< BPWM_T::SSCTL: SSEN0 Position         */
-#define BPWM_SSCTL_SSEN0_Msk            (0x1ul << BPWM_SSCTL_SSEN0_Pos)                  /*!< BPWM_T::SSCTL: SSEN0 Mask             */
-
-#define BPWM_SSCTL_SSRC_Pos             (8)                                               /*!< BPWM_T::SSCTL: SSRC Position          */
-#define BPWM_SSCTL_SSRC_Msk             (0x3ul << BPWM_SSCTL_SSRC_Pos)                   /*!< BPWM_T::SSCTL: SSRC Mask              */
-
-#define BPWM_SSTRG_CNTSEN_Pos           (0)                                               /*!< BPWM_T::SSTRG: CNTSEN Position        */
-#define BPWM_SSTRG_CNTSEN_Msk           (0x1ul << BPWM_SSTRG_CNTSEN_Pos)                 /*!< BPWM_T::SSTRG: CNTSEN Mask            */
-
 #define BPWM_STATUS_CNTMAX0_Pos         (0)                                               /*!< BPWM_T::STATUS: CNTMAX0 Position      */
 #define BPWM_STATUS_CNTMAX0_Msk         (0x1ul << BPWM_STATUS_CNTMAX0_Pos)               /*!< BPWM_T::STATUS: CNTMAX0 Mask          */
 
@@ -1936,15 +1952,6 @@ typedef struct
 
 #define BPWM_CMPBUF5_CMPBUF_Pos         (0)                                               /*!< BPWM_T::CMPBUF5: CMPBUF Position      */
 #define BPWM_CMPBUF5_CMPBUF_Msk         (0xfffful << BPWM_CMPBUF5_CMPBUF_Pos)            /*!< BPWM_T::CMPBUF5: CMPBUF Mask          */
-
-#define BPWM_VERSION_MINOR_Pos          (0)                                               /*!< BPWM_T::VERSION: MINOR Position       */
-#define BPWM_VERSION_MINOR_Msk          (0xfffful << BPWM_VERSION_MINOR_Pos)             /*!< BPWM_T::VERSION: MINOR Mask           */
-
-#define BPWM_VERSION_SUB_Pos            (16)                                              /*!< BPWM_T::VERSION: SUB Position         */
-#define BPWM_VERSION_SUB_Msk            (0xfful << BPWM_VERSION_SUB_Pos)                 /*!< BPWM_T::VERSION: SUB Mask             */
-
-#define BPWM_VERSION_MAJOR_Pos          (24)                                              /*!< BPWM_T::VERSION: MAJOR Position       */
-#define BPWM_VERSION_MAJOR_Msk          (0xfful << BPWM_VERSION_MAJOR_Pos)               /*!< BPWM_T::VERSION: MAJOR Mask           */
 
 /**@}*/ /* BPWM_CONST */
 /**@}*/ /* end of BPWM register group */

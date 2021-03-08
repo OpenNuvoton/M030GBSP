@@ -157,7 +157,6 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[15:0]  |AUTODATA  |Data Input of Auto Data Generation Function
      * |        |          |Software needs to write appropriate data value to these bits for DAC auto data generation
-     * |        |          |
      */
     __IO uint32_t CTL;                   /*!< [0x0000] DAC Control Register                                            */
     __IO uint32_t SWTRG;                 /*!< [0x0004] DAC Software Trigger Control Register                           */
@@ -166,10 +165,10 @@ typedef struct
     __IO uint32_t STATUS;                /*!< [0x0010] DAC Status Register                                             */
     __IO uint32_t TCTL;                  /*!< [0x0014] DAC Timing Control Register                                     */
     __I  uint32_t RESERVE0[1];
-    __IO uint32_t ADGCTL;                /*!< [0x001c] DAC0 Auto Data Generator Control Register (o                    */
+    __IO uint32_t ADGCTL;                /*!< [0x001c] DAC0 Auto Data Generator Control Register                       */
     __I  uint32_t RESERVE1[16];
-    __IO uint32_t ADCTL[32];             /*!< [0x0060] DAC0 Auto Data Control Register0                                */
-
+    __IO uint32_t ADCTL[32];             /*!< [0x0060] DAC0 Auto Data Control Register                                 */
+    
 } DAC_T;
 
 /**
