@@ -78,8 +78,7 @@ extern "C"
 /**
   * @brief      Set Timer Compared Value
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   * @param[in]  u32Value    Timer compare value. Valid values are between 2 to 0xFFFFFF.
   *
   * @return     None
@@ -96,8 +95,7 @@ extern "C"
 /**
   * @brief      Set Timer Prescale Value
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   * @param[in]  u32Value    Timer prescale value. Valid values are between 0 to 0xFF.
   *
   * @return     None
@@ -112,8 +110,7 @@ extern "C"
 /**
   * @brief      Check specify Timer Status
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @retval     0   Timer 24-bit up counter is inactive
   * @retval     1   Timer 24-bit up counter is active
@@ -127,8 +124,7 @@ extern "C"
 /**
   * @brief      Select Toggle-output Pin
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   * @param[in]  u32ToutSel  Toggle-output pin selection, valid values are:
   *                         - \ref TIMER_TOUT_PIN_FROM_TX
   *                         - \ref TIMER_TOUT_PIN_FROM_TX_EXT
@@ -144,8 +140,7 @@ extern "C"
 /**
   * @brief      Start Timer Counting
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -161,8 +156,7 @@ static __INLINE void TIMER_Start(TIMER_T *timer)
 /**
   * @brief      Stop Timer Counting
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -178,8 +172,7 @@ static __INLINE void TIMER_Stop(TIMER_T *timer)
 /**
   * @brief      Enable Timer Interrupt Wake-up Function
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -197,8 +190,7 @@ static __INLINE void TIMER_EnableWakeup(TIMER_T *timer)
 /**
   * @brief      Disable Timer Wake-up Function
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -214,8 +206,7 @@ static __INLINE void TIMER_DisableWakeup(TIMER_T *timer)
 /**
   * @brief      Enable Capture Pin De-bounce
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -231,8 +222,7 @@ static __INLINE void TIMER_EnableCaptureDebounce(TIMER_T *timer)
 /**
   * @brief      Disable Capture Pin De-bounce
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -248,8 +238,7 @@ static __INLINE void TIMER_DisableCaptureDebounce(TIMER_T *timer)
 /**
   * @brief      Enable Counter Pin De-bounce
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -265,8 +254,7 @@ static __INLINE void TIMER_EnableEventCounterDebounce(TIMER_T *timer)
 /**
   * @brief      Disable Counter Pin De-bounce
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -282,8 +270,7 @@ static __INLINE void TIMER_DisableEventCounterDebounce(TIMER_T *timer)
 /**
   * @brief      Enable Timer Time-out Interrupt
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -299,8 +286,7 @@ static __INLINE void TIMER_EnableInt(TIMER_T *timer)
 /**
   * @brief      Disable Timer Time-out Interrupt
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -316,8 +302,7 @@ static __INLINE void TIMER_DisableInt(TIMER_T *timer)
 /**
   * @brief      Enable Capture Trigger Interrupt
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -333,8 +318,7 @@ static __INLINE void TIMER_EnableCaptureInt(TIMER_T *timer)
 /**
   * @brief      Disable Capture Trigger Interrupt
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -350,8 +334,7 @@ static __INLINE void TIMER_DisableCaptureInt(TIMER_T *timer)
 /**
   * @brief      Get Timer Time-out Interrupt Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @retval     0   Timer time-out interrupt did not occur
   * @retval     1   Timer time-out interrupt occurred
@@ -368,8 +351,7 @@ static __INLINE uint32_t TIMER_GetIntFlag(TIMER_T *timer)
 /**
   * @brief      Clear Timer Time-out Interrupt Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -385,8 +367,7 @@ static __INLINE void TIMER_ClearIntFlag(TIMER_T *timer)
 /**
   * @brief      Get Timer Capture Interrupt Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @retval     0   Timer capture interrupt did not occur
   * @retval     1   Timer capture interrupt occurred
@@ -403,8 +384,7 @@ static __INLINE uint32_t TIMER_GetCaptureIntFlag(TIMER_T *timer)
 /**
   * @brief      Clear Timer Capture Interrupt Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -420,8 +400,7 @@ static __INLINE void TIMER_ClearCaptureIntFlag(TIMER_T *timer)
 /**
   * @brief      Get Timer Wake-up Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @retval     0   Timer does not cause CPU wake-up
   * @retval     1   Timer interrupt event cause CPU wake-up
@@ -438,8 +417,7 @@ static __INLINE uint32_t TIMER_GetWakeupFlag(TIMER_T *timer)
 /**
   * @brief      Clear Timer Wake-up Flag
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -455,8 +433,7 @@ static __INLINE void TIMER_ClearWakeupFlag(TIMER_T *timer)
 /**
   * @brief      Get Capture value
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     24-bit Capture Value
   *
@@ -472,8 +449,7 @@ static __INLINE uint32_t TIMER_GetCaptureData(TIMER_T *timer)
 /**
   * @brief      Get Counter value
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     24-bit Counter Value
   *
@@ -489,8 +465,7 @@ static __INLINE uint32_t TIMER_GetCounter(TIMER_T *timer)
 /**
   * @brief      Enable Manchester Edge Trigger Timer
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
@@ -506,8 +481,7 @@ static __INLINE void TIMER_EnableFromManch(TIMER_T *timer)
 /**
   * @brief      Disable Manchester Edge Trigger Timer
   *
-  * @param[in]  timer       The pointer of the specified Timer module. It could be TIMER0, TIMER1.
-  *                         For M031G, it could be TIMER0 ~ TIMER5.
+  * @param[in]  timer       The pointer of the specified Timer module.
   *
   * @return     None
   *
