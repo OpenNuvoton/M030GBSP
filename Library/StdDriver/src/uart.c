@@ -105,7 +105,7 @@ void UART_DisableFlowCtrl(UART_T *uart)
  *
  *    @param[in]    uart                The pointer of the specified UART module.
  *    @param[in]    u32InterruptFlag    The specified interrupt of UART module.
- *                                      - \ref UART_INTEN_SWBEINT_Msk   : Single-wire Bit Error Detect Interrupt
+ *                                      - \ref UART_INTEN_SWBEIEN_Msk   : Single-wire Bit Error Detect Interrupt
  *                                      - \ref UART_INTEN_WKIEN_Msk      : Wake-up interrupt
  *                                      - \ref UART_INTEN_BUFERRIEN_Msk  : Buffer Error interrupt
  *                                      - \ref UART_INTEN_RXTOIEN_Msk    : Rx time-out interrupt
@@ -157,7 +157,7 @@ void UART_EnableFlowCtrl(UART_T *uart)
  *
  *    @param[in]    uart                The pointer of the specified UART module.
  *    @param[in]    u32InterruptFlag    The specified interrupt of UART module:
- *                                      - \ref UART_INTEN_SWBEINT_Msk    : Single-wire Bit Error Detect Interrupt
+ *                                      - \ref UART_INTEN_SWBEIEN_Msk    : Single-wire Bit Error Detect Interrupt
  *                                      - \ref UART_INTEN_WKIEN_Msk      : Wake-up interrupt
  *                                      - \ref UART_INTEN_BUFERRIEN_Msk  : Buffer Error interrupt
  *                                      - \ref UART_INTEN_RXTOIEN_Msk    : Rx time-out interrupt
