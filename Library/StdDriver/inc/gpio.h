@@ -142,7 +142,6 @@ extern "C"
 /** @addtogroup GPIO_EXPORTED_FUNCTIONS GPIO Exported Functions
   @{
 */
-#define _GPIO_SET_PIN_MODE(port, pin, mode)     ((port)->MODE = ((port)->MODE & ~GPIO_MODE(pin, GPIO_MODE_QUASI)) | GPIO_MODE(pin, mode))
 
 /**
   * @brief       Clear GPIO Pin Interrupt Flag
