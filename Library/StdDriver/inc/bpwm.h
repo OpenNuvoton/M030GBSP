@@ -309,7 +309,7 @@ extern "C"
 #define BPWM_SET_ALIGNED_TYPE(bpwm, u32ChannelMask, u32AlignedType) ((bpwm)->CTL1 = (u32AlignedType))
 
 /**
- * @brief This macro s used to clear counter of all channels
+ * @brief This macro is used to clear counter of all channels
  * @param[in] bpwm The pointer of the specified BPWM module
  *                - BPWM0 : BPWM Group 0
  *                - BPWM1 : BPWM Group 1
