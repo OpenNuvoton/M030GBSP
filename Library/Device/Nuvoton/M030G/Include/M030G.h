@@ -3,7 +3,7 @@
  * @version  V3.0
  * $Revision: 8 $
  * $Date: 20/06/11 3:42p $
- * @brief    M030G Series Peripheral Access Layer Header File
+ * @brief    M030G/M031G Series Peripheral Access Layer Header File
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0
@@ -11,11 +11,11 @@
  *****************************************************************************/
 
 /**
-  \mainpage NuMicro M030G Driver Reference Guide
+  \mainpage NuMicro M030G/M031G Driver Reference Guide
   *
   * <b>Introduction</b>
   *
-  * This user manual describes the usage of M030G Series MCU device driver
+  * This user manual describes the usage of M030G/M031G Series MCU device driver
   *
   * <b>Disclaimer</b>
   *
@@ -122,7 +122,7 @@ typedef enum IRQn
 /*@}*/ /* end of group CMSIS_Device */
 
 #include "core_cm0.h"                   /*!< Cortex-M0 processor and core peripherals             */
-#include "system_M030G.h"          /*!< M030G System                                    */
+#include "system_M030G.h"          		/*!< M030G/M031G System                                    */
 
 
 #if defined ( __CC_ARM   )
