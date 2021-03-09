@@ -38,9 +38,9 @@
   *                             - \ref CRC_WDATA_RVS
   * @param[in]  u32Seed         Seed value.
   * @param[in]  u32DataLen      CPU Write Data Length. Valid values are:
-  *                             - \ref CRC_CPU_WDATA_8
-  *                             - \ref CRC_CPU_WDATA_16
-  *                             - \ref CRC_CPU_WDATA_32
+  *                             - \ref CRC_WDATA_8
+  *                             - \ref CRC_WDATA_16
+  *                             - \ref CRC_WDATA_32
   *
   * @return     None
   *
