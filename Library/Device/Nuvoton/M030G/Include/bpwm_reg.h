@@ -164,48 +164,8 @@ typedef struct
      * |        |          |BPWM period time = (PERIOD+1) * BPWM_CLK period.
      * |        |          |Up-Down-Count mode: In this mode, BPWM counter counts from 0 to PERIOD, then decrements to 0 and repeats again.
      * |        |          |BPWM period time = 2 * PERIOD * BPWM_CLK period.
-     * @var BPWM_T::CMPDAT0
-     * Offset: 0x50  BPWM Comparator Register 0
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
-     * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
-     * @var BPWM_T::CMPDAT1
-     * Offset: 0x54  BPWM Comparator Register 1
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
-     * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
-     * @var BPWM_T::CMPDAT2
-     * Offset: 0x58  BPWM Comparator Register 2
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
-     * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
-     * @var BPWM_T::CMPDAT3
-     * Offset: 0x5C  BPWM Comparator Register 3
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
-     * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
-     * @var BPWM_T::CMPDAT4
-     * Offset: 0x60  BPWM Comparator Register 4
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPDAT    |BPWM Comparator Register
-     * |        |          |CMPDAT use to compare with CNTR to generate BPWM waveform, interrupt and trigger ADC.
-     * |        |          |In independent mode, CMPDAT0~5 denote as 6 independent BPWM_CH0~5 compared point.
-     * @var BPWM_T::CMPDAT5
-     * Offset: 0x64  BPWM Comparator Register 5
+     * @var BPWM_T::CMPDAT[6]
+     * Offset: 0x50  BPWM Comparator Register 0~5
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
@@ -1220,47 +1180,12 @@ typedef struct
      * | :----: | :----:   | :---- |
      * |[15:0]  |PBUF      |BPWM Period Register Buffer (Read Only)
      * |        |          |Used as PERIOD active register.
-     * @var BPWM_T::CMPBUF0
-     * Offset: 0x31C  BPWM CMPDAT 0 Buffer
+     * @var BPWM_T::CMPBUF[6]
+     * Offset: 0x31C  BPWM CMPDAT 0~5 Buffer
      * ---------------------------------------------------------------------------------------------------
      * |Bits    |Field     |Descriptions
      * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
-     * |        |          |Used as CMP active register.
-     * @var BPWM_T::CMPBUF1
-     * Offset: 0x320  BPWM CMPDAT 1 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
-     * |        |          |Used as CMP active register.
-     * @var BPWM_T::CMPBUF2
-     * Offset: 0x324  BPWM CMPDAT 2 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
-     * |        |          |Used as CMP active register.
-     * @var BPWM_T::CMPBUF3
-     * Offset: 0x328  BPWM CMPDAT 3 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
-     * |        |          |Used as CMP active register.
-     * @var BPWM_T::CMPBUF4
-     * Offset: 0x32C  BPWM CMPDAT 4 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
-     * |        |          |Used as CMP active register.
-     * @var BPWM_T::CMPBUF5
-     * Offset: 0x330  BPWM CMPDAT 5 Buffer
-     * ---------------------------------------------------------------------------------------------------
-     * |Bits    |Field     |Descriptions
-     * | :----: | :----:   | :---- |
-     * |[15:0]  |CMPBUF    |BPWM Comparator Register Buffer (Read Only)
+     * |[15:0]  |CMPBUF    |BPWM Comparator Buffer (Read Only)
      * |        |          |Used as CMP active register.
      */
     __IO uint32_t CTL0;                  /*!< [0x0000] BPWM Control Register 0                                          */
@@ -1274,7 +1199,7 @@ typedef struct
     __I  uint32_t RESERVE2[2];
     __IO uint32_t PERIOD;                /*!< [0x0030] BPWM Period Register                                             */
     __I  uint32_t RESERVE3[7];
-    __IO uint32_t CMPDAT[6];             /*!< [0x0050] BPWM Comparator Register 0                                       */
+    __IO uint32_t CMPDAT[6];             /*!< [0x0050] BPWM Comparator Register                                         */
     __I  uint32_t RESERVE4[10];
     __I  uint32_t CNT;                   /*!< [0x0090] BPWM Counter Register                                            */
     __I  uint32_t RESERVE5[7];
@@ -1317,7 +1242,7 @@ typedef struct
     __I  uint32_t RESERVE13[43];
     __I  uint32_t PBUF;                  /*!< [0x0304] BPWM PERIOD Buffer                                               */
     __I  uint32_t RESERVE14[5];
-    __I  uint32_t CMPBUF[6];             /*!< [0x031c] BPWM CMPDAT 0 Buffer                                             */
+    __I  uint32_t CMPBUF[6];             /*!< [0x031c] BPWM CMPDAT Buffer                                             */
 
 } BPWM_T;
 
