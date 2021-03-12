@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>ThermalSensor_Measure</TargetName>
+      <TargetName>TS_TemperatureMeasure</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
@@ -47,7 +47,7 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\obj\</OutputDirectory>
-          <OutputName>ThermalSensor_Measure</OutputName>
+          <OutputName>TS_TemperatureMeasure</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
