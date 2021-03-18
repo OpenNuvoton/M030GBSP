@@ -216,15 +216,14 @@ int32_t main(void)
 
         /* Set TX level with frequency modulation */
         /* Note: only DAC0 supports this function */
-        // DAC_AUTO_SINE_MANCH_TX_HIGH(dac);
-        DAC_AUTO_SINE_MANCH_TX_LOW(dac);
+        DAC_AUTO_SINE_MANCH_TX_HIGH(dac);
 
         /* Prepare and set sine waveform data to DAC0 ADCTL[] registers */
         for (ii = 0; ii < SINE_SAMPLE; ii++)
         {
             /* Add 1.0 to offset sine result from [-1, 1] to [0, 2],
                and divided with 2.0 to compress to [0, 1] */
-            g_sineBuf[ii] = (uint16_t)((sin((double)(((ii+1) * PI)/(SINE_SAMPLE/2)))+1.0)/ 2.0)*0xFFF;
+            g_sineBuf[ii] = ((sin((double)(((ii+1) * PI) / (SINE_SAMPLE/2))) + 1.0) / 2.0) * 0xFFF;
         }
 
         DAC_SetAutoSineSampleContent(dac, g_sineBuf, u32SampleNumPerSine);
