@@ -466,7 +466,7 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
     CLK_WaitClockReady(CLK_STATUS_HIRCSTB_Msk);
 
     /* Select PLL source clock from HIRC */
-    u32CLK_SRC = 0;     /* PLL source clock always from HIRC for M031G */
+    u32CLK_SRC = BIT19;     /* PLL source clock always from HIRC/4 for M031G */
     u32PllSrcClk = __HIRC >> 2;
 
     /* u32NR start from 2 since NR = INDIV + 2 */

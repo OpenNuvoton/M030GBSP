@@ -92,9 +92,9 @@ void Delay(uint32_t x)
 
 uint32_t g_au32PllSetting[] =
 {
-    28000000,   /* PLL = 56MHz, HCLK = PLL/2  */
-    36000000,   /* PLL = 72MHz, HCLK = PLL/2  */
-    48000000,   /* PLL = 96MHz, HCLK = PLL/2 */
+    56000000,   /* PLL = 56MHz, HCLK = PLL/1  */
+    68000000,   /* PLL = 68MHz, HCLK = PLL/1 */
+    72000000,   /* PLL = 72MHz, HCLK = PLL/1  */
 };
 
 void SYS_PLL_Test(void)
@@ -106,7 +106,7 @@ void SYS_PLL_Test(void)
     /*---------------------------------------------------------------------------------------------------------*/
 
     printf("\n-------------------------[ Test PLL ]-----------------------------\n");
-    printf("  Select HCLK clock source from PLL/2.\n");
+    printf("  Select HCLK clock source from PLL/1.\n");
     printf("  Please measure HCLK on CLKO pin (PB.14) by scope ...\n");
 
     for(i = 0; i < sizeof(g_au32PllSetting) / sizeof(g_au32PllSetting[0]) ; i++)
