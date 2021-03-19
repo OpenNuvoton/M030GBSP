@@ -223,7 +223,7 @@ int32_t main(void)
         {
             /* Add 1.0 to offset sine result from [-1, 1] to [0, 2],
                and divided with 2.0 to compress to [0, 1] */
-            g_sineBuf[ii] = ((sin((double)(((ii+1) * PI) / (SINE_SAMPLE/2))) + 1.0) / 2.0) * 0xFFF;
+            g_sineBuf[ii] = (uint16_t)(((sin((double)(((ii+1) * PI) / (SINE_SAMPLE/2))) + 1.0) / 2.0) * 0xFFF);
         }
 
         DAC_SetAutoSineSampleContent(dac, g_sineBuf, u32SampleNumPerSine);
