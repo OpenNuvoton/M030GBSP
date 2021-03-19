@@ -182,7 +182,6 @@ Example: If user want to set PD.3 as UART0_TXD and PD.2 as UART0_RXD in initial 
 #define SYS_GPB_MFPL_PB3MFP_GPIO        (0x00UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for GPIO          \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_ADC0_CH3    (0x01UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for ADC0_CH3      \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_I2C1_SCL    (0x04UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for I2C1_SCL      \hideinitializer */
-#define SYS_GPB_MFPL_PB3MFP_TM4         (0x09UL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for TM4           \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_BPWM1_CH2   (0x0AUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for BPWM1_CH2     \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_TM0         (0x0CUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for TM0           \hideinitializer */
 #define SYS_GPB_MFPL_PB3MFP_MANCH_TXD   (0x0DUL<<SYS_GPB_MFPL_PB3MFP_Pos)   /*!< GPB_MFPL PB3 setting for MANCH_TXD     \hideinitializer */
