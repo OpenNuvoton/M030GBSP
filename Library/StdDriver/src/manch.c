@@ -94,6 +94,7 @@ void MANCH_Close(MANCH_T *manch)
   * @details    Set MANCH 1st stage bit clock divider. This is the 1st stage 12-bit width clock divider from
   *             engine clock. After setting 1st stage divider, 2nd stage TX/RX bit divider
   *             must also be set at the same time.
+  * @note       The real bit clock divider is given by (u32ClkDiv + 1).
   */
 void MANCH_SetBitClockDiv(MANCH_T *manch, uint32_t u32ClkDiv)
 {
