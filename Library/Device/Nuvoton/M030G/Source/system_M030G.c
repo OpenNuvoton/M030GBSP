@@ -77,10 +77,13 @@ void SystemCoreClockUpdate(void)
 void SystemInit(void)
 {
     /* Unlock protected registers */
-    //SYS_UnlockReg();
+    SYS_UnlockReg();
+
+    /* Disable Vref Short Circuit Protection */
+    SYS->VREFCTL |= SYS_VREFCTL_SCPDIS_Msk;
 
     /* Lock protected registers */
-    //SYS_LockReg();
+    SYS_LockReg();
 }
 
 #if USE_ASSERT

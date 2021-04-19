@@ -82,6 +82,12 @@ extern "C"
 #define SYS_BODCTL_BODDGSEL_4096HCLK    (0x7UL<<SYS_BODCTL_BODDGSEL_Pos)    /*!< BOD Output De-glitch Time is selected 4096HCLK         \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
+/*  VREFCTL constant definitions. (Write-Protection Register)                                              */
+/*---------------------------------------------------------------------------------------------------------*/
+#define SYS_VREFCTL_VREF_2_0V           (0x0UL << SYS_VREFCTL_VREFSEL_Pos)  /*!< Vref = 2.048V  \hideinitializer */
+#define SYS_VREFCTL_VREF_2_5V           (0x1UL << SYS_VREFCTL_VREFSEL_Pos)  /*!< Vref = 2.5V    \hideinitializer */
+
+/*---------------------------------------------------------------------------------------------------------*/
 /*  Multi-Function constant definitions.                                                                   */
 /*---------------------------------------------------------------------------------------------------------*/
 
@@ -582,7 +588,7 @@ void SYS_ResetCPU(void);
 void SYS_ResetModule(uint32_t u32ModuleIndex);
 void SYS_EnableBOD(int32_t i32Mode, uint32_t u32BODLevel);
 void SYS_DisableBOD(void);
-
+void SYS_SetVRef(uint32_t u32VRefCTL);
 
 /*@}*/ /* end of group SYS_EXPORTED_FUNCTIONS */
 
