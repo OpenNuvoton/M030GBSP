@@ -45,6 +45,7 @@ extern "C"
 #define FREQ_72MHZ         72000000     /*!< Define frequency macro  72MHz  \hideinitializer */
 #define FREQ_96MHZ         96000000     /*!< Define frequency macro  96MHz  \hideinitializer */
 #define FREQ_100MHZ       100000000     /*!< Define frequency macro 100MHz  \hideinitializer */
+#define FREQ_144MHZ       144000000     /*!< Define frequency macro 144MHz  \hideinitializer */
 
 /*---------------------------------------------------------------------------------------------------------*/
 /*  CLKSEL0 constant definitions.  (Write-protection)                                                      */

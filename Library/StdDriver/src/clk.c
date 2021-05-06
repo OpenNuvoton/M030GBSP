@@ -473,9 +473,9 @@ uint32_t CLK_EnablePLL(uint32_t u32PllClkSrc, uint32_t u32PllFreq)
     u32NR = 2;
 
     /* Select "NO" according to request frequency */
-    /* Constraint: PLL output frequency must <= 72MHz */
+    /* Constraint: PLL output frequency should <= 144MHz */
     /*             PLL output frequency must > 50.14MHz to meet all constraints */
-    u32PLL_UpperLimit = FREQ_72MHZ;
+    u32PLL_UpperLimit = FREQ_144MHZ;
 
     if((u32PllFreq <= u32PLL_UpperLimit) && (u32PllFreq >= FREQ_51MHZ))
     {
