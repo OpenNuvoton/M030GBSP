@@ -84,7 +84,7 @@ __Vectors:
 	.long	SPI0_IRQHandler       /* 14: Reserved                   */
 	.long	Default_Handler       /* 15: CAN0                       */
 	.long	Default_Handler       /* 16: Reserved                   */
-	.long	Default_Handler       /* 17: Reserved                   */
+	.long	MANCH_IRQHandler      /* 17: MANCH                      */
 	.long	I2C0_IRQHandler       /* 18: Reserved                   */
 	.long	I2C1_IRQHandler       /* 19: Reserved                   */
 	.long	Default_Handler       /* 20: Reserved                   */
@@ -308,6 +308,7 @@ Default_Handler:
     def_irq_handler	TMR3_IRQHandler
     def_irq_handler	UART0_IRQHandler
     def_irq_handler	SPI0_IRQHandler
+    def_irq_handler	MANCH_IRQHandler
     def_irq_handler	I2C0_IRQHandler
     def_irq_handler	I2C1_IRQHandler
     def_irq_handler	BPWM_IRQHandler

@@ -63,7 +63,7 @@ __vector_table
 	DCD     SPI0_IRQHandler
 	DCD     Default_Handler
 	DCD     Default_Handler
-	DCD     Default_Handler
+	DCD     MANCH_IRQHandler
 	DCD     I2C0_IRQHandler
 	DCD     I2C1_IRQHandler
 	DCD     Default_Handler
@@ -134,6 +134,7 @@ Reset_Handler
     PUBWEAK TMR3_IRQHandler
     PUBWEAK UART0_IRQHandler
     PUBWEAK SPI0_IRQHandler
+    PUBWEAK MANCH_IRQHandler
     PUBWEAK I2C0_IRQHandler
     PUBWEAK I2C1_IRQHandler
     PUBWEAK BPWM_IRQHandler
@@ -164,6 +165,7 @@ TMR2_IRQHandler
 TMR3_IRQHandler
 UART0_IRQHandler
 SPI0_IRQHandler
+MANCH_IRQHandler
 I2C0_IRQHandler
 I2C1_IRQHandler
 BPWM_IRQHandler

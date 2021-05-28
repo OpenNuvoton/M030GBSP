@@ -74,7 +74,7 @@ __Vectors       DCD     __initial_sp              ; Top of Stack
                 DCD     SPI0_IRQHandler
                 DCD     Default_Handler
                 DCD     Default_Handler
-                DCD     Default_Handler
+                DCD     MANCH_IRQHandler
                 DCD     I2C0_IRQHandler
                 DCD     I2C1_IRQHandler
                 DCD     Default_Handler
@@ -117,9 +117,9 @@ Reset_Handler   PROC
                 STR     R1, [R0]
 
                 ; Init POR
-				LDR     R2, =0x40000024
-				LDR     R1, =0x00005AA5
-				STR     R1, [R2]
+                LDR     R2, =0x40000024
+                LDR     R1, =0x00005AA5
+                STR     R1, [R2]
 
                 ; Lock register
                 MOVS    R1, #0
@@ -173,12 +173,13 @@ Default_Handler PROC
                 EXPORT  TMR3_IRQHandler           [WEAK]
                 EXPORT  UART0_IRQHandler          [WEAK]
                 EXPORT  SPI0_IRQHandler           [WEAK]
+                EXPORT  MANCH_IRQHandler          [WEAK]
                 EXPORT  I2C0_IRQHandler           [WEAK]
                 EXPORT  I2C1_IRQHandler           [WEAK]
                 EXPORT  BPWM_IRQHandler           [WEAK]
                 EXPORT  DAC01_IRQHandler          [WEAK]
                 EXPORT  DAC23_IRQHandler          [WEAK]
-				EXPORT  TEMP_IRQHandler           [WEAK]
+                EXPORT  TEMP_IRQHandler           [WEAK]
                 EXPORT  PDMA_IRQHandler           [WEAK]
                 EXPORT  PWRWU_IRQHandler          [WEAK]
                 EXPORT  ADC_IRQHandler            [WEAK]
@@ -197,6 +198,7 @@ TMR2_IRQHandler
 TMR3_IRQHandler
 UART0_IRQHandler
 SPI0_IRQHandler
+MANCH_IRQHandler
 I2C0_IRQHandler
 I2C1_IRQHandler
 BPWM_IRQHandler
