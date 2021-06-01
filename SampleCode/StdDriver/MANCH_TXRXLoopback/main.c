@@ -43,6 +43,8 @@
 /*---------------------------------------------------------------------------------------------------------*/
 uint8_t g_txBuf[256];
 uint8_t g_rxBuf[256];
+uint32_t g_u32TxDoneFlag;
+uint32_t g_u32RxDoneFlag;
 
 /*---------------------------------------------------------------------------------------------------------*/
 /* Function declaration                                                                                    */
@@ -51,6 +53,41 @@ void SYS_Init(void);
 void UART0_Init(void);
 
 
+void MANCH_IRQHandler(void)
+{
+    if(MANCH_IS_RXFRAME_DONE(MANCH))
+    {
+        MANCH_CLR_RXFRAME_DONE(MANCH);
+        g_u32RxDoneFlag = 1;
+        printf("RX done. \n");
+    }
+
+    if(MANCH_IS_TXFRAME_DONE(MANCH))
+    {
+        MANCH_CLR_TXFRAME_DONE(MANCH);
+        g_u32TxDoneFlag = 1;
+        printf("TX done. \n");
+    }
+
+    if(MANCH_IS_RX_OVER(MANCH))
+    {
+        MANCH_CLR_RX_OVER(MANCH);
+        printf("RX FIFO overflow. \n");
+    }
+
+    if(MANCH_IS_BIT_ERR(MANCH))
+    {
+        MANCH_CLR_BIT_ERR(MANCH);
+        printf("Bit error. \n");
+    }
+
+    if(MANCH_IS_IDLE_ERR(MANCH))
+    {
+        MANCH_CLR_IDLE_ERR(MANCH);
+        printf("Idle error. \n");
+    }
+}
+
 /*---------------------------------------------------------------------------------------------------------*/
 /*  Main Function                                                                                          */
 /*---------------------------------------------------------------------------------------------------------*/
@@ -58,7 +95,6 @@ int32_t main(void)
 {
     PDMA_T *pdma;
     MANCH_T *manch;
-
     uint32_t u32ModeSelect;
     uint32_t u32FrameByteCount;
     uint32_t u32Idle;
@@ -187,6 +223,10 @@ int32_t main(void)
         for (ii=0; ii<u32FrameByteCount; ii++)
             g_rxBuf[ii] = 0;
 
+        /* Clear global flags */
+        g_u32TxDoneFlag = 0;
+        g_u32RxDoneFlag = 0;
+
         /*--------------------------------------------------------------------------------------*/
         /* Set MANCH TX and RX related format                                                   */
         /*--------------------------------------------------------------------------------------*/
@@ -226,6 +266,11 @@ int32_t main(void)
 
         /* Clear Status register */
         MANCH_CLR_STATUS(manch);
+
+        /* Enable TX and RX done interrupt */
+        MANCH_ENABLE_TXFRAME_DONE_INT(MANCH);
+        MANCH_ENABLE_RXFRAME_DONE_INT(MANCH);
+        NVIC_EnableIRQ(MANCH_IRQn);
 
         /*--------------------------------------------------------------------------------------*/
         /* Set MANCH mode switch finally                                                        */
@@ -317,12 +362,12 @@ int32_t main(void)
         PDMA_CLR_TD_FLAG(PDMA, (1<<MANCH_RX_PDMA_CH));
 
         /* Check and clear TX_DONE finished flag */
-        while(!MANCH_IS_TXFRAME_DONE(manch));
-        MANCH_CLR_TXFRAME_DONE(manch);
+        while(!g_u32TxDoneFlag);
+        g_u32TxDoneFlag = 0;
 
         /* Check and clear RX_DONE finished flag */
-        while(!MANCH_IS_RXFRAME_DONE(manch));
-        MANCH_CLR_RXFRAME_DONE(manch);
+        while(!g_u32RxDoneFlag);
+        g_u32RxDoneFlag = 0;
 
         /* Check TX enabled */
         while(MANCH_IS_TX_ENABLED(manch));
