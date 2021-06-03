@@ -46,6 +46,9 @@ uint32_t MANCH_Open(MANCH_T *manch, uint32_t u32BusFreq)
     /* get PCLK0 clock freq (MANCH clock from PCLK0) */
     u32Clk = CLK_GetPCLK0Freq();
 
+    /* Set MANCH to NONE mode before to set related format */
+    MANCH_SetMode(manch, MANCH_NONE);
+
     /* given TBITNUM and RBITNUM default values */
     MANCH_SetTXBitNum(manch, MANCH_TBITNUM_DEFAULT);
     MANCH_SetRXBitNum(manch, MANCH_RBITNUM_DEFAULT);
