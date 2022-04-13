@@ -58,6 +58,7 @@ int32_t main(void)
 {
     PDMA_T *pdma;
     MANCH_T *manch;
+    uint32_t u32TimeOutCount;
 
     uint32_t u32ModeSelect;
     uint32_t u32FrameByteCount;
@@ -261,13 +262,32 @@ int32_t main(void)
         /* Wait DMA finished                                                                    */
         /*--------------------------------------------------------------------------------------*/
         /* Wait RX PDMA finished */
-        while((PDMA->TDSTS & (1<<MANCH_RX_PDMA_CH))==0);
+        u32TimeOutCount = SystemCoreClock;
+        while((PDMA->TDSTS & (1<<MANCH_RX_PDMA_CH))==0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Clear RX PDMA finished flag */
         PDMA_CLR_TD_FLAG(PDMA, (1<<MANCH_RX_PDMA_CH));
 
         /* Check and clear RX_DONE finished flag */
-        while(!MANCH_IS_RXFRAME_DONE(manch));
+        u32TimeOutCount = SystemCoreClock;
+        while(!MANCH_IS_RXFRAME_DONE(manch))
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
+
         MANCH_CLR_RXFRAME_DONE(manch);
 
         /* Check received data */

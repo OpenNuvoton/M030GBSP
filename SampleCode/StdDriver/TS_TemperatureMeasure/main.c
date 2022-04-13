@@ -53,6 +53,7 @@ int main(void)
 {
     uint8_t u8Option;
     uint32_t u32digiPart, u32deciPart;
+    uint32_t u32TimeOutCount;
 
     /* Unlock protected registers */
     SYS_UnlockReg();
@@ -101,7 +102,16 @@ int main(void)
         TS_TRIGGER();
 
         /* Wait to transform completely */
-        while(!done);
+        u32TimeOutCount = SystemCoreClock;
+        while(!done)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Read temperature data */
         if (u32tempData & 0x800)

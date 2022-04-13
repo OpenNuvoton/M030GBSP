@@ -221,28 +221,29 @@ void Manchester_Encode_Init(void)
 
 void add_crc(uint8_t* buf)
 {
-	int i;
+    int i;
 #ifdef OPT_ADD_CRC_BY_PDMA
-	uint8_t* ptr;
+    uint8_t* ptr;
 #endif
-	
+    uint32_t u32TimeOutCount;
+
     /* Configure CRC, seed is X8+X5+X4+1 */
     CRC_Open(CRC_8, 0, SEED_X8_X5_X4_1, CRC_WDATA_8);
 
-	/* given information lenght */
+    /* given information lenght */
     buf[7] = MSG_LENGTH;
 
 #ifdef OPT_ADD_CRC_BY_PDMA
-	ptr = buf;
+    ptr = buf;
 
     /* Start to caluculate CRC-8 checksum */
-	buf += PREAMBLE_LENGTH;
+    buf += PREAMBLE_LENGTH;
     for(i = 0; i < MSG_BEFORE_CRC; i++)
     {
         CRC_WRITE_DATA(*buf);
-		buf++;
+        buf++;
     }
-	buf++;
+    buf++;
 
     /* Open Channel PDMA_ENCODE_CRC_CH */
     PDMA_Open(PDMA,1 << PDMA_ENCODE_CRC_CH);
@@ -259,13 +260,22 @@ void add_crc(uint8_t* buf)
     PDMA_Trigger(PDMA, PDMA_ENCODE_CRC_CH);
 
     /* Waiting for transfer done */
-    while(!((PDMA_GET_TD_STS(PDMA)&(PDMA_TDSTS_TDIF0_Msk<<PDMA_ENCODE_CRC_CH))));
+    while(!((PDMA_GET_TD_STS(PDMA)&(PDMA_TDSTS_TDIF0_Msk<<PDMA_ENCODE_CRC_CH))))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nTimeout is happened, please check if something is wrong. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
+
     /* Clear transfer done flag of channel 5 */
     PDMA_CLR_TD_FLAG(PDMA, (PDMA_TDSTS_TDIF0_Msk<<PDMA_ENCODE_CRC_CH));
 
     /* Set CRC checksum to buffer */
-	ptr += PREAMBLE_LENGTH+MSG_BEFORE_CRC;
-	*ptr = CRC_GetChecksum();
+    ptr += PREAMBLE_LENGTH+MSG_BEFORE_CRC;
+    *ptr = CRC_GetChecksum();
 
 #else
     /* Start to caluculate CRC-8 checksum */
@@ -273,7 +283,7 @@ void add_crc(uint8_t* buf)
     {
         CRC_WRITE_DATA(buf[i+PREAMBLE_LENGTH]);
     }
-	
+
     for(i = 0; i < MSG_LENGTH; i++)
     {
         CRC_WRITE_DATA(buf[i+PREAMBLE_LENGTH+MSG_BEFORE_CRC+1]);

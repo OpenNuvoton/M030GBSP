@@ -95,6 +95,7 @@ int32_t main(void)
 {
     PDMA_T *pdma;
     MANCH_T *manch;
+    uint32_t u32TimeOutCount;
     uint32_t u32ModeSelect;
     uint32_t u32FrameByteCount;
     uint32_t u32Idle;
@@ -350,10 +351,28 @@ int32_t main(void)
         /* Wait DMA finished                                                                    */
         /*--------------------------------------------------------------------------------------*/
         /* Wait TX PDMA finished */
-        while((PDMA_GET_TD_STS(PDMA) & (1<<MANCH_TX_PDMA_CH))==0);
+        u32TimeOutCount = SystemCoreClock;
+        while((PDMA_GET_TD_STS(PDMA) & (1<<MANCH_TX_PDMA_CH))==0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Wait RX PDMA finished */
-        while((PDMA->TDSTS & (1<<MANCH_RX_PDMA_CH))==0);
+        u32TimeOutCount = SystemCoreClock;
+        while((PDMA->TDSTS & (1<<MANCH_RX_PDMA_CH))==0)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Clear TX PDMA finished flag */
         PDMA_CLR_TD_FLAG(PDMA, (1<<MANCH_TX_PDMA_CH));
@@ -362,15 +381,42 @@ int32_t main(void)
         PDMA_CLR_TD_FLAG(PDMA, (1<<MANCH_RX_PDMA_CH));
 
         /* Check and clear TX_DONE finished flag */
-        while(!g_u32TxDoneFlag);
+        u32TimeOutCount = SystemCoreClock;
+        while(!g_u32TxDoneFlag)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
         g_u32TxDoneFlag = 0;
 
         /* Check and clear RX_DONE finished flag */
-        while(!g_u32RxDoneFlag);
+        u32TimeOutCount = SystemCoreClock;
+        while(!g_u32RxDoneFlag)
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
         g_u32RxDoneFlag = 0;
 
         /* Check TX enabled */
-        while(MANCH_IS_TX_ENABLED(manch));
+        u32TimeOutCount = SystemCoreClock;
+        while(MANCH_IS_TX_ENABLED(manch))
+        {
+            if(u32TimeOutCount == 0)
+            {
+                printf("\nTimeout is happened, please check if something is wrong. \n");
+                while(1);
+            }
+            u32TimeOutCount--;
+        }
 
         /* Compare received data */
         pu8tx = g_txBuf;

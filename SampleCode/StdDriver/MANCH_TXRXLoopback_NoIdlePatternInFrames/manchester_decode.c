@@ -76,9 +76,9 @@ void Timer2_Init(void)
 
 void TMR2_IRQHandler(void)
 {
-	/* clear Timer1 interrupt flag */
+    /* clear Timer1 interrupt flag */
     TIMER_ClearIntFlag(TIMER2);
-    
+
     Rx_Done_Process();
 }
 
@@ -112,7 +112,7 @@ void Manch_Receive_By_Software(uint32_t u32Time)
         {
             g_u8RxStatus = 0;
             NVIC_DisableIRQ(TMR0_IRQn);
-            
+
             TIMER_Start(TIMER2);
             Timer_Decode_Capture_Set(TIMER_CAPTURE_FALLING_AND_RISING_EDGE);
             Timer_PDMA_Enable();
@@ -126,7 +126,7 @@ void Manch_Receive_By_Software(uint32_t u32Time)
 }
 
 void Timer_Decode_Init(void)
-{    
+{
     /* Enable Timer1 event counter input and external capture function */
     TIMER_Open(TIMER0, TIMER_CONTINUOUS_MODE, 1);
     TIMER_SET_PRESCALE_VALUE(TIMER0, 47);   /* 1 MHz */
@@ -142,12 +142,12 @@ void Timer_Decode_Init(void)
 void TMR0_IRQHandler(void)
 {
     uint32_t u32Time = 0;
-    
+
     if(TIMER_GetCaptureIntFlag(TIMER0) == 1)
     {
         /* Clear Timer1 capture trigger interrupt flag */
         TIMER_ClearCaptureIntFlag(TIMER0);
-        
+
         u32Time = TIMER_GetCaptureData(TIMER0);
 
         /* Check if Preamble pattern 0x7E is received */
@@ -184,7 +184,7 @@ void MANCH_Init(void)
     /* Set TX/RX polarity */
     MANCH_TX_NOT_INVERTED(MANCH);
     MANCH_RX_NOT_INVERTED(MANCH);
-    
+
     /* Disable upload bit number */
     MANCH_DISABLE_RX_UPLOAD_BITNUM_EACH_FRAME(MANCH);
     MANCH_DISABLE_RX_UPLOAD_BITNUM_EACH_BYTE(MANCH);
@@ -203,12 +203,12 @@ void MANCH_Init(void)
     /*--------------------------------------------------------------------------------------*/
     /* Set selected MANCH mode */
     MANCH_SetMode(MANCH, MANCH_MODE_OTHER);
-    
+
     MANCH_ENABLE_RXFRAME_DONE_INT(MANCH);
     MANCH_ENABLE_RX_OVER_INT(MANCH);
     MANCH_ENABLE_BIT_ERR_INT(MANCH);
     MANCH_ENABLE_IDLE_ERR_INT(MANCH);
-    
+
     NVIC_EnableIRQ(MANCH_IRQn);
 }
 
@@ -217,7 +217,7 @@ void PDMA_Rx_Init(void)
     /* Enable PDMA channels */
     PDMA_Open(PDMA, 1<<PDMA_DECODE_CH0);
     PDMA_SetTransferMode(PDMA, PDMA_DECODE_CH0, PDMA_TMR0, TRUE, (uint32_t)&PDMA_RX0_DESC[0]);
-    
+
     PDMA_RX0_DESC[0].ctl = ((1 - 1) << PDMA_DSCT_CTL_TXCNT_Pos) | PDMA_WIDTH_32 | PDMA_SAR_FIX | PDMA_DAR_FIX | PDMA_REQ_SINGLE | PDMA_OP_SCATTER;
     PDMA_RX0_DESC[0].src = (uint32_t)&g_u32DecodeTxBuf[0];
     PDMA_RX0_DESC[0].dest = (uint32_t)&DECODE_TXD;
@@ -227,16 +227,16 @@ void PDMA_Rx_Init(void)
     PDMA_RX0_DESC[1].src = (uint32_t)&g_u32DecodeTxBuf[1];
     PDMA_RX0_DESC[1].dest = (uint32_t)&DECODE_TXD;
     PDMA_RX0_DESC[1].offset = (uint32_t)&PDMA_RX0_DESC[0] - (PDMA->SCATBA);   //link to first description
-    
+
     /* Disable RX DMA */
     MANCH_DISABLE_RX_DMA(MANCH);
-    
+
     /*=======================================================================
     MANCH RX PDMA channel configuration:
     ========================================================================*/
     PDMA_Open(PDMA, 1<<PDMA_DECODE_CH1);
     PDMA_SetTransferMode(PDMA, PDMA_DECODE_CH1, PDMA_MANCH_RX, TRUE, (uint32_t)&PDMA_RX1_DESC[0]);
-    
+
     PDMA_RX1_DESC[0].ctl = ((FRAME_LENGTH - 2) << PDMA_DSCT_CTL_TXCNT_Pos) | PDMA_WIDTH_8 | PDMA_SAR_FIX | PDMA_DAR_INC | PDMA_REQ_SINGLE | PDMA_OP_SCATTER;
     PDMA_RX1_DESC[0].src = (uint32_t)&MANCH->RXDAT;
     PDMA_RX1_DESC[0].dest = (uint32_t)g_u8ManchRxBuf[0];
@@ -246,9 +246,9 @@ void PDMA_Rx_Init(void)
     PDMA_RX1_DESC[1].src = (uint32_t)&MANCH->RXDAT;
     PDMA_RX1_DESC[1].dest = (uint32_t)g_u8ManchRxBuf[1];
     PDMA_RX1_DESC[1].offset = (uint32_t)&PDMA_RX1_DESC[0] - (PDMA->SCATBA);   //link to first description
-    
+
     /* Enable RX DMA */
-    MANCH_ENABLE_RX_DMA(MANCH);    
+    MANCH_ENABLE_RX_DMA(MANCH);
 }
 
 void MANCH_IRQHandler(void)
@@ -260,25 +260,25 @@ void MANCH_IRQHandler(void)
         g_u8ManchRxId = g_u8ManchRxId^1;
         Rx_Done_Process();
     }
-    
+
     if(MANCH_IS_TXFRAME_DONE(MANCH))
     {
         MANCH_CLR_TXFRAME_DONE(MANCH);
         printf("Tx done. \n");
     }
-    
+
     if(MANCH_IS_RX_OVER(MANCH))
     {
         MANCH_CLR_RX_OVER(MANCH);
         printf("RX FIFO overflow. \n");
     }
-    
+
     if(MANCH_IS_BIT_ERR(MANCH))
     {
         MANCH_CLR_BIT_ERR(MANCH);
         printf("Bit error. \n");
     }
-    
+
     if(MANCH_IS_IDLE_ERR(MANCH))
     {
         MANCH_CLR_IDLE_ERR(MANCH);
@@ -298,37 +298,38 @@ void Manchester_Decode_Init(void)
 
 int check_crc(uint8_t* buf)
 {
-	uint8_t i, j=0;
-	uint8_t buf_checksum, checksum;
-	
+    uint8_t i, j=0;
+    uint8_t buf_checksum, checksum;
+    uint32_t u32TimeOutCount;
+
     /* Configure CRC, seed is X8+X5+X4+1 */
     CRC_Open(CRC_8, 0, SEED_X8_X5_X4_1, CRC_WDATA_8);
 
     /* Check the first non-Preamble data */
-	for (i=0; i<FRAME_LENGTH; i++) 
-	{
-		if (buf[i] != PREAMBLE)
-		{
-			j = i;
-			break;
-		}
-		else
-			j++;
-	}
-	
+    for (i=0; i<FRAME_LENGTH; i++)
+    {
+        if (buf[i] != PREAMBLE)
+        {
+            j = i;
+            break;
+        }
+        else
+            j++;
+    }
+
 #ifdef OPT_CHECK_CRC_BY_PDMA
-	buf += j;
+    buf += j;
 
     /* Start to caluculate CRC-8 checksum */
     for(i = 0; i < MSG_BEFORE_CRC; i++)
     {
         CRC_WRITE_DATA(*buf);
-		buf++;
+        buf++;
     }
-    
-   	/* Store checksum in buffer */
-	buf_checksum = *buf;
-	buf++;
+
+    /* Store checksum in buffer */
+    buf_checksum = *buf;
+    buf++;
 
     /* Open Channel PDMA_DECODE_CRC_CH */
     PDMA_Open(PDMA,1 << PDMA_DECODE_CRC_CH);
@@ -345,7 +346,16 @@ int check_crc(uint8_t* buf)
     PDMA_Trigger(PDMA, PDMA_DECODE_CRC_CH);
 
     /* Waiting for transfer done */
-    while(!((PDMA_GET_TD_STS(PDMA)&(PDMA_TDSTS_TDIF0_Msk<<PDMA_DECODE_CRC_CH))));
+    while(!((PDMA_GET_TD_STS(PDMA)&(PDMA_TDSTS_TDIF0_Msk<<PDMA_DECODE_CRC_CH))))
+    {
+        if(u32TimeOutCount == 0)
+        {
+            printf("\nTimeout is happened, please check if something is wrong. \n");
+            while(1);
+        }
+        u32TimeOutCount--;
+    }
+
     /* Clear transfer done flag */
     PDMA_CLR_TD_FLAG(PDMA, (PDMA_TDSTS_TDIF0_Msk<<PDMA_DECODE_CRC_CH));
 
@@ -358,29 +368,29 @@ int check_crc(uint8_t* buf)
     for(i = 0; i < MSG_BEFORE_CRC; i++)
     {
         CRC_WRITE_DATA(buf[j]);
-		j++;
+        j++;
     }
-	
-	/* Store checksum in buffer */
-	buf_checksum = buf[j];
-	j++;
-	
+
+    /* Store checksum in buffer */
+    buf_checksum = buf[j];
+    j++;
+
     /* Continue to calculate CRC checksum in buffer */
     for(i = 0; i < MSG_LENGTH; i++)
     {
         CRC_WRITE_DATA(buf[j]);
-		j++;
+        j++;
     }
-	
+
     /* Get CRC-8 checksum value */
     checksum = CRC_GetChecksum();
 #endif
-	
+
     /* Compare whether CRC is correct or not */
-	if (checksum == buf_checksum)
-		return 0;
-	else
-		return -1;
+    if (checksum == buf_checksum)
+        return 0;
+    else
+        return -1;
 }
 
 #ifdef OPT_REARRANGE_RX
@@ -389,18 +399,18 @@ int rearrange_rx(uint8_t* bufSrc, uint8_t* bufDest)
     uint8_t i;
 
     /* Check the first non-Preamble data */
-	for (i=0; i<FRAME_LENGTH; i++) 
-	{
-		if (*bufSrc != PREAMBLE)
-			break;
-		else
-			bufSrc++;
-	}
-	
+    for (i=0; i<FRAME_LENGTH; i++)
+    {
+        if (*bufSrc != PREAMBLE)
+            break;
+        else
+            bufSrc++;
+    }
+
     /* Given 0x7E to rearranged buffer */
     memset(bufDest, PREAMBLE, PREAMBLE_LENGTH);
     bufDest += PREAMBLE_LENGTH;
-    
+
     /* Copy non-0x7E to rearranged buffer */
     memcpy(bufDest, bufSrc, FRAME_LENGTH-PREAMBLE_LENGTH-1);
 

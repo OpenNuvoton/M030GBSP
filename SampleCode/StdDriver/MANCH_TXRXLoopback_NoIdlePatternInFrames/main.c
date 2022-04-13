@@ -108,7 +108,7 @@ int32_t main(void)
     uint8_t i = 0;
     uint8_t j = 0;
     uint8_t u8Id = 0;
-    
+
     /* Unlock protected registers */
     SYS_UnlockReg();
 
@@ -141,24 +141,24 @@ int32_t main(void)
         u8ManchTxBuf[i] = i-4;
     }
 
-	add_crc(u8ManchTxBuf);
+    add_crc(u8ManchTxBuf);
 
     u8ManchTxBuf[63] = 0x7E;
-    
+
     Encode_Buf_Fill(u8ManchTxBuf, 0);
     Encode_Buf_Fill(u8ManchTxBuf, 1);
-    
+
     GPIO_SetMode(PB, BIT5, GPIO_MODE_OUTPUT);
-    
+
     Manchester_Encode_Init();
     Manchester_Decode_Init();
-    
+
     while(1)
     {
         if(g_u8ManchTxDoneFlag == 1)
         {
             g_u8ManchTxDoneFlag = 0;
-            
+
             for(i=0; i<4; i++)
             {
                 u8ManchTxBuf[i] = 0x7E;
@@ -170,17 +170,17 @@ int32_t main(void)
             }
             u8ManchTxBuf[63] = 0x7E;
 
-			add_crc(u8ManchTxBuf);
+            add_crc(u8ManchTxBuf);
             j++;
-            
+
             Encode_Buf_Fill(u8ManchTxBuf, u8Id);
             u8Id ^= 1;
         }
-        
+
         if(g_u8ManchRxDoneFlag == 1)
         {
             g_u8ManchRxDoneFlag = 0;
-            
+
             printf("\n\nRX: ");
             for(i=0; i<63; i++)
             {
@@ -188,10 +188,10 @@ int32_t main(void)
             }
             printf("\n\n");
 
-			if (!check_crc(&g_u8ManchRxBuf[g_u8ManchRxId^1][0]))
-				printf("-> CRC: OK \n");
-			else
-				printf("-> CRC: Fail \n");
+            if (!check_crc(&g_u8ManchRxBuf[g_u8ManchRxId^1][0]))
+                printf("-> CRC: OK \n");
+            else
+                printf("-> CRC: Fail \n");
 
     #ifdef OPT_REARRANGE_RX
             printf("\n\nRX_re: ");
@@ -202,12 +202,12 @@ int32_t main(void)
             }
             printf("\n\n");
 
-			if (!check_crc(&g_u8ManchRxBuf[g_u8ManchRxId^1][0]))
+            if (!check_crc(&g_u8ManchRxBuf[g_u8ManchRxId^1][0]))
             {
-				printf("-> CRC: OK \n");
+                printf("-> CRC: OK \n");
             }
-			else
-				printf("-> CRC: Fail \n");
+            else
+                printf("-> CRC: Fail \n");
     #endif
 
         }
