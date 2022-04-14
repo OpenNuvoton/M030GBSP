@@ -72,27 +72,55 @@ int32_t main(void)
 
     /* FMC_ReadCID */
     u32Data = FMC_ReadCID();
-    printf("  Company ID ............................ [0x%X]\n", u32Data);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadCID failed!\n");
+        goto lexit;
+    }
+    printf("  Company ID ............................ [0x%08X]\n", u32Data);
 
     /* FMC_ReadPID */
     u32Data = FMC_ReadPID();
-    printf("  Product ID ............................ [0x%X]\n", u32Data);
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_ReadPID failed!\n");
+        goto lexit;
+    }
+    printf("  Product ID ............................ [0x%08X]\n", u32Data);
 
     /* Read User Configuration CONFIG0 */
-    printf("  User Config 0 ......................... [0x%X]\n", FMC_Read(FMC_CONFIG_BASE));
+    printf("  User Config 0 ......................... [0x%08X]\n", FMC_Read(FMC_CONFIG_BASE));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE) failed!\n");
+        goto lexit;
+    }
     /* Read User Configuration CONFIG1 */
-    printf("  User Config 1 ......................... [0x%X]\n", FMC_Read(FMC_CONFIG_BASE + 4));
+    printf("  User Config 1 ......................... [0x%08X]\n", FMC_Read(FMC_CONFIG_BASE + 4));
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Read(FMC_CONFIG_BASE+4) failed!\n");
+        goto lexit;
+    }
 
-    printf("\nLDROM (0x100000 ~ 0x%X) CRC32 checksum =>  ", (FMC_LDROM_BASE + FMC_MIN_LDROM_SIZE));
+    printf("\nLDROM (0x100000 ~ 0x%x) CRC32 checksum =>  ", (FMC_LDROM_BASE + FMC_MIN_LDROM_SIZE));
 
     /* Erase the first page of LDROM */
     FMC_ENABLE_LD_UPDATE();
 
     FMC_Erase(0x100000);
-
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Erase failed!\n");
+        goto lexit;
+    }
     /* Write one word on LD */
     FMC_Write(0x100000, 0x55AABBCC);
-
+    if (g_FMC_i32ErrCode != 0)
+    {
+        printf("FMC_Write failed!\n");
+        goto lexit;
+    }
     /*
      *  Request FMC hardware to run CRC32 calculation on LDROM.
      */
