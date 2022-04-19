@@ -16,6 +16,7 @@
   @{
 */
 
+int32_t g_I2C_i32ErrCode = 0;       /*!< I2C global error code */
 
 /** @addtogroup I2C_EXPORTED_FUNCTIONS I2C Exported Functions
   @{
@@ -487,12 +488,24 @@ void I2C_DisableTwoBufferMode(I2C_T *i2c)
 uint8_t I2C_WriteByte(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t data)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -519,16 +532,35 @@ uint8_t I2C_WriteByte(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t data)
         case 0x38:                                         /* Arbitration Lost */
         default:                                           /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);      /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                  /* Write controlbit to I2C_CTL register */
+    }
 
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return (u8Err | u8Xfering);                            /* return (Success)/(Fail) status */
@@ -552,12 +584,24 @@ uint32_t I2C_WriteMultiBytes(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t data[], ui
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     uint32_t u32txLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                        /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -587,15 +631,35 @@ uint32_t I2C_WriteMultiBytes(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t data[], ui
         case 0x38:                                         /* Arbitration Lost */
         default:                                           /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);      /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                  /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32txLen;                                       /* Return bytes length that have been transmitted */
@@ -620,12 +684,24 @@ uint8_t I2C_WriteByteOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr,
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     uint32_t u32txLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                        /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -661,15 +737,35 @@ uint8_t I2C_WriteByteOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr,
         case 0x38:                                         /* Arbitration Lost */
         default:                                           /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);      /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                  /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return (u8Err | u8Xfering);                            /* return (Success)/(Fail) status */
@@ -695,12 +791,24 @@ uint32_t I2C_WriteMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8Da
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     uint32_t u32txLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                           /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -733,15 +841,35 @@ uint32_t I2C_WriteMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8Da
         case 0x38:                                           /* Arbitration Lost */
         default:                                             /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);        /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                    /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32txLen;                                         /* Return bytes length that have been transmitted */
@@ -766,12 +894,24 @@ uint8_t I2C_WriteByteTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAd
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Addr = 1U, u8Ctrl = 0U;
     uint32_t u32txLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                                     /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -812,15 +952,35 @@ uint8_t I2C_WriteByteTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAd
         case 0x38:                                                      /* Arbitration Lost */
         default:                                                        /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                   /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                               /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return (u8Err | u8Xfering);                                         /* return (Success)/(Fail) status */
@@ -846,12 +1006,24 @@ uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u1
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Addr = 1U, u8Ctrl = 0U;
     uint32_t u32txLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                                     /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -889,15 +1061,35 @@ uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u1
         case 0x38:                                                      /* Arbitration Lost */
         default:                                                        /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                   /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                               /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32txLen;                                                    /* Return bytes length that have been transmitted */
@@ -917,12 +1109,24 @@ uint32_t I2C_WriteMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u1
 uint8_t I2C_ReadByte(I2C_T *i2c, uint8_t u8SlaveAddr)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Ctrl = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                          /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -949,15 +1153,35 @@ uint8_t I2C_ReadByte(I2C_T *i2c, uint8_t u8SlaveAddr)
         case 0x38:                                           /* Arbitration Lost */
         default:                                             /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);        /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                    /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     if (u8Err)
@@ -983,12 +1207,24 @@ uint32_t I2C_ReadMultiBytes(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t rdata[], ui
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     uint32_t u32rxLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                          /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -1029,15 +1265,35 @@ uint32_t I2C_ReadMultiBytes(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t rdata[], ui
         case 0x38:                                                  /* Arbitration Lost */
         default:                                                    /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);               /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                           /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32rxLen;                                                /* Return bytes length that have been received */
@@ -1060,12 +1316,24 @@ uint32_t I2C_ReadMultiBytes(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t rdata[], ui
 uint8_t I2C_ReadByteOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Ctrl = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                          /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -1111,15 +1379,35 @@ uint8_t I2C_ReadByteOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8DataAddr)
         case 0x38:                                           /* Arbitration Lost */
         default:                                             /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);        /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                    /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     if (u8Err)
@@ -1147,12 +1435,24 @@ uint32_t I2C_ReadMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8Dat
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Ctrl = 0U;
     uint32_t u32rxLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                          /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -1208,15 +1508,35 @@ uint32_t I2C_ReadMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8Dat
         case 0x38:                                           /* Arbitration Lost */
         default:                                             /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);        /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                    /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32rxLen;                                         /* Return bytes length that have been received */
@@ -1238,12 +1558,24 @@ uint32_t I2C_ReadMultiBytesOneReg(I2C_T *i2c, uint8_t u8SlaveAddr, uint8_t u8Dat
 uint8_t I2C_ReadByteTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAddr)
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, rdata = 0U, u8Addr = 1U, u8Ctrl = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                                   /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -1296,15 +1628,35 @@ uint8_t I2C_ReadByteTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16DataAdd
         case 0x38:                                                    /* Arbitration Lost */
         default:                                                      /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                 /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                             /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     if (u8Err)
@@ -1332,12 +1684,24 @@ uint32_t I2C_ReadMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16
 {
     uint8_t u8Xfering = 1U, u8Err = 0U, u8Addr = 1U, u8Ctrl = 0U;
     uint32_t u32rxLen = 0U;
+    uint32_t u32TimeOutCount;
+
+    g_I2C_i32ErrCode = 0;
 
     I2C_START(i2c);                                                   /* Send START */
 
     while (u8Xfering && (u8Err == 0U))
     {
-        I2C_WAIT_READY(i2c) {}
+        u32TimeOutCount = SystemCoreClock;
+        I2C_WAIT_READY(i2c)
+        {
+            u32TimeOutCount--;
+            if(u32TimeOutCount == 0)
+            {
+                g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                break;
+            }
+        }
 
         switch (I2C_GET_STATUS(i2c))
         {
@@ -1404,15 +1768,35 @@ uint32_t I2C_ReadMultiBytesTwoRegs(I2C_T *i2c, uint8_t u8SlaveAddr, uint16_t u16
         case 0x38:                                                    /* Arbitration Lost */
         default:                                                      /* Unknow status */
             I2C_SET_CONTROL_REG(i2c, I2C_CTL_STO_SI);                 /* Clear SI and send STOP */
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+
+            u32TimeOutCount = SystemCoreClock;
+            while(i2c->CTL0 & I2C_CTL0_STO_Msk)
+            {
+                u32TimeOutCount--;
+                if(u32TimeOutCount == 0)
+                {
+                    g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+                    break;
+                }
+            }
+
             u8Ctrl = I2C_CTL_SI;
             u8Err = 1U;
             break;
         }
 
         I2C_SET_CONTROL_REG(i2c, u8Ctrl);                             /* Write controlbit to I2C_CTL register */
-        if(u8Ctrl == I2C_CTL_STO_SI)
-            while(i2c->CTL0 & I2C_CTL0_STO_Msk);
+    }
+
+    u32TimeOutCount = SystemCoreClock;
+    while ((i2c)->CTL0 & I2C_CTL0_STO_Msk)
+    {
+        u32TimeOutCount--;
+        if(u32TimeOutCount == 0)
+        {
+            g_I2C_i32ErrCode = I2C_TIMEOUT_ERR;
+            break;
+        }
     }
 
     return u32rxLen;                                                  /* Return bytes length that have been received */
