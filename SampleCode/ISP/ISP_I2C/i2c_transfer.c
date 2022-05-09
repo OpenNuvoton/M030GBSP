@@ -22,15 +22,14 @@ volatile uint8_t g_u8SlvDataLen;
 
 void I2C_Init(void)
 {
-    uint32_t u32BusClock;
     /* Reset I2C0 */
     SYS->IPRST1 |=  SYS_IPRST1_I2C0RST_Msk;
     SYS->IPRST1 &= ~SYS_IPRST1_I2C0RST_Msk;
     /* Enable I2C0 Controller */
     I2C0->CTL0 |= I2C_CTL0_I2CEN_Msk;
     /* I2C0 bus clock 100K divider setting, I2CLK = PCLK/(100K*4)-1 */
-    u32BusClock = 100000;
-    I2C0->CLKDIV = (uint32_t)(((SystemCoreClock * 10) / (u32BusClock * 4) + 5) / 10 - 1); /* Compute proper divider for I2C clock */
+    I2C1->CLKDIV = 0x77;
+
     /* Slave Address : 0x60 */
     I2C0->ADDR0 = (I2C0->ADDR0 & ~I2C_ADDR0_ADDR_Msk) | (g_u8DeviceAddr << I2C_ADDR0_ADDR_Pos);
 
