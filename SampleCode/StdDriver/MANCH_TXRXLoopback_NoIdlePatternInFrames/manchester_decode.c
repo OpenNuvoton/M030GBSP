@@ -300,7 +300,7 @@ int check_crc(uint8_t* buf)
 {
     uint8_t i, j=0;
     uint8_t buf_checksum, checksum;
-    uint32_t u32TimeOutCount;
+    uint32_t u32TimeOutCount = SystemCoreClock;
 
     /* Configure CRC, seed is X8+X5+X4+1 */
     CRC_Open(CRC_8, 0, SEED_X8_X5_X4_1, CRC_WDATA_8);

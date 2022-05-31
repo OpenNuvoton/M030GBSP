@@ -225,7 +225,7 @@ void add_crc(uint8_t* buf)
 #ifdef OPT_ADD_CRC_BY_PDMA
     uint8_t* ptr;
 #endif
-    uint32_t u32TimeOutCount;
+    uint32_t u32TimeOutCount = SystemCoreClock;
 
     /* Configure CRC, seed is X8+X5+X4+1 */
     CRC_Open(CRC_8, 0, SEED_X8_X5_X4_1, CRC_WDATA_8);
