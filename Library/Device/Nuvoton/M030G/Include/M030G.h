@@ -104,7 +104,7 @@ typedef enum IRQn
     TEMP_IRQn                 = 25,       /*!< Temperature sensor Interrupt                         */
     PDMA_IRQn                 = 26,       /*!< PDMA Interrupt                                       */
     PWRWU_IRQn                = 28,       /*!< Power Down Wake Up Interrupt                         */
-    ADC_IRQn                  = 29,       /*!< ADC Interrupt                                        */
+    ADC_IRQn                  = 29        /*!< ADC Interrupt                                        */
 } IRQn_Type;
 
 
