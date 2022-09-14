@@ -40,6 +40,12 @@ uint32_t I2C_Open(I2C_T *i2c, uint32_t u32BusClock)
     uint32_t u32Div;
     uint32_t u32Pclk;
 
+    /* M029G I2C max clock : 400 KHz */
+    if ((GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M029G) && (u32BusClock > 400000))
+    {
+        u32BusClock = 400000;
+    }
+        
     if (i2c == I2C1)
     {
         u32Pclk = CLK_GetPCLK1Freq();
@@ -214,6 +220,12 @@ uint32_t I2C_SetBusClockFreq(I2C_T *i2c, uint32_t u32BusClock)
     uint32_t u32Div;
     uint32_t u32Pclk;
 
+    /* M029G I2C max clock : 400 KHz */
+    if ((GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M029G) && (u32BusClock > 400000))
+    {
+        u32BusClock = 400000;
+    }
+    
     if (i2c == I2C1)
     {
         u32Pclk = CLK_GetPCLK1Freq();

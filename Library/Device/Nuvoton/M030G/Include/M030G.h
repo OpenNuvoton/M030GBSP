@@ -3,7 +3,7 @@
  * @version  V3.0
  * $Revision: 8 $
  * $Date: 20/06/11 3:42p $
- * @brief    M030G/M031G Series Peripheral Access Layer Header File
+ * @brief    M029G/M030G/M031G Series Peripheral Access Layer Header File
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0
@@ -11,11 +11,11 @@
  *****************************************************************************/
 
 /**
-  \mainpage NuMicro M030G/M031G Driver Reference Guide
+  \mainpage NuMicro M029G/M030G/M031G Driver Reference Guide
   *
   * <b>Introduction</b>
   *
-  * This user manual describes the usage of M030G/M031G Series MCU device driver
+  * This user manual describes the usage of M029G/M030G/M031G Series MCU device driver
   *
   * <b>Disclaimer</b>
   *
@@ -122,7 +122,7 @@ typedef enum IRQn
 /*@}*/ /* end of group CMSIS_Device */
 
 #include "core_cm0.h"                   /*!< Cortex-M0 processor and core peripherals             */
-#include "system_M030G.h"          		/*!< M030G/M031G System                                    */
+#include "system_M030G.h"          		/*!< M029G/M030G/M031G System                                    */
 
 
 #if defined ( __CC_ARM   )
@@ -494,6 +494,7 @@ typedef volatile unsigned short vu16;
 
 /* Chip Series number definitions */
 #define GET_CHIP_SERIES_NUM    ((SYS->PDID & 0xF000) >> 12)     /*!< Extract chip series number from PDID */
+#define CHIP_SERIES_NUM_M029G  (0x9UL)                          /*!< Chip series number for M029G */
 #define CHIP_SERIES_NUM_M030G  (0x0UL)                          /*!< Chip series number for M030G */
 #define CHIP_SERIES_NUM_M031G  (0x1UL)                          /*!< Chip series number for M031G */
 

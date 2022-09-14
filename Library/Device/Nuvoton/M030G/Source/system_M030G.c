@@ -3,7 +3,7 @@
  * @version  V2.00
  * $Revision: 5 $
  * $Date: 20/06/11 3:00p $
- * @brief    M030G Series System Setting Source File
+ * @brief    M029G/M030G/M031G Series System Setting Source File
  *
  * @note
  * SPDX-License-Identifier: Apache-2.0

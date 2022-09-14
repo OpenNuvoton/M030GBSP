@@ -183,7 +183,7 @@ uint32_t CLK_GetCPUFreq(void)
   */
 uint32_t CLK_SetCoreClock(uint32_t u32Hclk)
 {
-    if ((u32Hclk == FREQ_48MHZ) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M030G))
+    if ((u32Hclk == FREQ_48MHZ) || (GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M030G)||(GET_CHIP_SERIES_NUM == CHIP_SERIES_NUM_M029G))
     {
         /* Set HIRC as core clock */
         CLK->PWRCTL |= CLK_PWRCTL_HIRCEN_Msk;

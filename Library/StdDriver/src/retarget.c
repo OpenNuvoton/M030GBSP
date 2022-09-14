@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file     retarget.c
  * @version  V0.10
- * @brief    M030G/M031G series Debug Port and Semihost Setting Source File
+ * @brief    M029G/M030G/M031G series Debug Port and Semihost Setting Source File
  *
  * SPDX-License-Identifier: Apache-2.0
  * @copyright (C) 2020 Nuvoton Technology Corp. All rights reserved.
