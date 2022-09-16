@@ -365,7 +365,7 @@ void CLK_EnableXtalRC(uint32_t u32ClkMask)
 
 /**
   * @brief      Disable clock source
-  * @param[in]  u32ClkMask is clock source mask. Unused in M030G.
+  * @param[in]  u32ClkMask is clock source mask. Unused in M030G Series.
   * @return     None
   * @details    This function disable clock source. \n
   *             The register write-protection function should be disabled before using this function.
