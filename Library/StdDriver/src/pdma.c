@@ -265,7 +265,7 @@ void PDMA_DisableTimeout(PDMA_T *pdma, uint32_t u32Mask)
  * @return      None
  *
  * @details     This function set the timeout count.
- * @note        M030G only supported channel 0/1.
+ * @note        M030G series only supported channel 0/1.
  */
 void PDMA_SetTimeOut(PDMA_T *pdma, uint32_t u32Ch, uint32_t u32OnOff, uint32_t u32TimeOutCnt)
 {
