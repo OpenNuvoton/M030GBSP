@@ -15,6 +15,7 @@
 #include "NuMicro.h"
 
 
+extern void *__Vectors;                   /* see startup file */
 
 /*----------------------------------------------------------------------------
   Clock Variable definitions

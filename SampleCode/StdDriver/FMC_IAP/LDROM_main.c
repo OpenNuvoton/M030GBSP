@@ -124,11 +124,11 @@ int main()
 
     UART_Init();                      /* Initialize UART0 */
 
-    PutString("\n\n");
-    PutString("+------------------------------------+\n");
-    PutString("|      M030G FMC IAP Sample Code     |\n");
-    PutString("|            [LDROM code]            |\n");
-    PutString("+------------------------------------+\n");
+//  PutString("\n\n");
+//  PutString("+------------------------------------+\n");
+//  PutString("|      M030G FMC IAP Sample Code     |\n");
+//  PutString("|            [LDROM code]            |\n");
+//  PutString("+------------------------------------+\n");
 
     SYS_UnlockReg();                   /* Unlock protected registers */
 
@@ -137,7 +137,7 @@ int main()
     PutString("\n\nPress any key to branch to APROM...\n");
     GetChar();                         /* block on waiting for any one character input from UART0 */
 
-    PutString("\n\nChange VECMAP and branch to APROM...\n");
+//    PutString("\n\nChange VECMAP and branch to APROM...\n");
     while (!(UART0->FIFOSTS & UART_FIFOSTS_TXEMPTY_Msk));       /* wait until UART0 TX FIFO is empty */
 
     /*  NOTE!
