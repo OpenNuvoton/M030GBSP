@@ -3,7 +3,7 @@
  * @version  V3.00
  * $Revision: 3 $
  * $Date: 20/06/10 9:36a $
- * @brief    Show how to wake up system form Power-down mode by UART interrupt.
+ * @brief    Show how to wake up system from Power-down mode by UART interrupt.
  * @note
  * SPDX-License-Identifier: Apache-2.0
  * Copyright (C) 2016 Nuvoton Technology Corp. All rights reserved.
@@ -162,7 +162,7 @@ void UART0_IRQHandler(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_CTSWakeUp(void)
 {
-    /* Enable UART nCTS wake-up frunction */
+    /* Enable UART nCTS wake-up function */
     UART0->WKCTL |= UART_WKCTL_WKCTSEN_Msk;
 
     printf("System enter to Power-down mode.\n");
@@ -175,7 +175,7 @@ void UART_CTSWakeUp(void)
 /*---------------------------------------------------------------------------------------------------------*/
 void UART_DataWakeUp(void)
 {
-    /* Enable UART data wake-up frunction */
+    /* Enable UART data wake-up function */
     UART0->WKCTL |= UART_WKCTL_WKDATEN_Msk;
 
     /* Set UART data wake-up start bit compensation value.
