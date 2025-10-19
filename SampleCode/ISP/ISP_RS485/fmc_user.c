@@ -18,7 +18,7 @@ int FMC_Proc(uint32_t u32Cmd, uint32_t addr_start, uint32_t addr_end, uint32_t *
 {
     unsigned int u32Addr, Reg;
 
-    for (u32Addr = addr_start; u32Addr < addr_end; data++)
+    for (u32Addr = addr_start; u32Addr < addr_end; )
     {
         FMC->ISPCMD = u32Cmd;
         FMC->ISPADDR = u32Addr;
@@ -53,6 +53,7 @@ int FMC_Proc(uint32_t u32Cmd, uint32_t addr_start, uint32_t addr_end, uint32_t *
         else
         {
             u32Addr += 4;
+            data++;
         }
     }
 
