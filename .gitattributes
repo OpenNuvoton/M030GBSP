@@ -1,1 +1,4 @@
 Document/SBOM/** -text
+M030GBSP_Product_SBOM_cdx.json -text
+M030GBSP_TestSample_SBOM_cdx.json -text
+M030GBSP_SBOM_Manifest.json -text
