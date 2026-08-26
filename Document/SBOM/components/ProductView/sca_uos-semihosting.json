@@ -1,0 +1,86 @@
+{
+    "components":  [
+                       {
+                           "type":  "library",
+                           "bom-ref":  "m030g:manual:uos-semihosting",
+                           "name":  "uOS++ III Semihosting and Syscall Support",
+                           "version":  "NOASSERTION",
+                           "scope":  "required",
+                           "author":  "Liviu Ionescu and newlib contributors",
+                           "description":  "Vendored GCC semihosting and syscall support files with uOS++ III and newlib-derived content. Exact upstream revision and complete license expression require manual review.",
+                           "licenses":  [
+                                            {
+                                                "license":  {
+                                                                "name":  "NOASSERTION"
+                                                            }
+                                            }
+                                        ],
+                           "properties":  [
+                                              {
+                                                  "name":  "src_path",
+                                                  "value":  "Library/Device/Nuvoton/M030G/Source/GCC"
+                                              },
+                                              {
+                                                  "name":  "integration",
+                                                  "value":  "vendored_source_files"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-origin",
+                                                  "value":  "third-party-mixed-origin"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-source",
+                                                  "value":  "uOS++ III and newlib-derived content"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-file",
+                                                  "value":  "Document/SBOM/components/ProductView/sca_uos-semihosting.json"
+                                              },
+                                              {
+                                                  "name":  "bsp:evidence-path",
+                                                  "value":  "Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c; Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h"
+                                              },
+                                              {
+                                                  "name":  "bsp:included-paths",
+                                                  "value":  "Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c; Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h"
+                                              },
+                                              {
+                                                  "name":  "bsp:file-sha256:_syscalls.c",
+                                                  "value":  "bc01f2e8a9b9d568fa40c74d75194c919eaf4859da7cbf352a2a3005c396719f"
+                                              },
+                                              {
+                                                  "name":  "bsp:file-sha256:semihosting.h",
+                                                  "value":  "1f28eb5ea069c0bcade5ef4240aaa28687788c3747e5bf226cd37814955420b4"
+                                              },
+                                              {
+                                                  "name":  "bsp:file-length:_syscalls.c",
+                                                  "value":  "25007"
+                                              },
+                                              {
+                                                  "name":  "bsp:file-length:semihosting.h",
+                                                  "value":  "3759"
+                                              },
+                                              {
+                                                  "name":  "bsp:review-required",
+                                                  "value":  "true"
+                                              },
+                                              {
+                                                  "name":  "bsp:review-reason",
+                                                  "value":  "Exact upstream revision and complete license expression are not identified; _syscalls.c contains newlib-derived portions with incomplete GPL wording."
+                                              },
+                                              {
+                                                  "name":  "bsp:license-status",
+                                                  "value":  "unresolved"
+                                              },
+                                              {
+                                                  "name":  "bsp:license-evidence",
+                                                  "value":  "Embedded source comments in _syscalls.c and semihosting.h; manual review recorded in sca_uos-semihosting.md"
+                                              },
+                                              {
+                                                  "name":  "bsp:version-evidence",
+                                                  "value":  "No exact upstream version, tag, or commit is asserted"
+                                              }
+                                          ]
+                       }
+                   ]
+}
