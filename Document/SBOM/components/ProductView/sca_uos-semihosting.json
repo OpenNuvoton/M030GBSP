@@ -79,8 +79,22 @@
                                               {
                                                   "name":  "bsp:version-evidence",
                                                   "value":  "No exact upstream version, tag, or commit is asserted"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-hash-algorithm",
+                                                  "value":  "sha256-path-nul-content-nul-v1"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-hash-file-count",
+                                                  "value":  "2"
                                               }
-                                          ]
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "8cc2ebf35c43b6d1e343919f80be2dc7b5d85cf273224fb4d3d720bd2a1dd2e3"
+                                          }
+                                      ]
                        }
                    ]
 }

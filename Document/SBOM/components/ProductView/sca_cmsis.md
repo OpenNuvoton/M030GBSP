@@ -72,3 +72,10 @@ Preserve the upstream copyright and license headers in all vendored source files
 - Do not copy the M55M1 CMSIS version, upstream tag, upstream commit, or component hashes into the M030G evidence.
 - If finer-grained component tracking is required later, CMSIS-Core, CMSIS-Driver, CMSIS-RTOS2, and CoreValidation may be reviewed as separate components.
 - Generated documentation content is treated as part of the delivered CMSIS package and must not be interpreted as proof that every documented CMSIS module is present as source code.
+## 7) Canonical Component Content Hash
+
+- Algorithm: `sha256-path-nul-content-nul-v1`
+- File count: `2253`
+- SHA-256: `b5c3e4f30f88852f4433bfd818a8f091654b8b5ec099b4a5b868c0ecb79c46ad`
+
+The hash is computed from all files under `Library/CMSIS`. Files are ordered by repository-relative path. For each file, the SHA-256 input contains the UTF-8 relative path, a NUL byte, the raw file bytes, and a terminating NUL byte. This is an evidence-backed content hash and is not derived from component metadata.

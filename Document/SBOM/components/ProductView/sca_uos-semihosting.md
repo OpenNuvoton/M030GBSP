@@ -64,3 +64,12 @@ This document records manual SCA evidence for GCC semihosting and syscall suppor
 - The files must not be modified merely to achieve 100 percent SPDX header coverage.
 - External newlib-nano selected through GCC project options is a build-toolchain dependency and is not treated as bundled newlib source.
 - Formal license approval is required before replacing `NOASSERTION` with a specific license expression.
+## 7) Canonical Component Content Hash
+
+- Algorithm: `sha256-path-nul-content-nul-v1`
+- File count: `2`
+- SHA-256: `8cc2ebf35c43b6d1e343919f80be2dc7b5d85cf273224fb4d3d720bd2a1dd2e3`
+
+The hash covers `_syscalls.c` and `semihosting.h`. Files are ordered by repository-relative path. For each file, the SHA-256 input contains the UTF-8 relative path, a NUL byte, the raw file bytes, and a terminating NUL byte.
+
+This aggregate hash provides component content integrity only. It does not identify an upstream package, release, tag, commit, supplier, PURL, CPE, or license. The license conclusion remains `NOASSERTION`, and formal license review remains required.

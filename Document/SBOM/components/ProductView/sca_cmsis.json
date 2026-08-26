@@ -72,8 +72,22 @@
                                               {
                                                   "name":  "bsp:license-evidence",
                                                   "value":  "Library/CMSIS/Core/Include/cmsis_version.h; Library/CMSIS/RTOS2/Include/cmsis_os2.h; Library/CMSIS/Driver/Include/Driver_Common.h"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-hash-algorithm",
+                                                  "value":  "sha256-path-nul-content-nul-v1"
+                                              },
+                                              {
+                                                  "name":  "bsp:component-hash-file-count",
+                                                  "value":  "2253"
                                               }
-                                          ]
+                                          ],
+                           "hashes":  [
+                                          {
+                                              "alg":  "SHA-256",
+                                              "content":  "b5c3e4f30f88852f4433bfd818a8f091654b8b5ec099b4a5b868c0ecb79c46ad"
+                                          }
+                                      ]
                        }
                    ]
 }
