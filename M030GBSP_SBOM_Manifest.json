@@ -1,13 +1,13 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:e245c16f-9416-4dfd-93bf-7c2980e0d624",
-  "createdAt": "2026-08-26T15:05:02.323640Z",
+  "serialNumber": "urn:uuid:99cbfa7d-88d2-4ef5-8f3e-d09cb79c937c",
+  "createdAt": "2026-08-29T00:10:45.620753Z",
   "bsp": {
-    "name": "M030GBSP",
-    "version": "V3.04.000-18-g782f58a",
+    "name": "M030Gbsp",
+    "version": "V3.04.000-19-g76385b0-dirty",
     "releaseIdentifierSource": "SBOM file name",
-    "gitDescribe": "V3.04.000-18-g782f58a"
+    "gitDescribe": "V3.04.000-19-g76385b0-dirty"
   },
   "sbomPackage": {
     "name": "MCU BSP SBOM Package",
@@ -24,14 +24,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:8313705b-b2cd-44e9-9b5c-d8f91e444b9d",
+      "serialNumber": "urn:uuid:6d657e14-5817-4435-b8ef-e2eef9f91009",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-26T14:59:58Z",
+      "generatedTimestamp": "2026-08-29T08:10:38+08:00",
       "metadataComponent": {
-        "bomRef": "b444bfd125b4c92d",
+        "bomRef": "b0a70ff95ab205e4",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.04.000-18-g782f58a",
+        "version": "V3.04.000-19-g76385b0-dirty",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -76,15 +76,23 @@
           {
             "name": "bsp:product-scope-exclude-path",
             "value": "SampleCode/"
+          },
+          {
+            "name": "bsp:product-scope-exclude-path",
+            "value": "Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c"
+          },
+          {
+            "name": "bsp:product-scope-exclude-path",
+            "value": "Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h"
           }
         ]
       },
       "scope": "Components included in, linked with, deployed to, or reasonably expected to be integrated into final product firmware/software.",
       "isProductRuntimeScope": true,
       "componentSummary": {
-        "componentCount": 4,
+        "componentCount": 3,
         "componentCountByType": {
-          "library": 4
+          "library": 3
         },
         "applicationNames": [],
         "fileComponentCount": 0,
@@ -92,7 +100,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "bc9c6bc24f51e1d8a32e9b47c5d596d713526fa2a92c8fe4f3a2494f921c2008"
+        "value": "c1214265b37cd32c638cceb945b0955ae9fe539a0daabd6977583de1c50e32ac"
       }
     },
     {
@@ -100,14 +108,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:eafacb8f-24e9-4962-b330-393a55d0e5f6",
+      "serialNumber": "urn:uuid:070ed3d0-cbc2-4dfb-a6df-f735b8d11c75",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-26T15:00:04Z",
+      "generatedTimestamp": "2026-08-29T08:10:43+08:00",
       "metadataComponent": {
-        "bomRef": "737fe0371968148c",
+        "bomRef": "281e8e40b611917b",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.04.000-18-g782f58a",
+        "version": "V3.04.000-19-g76385b0-dirty",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -158,7 +166,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "7b21c4b966620aa3e45effe9ce92f3c3ccbcc25f80ec67790ee7ceb607a4323e"
+        "value": "923b7ab1730d49c97d270d5db58fee7bbbbd0c0b50c5ba62f88d60c8769da63e"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,

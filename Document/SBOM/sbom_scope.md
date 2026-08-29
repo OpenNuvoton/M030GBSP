@@ -22,7 +22,25 @@ Drivers, device support files, startup code, linker configuration, libraries, bi
 
 Arm CMSIS under `Library/CMSIS` is a third-party Product component. The delivered CMSIS package version is 6.1.0 and its license is Apache-2.0. Manual evidence is stored under `Document/SBOM/components/ProductView`.
 
-The files `Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c` and `Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h` identify content originating from the µOS++ III distribution. The `_syscalls.c` file also states that portions originate from newlib sources. Their exact upstream version and complete license expression require manual review and must not be assumed to be Apache-2.0.
+## Excluded GCC Semihosting Support Files
+
+The repository contains the following GCC semihosting support files:
+
+- `Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c`
+- `Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h`
+
+The files contain content originating from the micro-os-plus
+distribution, and `_syscalls.c` also contains newlib-derived portions.
+
+No current M030G project, build script, linked source resource, or
+retained build artifact was found to compile or link these files.
+Therefore, the files are excluded from the Product SBOM pending
+documented build evidence showing product firmware integration.
+
+The source files remain in the repository. The corresponding review
+evidence is retained under:
+
+`Document/SBOM/components/Excluded/`
 
 # Test Sample SBOM
 

@@ -73,3 +73,45 @@ This document records manual SCA evidence for GCC semihosting and syscall suppor
 The hash covers `_syscalls.c` and `semihosting.h`. Files are ordered by repository-relative path. For each file, the SHA-256 input contains the UTF-8 relative path, a NUL byte, the raw file bytes, and a terminating NUL byte.
 
 This aggregate hash provides component content integrity only. It does not identify an upstream package, release, tag, commit, supplier, PURL, CPE, or license. The license conclusion remains `NOASSERTION`, and formal license review remains required.
+## 8) SBOM Compliance Representation
+
+The CycloneDX component uses the following unversioned generic package
+identifier because no exact upstream release, tag, or commit has been
+identified:
+
+`pkg:generic/micro-os-plus/semihosting-and-syscall-support`
+
+The unresolved license review state is represented using the following
+CycloneDX license expression:
+
+`LicenseRef-uOS-III-License-Review-Pending`
+
+This LicenseRef is a review-state representation. It does not assert that
+the complete component is covered by a single standard SPDX license.
+
+The component version remains `NOASSERTION`. The license status remains
+`unresolved`, and formal review of the uOS++ III and newlib-derived source
+content remains required before final license approval.
+## SBOM Scope Disposition
+
+- Disposition: Excluded from Product SBOM
+- Review date: 2026-08-29
+- Files reviewed:
+  - Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c
+  - Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h
+- Direct project or build reference found: No
+- Linked source reference found: No
+- Retained build artifact found: No
+- Product firmware integration evidence found: No
+
+The M030G repository contains GCC semihosting support files originating
+from the micro-os-plus distribution. The _syscalls.c file also contains
+newlib-derived content.
+
+No current M030G project, build script, linked source resource, or retained
+build artifact was found to compile or link these files. The files are
+therefore excluded from the Product SBOM pending documented build evidence
+showing product firmware integration.
+
+This disposition does not remove or modify the source files. The evidence
+is retained for traceability and future license review.

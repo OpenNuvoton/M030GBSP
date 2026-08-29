@@ -6,3 +6,5 @@ include:
 exclude:
   - path: Document/
   - path: SampleCode/
+  - path: Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c
+  - path: Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h

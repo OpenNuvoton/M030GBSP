@@ -1,36 +1,33 @@
 {
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:eafacb8f-24e9-4962-b330-393a55d0e5f6",
+  "serialNumber": "urn:uuid:070ed3d0-cbc2-4dfb-a6df-f735b8d11c75",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-26T15:00:04Z",
+    "timestamp": "2026-08-29T08:10:43+08:00",
     "tools": {
       "components": [
         {
           "type": "application",
           "author": "anchore",
           "name": "syft",
-          "version": "1.50.0"
+          "version": "1.45.1"
         }
       ]
     },
-    "authors": [
-      {
-        "name": "Nuvoton Technology Corp."
-      }
-    ],
     "component": {
+      "bom-ref": "281e8e40b611917b",
       "type": "application",
-      "bom-ref": "737fe0371968148c",
+      "name": "MCU Test Sample",
+      "version": "V3.04.000-19-g76385b0-dirty",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "name": "MCU Test Sample",
-      "version": "V3.04.000-18-g782f58a",
+      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.04.000-19-g76385b0-dirty",
       "licenses": [
         {
           "license": {
@@ -38,7 +35,6 @@
           }
         }
       ],
-      "purl": "pkg:generic/nuvoton/mcu-test-sample@V3.04.000-18-g782f58a",
       "properties": [
         {
           "name": "bsp:sbom-category",
@@ -79,22 +75,26 @@
       "url": [
         "https://www.nuvoton.com"
       ]
-    }
+    },
+    "authors": [
+      {
+        "name": "Nuvoton Technology Corp."
+      }
+    ]
   },
   "components": [
     {
       "type": "application",
       "bom-ref": "m030gbsp:test-sample-component:samplecode",
+      "name": "M030G SampleCode",
+      "version": "V3.04.000-19-g76385b0-dirty",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "name": "M030G SampleCode",
-      "version": "V3.04.000-18-g782f58a",
-      "description": "Directory-level first-party BSP test-sample component included from test-sample scope path SampleCode/",
-      "scope": "required",
+      "purl": "pkg:generic/nuvoton/samplecode@V3.04.000-19-g76385b0-dirty",
       "hashes": [
         {
           "alg": "SHA-256",
@@ -108,7 +108,8 @@
           }
         }
       ],
-      "purl": "pkg:generic/nuvoton/samplecode@V3.04.000-18-g782f58a",
+      "scope": "required",
+      "description": "Directory-level first-party BSP test-sample component included from test-sample scope path SampleCode/",
       "properties": [
         {
           "name": "bsp:sbom-category",
@@ -143,7 +144,7 @@
   ],
   "dependencies": [
     {
-      "ref": "737fe0371968148c",
+      "ref": "281e8e40b611917b",
       "dependsOn": [
         "m030gbsp:test-sample-component:samplecode"
       ]
