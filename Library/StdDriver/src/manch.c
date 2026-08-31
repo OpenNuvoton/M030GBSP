@@ -36,12 +36,13 @@ extern "C"
   * @details    This function is used to configure MANCH in specified operation mode and bus clock frequency.
   *             If MANCH cannot work in targeted frequency, the closest frequency will be chosen and returned.
   * @note       TBITNUM and RBITNUM dividers are set to 0x64.
-  )* @note       If u32BusFreq = 0, BITDIV divider will be set to the maximum value (0xFFF).
+  * @note       If u32BusFreq = 0, BITDIV divider will be set to the maximum value (0xFFF).
   * @note       If u32BusFreq >= PCLK0/100, BITDIV divider will be set to 0x03.
   */
 uint32_t MANCH_Open(MANCH_T *manch, uint32_t u32BusFreq)
 {
-    uint32_t u32Clk, u32BitDivider;
+    uint32_t u32Clk;
+    uint32_t u32BitDivider;
 
     /* get PCLK0 clock freq (MANCH clock from PCLK0) */
     u32Clk = CLK_GetPCLK0Freq();
@@ -79,7 +80,7 @@ uint32_t MANCH_Open(MANCH_T *manch, uint32_t u32BusFreq)
   * @return     None
   * @details    This function will reset MANCH controller.
   */
-void MANCH_Close(MANCH_T *manch)
+void MANCH_Close(const MANCH_T *manch)
 {
     if(manch == MANCH)
     {
@@ -112,7 +113,7 @@ void MANCH_SetBitClockDiv(MANCH_T *manch, uint32_t u32ClkDiv)
   * @details    Get MANCH 1st stage bit clock divider. This is the 1st stage clock divider from
   *             engine clock.
   */
-uint32_t MANCH_GetBitClockDiv(MANCH_T *manch)
+uint32_t MANCH_GetBitClockDiv(const MANCH_T *manch)
 {
     return ((manch->CTL & MANCH_CTL_BITDIV_Msk)>>MANCH_CTL_BITDIV_Pos);
 }
@@ -136,7 +137,7 @@ void MANCH_SetDegClockDiv(MANCH_T *manch, uint32_t u32ClkDiv)
   * @return     Deglitch clock divider
   * @details    Get current MANCH deglitch clock divider.
   */
-uint32_t MANCH_GetDegClockDiv(MANCH_T *manch)
+uint32_t MANCH_GetDegClockDiv(const MANCH_T *manch)
 {
     return ((manch->CTL & MANCH_CTL_DEGDIV_Msk)>>MANCH_CTL_DEGDIV_Pos);
 }
@@ -166,7 +167,7 @@ void MANCH_SetDegWidth(MANCH_T *manch, uint32_t u32DegWidth)
   * @return     Deglitch width
   * @details    Get current MANCH deglitch width.
   */
-uint32_t MANCH_GetDegWidth(MANCH_T *manch)
+uint32_t MANCH_GetDegWidth(const MANCH_T *manch)
 {
     return ((manch->CTL & MANCH_CTL_DEGSEL_Msk)>>MANCH_CTL_DEGSEL_Pos);
 }
@@ -265,7 +266,7 @@ void MANCH_SetTXBitNum(MANCH_T *manch, uint32_t u32TXBitNum)
   * @return     TX bit clock divider
   * @details    Get 2nd stage TX bit clock divider number.
   */
-uint32_t MANCH_GetTXBitNum(MANCH_T *manch)
+uint32_t MANCH_GetTXBitNum(const MANCH_T *manch)
 {
     return ((manch->BITCNT & MANCH_BITCNT_TBITNUM_Msk)>> MANCH_BITCNT_TBITNUM_Pos);
 }
@@ -291,7 +292,7 @@ void MANCH_SetRXBitNum(MANCH_T *manch, uint32_t u32RXBitNum)
   * @return     RX bit clock divider number
   * @details    Get 2nd stage RX bit clock divider number.
   */
-uint32_t MANCH_GetRXBitNum(MANCH_T *manch)
+uint32_t MANCH_GetRXBitNum(const MANCH_T *manch)
 {
     return ((manch->BITCNT & MANCH_BITCNT_RBITNUM_Msk)>> MANCH_BITCNT_RBITNUM_Pos);
 }
@@ -302,7 +303,7 @@ uint32_t MANCH_GetRXBitNum(MANCH_T *manch)
   * @return     current RX bit clock divider number
   * @details    Get current RX bit clock divider number.
   */
-uint32_t MANCH_GetCurrentRXBitNum(MANCH_T *manch)
+uint32_t MANCH_GetCurrentRXBitNum(const MANCH_T *manch)
 {
     return ((manch->BITCNT & MANCH_BITCNT_CRBITNUM_Msk)>> MANCH_BITCNT_CRBITNUM_Pos);
 }
@@ -332,7 +333,7 @@ void MANCH_SetRXBitTolNum(MANCH_T *manch, uint32_t u32RXBitErrTolNum)
   * @return     u32RXBitErrTolNum
   * @details    Get the error tolerance number of RX fraction bit.
   */
-uint32_t MANCH_GetRXBitTolNum(MANCH_T *manch)
+uint32_t MANCH_GetRXBitTolNum(const MANCH_T *manch)
 {
     return ((manch->BITCNT & MANCH_BITCNT_RBERRTN_Msk)>> MANCH_BITCNT_RBERRTN_Pos);
 }

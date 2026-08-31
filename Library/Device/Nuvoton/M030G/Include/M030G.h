@@ -165,6 +165,7 @@ extern void SystemInit(void);
 #include "manch_reg.h"
 
 
+
 /******************************************************************************/
 /*                         Peripheral memory map                              */
 /******************************************************************************/
@@ -173,57 +174,57 @@ extern void SystemInit(void);
   @{
  */
 /* Peripheral and SRAM base address */
-#define FLASH_BASE          ((     uint32_t)0x00000000)
-#define SRAM_BASE           ((     uint32_t)0x20000000)
-#define AHB_BASE            ((     uint32_t)0x40000000)
-#define APB1_BASE           ((     uint32_t)0x40000000)
-#define APB2_BASE           ((     uint32_t)0x40000000)
+#define FLASH_BASE          ((     uint32_t)0x00000000UL)
+#define SRAM_BASE           ((     uint32_t)0x20000000UL)
+#define AHB_BASE            ((     uint32_t)0x40000000UL)
+#define APB1_BASE           ((     uint32_t)0x40000000UL)
+#define APB2_BASE           ((     uint32_t)0x40000000UL)
 
 /* Peripheral memory map */
 
-#define SYS_BASE            (AHB_BASE       + 0x00000)                  /*!< System Global Controller Base Address            */
-#define CLK_BASE            (AHB_BASE       + 0x00200)                  /*!< System Clock Controller Base Address             */
-#define INT_BASE            (AHB_BASE       + 0x00300)                  /*!< Interrupt Source Controller Base Address         */
-#define NMI_BASE            (AHB_BASE       + 0x00300)                  /*!< Interrupt Source Controller Base Address         */
+#define SYS_BASE            (AHB_BASE       + 0x00000UL)                  /*!< System Global Controller Base Address            */
+#define CLK_BASE            (AHB_BASE       + 0x00200UL)                  /*!< System Clock Controller Base Address             */
+#define INT_BASE            (AHB_BASE       + 0x00300UL)                  /*!< Interrupt Source Controller Base Address         */
+#define NMI_BASE            (AHB_BASE       + 0x00300UL)                  /*!< Interrupt Source Controller Base Address         */
 
-#define GPIO_BASE           (AHB_BASE       + 0x4000)                   /*!< GPIO Base Address                                */
-#define PA_BASE             (GPIO_BASE              )                   /*!< GPIO PA Base Address                             */
-#define PB_BASE             (GPIO_BASE      + 0x0040)                   /*!< GPIO PB Base Address                             */
-#define PC_BASE             (GPIO_BASE      + 0x0080)                   /*!< GPIO PC Base Address                             */
-#define PD_BASE             (GPIO_BASE      + 0x00C0)                   /*!< GPIO PD Base Address                             */
-#define PE_BASE             (GPIO_BASE      + 0x0100)                   /*!< GPIO PE Base Address                             */
-#define PF_BASE             (GPIO_BASE      + 0x0140)                   /*!< GPIO PF Base Address                             */
-#define PG_BASE             (GPIO_BASE      + 0x0180)                   /*!< GPIO PG Base Address                             */
-#define PH_BASE             (GPIO_BASE      + 0x01C0)                   /*!< GPIO PH Base Address                             */
-#define GPIO_DBCTL_BASE     (GPIO_BASE      + 0x0440)                   /*!< GPIO De-bounce Cycle Control Base Address        */
-#define GPIO_PIN_DATA_BASE  (GPIO_BASE      + 0x0800)                   /*!< GPIO Pin Data Input/Output Control Base Address  */
+#define GPIO_BASE           (AHB_BASE       + 0x4000UL)                   /*!< GPIO Base Address                                */
+#define PA_BASE             (GPIO_BASE                )                   /*!< GPIO PA Base Address                             */
+#define PB_BASE             (GPIO_BASE      + 0x0040UL)                   /*!< GPIO PB Base Address                             */
+#define PC_BASE             (GPIO_BASE      + 0x0080UL)                   /*!< GPIO PC Base Address                             */
+#define PD_BASE             (GPIO_BASE      + 0x00C0UL)                   /*!< GPIO PD Base Address                             */
+#define PE_BASE             (GPIO_BASE      + 0x0100UL)                   /*!< GPIO PE Base Address                             */
+#define PF_BASE             (GPIO_BASE      + 0x0140UL)                   /*!< GPIO PF Base Address                             */
+#define PG_BASE             (GPIO_BASE      + 0x0180UL)                   /*!< GPIO PG Base Address                             */
+#define PH_BASE             (GPIO_BASE      + 0x01C0UL)                   /*!< GPIO PH Base Address                             */
+#define GPIO_DBCTL_BASE     (GPIO_BASE      + 0x0440UL)                   /*!< GPIO De-bounce Cycle Control Base Address        */
+#define GPIO_PIN_DATA_BASE  (GPIO_BASE      + 0x0800UL)                   /*!< GPIO Pin Data Input/Output Control Base Address  */
 
-#define PDMA_BASE           (AHB_BASE       + 0x08000)                  /*!< PDMA Base Address                                */
-#define FMC_BASE            (AHB_BASE       + 0x0C000)                  /*!< Flash Memory Controller Base Address             */
-#define CRC_BASE            (AHB_BASE       + 0x31000)                  /*!< CRC Base Address                                 */
+#define PDMA_BASE           (AHB_BASE       + 0x08000UL)                  /*!< PDMA Base Address                                */
+#define FMC_BASE            (AHB_BASE       + 0x0C000UL)                  /*!< Flash Memory Controller Base Address             */
+#define CRC_BASE            (AHB_BASE       + 0x31000UL)                  /*!< CRC Base Address                                 */
 
-#define WDT_BASE            (APB1_BASE      + 0x40000)                  /*!< Watch Dog Timer Base Address                     */
-#define WWDT_BASE           (APB1_BASE      + 0x40100)                  /*!< Window Watch Dog Timer Base Address              */
-#define ADC_BASE            (APB1_BASE      + 0x43000)                  /*!< ADC Base Address                                 */
-#define DAC0_BASE           (APB1_BASE      + 0x47000)                  /*!< DAC0 Base Address                                */
-#define DAC1_BASE           (APB1_BASE      + 0x47040)                  /*!< DAC1 Base Address                                */
-#define DAC2_BASE           (APB1_BASE      + 0x4B000)                  /*!< DAC2 Base Address                                */
-#define DAC3_BASE           (APB1_BASE      + 0x4B040)                  /*!< DAC3 Base Address                                */
+#define WDT_BASE            (APB1_BASE      + 0x40000UL)                  /*!< Watch Dog Timer Base Address                     */
+#define WWDT_BASE           (APB1_BASE      + 0x40100UL)                  /*!< Window Watch Dog Timer Base Address              */
+#define ADC_BASE            (APB1_BASE      + 0x43000UL)                  /*!< ADC Base Address                                 */
+#define DAC0_BASE           (APB1_BASE      + 0x47000UL)                  /*!< DAC0 Base Address                                */
+#define DAC1_BASE           (APB1_BASE      + 0x47040UL)                  /*!< DAC1 Base Address                                */
+#define DAC2_BASE           (APB1_BASE      + 0x4B000UL)                  /*!< DAC2 Base Address                                */
+#define DAC3_BASE           (APB1_BASE      + 0x4B040UL)                  /*!< DAC3 Base Address                                */
 
-#define TIMER0_BASE         (APB1_BASE      + 0x50000)                  /*!< Timer0 Base Address                              */
-#define TIMER1_BASE         (APB1_BASE      + 0x50020)                  /*!< Timer1 Base Address                              */
-#define TIMER2_BASE         (APB2_BASE      + 0x51000)                  /*!< Timer2 Base Address                              */
-#define TIMER3_BASE         (APB2_BASE      + 0x51020)                  /*!< Timer3 Base Address                              */
-#define TIMER4_BASE         (APB2_BASE      + 0x52000)                  /*!< Timer4 Base Address                              */
-#define TIMER5_BASE         (APB2_BASE      + 0x52020)                  /*!< Timer5 Base Address                              */
+#define TIMER0_BASE         (APB1_BASE      + 0x50000UL)                  /*!< Timer0 Base Address                              */
+#define TIMER1_BASE         (APB1_BASE      + 0x50020UL)                  /*!< Timer1 Base Address                              */
+#define TIMER2_BASE         (APB2_BASE      + 0x51000UL)                  /*!< Timer2 Base Address                              */
+#define TIMER3_BASE         (APB2_BASE      + 0x51020UL)                  /*!< Timer3 Base Address                              */
+#define TIMER4_BASE         (APB2_BASE      + 0x52000UL)                  /*!< Timer4 Base Address                              */
+#define TIMER5_BASE         (APB2_BASE      + 0x52020UL)                  /*!< Timer5 Base Address                              */
 
-#define BPWM1_BASE          (APB2_BASE      + 0x5B000)                  /*!< BPWM1 Base Address                               */
-#define SPI0_BASE           (APB1_BASE      + 0x61000)                  /*!< SPI0 Base Address                                */
-#define UART0_BASE          (APB1_BASE      + 0x70000)                  /*!< UART0 Base Address                               */
-#define I2C0_BASE           (APB1_BASE      + 0x80000)                  /*!< I2C0 Base Address                                */
-#define I2C1_BASE           (APB2_BASE      + 0x81000)                  /*!< I2C1 Base Address                                */
+#define BPWM1_BASE          (APB2_BASE      + 0x5B000UL)                  /*!< BPWM1 Base Address                               */
+#define SPI0_BASE           (APB1_BASE      + 0x61000UL)                  /*!< SPI0 Base Address                                */
+#define UART0_BASE          (APB1_BASE      + 0x70000UL)                  /*!< UART0 Base Address                               */
+#define I2C0_BASE           (APB1_BASE      + 0x80000UL)                  /*!< I2C0 Base Address                                */
+#define I2C1_BASE           (APB2_BASE      + 0x81000UL)                  /*!< I2C1 Base Address                                */
 
-#define MANCH_BASE          (APB2_BASE      + 0xBC000)                  /*!< MANCH Base Address                               */
+#define MANCH_BASE          (APB2_BASE      + 0xBC000UL)                  /*!< MANCH Base Address                               */
 
 /**@}*/ /* PERIPHERAL */
 

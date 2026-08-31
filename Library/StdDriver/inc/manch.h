@@ -90,7 +90,7 @@ extern "C"
   * @return     None
   * @details    Select Thomas standard for Manchester encoding.
   */
-#define MANCH_ENCODE_THOMAS(manch) (manch->CTL &= ~MANCH_CTL_MECT_Msk)
+#define MANCH_ENCODE_THOMAS(manch) ((manch)->CTL &= ~MANCH_CTL_MECT_Msk)
 
 /**
   * @brief      Manchester IEEE802.3 encode type
@@ -98,7 +98,7 @@ extern "C"
   * @return     None
   * @details    Select IEEE802.3 standard for Manchester encoding
   */
-#define MANCH_ENCODE_IEEE8023(manch) (manch->CTL |= MANCH_CTL_MECT_Msk)
+#define MANCH_ENCODE_IEEE8023(manch) ((manch)->CTL |= MANCH_CTL_MECT_Msk)
 
 /**
   * @brief      Manchester LSB first
@@ -650,24 +650,25 @@ extern "C"
 /* Define MANCH function prototype                                                                          */
 /*----------------------------------------------------------------------------------------------------------*/
 uint32_t MANCH_Open(MANCH_T *manch, uint32_t u32BusFreq);
+void MANCH_Close(const MANCH_T *manch);
 void MANCH_SetBitClockDiv(MANCH_T *manch, uint32_t u32ClkDiv);
-uint32_t MANCH_GetBitClockDiv(MANCH_T *manch);
+uint32_t MANCH_GetBitClockDiv(const MANCH_T *manch);
 void MANCH_SetDegClockDiv(MANCH_T *manch, uint32_t u32ClkDiv);
-uint32_t MANCH_GetDegClockDiv(MANCH_T *manch);
+uint32_t MANCH_GetDegClockDiv(const MANCH_T *manch);
 void MANCH_SetDegWidth(MANCH_T *manch, uint32_t u32DegWidth);
-uint32_t MANCH_GetDegWidth(MANCH_T *manch);
+uint32_t MANCH_GetDegWidth(const MANCH_T *manch);
 void MANCH_SetPreamble(MANCH_T *manch, uint32_t u32Preamble);
 void MANCH_SetPreambleNum(MANCH_T *manch, uint32_t u32PreambleNum);
 void MANCH_SetIdle(MANCH_T *manch, uint32_t u32Idle);
 void MANCH_SetFrameNum(MANCH_T *manch, uint32_t u32FrameNum);
 void MANCH_SetMode(MANCH_T *manch, uint32_t u32Mode);
 void MANCH_SetTXBitNum(MANCH_T *manch, uint32_t u32TXBitNum);
-uint32_t MANCH_GetTXBitNum(MANCH_T *manch);
+uint32_t MANCH_GetTXBitNum(const MANCH_T *manch);
 void MANCH_SetRXBitNum(MANCH_T *manch, uint32_t u32RXBitNum);
-uint32_t MANCH_GetRXBitNum(MANCH_T *manch);
-uint32_t MANCH_GetCurrentRXBitNum(MANCH_T *manch);
+uint32_t MANCH_GetRXBitNum(const MANCH_T *manch);
+uint32_t MANCH_GetCurrentRXBitNum(const MANCH_T *manch);
 void MANCH_SetRXBitTolNum(MANCH_T *manch, uint32_t u32RXBitErrTolNum);
-uint32_t MANCH_GetRXBitTolNum(MANCH_T *manch);
+uint32_t MANCH_GetRXBitTolNum(const MANCH_T *manch);
 
 
 /*@}*/ /* end of group MANCH_EXPORTED_FUNCTIONS */
