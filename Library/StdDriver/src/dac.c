@@ -57,6 +57,8 @@ void DAC_Open(DAC_T *dac,
               uint32_t u32Ch,
               uint32_t u32TrgSrc)
 {
+    (void)u32Ch;
+
     dac->CTL &= ~(DAC_CTL_ETRGSEL_Msk | DAC_CTL_TRGSEL_Msk | DAC_CTL_TRGEN_Msk);
 
     dac->CTL |= (u32TrgSrc | DAC_CTL_DACEN_Msk);
@@ -71,6 +73,8 @@ void DAC_Open(DAC_T *dac,
   */
 void DAC_Close(DAC_T *dac, uint32_t u32Ch)
 {
+    (void)u32Ch;
+
     dac->CTL &= (~DAC_CTL_DACEN_Msk);
 }
 
@@ -86,9 +90,9 @@ float DAC_SetDelayTime(DAC_T *dac, uint32_t u32Delay)
 {
     SystemCoreClockUpdate();
 
-    dac->TCTL = ((SystemCoreClock * u32Delay / 1000000) & 0x3FFF);
+    dac->TCTL = ((SystemCoreClock * u32Delay / 1000000UL) & 0x3FFFUL);
 
-    return ((dac->TCTL) * 1000000 / SystemCoreClock);
+    return (((float)dac->TCTL) * 1000000.0f) / (float)SystemCoreClock;
 }
 
 /**
@@ -105,8 +109,10 @@ float DAC_SetDelayTime(DAC_T *dac, uint32_t u32Delay)
   */
 void DAC_SetAutoSineSampleNum(DAC_T *dac, uint32_t u32SampleNum)
 {
-    u32SampleNum &= 0x03;
-    dac->ADGCTL = ((dac->ADGCTL & ~DAC_ADGCTL_SAMPSEL_Msk) | (u32SampleNum << DAC_ADGCTL_SAMPSEL_Pos));
+    uint32_t u32SampleNumMask;
+
+    u32SampleNumMask = u32SampleNum & 0x03UL;
+    dac->ADGCTL = ((dac->ADGCTL & ~DAC_ADGCTL_SAMPSEL_Msk) | (u32SampleNumMask << DAC_ADGCTL_SAMPSEL_Pos));
 }
 
 /**
@@ -119,17 +125,28 @@ void DAC_SetAutoSineSampleNum(DAC_T *dac, uint32_t u32SampleNum)
   * @note       Only DAC0 provides this function
   */
 void DAC_SetAutoSineSampleContent(DAC_T *dac,
-                                  uint16_t *pu16SampleBase,
+                  const uint16_t *pu16SampleBase,
                                   uint32_t u32SampleNum)
 {
     uint32_t i;
+    uint32_t u32SampleCount;
+    const uint16_t *pu16Sample;
 
-    if (u32SampleNum > 32)
-        u32SampleNum = 32;
-
-    for (i=0; i< u32SampleNum; i++)
+    if (u32SampleNum > 32UL)
     {
-        dac->ADCTL[i] = *pu16SampleBase++;
+        u32SampleCount = 32UL;
+    }
+    else
+    {
+        u32SampleCount = u32SampleNum;
+    }
+
+    pu16Sample = pu16SampleBase;
+
+    for (i = 0UL; i < u32SampleCount; i++)
+    {
+        dac->ADCTL[i] = *pu16Sample;
+        pu16Sample++;
     }
 }
 
@@ -145,7 +162,9 @@ void DAC_SetAutoSineSampleContent(DAC_T *dac,
   */
 void DAC_SetAutoSineFreq(DAC_T *dac, uint32_t u32SineFreq)
 {
-    uint32_t u32Clk, u32SampleNum, u32SettleTime;
+    uint32_t u32Clk;
+    uint32_t u32SampleNum;
+    uint32_t u32SettleTime;
 
     /* get PCLK1 clock freq (DAC clock from PCLK1) */
     u32Clk = CLK_GetPCLK1Freq();
@@ -154,27 +173,29 @@ void DAC_SetAutoSineFreq(DAC_T *dac, uint32_t u32SineFreq)
     u32SampleNum = (dac->ADGCTL&DAC_ADGCTL_SAMPSEL_Msk)>>DAC_ADGCTL_SAMPSEL_Pos;
     switch (u32SampleNum)
     {
-    case 0:
-        u32SampleNum = 0x00;
-        break;
-    case 1:
-        u32SampleNum = 0x08;
-        break;
-    case 2:
-        u32SampleNum = 0x10;
-        break;
-    case 3:
-    default:
-        u32SampleNum = 0x20;
-        break;
+        case 0UL:
+            u32SampleNum = 0x00UL;
+            break;
+        case 1UL:
+            u32SampleNum = 0x08UL;
+            break;
+        case 2UL:
+            u32SampleNum = 0x10UL;
+            break;
+        case 3UL:
+        default:
+            u32SampleNum = 0x20UL;
+            break;
     }
-    if (!u32SampleNum)
-        DAC_SET_SETTLE_TIME(dac, 0x3FF);
+    if ((u32SampleNum == 0UL) || (u32SineFreq == 0UL))
+    {
+        DAC_SET_SETTLE_TIME(dac, 0x3FFUL);
+        return;
+    }
 
     u32SettleTime = u32Clk/(u32SampleNum*u32SineFreq);
     DAC_SET_SETTLE_TIME(dac, u32SettleTime);
 }
-
 
 /*@}*/ /* end of group DAC_EXPORTED_FUNCTIONS */
 

@@ -327,14 +327,14 @@ extern "C"
   * @note       Don't more than 10-bit width
   * \hideinitializer
   */
-#define DAC_SET_SETTLE_TIME(dac, u32SettleTime) ((dac)->TCTL = (u32SettleTime-1))
+#define DAC_SET_SETTLE_TIME(dac, u32SettleTime) ((dac)->TCTL = ((u32SettleTime) - 1UL))
 
 
 void DAC_Open(DAC_T *dac, uint32_t u32Ch, uint32_t u32TrgSrc);
 void DAC_Close(DAC_T *dac, uint32_t u32Ch);
-float DAC_SetDelayTime(DAC_T *dac, uint32_t u16Delay);
+float DAC_SetDelayTime(DAC_T *dac, uint32_t u32Delay);
 void DAC_SetAutoSineSampleNum(DAC_T *dac, uint32_t u32SampleNum);
-void DAC_SetAutoSineSampleContent(DAC_T *dac, uint16_t *pu32SampleBase, uint32_t u32SampleNum);
+void DAC_SetAutoSineSampleContent(DAC_T *dac, const uint16_t *pu16SampleBase, uint32_t u32SampleNum);
 void DAC_SetAutoSineFreq(DAC_T *dac, uint32_t u32SineFreq);
 
 
