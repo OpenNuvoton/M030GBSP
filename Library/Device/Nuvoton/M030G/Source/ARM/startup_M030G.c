@@ -24,6 +24,7 @@ extern __NO_RETURN void __PROGRAM_START(void);
  *----------------------------------------------------------------------------*/
 __NO_RETURN void Reset_Handler(void);
 __NO_RETURN void Default_Handler(void);
+void Reset_Handler_PreInit(void);
 
 /*----------------------------------------------------------------------------
   Exception / Interrupt Handler
@@ -152,7 +153,8 @@ __NO_RETURN void Reset_Handler(void)
     SystemInit();               /* CMSIS System Initialization */
 
     /* Init POR */
-    SYS->PORCTL = 0x5AA5;
+    // cppcheck-suppress misra-c2012-10.4
+    SYS->PORCTL = 0x5AA5UL;
 
     /* Lock protected registers */
     SYS_LockReg();
@@ -185,7 +187,10 @@ __WEAK void HardFault_Handler(void)
  *----------------------------------------------------------------------------*/
 void Default_Handler(void)
 {
-    while (1);
+    while (1U != 0U)
+    {
+        /* Wait forever. */
+    }
 }
 
 #if defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)

@@ -131,7 +131,7 @@ int32_t main(void)
     }
     printf("0x%X\n", u32ChkSum);       /* print out LDROM CRC32 check sum value */
 
-    printf("\nSPROM (0x200000 ~ 0x%X) CRC32 checksum =>  ", (0x200000+FMC_SPROM_SIZE));
+    printf("\nSPROM (0x200000 ~ 0x%lX) CRC32 checksum =>  ", (0x200000+FMC_SPROM_SIZE));
     /*
     *  Request FMC hardware to run CRC32 calculation on SPROM.
     */

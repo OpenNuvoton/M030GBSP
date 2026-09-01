@@ -21,9 +21,9 @@ extern void *__Vectors;                   /* see startup file */
   Clock Variable definitions
  *----------------------------------------------------------------------------*/
 uint32_t SystemCoreClock  = __HSI;              /*!< System Clock Frequency (Core Clock) */
-uint32_t CyclesPerUs      = (__HSI / 1000000);  /*!< Cycles per micro second             */
+uint32_t CyclesPerUs      = (__HSI / 1000000UL);  /*!< Cycles per micro second             */
+extern uint32_t PllClock;
 uint32_t PllClock         = __HSI;              /*!< PLL Output Clock Frequency          */
-const uint32_t gau32ClkSrcTbl[] = {0UL, 0UL, __HSI, 0UL, 0UL, 0UL, 0UL, __HIRC};
 
 
 /**
@@ -38,10 +38,16 @@ const uint32_t gau32ClkSrcTbl[] = {0UL, 0UL, __HSI, 0UL, 0UL, 0UL, 0UL, __HIRC};
  */
 void SystemCoreClockUpdate(void)
 {
-    uint32_t u32Freq, u32ClkSrc;
+    static const uint32_t gau32ClkSrcTbl[] =
+    {
+        0UL, 0UL, __HSI, 0UL, 0UL, 0UL, 0UL, __HIRC
+    };
+    uint32_t u32Freq;
+    uint32_t u32ClkSrc;
     uint32_t u32HclkDiv;
 
-    u32ClkSrc = CLK->CLKSEL0 & CLK_CLKSEL0_HCLKSEL_Msk;
+    // cppcheck-suppress misra-c2012-10.4
+    u32ClkSrc = (uint32_t)CLK->CLKSEL0 & (uint32_t)CLK_CLKSEL0_HCLKSEL_Msk;
 
     /* Update PLL Clock */
     PllClock = CLK_GetPLLClockFreq();
@@ -57,12 +63,13 @@ void SystemCoreClockUpdate(void)
         u32Freq = PllClock;
     }
 
-    u32HclkDiv = (CLK->CLKDIV0 & CLK_CLKDIV0_HCLKDIV_Msk) + 1;
+    // cppcheck-suppress misra-c2012-10.4
+    u32HclkDiv = ((uint32_t)CLK->CLKDIV0 & (uint32_t)CLK_CLKDIV0_HCLKDIV_Msk) + 1UL;
 
     /* Update System Core Clock */
     SystemCoreClock = u32Freq / u32HclkDiv;
 
-    CyclesPerUs = (SystemCoreClock + 500000) / 1000000;
+    CyclesPerUs = (SystemCoreClock + 500000UL) / 1000000UL;
 }
 
 
@@ -81,13 +88,14 @@ void SystemInit(void)
     SYS_UnlockReg();
 
     /* Disable Vref Short Circuit Protection */
-    SYS->VREFCTL |= SYS_VREFCTL_SCPDIS_Msk;
+    // cppcheck-suppress misra-c2012-10.4
+    SYS->VREFCTL = (uint32_t)SYS->VREFCTL | (uint32_t)SYS_VREFCTL_SCPDIS_Msk;
 
     /* Lock protected registers */
     SYS_LockReg();
 }
 
-#if USE_ASSERT
+#if defined(USE_ASSERT) && (USE_ASSERT != 0)
 
 /**
  * @brief      Assert Error Message
@@ -106,6 +114,9 @@ void AssertError(uint8_t * file, uint32_t line)
     printf("[%s] line %d : wrong parameters.\r\n", file, line);
 
     /* Infinite loop */
-    while(1) ;
+    while (1U != 0U)
+    {
+        /* Wait forever. */
+    }
 }
 #endif
