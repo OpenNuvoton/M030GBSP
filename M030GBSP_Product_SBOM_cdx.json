@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:5a4547b8-f537-411f-a2b0-38038ed73bba",
+  "serialNumber": "urn:uuid:73243163-6c1a-49c0-93ac-40c24db5da87",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-01T18:31:40+08:00",
+    "timestamp": "2026-09-01T20:22:42+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "b01e89a2616eb989",
+      "bom-ref": "7e4a29ef383c3bab",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.04.000-20-gd9fc2b3e",
+      "version": "V3.04.000-25-gf288a74a",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.04.000-20-gd9fc2b3e",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.04.000-25-gf288a74a",
       "licenses": [
         {
           "license": {
@@ -107,18 +107,18 @@
       "type": "library",
       "bom-ref": "m030gbsp:product-component:library-device",
       "name": "M030G Device",
-      "version": "V3.04.000-20-gd9fc2b3e",
+      "version": "V3.04.000-25-gf288a74a",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-device@V3.04.000-20-gd9fc2b3e",
+      "purl": "pkg:generic/nuvoton/library-device@V3.04.000-25-gf288a74a",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "14ac110f25f51d614db8011e6df89595d412e2c2e83ac970a7cf366d98acd77f"
+          "content": "a6749543ef47c590935cd2640ff252dfe6b1f4c2fe5edfe00d9f3ffd68bc2599"
         }
       ],
       "licenses": [
@@ -165,18 +165,18 @@
       "type": "library",
       "bom-ref": "m030gbsp:product-component:library-stddriver",
       "name": "M030G StdDriver",
-      "version": "V3.04.000-20-gd9fc2b3e",
+      "version": "V3.04.000-25-gf288a74a",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.04.000-20-gd9fc2b3e",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.04.000-25-gf288a74a",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "57ba59a51258e672e3bd9a80eb44391ff2b901417b078cd042cde91103a5d4cc"
+          "content": "203261524d4e076a9b9b1af478b2e2b626e6f587030ca6b162c6a35939a16625"
         }
       ],
       "licenses": [
@@ -311,7 +311,7 @@
   ],
   "dependencies": [
     {
-      "ref": "b01e89a2616eb989",
+      "ref": "7e4a29ef383c3bab",
       "dependsOn": [
         "m030gbsp:product-component:library-device",
         "m030gbsp:product-component:library-stddriver"

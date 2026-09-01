@@ -1,22 +1,29 @@
-# M030GBSP
+# M030G BSP
 
-See `Readme.pdf` for BSP usage and release information.
+The M030G Board Support Package provides device support, peripheral drivers,
+startup code, and sample projects for Nuvoton M030G microcontrollers.
 
-## SBOM
+## Repository Contents
 
-The repository contains separate CycloneDX 1.6 Product and Test Sample SBOMs:
+- `Library/CMSIS`: Arm CMSIS headers, interfaces, and support files.
+- `Library/Device`: M030G device headers, startup code, and system files.
+- `Library/StdDriver`: M030G peripheral driver headers and sources.
+- `SampleCode`: Toolchain projects and examples for M030G peripherals and
+  device features.
+- `Document`: BSP documentation and software component evidence.
+
+## Getting Started
+
+Refer to `Readme.pdf` and the files under `Document` for supported devices,
+toolchain requirements, configuration, and example usage.
+
+## Software Bill of Materials
+
+The repository includes separate CycloneDX 1.6 Product and Test Sample SBOMs:
 
 - `M030GBSP_Product_SBOM_cdx.json`
 - `M030GBSP_TestSample_SBOM_cdx.json`
 - `M030GBSP_SBOM_Manifest.json`
 
-Scope policies and manual component evidence are maintained under
-`Document/SBOM`. The Product SBOM covers the runtime library scope. The Test
-Sample SBOM covers `SampleCode/` and records every tracked `.a`, `.bin`, `.dll`,
-`.exe`, and `.lib` artifact with its exact repository-relative path and
-SHA-256 hash.
-
-The formal release package for the current source commit is stored in the SBOM
-release repository under `bsp/m030g/V3.04.000-20-gd9fc2b3e`. It includes
-strict checker reports, vulnerability scan metadata and limitations,
-release-validation configuration, and complete SHA-256 payload checksums.
+SBOM scope policies and component evidence are maintained under
+`Document/SBOM`.
