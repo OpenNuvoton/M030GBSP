@@ -1,14 +1,38 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:99cbfa7d-88d2-4ef5-8f3e-d09cb79c937c",
-  "createdAt": "2026-08-29T00:10:45.620753Z",
+  "serialNumber": "urn:uuid:4afd4984-26b4-4d5b-8dc9-869cf750678b",
+  "createdAt": "2026-09-01T10:31:55.504035Z",
   "bsp": {
-    "name": "M030Gbsp",
-    "version": "V3.04.000-19-g76385b0-dirty",
-    "releaseIdentifierSource": "SBOM file name",
-    "gitDescribe": "V3.04.000-19-g76385b0-dirty"
+    "name": "M030GBSP",
+    "version": "V3.04.000-20-gd9fc2b3e",
+    "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
+    "gitDescribe": "V3.04.000-20-gd9fc2b3e",
+    "gitCommit": "d9fc2b3eaad18424937e39c2f278fe67a8d4251a",
+    "sourceTreeState": "clean"
   },
+  "generationTools": [
+    {
+      "name": "SBOM Generator",
+      "version": "0.2.0"
+    },
+    {
+      "name": "Syft",
+      "version": "1.45.1"
+    },
+    {
+      "name": "CycloneDX CLI",
+      "version": "0.32.0+0ed788d25c13cef9e9a3029603f6b708e3279390"
+    },
+    {
+      "name": "grype",
+      "version": "grype 0.117.0"
+    },
+    {
+      "name": "sbom-checker",
+      "version": "1.0.0"
+    }
+  ],
   "sbomPackage": {
     "name": "MCU BSP SBOM Package",
     "format": "CycloneDX",
@@ -24,14 +48,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:6d657e14-5817-4435-b8ef-e2eef9f91009",
+      "serialNumber": "urn:uuid:5a4547b8-f537-411f-a2b0-38038ed73bba",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-29T08:10:38+08:00",
+      "generatedTimestamp": "2026-09-01T18:31:40+08:00",
       "metadataComponent": {
-        "bomRef": "b0a70ff95ab205e4",
+        "bomRef": "b01e89a2616eb989",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.04.000-19-g76385b0-dirty",
+        "version": "V3.04.000-20-gd9fc2b3e",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -100,7 +124,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "c1214265b37cd32c638cceb945b0955ae9fe539a0daabd6977583de1c50e32ac"
+        "value": "67a9fafccdacfdc3595ca9e65a5c806ca38a406f72d088c7b249e53297eb2758"
       }
     },
     {
@@ -108,14 +132,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:070ed3d0-cbc2-4dfb-a6df-f735b8d11c75",
+      "serialNumber": "urn:uuid:ec2c82fd-e2fb-4804-a2e1-35b39e85ee54",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-08-29T08:10:43+08:00",
+      "generatedTimestamp": "2026-09-01T18:31:51+08:00",
       "metadataComponent": {
-        "bomRef": "281e8e40b611917b",
+        "bomRef": "ea19d65414c9fd50",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.04.000-19-g76385b0-dirty",
+        "version": "V3.04.000-20-gd9fc2b3e",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -154,19 +178,20 @@
       "scope": "Components used only for examples, demonstrations, validation, host-side utilities, or testing; not included in product runtime unless explicitly integrated by the user.",
       "isProductRuntimeScope": false,
       "componentSummary": {
-        "componentCount": 1,
+        "componentCount": 5,
         "componentCountByType": {
-          "application": 1
+          "application": 1,
+          "file": 4
         },
         "applicationNames": [
           "M030G SampleCode"
         ],
-        "fileComponentCount": 0,
-        "fileComponentWithHashCount": 0
+        "fileComponentCount": 4,
+        "fileComponentWithHashCount": 4
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "923b7ab1730d49c97d270d5db58fee7bbbbd0c0b50c5ba62f88d60c8769da63e"
+        "value": "1fa17ed8f73ff8382d5b6713bb050851bc4361078a99ead5a040d961934852f4"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,

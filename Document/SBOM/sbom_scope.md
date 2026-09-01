@@ -62,7 +62,7 @@ Sample code, demonstration projects, validation code, project configuration, sam
 
 ## FMC IAP Binary Artifacts
 
-The FMC IAP sample contains four toolchain-specific `.bin` firmware images under `SampleCode/StdDriver/FMC_IAP`. These files are referenced by the corresponding sample projects and are Test Sample build artifacts. They are not Product runtime components. If represented as CycloneDX file components, each file must retain its actual relative path and SHA-256 hash.
+The FMC IAP sample contains four toolchain-specific `.bin` firmware images under `SampleCode/StdDriver/FMC_IAP`. These files are referenced by the corresponding sample projects and are Test Sample build artifacts. They are not Product runtime components. Each file is represented as a CycloneDX file component with its exact repository-relative path and SHA-256 hash.
 
 # Excluded Repository Content
 
