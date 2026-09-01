@@ -32,7 +32,7 @@
         },
         {
           "name": "bsp:evidence-file",
-          "value": "Document/SBOM/components/ProductView/sca_uos-semihosting.json"
+          "value": "Document/SBOM/components/Excluded/sca_uos-semihosting.json"
         },
         {
           "name": "bsp:evidence-path",
