@@ -1,15 +1,34 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:86e8dd84-1532-4ce2-8bcd-959a6cc54935",
-  "createdAt": "2026-09-01T12:22:55.173137Z",
+  "serialNumber": "urn:uuid:58ac6427-d8b5-4be4-847e-19b8e315aff4",
+  "createdAt": "2026-09-02T00:55:52.700730Z",
   "bsp": {
     "name": "M030GBSP",
-    "version": "V3.04.000-25-gf288a74a",
+    "version": "V3.04.000-27-gfcbbddf8",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.04.000-25-gf288a74a",
-    "gitCommit": "f288a74a4d9c51dc93e068777dfda67c36bced87",
-    "sourceTreeState": "clean"
+    "gitDescribe": "V3.04.000-27-gfcbbddf8",
+    "gitCommit": "fcbbddf8decb5ca45c92a52953315f048f7c452d",
+    "sourceTreeState": "clean",
+    "sourceCommit": "fcbbddf8decb5ca45c92a52953315f048f7c452d",
+    "sourceCommitStatus": "merged",
+    "sourceGerritChange": 16789,
+    "sourceGerritChangeId": "I306307f8fca8cfb74c378cf356f53e6d18234d1e",
+    "sourceBranch": "master",
+    "canonicalReleaseIdentity": "V3.04.000-27-gfcbbddf8",
+    "canonicalIdentityBasis": {
+      "anchor": "V3.04.000",
+      "commitCountFromAnchor": 27,
+      "sourceAbbreviation": "fcbbddf8",
+      "tagRefsPresent": true
+    },
+    "svnDistribution": {
+      "path": "bsp/m030g/V3.04.000-27-gfcbbddf8",
+      "revision": 51,
+      "publicationState": "committed-final"
+    },
+    "gitArtifactDistributionCommit": "containing-commit",
+    "gitArtifactDistributionPolicy": "Current canonical Product, Test Sample, and Manifest files are synchronized from the finalized formal release by the containing Git commit. The containing commit identifier is intentionally not embedded to avoid a self-reference loop."
   },
   "generationTools": [
     {
@@ -48,14 +67,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:73243163-6c1a-49c0-93ac-40c24db5da87",
+      "serialNumber": "urn:uuid:f041467a-6868-4669-a5e9-e5306edd62a9",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T20:22:42+08:00",
+      "generatedTimestamp": "2026-09-02T08:55:40+08:00",
       "metadataComponent": {
-        "bomRef": "7e4a29ef383c3bab",
+        "bomRef": "ad8f90cf8f94ed8a",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.04.000-25-gf288a74a",
+        "version": "V3.04.000-27-gfcbbddf8",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -124,7 +143,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "430080527b6d2fd6ca5455ef7c4293a481408ee9583ec7ee3eb76edb531f6c34"
+        "value": "6caf954341ee830c597a4e9154a1093ef0147f4de31ba3c9d0dc4df9fdeee1f4"
       }
     },
     {
@@ -132,14 +151,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:c2481651-b854-422c-94e7-3e7ee7b20a80",
+      "serialNumber": "urn:uuid:636f585d-62d8-4f0b-86f2-fd6fc6346b50",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-01T20:22:50+08:00",
+      "generatedTimestamp": "2026-09-02T08:55:49+08:00",
       "metadataComponent": {
-        "bomRef": "00c3521de3ac9dd2",
+        "bomRef": "147ee2acbbf8b669",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.04.000-25-gf288a74a",
+        "version": "V3.04.000-27-gfcbbddf8",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -191,7 +210,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "53667e24e4ffa49ea50af04766f27b6218ddc41e463c140f9532b4a0364ae32b"
+        "value": "d682af03482659c479d889c745736dfbef4ed60a7d0229841b50786208156e28"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -214,23 +233,6 @@
     "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
   ],
   "validationEvidence": {
-    "auditProvenance": {
-      "source": {
-        "authoritativeMergedBranch": "origin/master",
-        "authoritativeMergedCommit": "d9d4b7987ad4feb1de5de6f8e78abbc9f581e801",
-        "sbomSourceCommit": "f288a74a4d9c51dc93e068777dfda67c36bced87",
-        "sourceTreeStateAtAuditStart": "clean"
-      },
-      "formalArtifact": {
-        "releaseIdentifier": "V3.04.000-25-gf288a74a",
-        "distributionPath": "bsp/m030g/V3.04.000-25-gf288a74a",
-        "distributionRevision": 42,
-        "publicationState": "existing-immutable",
-        "latestReleaseAtAudit": "V3.04.000-25-gf288a74a",
-        "releaseTreeSha256": "0636b3ab88640342df0df3d26cd691a32a1eeea97dd7025169480adcce83ab90",
-        "manifestSha256": "a5a0815e8f84eddbf3229c05a2110109c05605abbce1af6231c1772817732b41"
-      }
-    },
     "formalPackageAudit": {
       "status": "PASS",
       "gapCount": 0,
@@ -302,10 +304,10 @@
         "valid": true
       },
       "product": {
-        "rawReport": "vulnerability-scan/grype_M030GBSP_Product_SBOM_V3.04.000-25-gf288a74a.cdx.json",
-        "rawReportSha256": "f9f40d8d96cfbe63b0924ea9a35c72c1c566ab88234ed7d8869c5fd8b8bd6671",
-        "sourceTarget": "M030GBSP_Product_SBOM_V3.04.000-25-gf288a74a.cdx.json",
-        "timestamp": "2026-09-01T20:22:57.6772446+08:00",
+        "path": "vulnerability-scan/grype_M030GBSP_Product_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
+        "sha256": "b590bd9ece5b8f18b0e99d823abca82f5ff38907eea0c2888af5c0546196e32e",
+        "target": "M030GBSP_Product_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
+        "timestamp": "2026-09-02T08:55:55.9579694+08:00",
         "matches": 0,
         "severity": {
           "critical": 0,
@@ -318,10 +320,10 @@
         "findings": []
       },
       "testSample": {
-        "rawReport": "vulnerability-scan/grype_M030GBSP_TestSample_SBOM_V3.04.000-25-gf288a74a.cdx.json",
-        "rawReportSha256": "7133f1042cf8c833592ec750455236a7f624ae6f35e4877b835934f53a49ecf3",
-        "sourceTarget": "M030GBSP_TestSample_SBOM_V3.04.000-25-gf288a74a.cdx.json",
-        "timestamp": "2026-09-01T20:22:56.4349788+08:00",
+        "path": "vulnerability-scan/grype_M030GBSP_TestSample_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
+        "sha256": "67487939c9da9a3c4becdb090f7262f015b7a097b4434a74a8b8b5441e55430c",
+        "target": "M030GBSP_TestSample_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
+        "timestamp": "2026-09-02T08:55:54.3121808+08:00",
         "matches": 0,
         "severity": {
           "critical": 0,
@@ -332,10 +334,6 @@
           "unknown": 0
         },
         "findings": []
-      },
-      "summaryEvidence": {
-        "path": "Document/SBOM/vulnerability-scan-summary.md",
-        "sha256": "0895f9d53c1e311897d4e39aabf778bfe7a5750a4775ba6e13cfd56b4065e270"
       },
       "coverageLimitation": "CycloneDX input can omit identifiers required for vulnerability matching; offline or stale databases further limit coverage. Zero matches is not evidence that the BSP is clean or that the assessment is complete."
     },
@@ -350,13 +348,20 @@
       "notAffectedAssertions": 0
     },
     "integrity": {
-      "formalPayloadChecksums": "PASS (21/21)",
+      "formalPayloadChecksums": "PASS (22/22)",
       "manifestReferencesAndHashes": "PASS (2/2)",
-      "canonicalEvidenceHashes": {
-        "Document/SBOM/sbom_scope.md": "e2aaa84b13c767a2e568e6f2d56bf21b457c7cb59ba8a5594ae58273cec103bd",
-        "Document/SBOM/vulnerability-scan-summary.md": "0895f9d53c1e311897d4e39aabf778bfe7a5750a4775ba6e13cfd56b4065e270"
-      },
       "absolutePaths": 0
     }
+  },
+  "artifactSynchronization": {
+    "sourceRelease": "V3.04.000-27-gfcbbddf8",
+    "distributionPath": "bsp/m030g/V3.04.000-27-gfcbbddf8",
+    "distributionRevision": 51,
+    "formalManifestSha256": "c078739a340f8bf96eaaf25349532c02706779c78f692aee0c5c63cfeb9cd919",
+    "productPayloadSha256": "6caf954341ee830c597a4e9154a1093ef0147f4de31ba3c9d0dc4df9fdeee1f4",
+    "testSamplePayloadSha256": "d682af03482659c479d889c745736dfbef4ed60a7d0229841b50786208156e28",
+    "payloadIdentity": "Product and Test Sample current canonical files are byte-identical to the finalized formal payloads.",
+    "manifestIdentity": "Current Manifest preserves formal metadata and validation evidence while using current canonical filenames and final distribution trace.",
+    "selfReferencePolicy": "The containing artifact commit identifier is not embedded in this Manifest."
   }
 }
