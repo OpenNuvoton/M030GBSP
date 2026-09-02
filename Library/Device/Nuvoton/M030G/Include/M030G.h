@@ -494,7 +494,7 @@ typedef volatile unsigned short vu16;
 #define GET_BYTE3(u32Param)    (((u32Param) & BYTE3_Msk) >> 24) /*!< Extract Byte 3 (Bit 24~31) from parameter u32Param */
 
 /* Chip Series number definitions */
-#define GET_CHIP_SERIES_NUM    ((SYS->PDID & 0xF000) >> 12)     /*!< Extract chip series number from PDID */
+#define GET_CHIP_SERIES_NUM    ((SYS->PDID & 0xF000UL) >> 12)     /*!< Extract chip series number from PDID */
 #define CHIP_SERIES_NUM_M029G  (0x9UL)                          /*!< Chip series number for M029G */
 #define CHIP_SERIES_NUM_M030G  (0x0UL)                          /*!< Chip series number for M030G */
 #define CHIP_SERIES_NUM_M031G  (0x1UL)                          /*!< Chip series number for M031G */

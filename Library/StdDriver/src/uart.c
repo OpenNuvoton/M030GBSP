@@ -28,7 +28,7 @@
  *    @param[in]    uart                The pointer of the specified UART module.
  *    @param[in]    u32InterruptFlag    The specified interrupt of UART module.
  *                                      - \ref UART_INTSTS_SWBEINT_Msk   : Single-wire Bit Error Detect Interrupt
- *                                      - \ref UART_INTEN_WKIEN_Msk      : Wake-up interrupt
+ *                                      - \ref UART_INTSTS_WKINT_Msk     : Wake-up interrupt
  *                                      - \ref UART_INTSTS_BUFERRINT_Msk : Buffer Error interrupt
  *                                      - \ref UART_INTSTS_MODEMINT_Msk  : Modem Status interrupt
  *                                      - \ref UART_INTSTS_RLSINT_Msk    : Receive Line Status interrupt
@@ -38,7 +38,7 @@
  *    @details      The function is used to clear UART specified interrupt flag.
  */
 
-void UART_ClearIntFlag(UART_T *uart , uint32_t u32InterruptFlag)
+void UART_ClearIntFlag(UART_T *uart, uint32_t u32InterruptFlag)
 {
 
 
@@ -81,7 +81,7 @@ void UART_ClearIntFlag(UART_T *uart , uint32_t u32InterruptFlag)
  */
 void UART_Close(UART_T *uart)
 {
-    uart->INTEN = 0ul;
+    uart->INTEN = 0UL;
 }
 
 
@@ -118,14 +118,16 @@ void UART_DisableFlowCtrl(UART_T *uart)
  *
  *    @details      The function is used to disable UART specified interrupt and disable NVIC UART IRQ.
  */
-void UART_DisableInt(UART_T  *uart, uint32_t u32InterruptFlag)
+void UART_DisableInt(UART_T *uart, uint32_t u32InterruptFlag)
 {
     /* Disable UART specified interrupt */
     UART_DISABLE_INT(uart, u32InterruptFlag);
 
     /* Disable NVIC UART IRQ */
-    if(uart == UART0)
+    if (uart == (UART_T *)UART0)
+    {
         NVIC_DisableIRQ(UART0_IRQn);
+    }
 
 }
 
@@ -137,7 +139,7 @@ void UART_DisableInt(UART_T  *uart, uint32_t u32InterruptFlag)
  *
  *    @return       None
  *
- *    @details      The function is used to Enable UART auto flow control.
+ *    @details      The function is used to enable UART auto flow control.
  */
 void UART_EnableFlowCtrl(UART_T *uart)
 {
@@ -170,14 +172,16 @@ void UART_EnableFlowCtrl(UART_T *uart)
  *
  *    @details      The function is used to enable UART specified interrupt and enable NVIC UART IRQ.
  */
-void UART_EnableInt(UART_T  *uart, uint32_t u32InterruptFlag)
+void UART_EnableInt(UART_T *uart, uint32_t u32InterruptFlag)
 {
     /* Enable UART specified interrupt */
     UART_ENABLE_INT(uart, u32InterruptFlag);
 
     /* Enable NVIC UART IRQ */
-    if(uart == UART0)
+    if (uart == (UART_T *)UART0)
+    {
         NVIC_EnableIRQ(UART0_IRQn);
+    }
 
 }
 
@@ -194,9 +198,9 @@ void UART_EnableInt(UART_T  *uart, uint32_t u32InterruptFlag)
  */
 void UART_Open(UART_T *uart, uint32_t u32baudrate)
 {
-    uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[6ul] = {0ul, 0ul, 0ul, __HIRC, 0ul, __LIRC};
-    uint32_t u32Baud_Div = 0ul;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 0UL;
+    uint32_t u32ClkTbl[6UL] = {0UL, 0UL, 0UL, __HIRC, 0UL, __LIRC};
 
 
     if (uart == (UART_T *)UART0)
@@ -217,7 +221,7 @@ void UART_Open(UART_T *uart, uint32_t u32baudrate)
     uart->FIFO &= ~(UART_FIFO_RFITL_Msk | UART_FIFO_RTSTRGLV_Msk);
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 4ul)
+    if (u32UartClkSrcSel == 4UL)
     {
         /* UART Port as UART0 */
         if (uart == (UART_T *)UART0)
@@ -228,13 +232,13 @@ void UART_Open(UART_T *uart, uint32_t u32baudrate)
     }
 
     /* Set UART baud rate */
-    if (u32baudrate != 0ul)
+    if (u32baudrate != 0UL)
     {
-        u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate);
+        uint32_t u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate);
 
-        if (u32Baud_Div > 0xFFFFul)
+        if (u32Baud_Div > 0xFFFFUL)
         {
-            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate));
+            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate));
         }
         else
         {
@@ -249,33 +253,33 @@ void UART_Open(UART_T *uart, uint32_t u32baudrate)
  *
  *    @param[in]    uart            The pointer of the specified UART module.
  *    @param[in]    pu8RxBuf        The buffer to receive the data of receive FIFO.
- *    @param[in]    u32ReadBytes    The the read bytes number of data.
+ *    @param[in]    u32ReadBytes    The read bytes number of data.
  *
  *    @return       u32Count Receive byte count
  *
  *    @details      The function is used to read Rx data from RX FIFO and the data will be stored in pu8RxBuf.
  */
-uint32_t UART_Read(UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
+uint32_t UART_Read(const UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
 {
-    uint32_t  u32Count, u32delayno;
-    uint32_t  u32Exit = 0ul;
+    uint32_t  u32Count;
+    uint32_t  u32Exit = 0UL;
 
-    for (u32Count = 0ul; u32Count < u32ReadBytes; u32Count++)
+    for (u32Count = 0UL; u32Count < u32ReadBytes; u32Count++)
     {
-        u32delayno = 0ul;
+        uint32_t u32delayno = 0UL;
 
         while (uart->FIFOSTS & UART_FIFOSTS_RXEMPTY_Msk)   /* Check RX empty => failed */
         {
             u32delayno++;
 
-            if (u32delayno >= 0x40000000ul)
+            if (u32delayno >= 0x40000000UL)
             {
-                u32Exit = 1ul;
+                u32Exit = 1UL;
                 break;
             }
         }
 
-        if (u32Exit == 1ul)
+        if (u32Exit == 1UL)
         {
             break;
         }
@@ -316,11 +320,11 @@ uint32_t UART_Read(UART_T *uart, uint8_t pu8RxBuf[], uint32_t u32ReadBytes)
  *
  *    @details      This function use to config UART line setting.
  */
-void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t  u32stop_bits)
+void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_width, uint32_t u32parity, uint32_t u32stop_bits)
 {
-    uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[6ul] = {0ul, 0ul, 0ul, __HIRC, 0, __LIRC};
-    uint32_t u32Baud_Div = 0ul;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 0UL;
+    uint32_t u32ClkTbl[6UL] = {0UL, 0UL, 0UL, __HIRC, 0UL, __LIRC};
 
 
     if (uart == (UART_T *)UART0)
@@ -332,7 +336,7 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
     }
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 4ul)
+    if (u32UartClkSrcSel == 4UL)
     {
         if (uart == (UART_T *)UART0)
         {
@@ -342,13 +346,13 @@ void UART_SetLine_Config(UART_T *uart, uint32_t u32baudrate, uint32_t u32data_wi
 
 
     /* Set UART baud rate */
-    if (u32baudrate != 0ul)
+    if (u32baudrate != 0UL)
     {
-        u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate);
+        uint32_t u32Baud_Div = UART_BAUD_MODE2_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate);
 
-        if (u32Baud_Div > 0xFFFFul)
+        if (u32Baud_Div > 0xFFFFUL)
         {
-            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32baudrate));
+            uart->BAUD = (UART_BAUD_MODE0 | UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32baudrate));
         }
         else
         {
@@ -396,9 +400,9 @@ void UART_SetTimeoutCnt(UART_T *uart, uint32_t u32TOC)
  */
 void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Direction)
 {
-    uint32_t u32UartClkSrcSel = 0ul, u32UartClkDivNum = 0ul;
-    uint32_t u32ClkTbl[6ul] = {0ul, 0ul, 0ul, __HIRC, 0ul, __LIRC};
-    uint32_t u32Baud_Div;
+    uint32_t u32UartClkSrcSel = 0UL;
+    uint32_t u32UartClkDivNum = 0UL;
+    uint32_t u32ClkTbl[6UL] = {0UL, 0UL, 0UL, __HIRC, 0UL, __LIRC};
 
     /* Select IrDA function mode */
     uart->FUNCSEL = UART_FUNCSEL_IrDA;
@@ -414,7 +418,7 @@ void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Directi
 
 
     /* Get PCLK clock frequency if UART clock source selection is PCLK */
-    if (u32UartClkSrcSel == 4ul)
+    if (u32UartClkSrcSel == 4UL)
     {
         if (uart == (UART_T *)UART0)
         {
@@ -424,11 +428,11 @@ void UART_SelectIrDAMode(UART_T *uart, uint32_t u32Buadrate, uint32_t u32Directi
 
 
     /* Set UART IrDA baud rate in mode 0 */
-    if (u32Buadrate != 0ul)
+    if (u32Buadrate != 0UL)
     {
-        u32Baud_Div = UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1ul), u32Buadrate);
+        uint32_t u32Baud_Div = UART_BAUD_MODE0_DIVIDER((u32ClkTbl[u32UartClkSrcSel]) / (u32UartClkDivNum + 1UL), u32Buadrate);
 
-        if (u32Baud_Div < 0xFFFFul)
+        if (u32Baud_Div < 0xFFFFUL)
         {
             uart->BAUD = (UART_BAUD_MODE0 | u32Baud_Div);
         }
@@ -488,27 +492,27 @@ void UART_SelectRS485Mode(UART_T *uart, uint32_t u32Mode, uint32_t u32Addr)
  *
  *    @details      The function is to write data into TX buffer to transmit data by UART.
  */
-uint32_t UART_Write(UART_T *uart, uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
+uint32_t UART_Write(UART_T *uart, const uint8_t pu8TxBuf[], uint32_t u32WriteBytes)
 {
-    uint32_t  u32Count, u32delayno;
-    uint32_t  u32Exit = 0ul;
+    uint32_t  u32Count;
+    uint32_t  u32Exit = 0UL;
 
-    for (u32Count = 0ul; u32Count != u32WriteBytes; u32Count++)
+    for (u32Count = 0UL; u32Count != u32WriteBytes; u32Count++)
     {
-        u32delayno = 0ul;
+        uint32_t u32delayno = 0UL;
 
         while (uart->FIFOSTS & UART_FIFOSTS_TXFULL_Msk)   /* Check Tx Full */
         {
             u32delayno++;
 
-            if (u32delayno >= 0x40000000ul)
+            if (u32delayno >= 0x40000000UL)
             {
-                u32Exit = 1ul;
+                u32Exit = 1UL;
                 break;
             }
         }
 
-        if (u32Exit == 1ul)
+        if (u32Exit == 1UL)
         {
             break;
         }
