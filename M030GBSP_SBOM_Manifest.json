@@ -212,5 +212,151 @@
   ],
   "notes": [
     "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
-  ]
+  ],
+  "validationEvidence": {
+    "auditProvenance": {
+      "source": {
+        "authoritativeMergedBranch": "origin/master",
+        "authoritativeMergedCommit": "d9d4b7987ad4feb1de5de6f8e78abbc9f581e801",
+        "sbomSourceCommit": "f288a74a4d9c51dc93e068777dfda67c36bced87",
+        "sourceTreeStateAtAuditStart": "clean"
+      },
+      "formalArtifact": {
+        "releaseIdentifier": "V3.04.000-25-gf288a74a",
+        "distributionPath": "bsp/m030g/V3.04.000-25-gf288a74a",
+        "distributionRevision": 42,
+        "publicationState": "existing-immutable",
+        "latestReleaseAtAudit": "V3.04.000-25-gf288a74a",
+        "releaseTreeSha256": "0636b3ab88640342df0df3d26cd691a32a1eeea97dd7025169480adcce83ab90",
+        "manifestSha256": "a5a0815e8f84eddbf3229c05a2110109c05605abbce1af6231c1772817732b41"
+      }
+    },
+    "formalPackageAudit": {
+      "status": "PASS",
+      "gapCount": 0,
+      "gaps": [],
+      "checks": [
+        "identity",
+        "generationTools",
+        "productReferences",
+        "testSampleReferences",
+        "manifest",
+        "applicabilityClosure",
+        "checkerReports",
+        "binaryClosure",
+        "manualAndLicenseEvidence",
+        "scans",
+        "absolutePaths",
+        "checksums"
+      ]
+    },
+    "cycloneDx": {
+      "specVersion": "1.6",
+      "validated": 2,
+      "passed": 2
+    },
+    "strictChecker": {
+      "validated": 2,
+      "passed": 2,
+      "errors": 0,
+      "warnings": 0
+    },
+    "binaryExactClosure": {
+      "trackedPaths": 4,
+      "matchedRepositoryRelativePathsAndSha256": 4,
+      "gaps": 0
+    },
+    "manualAndLicenseEvidence": {
+      "includedManualSourceComponents": {
+        "components": 1,
+        "matchedSbomComponents": 1,
+        "sourceAndLicenseEvidenceValidated": 1
+      },
+      "binaryComponents": {
+        "components": 4,
+        "matchedExactPathsAndSha256": 4,
+        "licenseEvidenceReferencesValidated": 4
+      },
+      "excludedSourceReview": {
+        "records": 1,
+        "sourceFileHashesValidated": 2,
+        "reviewStatus": "pending"
+      },
+      "gaps": 0
+    },
+    "grype": {
+      "scannerVersion": "0.117.0",
+      "rawSchema": {
+        "format": "Grype JSON",
+        "requiredTopLevelFields": [
+          "matches",
+          "source",
+          "distro",
+          "descriptor"
+        ],
+        "reportsValidated": 2
+      },
+      "database": {
+        "schemaVersion": "v6.1.9",
+        "built": "2026-08-31T06:37:31Z",
+        "valid": true
+      },
+      "product": {
+        "rawReport": "vulnerability-scan/grype_M030GBSP_Product_SBOM_V3.04.000-25-gf288a74a.cdx.json",
+        "rawReportSha256": "f9f40d8d96cfbe63b0924ea9a35c72c1c566ab88234ed7d8869c5fd8b8bd6671",
+        "sourceTarget": "M030GBSP_Product_SBOM_V3.04.000-25-gf288a74a.cdx.json",
+        "timestamp": "2026-09-01T20:22:57.6772446+08:00",
+        "matches": 0,
+        "severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "negligible": 0,
+          "unknown": 0
+        },
+        "findings": []
+      },
+      "testSample": {
+        "rawReport": "vulnerability-scan/grype_M030GBSP_TestSample_SBOM_V3.04.000-25-gf288a74a.cdx.json",
+        "rawReportSha256": "7133f1042cf8c833592ec750455236a7f624ae6f35e4877b835934f53a49ecf3",
+        "sourceTarget": "M030GBSP_TestSample_SBOM_V3.04.000-25-gf288a74a.cdx.json",
+        "timestamp": "2026-09-01T20:22:56.4349788+08:00",
+        "matches": 0,
+        "severity": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "negligible": 0,
+          "unknown": 0
+        },
+        "findings": []
+      },
+      "summaryEvidence": {
+        "path": "Document/SBOM/vulnerability-scan-summary.md",
+        "sha256": "0895f9d53c1e311897d4e39aabf778bfe7a5750a4775ba6e13cfd56b4065e270"
+      },
+      "coverageLimitation": "CycloneDX input can omit identifiers required for vulnerability matching; offline or stale databases further limit coverage. Zero matches is not evidence that the BSP is clean or that the assessment is complete."
+    },
+    "securityStatus": {
+      "findingsDisclosure": "Raw Product and Test Sample reports are preserved without deletion, hiding, filtering, or severity downgrade.",
+      "findingDisposition": "not asserted",
+      "productSecurityDisposition": "not asserted",
+      "productSecurityApproval": "not asserted",
+      "psirtApproval": "not asserted",
+      "vexApplicability": "not asserted",
+      "vexPublished": false,
+      "notAffectedAssertions": 0
+    },
+    "integrity": {
+      "formalPayloadChecksums": "PASS (21/21)",
+      "manifestReferencesAndHashes": "PASS (2/2)",
+      "canonicalEvidenceHashes": {
+        "Document/SBOM/sbom_scope.md": "e2aaa84b13c767a2e568e6f2d56bf21b457c7cb59ba8a5594ae58273cec103bd",
+        "Document/SBOM/vulnerability-scan-summary.md": "0895f9d53c1e311897d4e39aabf778bfe7a5750a4775ba6e13cfd56b4065e270"
+      },
+      "absolutePaths": 0
+    }
+  }
 }

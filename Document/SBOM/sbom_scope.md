@@ -75,3 +75,18 @@ M030G is not suitable for FreeRTOS integration in this BSP scope. The M030G BSP 
 # External Build Dependencies
 
 GCC project files may select newlib-nano through toolchain options such as `--specs=nano.specs`. This is an external build-toolchain dependency and does not mean that the complete newlib or newlib-nano source package is distributed in the M030G BSP repository.
+
+# Canonical Validation Evidence
+
+The structured aggregate audit is recorded in
+`M030GBSP_SBOM_Manifest.json`. It covers source and formal-artifact provenance,
+CycloneDX 1.6 validation, strict checker results, component references,
+manifest hashes, exact physical binary closure, manual and license evidence,
+raw Grype schema and metadata, absolute-path exclusion, and payload checksums.
+The recorded result is `PASS (0 gaps)`.
+
+The exact Product and Test Sample findings, severity counts, raw report
+identities and hashes, scanner and database metadata, coverage limitations,
+and security status are recorded in
+`Document/SBOM/vulnerability-scan-summary.md`. Zero Grype matches is not
+equivalent to a clean or complete security assessment.
