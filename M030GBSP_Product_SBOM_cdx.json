@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:f041467a-6868-4669-a5e9-e5306edd62a9",
+  "serialNumber": "urn:uuid:cf64ce84-4bbe-4304-b86d-923c128b78dc",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-09-02T08:55:40+08:00",
+    "timestamp": "2026-09-02T14:59:18+08:00",
     "tools": {
       "components": [
         {
@@ -17,17 +17,17 @@
       ]
     },
     "component": {
-      "bom-ref": "ad8f90cf8f94ed8a",
+      "bom-ref": "51fc635bfee1e6db",
       "type": "library",
       "name": "MCU Driver",
-      "version": "V3.04.000-27-gfcbbddf8",
+      "version": "V3.04.000-28-gf5d1bb9d",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/mcu-driver@V3.04.000-27-gfcbbddf8",
+      "purl": "pkg:generic/nuvoton/mcu-driver@V3.04.000-28-gf5d1bb9d",
       "licenses": [
         {
           "license": {
@@ -46,7 +46,7 @@
         },
         {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -105,78 +105,20 @@
   "components": [
     {
       "type": "library",
-      "bom-ref": "m030gbsp:product-component:library-device",
-      "name": "M030G Device",
-      "version": "V3.04.000-27-gfcbbddf8",
-      "supplier": {
-        "name": "Nuvoton Technology Corp.",
-        "url": [
-          "https://www.nuvoton.com"
-        ]
-      },
-      "purl": "pkg:generic/nuvoton/library-device@V3.04.000-27-gfcbbddf8",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "a6749543ef47c590935cd2640ff252dfe6b1f4c2fe5edfe00d9f3ffd68bc2599"
-        }
-      ],
-      "licenses": [
-        {
-          "license": {
-            "id": "Apache-2.0"
-          }
-        }
-      ],
-      "scope": "required",
-      "description": "Directory-level first-party BSP product component included from product scope path Library/Device",
-      "properties": [
-        {
-          "name": "bsp:sbom-category",
-          "value": "product"
-        },
-        {
-          "name": "bsp:path",
-          "value": "Library/Device"
-        },
-        {
-          "name": "bsp:component-origin",
-          "value": "first-party"
-        },
-        {
-          "name": "bsp:component-granularity",
-          "value": "directory"
-        },
-        {
-          "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
-        },
-        {
-          "name": "bsp:runtime-scope",
-          "value": "true"
-        },
-        {
-          "name": "bsp:included-in-product-firmware",
-          "value": "true"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "bom-ref": "m030gbsp:product-component:library-stddriver",
       "name": "M030G StdDriver",
-      "version": "V3.04.000-27-gfcbbddf8",
+      "version": "V3.04.000-28-gf5d1bb9d",
       "supplier": {
         "name": "Nuvoton Technology Corp.",
         "url": [
           "https://www.nuvoton.com"
         ]
       },
-      "purl": "pkg:generic/nuvoton/library-stddriver@V3.04.000-27-gfcbbddf8",
+      "purl": "pkg:generic/nuvoton/library-stddriver@V3.04.000-28-gf5d1bb9d",
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "203261524d4e076a9b9b1af478b2e2b626e6f587030ca6b162c6a35939a16625"
+          "content": "1bbfcac16fd390443d3beb020c10d6d95f853ba417cb5fe334b74b5cb2db5b1f"
         }
       ],
       "licenses": [
@@ -206,8 +148,12 @@
           "value": "directory"
         },
         {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
           "name": "bsp:scope-policy-file",
-          "value": "product-scope.yaml"
+          "value": "Document/SBOM/product-scope.yaml"
         },
         {
           "name": "bsp:runtime-scope",
@@ -216,6 +162,14 @@
         {
           "name": "bsp:included-in-product-firmware",
           "value": "true"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "34"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/inventory/aggregate-inventory.json#stdDriver"
         }
       ]
     },
@@ -299,22 +253,859 @@
         {
           "name": "bsp:component-hash-file-count",
           "value": "2253"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/inventory/aggregate-inventory.json#cmsis"
         }
       ],
       "hashes": [
         {
           "alg": "SHA-256",
-          "content": "b5c3e4f30f88852f4433bfd818a8f091654b8b5ec099b4a5b868c0ecb79c46ad"
+          "content": "6250ee7ddf4cbe6f660eaa47d35bcbaf0f1afaea18e7ef0cf0041741180f0312"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "m030gbsp:product-component:deviceinclude",
+      "name": "M030G Device Include",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/deviceinclude@V3.04.000-28-gf5d1bb9d",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e72a2a7f4225f621f8c0f8165db6c7d251eecd91b0fa7e9c50b29fb82bc1e8d0"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Non-overlapping directory aggregate for Library/Device/Nuvoton/M030G/Include.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Include"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "19"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/inventory/aggregate-inventory.json#deviceInclude"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "SPDX-License-Identifier: Apache-2.0 in every inventoried file"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "m030gbsp:product-component:deviceiar",
+      "name": "M030G Device IAR Source",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/deviceiar@V3.04.000-28-gf5d1bb9d",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f77ab0370f5fefad02d9f092988d5781446b6a8a834cf2a5a8d472f97685cc03"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Non-overlapping directory aggregate for Library/Device/Nuvoton/M030G/Source/IAR.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/IAR"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "directory"
+        },
+        {
+          "name": "bsp:component-hash-algorithm",
+          "value": "sha256-path-nul-content-nul-v1"
+        },
+        {
+          "name": "bsp:component-hash-file-count",
+          "value": "1"
+        },
+        {
+          "name": "bsp:component-hash-inventory",
+          "value": "Document/SBOM/inventory/aggregate-inventory.json#deviceIar"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "SPDX-License-Identifier: Apache-2.0 in every inventoried file"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:1ff1217e01cb8f07101d1ad40243f85bdc25f9654357dc99d75d0fc502798d7a",
+      "name": "Library/Device/Nuvoton/M030G/Source/semihost.s",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2Fsemihost.s",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1ff1217e01cb8f07101d1ad40243f85bdc25f9654357dc99d75d0fc502798d7a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/semihost.s"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "8b8c93ddd3102e7bf8f225ec46deaa51f540a54e"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "embedded SPDX-License-Identifier: Apache-2.0"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:8e0bbf9987f60a1f74511d195c8c843a268b356d62c6d3d487d94ff6a0c26c47",
+      "name": "Library/Device/Nuvoton/M030G/Source/system_M030G.c",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2Fsystem_M030G.c",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "8e0bbf9987f60a1f74511d195c8c843a268b356d62c6d3d487d94ff6a0c26c47"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/system_M030G.c"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "cca409c3f43d3c58696f774b1301c9b6cac2ec02"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "embedded SPDX-License-Identifier: Apache-2.0"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:9af7bd5406d100bc652a5c4eadd4446d7cc47cc6ad5775616f78343ed0a702b5",
+      "name": "Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.c",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FARM%2Fstartup_M030G.c",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "9af7bd5406d100bc652a5c4eadd4446d7cc47cc6ad5775616f78343ed0a702b5"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.c"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "fe9c4b446a27debab08343bdc4d83de6f321217e"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "embedded SPDX-License-Identifier: Apache-2.0"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:4a9e8628f1952aab73a34cceca94a61ac0e991a4d35af18b2d8b548887130d5c",
+      "name": "Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.s",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FARM%2Fstartup_M030G.s",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "4a9e8628f1952aab73a34cceca94a61ac0e991a4d35af18b2d8b548887130d5c"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.s"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "6c97188e6e5509bd84aa066312be7d5568290bb6"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "embedded SPDX-License-Identifier: Apache-2.0"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:49a05fe3f45ca2437d1d6665e18e7771f46cac47dff54073576b495f95cb013a",
+      "name": "Library/Device/Nuvoton/M030G/Source/GCC/startup_M030G.S",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FGCC%2Fstartup_M030G.S",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "49a05fe3f45ca2437d1d6665e18e7771f46cac47dff54073576b495f95cb013a"
+        }
+      ],
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/GCC/startup_M030G.S"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "18f75f9aafe0f57e12ccaa7195a585adc46581b9"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "identified"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "embedded SPDX-License-Identifier: Apache-2.0"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:7c34d7a8dbe95a8bd60b4b0611fb81512db8cdb7655feb765dd494f706023ea8",
+      "name": "Library/Device/Nuvoton/M030G/Source/ARM/APROM.sct",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FARM%2FAPROM.sct",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "7c34d7a8dbe95a8bd60b4b0611fb81512db8cdb7655feb765dd494f706023ea8"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-M030G-Device-License-Review-Pending"
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/ARM/APROM.sct"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "424473f066336de5c07caabe8700d52713a35278"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "review-pending"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/evidence/device-license-review.md"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:f1c421848135a2ab04e61e49d83269bc090564f33e8100396d62e8945c47ece7",
+      "name": "Library/Device/Nuvoton/M030G/Source/ARM/LDROM.sct",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FARM%2FLDROM.sct",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "f1c421848135a2ab04e61e49d83269bc090564f33e8100396d62e8945c47ece7"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-M030G-Device-License-Review-Pending"
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/ARM/LDROM.sct"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "ee83d03276cfbc4bc6c802e601ad2f527241dcac"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "review-pending"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/evidence/device-license-review.md"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:e3651fbd1c4effc6e5f36090d620a51bc7e7db2e0e457a4a929f5490e385c1bf",
+      "name": "Library/Device/Nuvoton/M030G/Source/GCC/gcc_arm.ld",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FGCC%2Fgcc_arm.ld",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "e3651fbd1c4effc6e5f36090d620a51bc7e7db2e0e457a4a929f5490e385c1bf"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-M030G-Device-License-Review-Pending"
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/GCC/gcc_arm.ld"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "c89c66650e8aa5c677154edc17b9673a2cb0e60d"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "review-pending"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/evidence/device-license-review.md"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "type": "file",
+      "bom-ref": "file:1ee51de0ba2762f19e6ea32213f3791cda4618f22789f23f03c85f3a2bc9bb28",
+      "name": "Library/Device/Nuvoton/M030G/Source/GCC/LDROM.ld",
+      "version": "V3.04.000-28-gf5d1bb9d",
+      "supplier": {
+        "name": "Nuvoton Technology Corp.",
+        "url": [
+          "https://www.nuvoton.com"
+        ]
+      },
+      "purl": "pkg:generic/nuvoton/m030gbsp-device-file@V3.04.000-28-gf5d1bb9d?file_path=Library%2FDevice%2FNuvoton%2FM030G%2FSource%2FGCC%2FLDROM.ld",
+      "hashes": [
+        {
+          "alg": "SHA-256",
+          "content": "1ee51de0ba2762f19e6ea32213f3791cda4618f22789f23f03c85f3a2bc9bb28"
+        }
+      ],
+      "licenses": [
+        {
+          "expression": "LicenseRef-M030G-Device-License-Review-Pending"
+        }
+      ],
+      "scope": "required",
+      "description": "Exact Device source file outside overlapping directory aggregates.",
+      "properties": [
+        {
+          "name": "bsp:sbom-category",
+          "value": "product"
+        },
+        {
+          "name": "bsp:path",
+          "value": "Library/Device/Nuvoton/M030G/Source/GCC/LDROM.ld"
+        },
+        {
+          "name": "bsp:git-blob-sha",
+          "value": "9250f559120b9bcc7f1f3b216a495e5c6391c91b"
+        },
+        {
+          "name": "bsp:component-origin",
+          "value": "first-party"
+        },
+        {
+          "name": "bsp:component-granularity",
+          "value": "file"
+        },
+        {
+          "name": "bsp:identity-basis",
+          "value": "exact repository-relative path, SHA-256, Git blob SHA, and BSP release"
+        },
+        {
+          "name": "bsp:license-status",
+          "value": "review-pending"
+        },
+        {
+          "name": "bsp:license-evidence",
+          "value": "Document/SBOM/evidence/device-license-review.md"
+        },
+        {
+          "name": "bsp:runtime-scope",
+          "value": "true"
+        },
+        {
+          "name": "bsp:included-in-product-firmware",
+          "value": "true"
         }
       ]
     }
   ],
   "dependencies": [
     {
-      "ref": "ad8f90cf8f94ed8a",
+      "ref": "51fc635bfee1e6db",
       "dependsOn": [
-        "m030gbsp:product-component:library-device",
-        "m030gbsp:product-component:library-stddriver"
+        "file:1ee51de0ba2762f19e6ea32213f3791cda4618f22789f23f03c85f3a2bc9bb28",
+        "file:1ff1217e01cb8f07101d1ad40243f85bdc25f9654357dc99d75d0fc502798d7a",
+        "file:49a05fe3f45ca2437d1d6665e18e7771f46cac47dff54073576b495f95cb013a",
+        "file:4a9e8628f1952aab73a34cceca94a61ac0e991a4d35af18b2d8b548887130d5c",
+        "file:7c34d7a8dbe95a8bd60b4b0611fb81512db8cdb7655feb765dd494f706023ea8",
+        "file:8e0bbf9987f60a1f74511d195c8c843a268b356d62c6d3d487d94ff6a0c26c47",
+        "file:9af7bd5406d100bc652a5c4eadd4446d7cc47cc6ad5775616f78343ed0a702b5",
+        "file:e3651fbd1c4effc6e5f36090d620a51bc7e7db2e0e457a4a929f5490e385c1bf",
+        "file:f1c421848135a2ab04e61e49d83269bc090564f33e8100396d62e8945c47ece7",
+        "m030gbsp:product-component:deviceiar",
+        "m030gbsp:product-component:deviceinclude",
+        "m030gbsp:product-component:library-stddriver",
+        "pkg:github/ARM-software/CMSIS_6@6.1.0?source=vendored&path=Library/CMSIS"
+      ]
+    },
+    {
+      "ref": "file:1ee51de0ba2762f19e6ea32213f3791cda4618f22789f23f03c85f3a2bc9bb28",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:1ff1217e01cb8f07101d1ad40243f85bdc25f9654357dc99d75d0fc502798d7a",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:49a05fe3f45ca2437d1d6665e18e7771f46cac47dff54073576b495f95cb013a",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:4a9e8628f1952aab73a34cceca94a61ac0e991a4d35af18b2d8b548887130d5c",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:7c34d7a8dbe95a8bd60b4b0611fb81512db8cdb7655feb765dd494f706023ea8",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:8e0bbf9987f60a1f74511d195c8c843a268b356d62c6d3d487d94ff6a0c26c47",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:9af7bd5406d100bc652a5c4eadd4446d7cc47cc6ad5775616f78343ed0a702b5",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:e3651fbd1c4effc6e5f36090d620a51bc7e7db2e0e457a4a929f5490e385c1bf",
+      "dependsOn": []
+    },
+    {
+      "ref": "file:f1c421848135a2ab04e61e49d83269bc090564f33e8100396d62e8945c47ece7",
+      "dependsOn": []
+    },
+    {
+      "ref": "m030gbsp:product-component:deviceiar",
+      "dependsOn": []
+    },
+    {
+      "ref": "m030gbsp:product-component:deviceinclude",
+      "dependsOn": []
+    },
+    {
+      "ref": "m030gbsp:product-component:library-stddriver",
+      "dependsOn": []
+    },
+    {
+      "ref": "pkg:github/ARM-software/CMSIS_6@6.1.0?source=vendored&path=Library/CMSIS",
+      "dependsOn": []
+    }
+  ],
+  "compositions": [
+    {
+      "aggregate": "complete",
+      "assemblies": [
+        "51fc635bfee1e6db"
       ]
     }
   ]

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0",
+  "definitions": [
+    {
+      "id": "LicenseRef-Nuvoton-Proprietary",
+      "conclusion": "Nuvoton Software License Agreement",
+      "definition": "The four exact FMC IAP binaries are governed for binary-form distribution by the authority identified below. This LicenseRef does not establish source redistribution rights.",
+      "authorityLocator": "http://nthcrdvss01.nuvoton.com:9443/svn/SBOM/bsp/m030g/V3.04.000-27-gfcbbddf8/Nuvoton%20Software%20License%20Agreement.md@51",
+      "authoritySha256": "8c61cd7eb3a4bd8693bb3678c57c9568d328ad661dc5f4682fcf306644dcf9fe",
+      "scope": "Four exact FMC IAP binary files listed in Document/SBOM/evidence/fmc-iap-binaries.md"
+    },
+    {
+      "id": "LicenseRef-Mixed-Apache-2.0-and-Nuvoton-Proprietary",
+      "conclusion": "mixed",
+      "definition": "Aggregate contains Apache-2.0 source files and four exact children under LicenseRef-Nuvoton-Proprietary; child conclusions remain authoritative.",
+      "evidence": [
+        "Document/SBOM/inventory/aggregate-inventory.json#sampleCode",
+        "Document/SBOM/evidence/fmc-iap-binaries.md"
+      ]
+    },
+    {
+      "id": "LicenseRef-M030G-Device-License-Review-Pending",
+      "conclusion": "not_assessed",
+      "definition": "No SPDX identifier or packaged authoritative license grant was found for the exact listed linker-control files. This is a review-state identifier, not a license grant.",
+      "evidence": [
+        "Document/SBOM/evidence/device-license-review.md"
+      ]
+    },
+    {
+      "id": "LicenseRef-uOS-III-License-Review-Pending",
+      "conclusion": "not_assessed",
+      "definition": "Existing review-state identifier for excluded uOS++ III/newlib-derived files; no final license expression is asserted.",
+      "evidence": [
+        "Document/SBOM/components/Excluded/sca_uos-semihosting.md"
+      ]
+    }
+  ]
+}

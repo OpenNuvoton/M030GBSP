@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "1.0",
+  "baselineCommit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
+  "extensions": [
+    ".a",
+    ".apk",
+    ".bin",
+    ".cat",
+    ".dll",
+    ".exe",
+    ".inf",
+    ".lib",
+    ".sys"
+  ],
+  "trackedArtifactCount": 4,
+  "includedCount": 4,
+  "excludedCount": 0,
+  "artifacts": [
+    {
+      "path": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "extension": ".bin",
+      "sha256": "cc6a044e93d6841911486e4a1f0ad1bdca859a4f491d9facd3909a8d93af3fed",
+      "gitBlobSha": "508dcb6a72e926673056ee812400a63f7aef99d1",
+      "disposition": "included",
+      "sbom": "test-sample",
+      "license": "LicenseRef-Nuvoton-Proprietary",
+      "evidence": "Document/SBOM/evidence/fmc-iap-binaries.md"
+    },
+    {
+      "path": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "extension": ".bin",
+      "sha256": "0fe73f7929c9dc22b1e8185f9ec98d5bf87525070aea58a88e7301220f7f1069",
+      "gitBlobSha": "0c6a480de958224fba7eb329c6e240d3fb154be8",
+      "disposition": "included",
+      "sbom": "test-sample",
+      "license": "LicenseRef-Nuvoton-Proprietary",
+      "evidence": "Document/SBOM/evidence/fmc-iap-binaries.md"
+    },
+    {
+      "path": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "extension": ".bin",
+      "sha256": "8af95568f8bf5610d2e4eba78ec80de54d70f460700ac3c83984f033396ad87b",
+      "gitBlobSha": "48ab8b59cf8997c07c70bcae2ed683304817c0a4",
+      "disposition": "included",
+      "sbom": "test-sample",
+      "license": "LicenseRef-Nuvoton-Proprietary",
+      "evidence": "Document/SBOM/evidence/fmc-iap-binaries.md"
+    },
+    {
+      "path": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "extension": ".bin",
+      "sha256": "62c9793103992e77335d494b44bf7103e6d57975b31e0825f5ad26d430125f9c",
+      "gitBlobSha": "9ba13cabebfa7fb27ee987e1d5c323015352c9c2",
+      "disposition": "included",
+      "sbom": "test-sample",
+      "license": "LicenseRef-Nuvoton-Proprietary",
+      "evidence": "Document/SBOM/evidence/fmc-iap-binaries.md"
+    }
+  ],
+  "exclusions": []
+}

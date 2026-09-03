@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0",
+  "databaseName": "M030GBSP FMC IAP binary license projection",
+  "description": "BSP-specific durable projection containing only the four tracked FMC IAP binaries.",
+  "matchingPolicy": {
+    "primaryMatch": "sha256",
+    "allowMetadataFallback": false,
+    "doNotMatchByFilenameOnly": true
+  },
+  "entries": [
+    {
+      "id": "m030g-fmc-iap-cc6a044e93d6",
+      "componentName": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin",
+      "componentType": "file",
+      "origin": "first-party",
+      "usage": "test-sample firmware image",
+      "sbomScope": "Test Sample SBOM",
+      "projection": {
+        "bsps": [
+          "M030GBSP"
+        ],
+        "releases": [
+          "V3.04.000-28-gf5d1bb9d"
+        ]
+      },
+      "match": {
+        "sha256": "cc6a044e93d6841911486e4a1f0ad1bdca859a4f491d9facd3909a8d93af3fed",
+        "fileName": "LDROM_iap.bin",
+        "pathHint": "SampleCode/StdDriver/FMC_IAP/GCC/LDROM_iap/LDROM_iap.bin"
+      },
+      "license": {
+        "status": "proprietary",
+        "expression": "LicenseRef-Nuvoton-Proprietary",
+        "type": "custom",
+        "confidence": "high"
+      },
+      "evidence": {
+        "source": "finalized-r51-license-package-and-exact-hash",
+        "evidenceFile": "Document/SBOM/evidence/fmc-iap-binaries.md",
+        "evidenceCompleteness": "exact-path-sha256-git-blob-and-packaged-license"
+      },
+      "cyclonedx": {
+        "licenses": [
+          {
+            "expression": "LicenseRef-Nuvoton-Proprietary"
+          }
+        ],
+        "properties": [
+          {
+            "name": "bsp:binary-license-status",
+            "value": "proprietary"
+          },
+          {
+            "name": "bsp:binary-license-evidence",
+            "value": "Document/SBOM/evidence/fmc-iap-binaries.md"
+          },
+          {
+            "name": "bsp:license-match-method",
+            "value": "sha256"
+          }
+        ]
+      }
+    },
+    {
+      "id": "m030g-fmc-iap-0fe73f7929c9",
+      "componentName": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin",
+      "componentType": "file",
+      "origin": "first-party",
+      "usage": "test-sample firmware image",
+      "sbomScope": "Test Sample SBOM",
+      "projection": {
+        "bsps": [
+          "M030GBSP"
+        ],
+        "releases": [
+          "V3.04.000-28-gf5d1bb9d"
+        ]
+      },
+      "match": {
+        "sha256": "0fe73f7929c9dc22b1e8185f9ec98d5bf87525070aea58a88e7301220f7f1069",
+        "fileName": "fmc_ld_iap.bin",
+        "pathHint": "SampleCode/StdDriver/FMC_IAP/IAR/Release/Exe/fmc_ld_iap.bin"
+      },
+      "license": {
+        "status": "proprietary",
+        "expression": "LicenseRef-Nuvoton-Proprietary",
+        "type": "custom",
+        "confidence": "high"
+      },
+      "evidence": {
+        "source": "finalized-r51-license-package-and-exact-hash",
+        "evidenceFile": "Document/SBOM/evidence/fmc-iap-binaries.md",
+        "evidenceCompleteness": "exact-path-sha256-git-blob-and-packaged-license"
+      },
+      "cyclonedx": {
+        "licenses": [
+          {
+            "expression": "LicenseRef-Nuvoton-Proprietary"
+          }
+        ],
+        "properties": [
+          {
+            "name": "bsp:binary-license-status",
+            "value": "proprietary"
+          },
+          {
+            "name": "bsp:binary-license-evidence",
+            "value": "Document/SBOM/evidence/fmc-iap-binaries.md"
+          },
+          {
+            "name": "bsp:license-match-method",
+            "value": "sha256"
+          }
+        ]
+      }
+    },
+    {
+      "id": "m030g-fmc-iap-8af95568f8bf",
+      "componentName": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin",
+      "componentType": "file",
+      "origin": "first-party",
+      "usage": "test-sample firmware image",
+      "sbomScope": "Test Sample SBOM",
+      "projection": {
+        "bsps": [
+          "M030GBSP"
+        ],
+        "releases": [
+          "V3.04.000-28-gf5d1bb9d"
+        ]
+      },
+      "match": {
+        "sha256": "8af95568f8bf5610d2e4eba78ec80de54d70f460700ac3c83984f033396ad87b",
+        "fileName": "fmc_ld_iap.bin",
+        "pathHint": "SampleCode/StdDriver/FMC_IAP/KEIL/Obj/fmc_ld_iap.bin"
+      },
+      "license": {
+        "status": "proprietary",
+        "expression": "LicenseRef-Nuvoton-Proprietary",
+        "type": "custom",
+        "confidence": "high"
+      },
+      "evidence": {
+        "source": "finalized-r51-license-package-and-exact-hash",
+        "evidenceFile": "Document/SBOM/evidence/fmc-iap-binaries.md",
+        "evidenceCompleteness": "exact-path-sha256-git-blob-and-packaged-license"
+      },
+      "cyclonedx": {
+        "licenses": [
+          {
+            "expression": "LicenseRef-Nuvoton-Proprietary"
+          }
+        ],
+        "properties": [
+          {
+            "name": "bsp:binary-license-status",
+            "value": "proprietary"
+          },
+          {
+            "name": "bsp:binary-license-evidence",
+            "value": "Document/SBOM/evidence/fmc-iap-binaries.md"
+          },
+          {
+            "name": "bsp:license-match-method",
+            "value": "sha256"
+          }
+        ]
+      }
+    },
+    {
+      "id": "m030g-fmc-iap-62c979310399",
+      "componentName": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin",
+      "componentType": "file",
+      "origin": "first-party",
+      "usage": "test-sample firmware image",
+      "sbomScope": "Test Sample SBOM",
+      "projection": {
+        "bsps": [
+          "M030GBSP"
+        ],
+        "releases": [
+          "V3.04.000-28-gf5d1bb9d"
+        ]
+      },
+      "match": {
+        "sha256": "62c9793103992e77335d494b44bf7103e6d57975b31e0825f5ad26d430125f9c",
+        "fileName": "fmc_ld_iap.bin",
+        "pathHint": "SampleCode/StdDriver/FMC_IAP/VSCode/bin/fmc_ld_iap.bin"
+      },
+      "license": {
+        "status": "proprietary",
+        "expression": "LicenseRef-Nuvoton-Proprietary",
+        "type": "custom",
+        "confidence": "high"
+      },
+      "evidence": {
+        "source": "finalized-r51-license-package-and-exact-hash",
+        "evidenceFile": "Document/SBOM/evidence/fmc-iap-binaries.md",
+        "evidenceCompleteness": "exact-path-sha256-git-blob-and-packaged-license"
+      },
+      "cyclonedx": {
+        "licenses": [
+          {
+            "expression": "LicenseRef-Nuvoton-Proprietary"
+          }
+        ],
+        "properties": [
+          {
+            "name": "bsp:binary-license-status",
+            "value": "proprietary"
+          },
+          {
+            "name": "bsp:binary-license-evidence",
+            "value": "Document/SBOM/evidence/fmc-iap-binaries.md"
+          },
+          {
+            "name": "bsp:license-match-method",
+            "value": "sha256"
+          }
+        ]
+      }
+    }
+  ]
+}

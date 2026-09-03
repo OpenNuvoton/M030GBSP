@@ -1,34 +1,45 @@
 {
   "manifestFormat": "MCU-BSP-SBOM-Manifest",
   "manifestVersion": "1.0",
-  "serialNumber": "urn:uuid:58ac6427-d8b5-4be4-847e-19b8e315aff4",
-  "createdAt": "2026-09-02T00:55:52.700730Z",
+  "serialNumber": "urn:uuid:741b6a12-ea2a-4bdc-960e-29e0380b5154",
+  "createdAt": "2026-09-02T06:59:25.899105Z",
   "bsp": {
     "name": "M030GBSP",
-    "version": "V3.04.000-27-gfcbbddf8",
+    "version": "V3.04.000-28-gf5d1bb9d",
     "releaseIdentifierSource": "git describe --tags --always --long --abbrev=8 --dirty",
-    "gitDescribe": "V3.04.000-27-gfcbbddf8",
-    "gitCommit": "fcbbddf8decb5ca45c92a52953315f048f7c452d",
+    "gitDescribe": "V3.04.000-28-gf5d1bb9d",
+    "gitCommit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
     "sourceTreeState": "clean",
-    "sourceCommit": "fcbbddf8decb5ca45c92a52953315f048f7c452d",
-    "sourceCommitStatus": "merged",
-    "sourceGerritChange": 16789,
-    "sourceGerritChangeId": "I306307f8fca8cfb74c378cf356f53e6d18234d1e",
-    "sourceBranch": "master",
-    "canonicalReleaseIdentity": "V3.04.000-27-gfcbbddf8",
-    "canonicalIdentityBasis": {
-      "anchor": "V3.04.000",
-      "commitCountFromAnchor": 27,
-      "sourceAbbreviation": "fcbbddf8",
-      "tagRefsPresent": true
-    },
-    "svnDistribution": {
-      "path": "bsp/m030g/V3.04.000-27-gfcbbddf8",
-      "revision": 51,
-      "publicationState": "committed-final"
-    },
-    "gitArtifactDistributionCommit": "containing-commit",
-    "gitArtifactDistributionPolicy": "Current canonical Product, Test Sample, and Manifest files are synchronized from the finalized formal release by the containing Git commit. The containing commit identifier is intentionally not embedded to avoid a self-reference loop."
+    "scanSourceCommit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
+    "generationCommit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
+    "releaseCommit": null,
+    "distributionCommit": null,
+    "provenanceRoles": {
+      "scanSource": {
+        "commit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
+        "status": "fixed-baseline"
+      },
+      "generation": {
+        "commit": "f5d1bb9d41f925d9bfb521c41fa1331689da7b01",
+        "status": "generated-from-fixed-baseline"
+      },
+      "release": {
+        "commit": null,
+        "status": "not_created"
+      },
+      "distribution": {
+        "commit": null,
+        "status": "not_created"
+      },
+      "svnReferencePackage": {
+        "revision": 51,
+        "status": "read-only-authority",
+        "purpose": "license agreement and prior finalized package evidence only",
+        "agreementLocator": "http://nthcrdvss01.nuvoton.com:9443/svn/SBOM/bsp/m030g/V3.04.000-27-gfcbbddf8/Nuvoton%20Software%20License%20Agreement.md@51",
+        "agreementSha256": "8c61cd7eb3a4bd8693bb3678c57c9568d328ad661dc5f4682fcf306644dcf9fe",
+        "agreementCopiedToGit": false
+      }
+    }
   },
   "generationTools": [
     {
@@ -67,14 +78,14 @@
       "sbomType": "Product SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:f041467a-6868-4669-a5e9-e5306edd62a9",
+      "serialNumber": "urn:uuid:cf64ce84-4bbe-4304-b86d-923c128b78dc",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T08:55:40+08:00",
+      "generatedTimestamp": "2026-09-02T14:59:18+08:00",
       "metadataComponent": {
-        "bomRef": "ad8f90cf8f94ed8a",
+        "bomRef": "51fc635bfee1e6db",
         "type": "library",
         "name": "MCU Driver",
-        "version": "V3.04.000-27-gfcbbddf8",
+        "version": "V3.04.000-28-gf5d1bb9d",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -86,7 +97,7 @@
           },
           {
             "name": "bsp:scope-policy-file",
-            "value": "product-scope.yaml"
+            "value": "Document/SBOM/product-scope.yaml"
           },
           {
             "name": "bsp:runtime-scope",
@@ -133,17 +144,18 @@
       "scope": "Components included in, linked with, deployed to, or reasonably expected to be integrated into final product firmware/software.",
       "isProductRuntimeScope": true,
       "componentSummary": {
-        "componentCount": 3,
+        "componentCount": 13,
         "componentCountByType": {
-          "library": 3
+          "file": 9,
+          "library": 4
         },
         "applicationNames": [],
-        "fileComponentCount": 0,
-        "fileComponentWithHashCount": 0
+        "fileComponentCount": 9,
+        "fileComponentWithHashCount": 9
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "6caf954341ee830c597a4e9154a1093ef0147f4de31ba3c9d0dc4df9fdeee1f4"
+        "value": "92c9ddb91bafeeb96e64fff81c59d917825b89ea4969c06d807e5304c25e0cf3"
       }
     },
     {
@@ -151,14 +163,14 @@
       "sbomType": "Test Sample SBOM",
       "bomFormat": "CycloneDX",
       "specVersion": "1.6",
-      "serialNumber": "urn:uuid:636f585d-62d8-4f0b-86f2-fd6fc6346b50",
+      "serialNumber": "urn:uuid:d0507507-23a5-4bcf-b937-fd067c12414a",
       "sbomVersion": 1,
-      "generatedTimestamp": "2026-09-02T08:55:49+08:00",
+      "generatedTimestamp": "2026-09-02T14:59:23+08:00",
       "metadataComponent": {
-        "bomRef": "147ee2acbbf8b669",
+        "bomRef": "7246e2dafea98142",
         "type": "application",
         "name": "MCU Test Sample",
-        "version": "V3.04.000-27-gfcbbddf8",
+        "version": "V3.04.000-28-gf5d1bb9d",
         "properties": [
           {
             "name": "bsp:sbom-category",
@@ -170,7 +182,7 @@
           },
           {
             "name": "bsp:scope-policy-file",
-            "value": "test-sample-scope.yaml"
+            "value": "Document/SBOM/test-sample-scope.yaml"
           },
           {
             "name": "bsp:runtime-scope",
@@ -210,7 +222,7 @@
       },
       "hash": {
         "algorithm": "SHA-256",
-        "value": "d682af03482659c479d889c745736dfbef4ed60a7d0229841b50786208156e28"
+        "value": "7e6b5706500b13d994bdc5cb8377869577124b2b4b5de94df7b20ce9aed2ba5d"
       },
       "relationshipToProductSbom": {
         "usesProductComponents": true,
@@ -230,138 +242,86 @@
     "Components in the Test Sample SBOM are not considered product firmware/runtime dependencies unless explicitly integrated by the user."
   ],
   "notes": [
-    "This manifest is an index for the SBOM package; it is not a merged CycloneDX BOM."
+    "This manifest indexes durable current SBOM records; it is not a merged CycloneDX BOM or a release package.",
+    "Generated scanner, checker, checksum, and validation execution artifacts are intentionally not stored in the BSP repository."
   ],
-  "validationEvidence": {
-    "formalPackageAudit": {
-      "status": "PASS",
-      "gapCount": 0,
-      "gaps": [],
-      "checks": [
-        "identity",
-        "generationTools",
-        "productReferences",
-        "testSampleReferences",
-        "manifest",
-        "applicabilityClosure",
-        "checkerReports",
-        "binaryClosure",
-        "manualAndLicenseEvidence",
-        "scans",
-        "absolutePaths",
-        "checksums"
-      ]
-    },
-    "cycloneDx": {
-      "specVersion": "1.6",
-      "validated": 2,
-      "passed": 2
-    },
-    "strictChecker": {
-      "validated": 2,
-      "passed": 2,
-      "errors": 0,
-      "warnings": 0
-    },
-    "binaryExactClosure": {
-      "trackedPaths": 4,
-      "matchedRepositoryRelativePathsAndSha256": 4,
-      "gaps": 0
-    },
-    "manualAndLicenseEvidence": {
-      "includedManualSourceComponents": {
-        "components": 1,
-        "matchedSbomComponents": 1,
-        "sourceAndLicenseEvidenceValidated": 1
-      },
-      "binaryComponents": {
-        "components": 4,
-        "matchedExactPathsAndSha256": 4,
-        "licenseEvidenceReferencesValidated": 4
-      },
-      "excludedSourceReview": {
-        "records": 1,
-        "sourceFileHashesValidated": 2,
-        "reviewStatus": "pending"
-      },
-      "gaps": 0
-    },
-    "grype": {
-      "scannerVersion": "0.117.0",
-      "rawSchema": {
-        "format": "Grype JSON",
-        "requiredTopLevelFields": [
-          "matches",
-          "source",
-          "distro",
-          "descriptor"
-        ],
-        "reportsValidated": 2
-      },
-      "database": {
-        "schemaVersion": "v6.1.9",
-        "built": "2026-08-31T06:37:31Z",
-        "valid": true
-      },
-      "product": {
-        "path": "vulnerability-scan/grype_M030GBSP_Product_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
-        "sha256": "b590bd9ece5b8f18b0e99d823abca82f5ff38907eea0c2888af5c0546196e32e",
-        "target": "M030GBSP_Product_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
-        "timestamp": "2026-09-02T08:55:55.9579694+08:00",
-        "matches": 0,
-        "severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "negligible": 0,
-          "unknown": 0
-        },
-        "findings": []
-      },
-      "testSample": {
-        "path": "vulnerability-scan/grype_M030GBSP_TestSample_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
-        "sha256": "67487939c9da9a3c4becdb090f7262f015b7a097b4434a74a8b8b5441e55430c",
-        "target": "M030GBSP_TestSample_SBOM_V3.04.000-27-gfcbbddf8.cdx.json",
-        "timestamp": "2026-09-02T08:55:54.3121808+08:00",
-        "matches": 0,
-        "severity": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "negligible": 0,
-          "unknown": 0
-        },
-        "findings": []
-      },
-      "coverageLimitation": "CycloneDX input can omit identifiers required for vulnerability matching; offline or stale databases further limit coverage. Zero matches is not evidence that the BSP is clean or that the assessment is complete."
-    },
-    "securityStatus": {
-      "findingsDisclosure": "Raw Product and Test Sample reports are preserved without deletion, hiding, filtering, or severity downgrade.",
-      "findingDisposition": "not asserted",
-      "productSecurityDisposition": "not asserted",
-      "productSecurityApproval": "not asserted",
-      "psirtApproval": "not asserted",
-      "vexApplicability": "not asserted",
-      "vexPublished": false,
-      "notAffectedAssertions": 0
-    },
-    "integrity": {
-      "formalPayloadChecksums": "PASS (22/22)",
-      "manifestReferencesAndHashes": "PASS (2/2)",
-      "absolutePaths": 0
-    }
+  "lifecycle": {
+    "kind": "current-sbom-record",
+    "technicalValidation": "validated",
+    "releaseDecision": "BLOCKED_EXTERNAL",
+    "releaseCommit": null,
+    "distributionCommit": null
   },
-  "artifactSynchronization": {
-    "sourceRelease": "V3.04.000-27-gfcbbddf8",
-    "distributionPath": "bsp/m030g/V3.04.000-27-gfcbbddf8",
-    "distributionRevision": 51,
-    "formalManifestSha256": "c078739a340f8bf96eaaf25349532c02706779c78f692aee0c5c63cfeb9cd919",
-    "productPayloadSha256": "6caf954341ee830c597a4e9154a1093ef0147f4de31ba3c9d0dc4df9fdeee1f4",
-    "testSamplePayloadSha256": "d682af03482659c479d889c745736dfbef4ed60a7d0229841b50786208156e28",
-    "payloadIdentity": "Product and Test Sample current canonical files are byte-identical to the finalized formal payloads.",
-    "manifestIdentity": "Current Manifest preserves formal metadata and validation evidence while using current canonical filenames and final distribution trace.",
-    "selfReferencePolicy": "The containing artifact commit identifier is not embedded in this Manifest."
+  "knownUnknowns": [
+    {
+      "id": "MS00-006-APROM-SCT-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/ARM/APROM.sct",
+      "sha256": "7c34d7a8dbe95a8bd60b4b0611fb81512db8cdb7655feb765dd494f706023ea8",
+      "gitBlobSha": "424473f066336de5c07caabe8700d52713a35278",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-006-LDROM-SCT-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/ARM/LDROM.sct",
+      "sha256": "f1c421848135a2ab04e61e49d83269bc090564f33e8100396d62e8945c47ece7",
+      "gitBlobSha": "ee83d03276cfbc4bc6c802e601ad2f527241dcac",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-006-GCC-ARM-LD-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/GCC/gcc_arm.ld",
+      "sha256": "e3651fbd1c4effc6e5f36090d620a51bc7e7db2e0e457a4a929f5490e385c1bf",
+      "gitBlobSha": "c89c66650e8aa5c677154edc17b9673a2cb0e60d",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-006-LDROM-LD-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/GCC/LDROM.ld",
+      "sha256": "1ee51de0ba2762f19e6ea32213f3791cda4618f22789f23f03c85f3a2bc9bb28",
+      "gitBlobSha": "9250f559120b9bcc7f1f3b216a495e5c6391c91b",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-006-SYSCALLS-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c",
+      "sha256": "bc01f2e8a9b9d568fa40c74d75194c919eaf4859da7cbf352a2a3005c396719f",
+      "gitBlobSha": "63b2034dad7916e240b0b9cb8c7aa696db804fb2",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-006-SEMIHOSTING-LICENSE",
+      "path": "Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h",
+      "sha256": "1f28eb5ea069c0bcade5ef4240aaa28687788c3747e5bf226cd37814955420b4",
+      "gitBlobSha": "0c60551b5acf35c1baf6bc758dd73b614d610219",
+      "status": "legal-review-pending",
+      "requiredDecision": "Legal must establish an authoritative license conclusion and redistribution obligations for this exact file before release."
+    },
+    {
+      "id": "MS00-PSIRT-VEX-ASSESSMENT",
+      "type": "product-security-psirt",
+      "status": "not_assessed",
+      "vex": "not_assessed",
+      "releaseBlocking": true,
+      "requiredDecision": "PSIRT/Product Security assessment is required before any vulnerability or VEX release claim."
+    }
+  ],
+  "blockerSummary": {
+    "totalReleaseBlockers": 7,
+    "legalBlockers": 6,
+    "productSecurityPsirtBlockers": 1
+  },
+  "durableEvidence": {
+    "artifactInventory": "Document/SBOM/inventory/artifact-inventory.json",
+    "aggregateInventory": "Document/SBOM/inventory/aggregate-inventory.json",
+    "licenseDefinitions": "Document/SBOM/license-definitions.json",
+    "binaryLicenseProjection": "Document/SBOM/license-evidence/binary-license-database.json",
+    "deviceLicenseReview": "Document/SBOM/evidence/device-license-review.md",
+    "fmcIapBinaryEvidence": "Document/SBOM/evidence/fmc-iap-binaries.md",
+    "vulnerabilityScanSummary": "Document/SBOM/vulnerability-scan-summary.md"
   }
 }

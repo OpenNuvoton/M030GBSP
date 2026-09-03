@@ -49,7 +49,7 @@ This document records manual SCA evidence for GCC semihosting and syscall suppor
 ## 5) CycloneDX Modeling Guidance
 
 - Represent the delivered files as one manual mixed-origin component for inventory and review tracking.
-- Use component version `NOASSERTION` because the exact upstream revision is unknown.
+- Use component version `NOASSERTION` because the exact upstream revision is not identified.
 - Do not assign `Apache-2.0` based only on the parent Nuvoton Device directory.
 - Do not convert the incomplete GPL wording into a specific SPDX expression.
 - Preserve the actual SHA-256 hash of each evidence file in component properties.
