@@ -1,29 +1,53 @@
-# M030G BSP
+# M030G Series CMSIS BSP
 
-The M030G Board Support Package provides device support, peripheral drivers,
-startup code, and sample projects for Nuvoton M030G microcontrollers.
+This BSP folder
 
-## Repository Contents
 
-- `Library/CMSIS`: Arm CMSIS headers, interfaces, and support files.
-- `Library/Device`: M030G device headers, startup code, and system files.
-- `Library/StdDriver`: M030G peripheral driver headers and sources.
-- `SampleCode`: Toolchain projects and examples for M030G peripherals and
-  device features.
-- `Document`: BSP documentation and software component evidence.
+## .\Document\
 
-## Getting Started
+- CMSIS.html<br>
+	Document of CMSIS version 6.1.0.
 
-Refer to `Readme.pdf` and the files under `Document` for supported devices,
-toolchain requirements, configuration, and example usage.
+- NuMicro M029G_M030G_M031G Driver Reference Guide.chm<br>
+	This document describes the usage of drivers in M030G BSP.
 
-## Software Bill of Materials
+- NuMicro M029G_M030G_M031G Series CMSIS BSP Revision History.pdf<br>
+	This document shows the revision history of M030G BSP.
 
-The repository includes separate CycloneDX 1.6 Product and Test Sample SBOMs:
 
-- `M030GBSP_Product_SBOM_cdx.json`
-- `M030GBSP_TestSample_SBOM_cdx.json`
-- `M030GBSP_SBOM_Manifest.json`
+## .\Library\
 
-SBOM scope policies and component evidence are maintained under
-`Document/SBOM`.
+- CMSIS<br>
+	Cortex Microcontroller Software Interface Standard (CMSIS) V6.1.0 definitions by Arm.
+
+- Device<br>
+	CMSIS compliant device header and startup files.
+
+- StdDriver<br>
+	All peripheral driver header and source files.
+
+
+## .\Sample Code\
+
+- Hard\_Fault\_Sample<br>
+	Sample project for hard fault handling.
+
+- ISP<br>
+	Sample codes for In-System Programming.
+
+- Semihost<br>
+	Sample code for semihosting through an IDE console.
+
+- StdDriver<br>
+	Sample code to demonstrate the usage of M030G series MCU peripheral driver APIs.
+
+- Template<br>
+	A project template for M030G series MCU.
+
+# License
+
+**SPDX-License-Identifier: Apache-2.0**
+
+Copyright in some of the content available in this BSP belongs to third parties.
+Third parties license is specified in a file header or license file.<p>
+Files identified as Apache-2.0 in their headers are provided under the Apache-2.0 license.

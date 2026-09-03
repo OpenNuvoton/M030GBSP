@@ -4,3 +4,8 @@ include:
 exclude:
   - path: Document/
   - path: Library/
+componentModel:
+  aggregateHashRecipe: sha256-path-nul-content-nul-v1
+  aggregateInventory: Document/SBOM/inventory/aggregate-inventory.json
+  aggregateLicense: LicenseRef-Mixed-Apache-2.0-and-Nuvoton-Proprietary
+  exactBinaryInventory: Document/SBOM/inventory/artifact-inventory.json

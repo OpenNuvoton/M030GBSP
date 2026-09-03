@@ -8,3 +8,24 @@ exclude:
   - path: SampleCode/
   - path: Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c
   - path: Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h
+componentModel:
+  aggregateHashRecipe: sha256-path-nul-content-nul-v1
+  aggregateInventory: Document/SBOM/inventory/aggregate-inventory.json
+  nonOverlappingAggregates:
+    - Library/CMSIS
+    - Library/StdDriver
+    - Library/Device/Nuvoton/M030G/Include
+    - Library/Device/Nuvoton/M030G/Source/IAR
+  exactFileComponents:
+    - Library/Device/Nuvoton/M030G/Source/semihost.s
+    - Library/Device/Nuvoton/M030G/Source/system_M030G.c
+    - Library/Device/Nuvoton/M030G/Source/ARM/APROM.sct
+    - Library/Device/Nuvoton/M030G/Source/ARM/LDROM.sct
+    - Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.c
+    - Library/Device/Nuvoton/M030G/Source/ARM/startup_M030G.s
+    - Library/Device/Nuvoton/M030G/Source/GCC/gcc_arm.ld
+    - Library/Device/Nuvoton/M030G/Source/GCC/LDROM.ld
+    - Library/Device/Nuvoton/M030G/Source/GCC/startup_M030G.S
+  excludedSubpaths:
+    - Library/Device/Nuvoton/M030G/Source/GCC/_syscalls.c
+    - Library/Device/Nuvoton/M030G/Source/GCC/semihosting.h

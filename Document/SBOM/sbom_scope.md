@@ -22,6 +22,18 @@ Drivers, device support files, startup code, linker configuration, libraries, bi
 
 Arm CMSIS under `Library/CMSIS` is a third-party Product component. The delivered CMSIS package version is 6.1.0 and its license is Apache-2.0. Manual evidence is stored under `Document/SBOM/components/ProductView`.
 
+All directory components use `sha256-path-nul-content-nul-v1`. Their exact
+path base, file count, aggregate digest, and per-file inventory are recorded in
+`Document/SBOM/inventory/aggregate-inventory.json`.
+The Product root reaches CMSIS and every other Product component, and every
+component has a dependency row.
+
+`Library/Device` is not represented as one aggregate because that would overlap
+the excluded `_syscalls.c` and `semihosting.h` paths. Non-overlapping Device
+directories and exact Device files are modeled separately. Four included linker
+control files and the two excluded semihosting files remain blocked pending an
+authoritative legal conclusion.
+
 ## Excluded GCC Semihosting Support Files
 
 The repository contains the following GCC semihosting support files:
@@ -62,7 +74,7 @@ Sample code, demonstration projects, validation code, project configuration, sam
 
 ## FMC IAP Binary Artifacts
 
-The FMC IAP sample contains four toolchain-specific `.bin` firmware images under `SampleCode/StdDriver/FMC_IAP`. These files are referenced by the corresponding sample projects and are Test Sample build artifacts. They are not Product runtime components. Each file is represented as a CycloneDX file component with its exact repository-relative path and SHA-256 hash.
+The FMC IAP sample contains four toolchain-specific `.bin` firmware images under `SampleCode/StdDriver/FMC_IAP`. These files are referenced by the corresponding sample projects and are Test Sample build artifacts. They are not Product runtime components. Each file is represented as a CycloneDX file component with its exact repository-relative path, SHA-256, Git blob SHA, and durable license evidence. The containing `SampleCode` aggregate is explicitly mixed-license and does not override its proprietary binary children.
 
 # Excluded Repository Content
 
@@ -76,17 +88,17 @@ M030G is not suitable for FreeRTOS integration in this BSP scope. The M030G BSP 
 
 GCC project files may select newlib-nano through toolchain options such as `--specs=nano.specs`. This is an external build-toolchain dependency and does not mean that the complete newlib or newlib-nano source package is distributed in the M030G BSP repository.
 
-# Canonical Validation Evidence
+# Current SBOM Validation State
 
-The structured aggregate audit is recorded in
-`M030GBSP_SBOM_Manifest.json`. It covers source and formal-artifact provenance,
-CycloneDX 1.6 validation, strict checker results, component references,
-manifest hashes, exact physical binary closure, manual and license evidence,
-raw Grype schema and metadata, absolute-path exclusion, and payload checksums.
-The recorded result is `PASS (0 gaps)`.
+The current Product and Test Sample SBOM records are technically validated but
+remain `BLOCKED_EXTERNAL`; a technical PASS does not clear legal or Product
+Security/PSIRT decisions. Exact blockers and required decisions are recorded in
+`M030GBSP_SBOM_Manifest.json`, with source-license evidence in
+`Document/SBOM/evidence/device-license-review.md`.
 
-The exact Product and Test Sample findings, severity counts, raw report
-identities and hashes, scanner and database metadata, coverage limitations,
-and security status are recorded in
-`Document/SBOM/vulnerability-scan-summary.md`. Zero Grype matches is not
-equivalent to a clean or complete security assessment.
+The Product and Test Sample scanner identity coverage, scanner and database
+metadata, coverage limitations, and security status are recorded in
+`Document/SBOM/vulnerability-scan-summary.md`. Zero Grype matches is
+identity-limited and is not equivalent to a clean or complete security
+assessment. Raw scanner and generated validation outputs are not stored in the
+BSP repository.
