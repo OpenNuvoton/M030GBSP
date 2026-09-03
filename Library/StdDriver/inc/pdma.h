@@ -141,7 +141,7 @@ extern "C"
  * @brief       Clear Transfer Done Interrupt Status
  *
  * @param[in]   pdma      The pointer of the specified PDMA module
- * @param[in]   u32Mask     The channel mask
+ * @param[in]   u32Mask   The channel mask
  *
  * @return      None
  *
@@ -166,7 +166,7 @@ extern "C"
  * @brief       Clear Target Abort Interrupt Status
  *
  * @param[in]   pdma      The pointer of the specified PDMA module
- * @param[in]   u32Mask     The channel mask
+ * @param[in]   u32Mask   The channel mask
  *
  * @return      None
  *
@@ -203,7 +203,7 @@ extern "C"
 /**
  * @brief       Clear Timeout Interrupt Status
  *
- * @param[in]   pdma        The pointer of the specified PDMA module
+ * @param[in]   pdma      The pointer of the specified PDMA module
  * @param[in]   u32Ch     The selected channel
  *
  * @return      None
@@ -216,7 +216,7 @@ extern "C"
 /**
  * @brief       Check Channel Status
  *
- * @param[in]   pdma        The pointer of the specified PDMA module
+ * @param[in]   pdma      The pointer of the specified PDMA module
  * @param[in]   u32Ch     The selected channel
  *
  * @retval      0 Idle state
@@ -225,7 +225,7 @@ extern "C"
  * @details     Check the selected channel is busy or not.
  * \hideinitializer
  */
-#define PDMA_IS_CH_BUSY(pdma, u32Ch) ((uint32_t)((pdma)->TRGSTS & (1UL << (u32Ch)))? 1 : 0)
+#define PDMA_IS_CH_BUSY(pdma, u32Ch) ((uint32_t)((pdma)->TRGSTS & (1UL << (u32Ch)))? 1UL : 0UL)
 
 /**
  * @brief       Set Source Address
