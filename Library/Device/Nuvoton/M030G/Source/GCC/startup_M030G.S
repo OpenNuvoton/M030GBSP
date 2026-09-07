@@ -281,16 +281,25 @@ Default_Handler:
 	b	.
 	.size	Default_Handler, . - Default_Handler
 
-/* HardFault handler: keep toolchain behavior consistent with ARM/IAR startup. */
+/* HardFault handler: keep toolchain behavior consistent with ARM/IAR startup.
+ * ProcessHardFault() is provided by retarget.c when that file is linked.
+ * Declare it as a weak undefined symbol so projects that do not use retarget.c
+ * can still link; an undefined weak symbol resolves to address 0.
+ */
+	.weak	ProcessHardFault
+
 	.align	1
 	.thumb_func
 	.weak	HardFault_Handler
 	.type	HardFault_Handler, %function
 HardFault_Handler:
+	ldr	r3, =ProcessHardFault
+	cmp	r3, #0
+	beq	Default_Handler
+
 	mov	r0, lr
 	mrs	r1, msp
 	mrs	r2, psp
-	ldr	r3, =ProcessHardFault
 	blx	r3
 	bx	r0
 	.size	HardFault_Handler, . - HardFault_Handler
