@@ -19,6 +19,9 @@ extern uint32_t __STACK_LIMIT;
 
 extern __NO_RETURN void __PROGRAM_START(void);
 
+/* Optional HardFault processing routine supplied by retarget.c. */
+extern uint32_t ProcessHardFault(uint32_t lr, uint32_t msp, uint32_t psp) __attribute__((weak));
+
 /*----------------------------------------------------------------------------
   Internal References
  *----------------------------------------------------------------------------*/
@@ -173,12 +176,14 @@ __NO_RETURN void Reset_Handler(void)
 __WEAK void HardFault_Handler(void)
 {
     __ASM(
-        "MOV     R0, LR  \n"
-        "MRS     R1, MSP \n"
-        "MRS     R2, PSP \n"
         "LDR     R3, =ProcessHardFault \n"
-        "BLX     R3 \n"
-        "BX      R0 \n"
+        "CMP     R3, #0               \n"
+        "BEQ     Default_Handler      \n"
+        "MOV     R0, LR               \n"
+        "MRS     R1, MSP              \n"
+        "MRS     R2, PSP              \n"
+        "BLX     R3                   \n"
+        "BX      R0                   \n"
     );
 }
 

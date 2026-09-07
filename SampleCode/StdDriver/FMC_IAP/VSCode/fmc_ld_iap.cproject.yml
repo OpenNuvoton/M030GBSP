@@ -42,7 +42,7 @@ project:
           C:
             - -std=gnu11 -mthumb -masm-syntax-unified -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections
           Link:
-            - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs --specs=nosys.specs
+            - -mthumb -fmessage-length=0 -fsigned-char --specs=nano.specs #--specs=nosys.specs
             - -Wl,--gc-sections,-Map="$elf()$.map"
   linker:
     - script: ../../../../Library/Device/Nuvoton/M030G/Source/ARM/LDROM.sct
@@ -60,6 +60,8 @@ project:
     - group: User
       files:
         - file: ../LDROM_main.c
+        - file: ./syscalls_stub.c
+          for-compiler: GCC
     - group: Library
       files:
         - file: ../../../../Library/StdDriver/src/sys.c
@@ -67,7 +69,7 @@ project:
 
   # The execute: node is processed only for an application build when no --context option is specified.
   executes:
-    - execute: Copy bin file
+    - execute: Copy_bin_file
       run: ${CMAKE_COMMAND} -E copy $input$ $output$
       always:
       input:
