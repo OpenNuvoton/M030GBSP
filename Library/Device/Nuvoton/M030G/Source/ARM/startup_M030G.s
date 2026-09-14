@@ -122,12 +122,17 @@ NMI_Handler     PROC
                 ENDP
 HardFault_Handler\
                 PROC
-                IMPORT  ProcessHardFault
-                EXPORT  HardFault_Handler         [WEAK]
+                IMPORT  ProcessHardFault           [WEAK]
+                EXPORT  HardFault_Handler          [WEAK]
+                LDR     R3, =ProcessHardFault
+                CMP     R3, #0
+                BNE     HardFault_Process
+                LDR     R3, =Default_Handler
+                BX      R3
+HardFault_Process
                 MOV     R0, LR
                 MRS     R1, MSP
                 MRS     R2, PSP
-                LDR     R3, =ProcessHardFault
                 BLX     R3
                 BX      R0
                 ENDP
