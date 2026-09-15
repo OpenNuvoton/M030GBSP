@@ -295,8 +295,13 @@ Default_Handler:
 HardFault_Handler:
 	ldr	r3, =ProcessHardFault
 	cmp	r3, #0
-	beq	Default_Handler
+	bne	.LHardFault_Process
 
+	/* Cortex-M0 conditional branches have a limited range. */
+	ldr	r3, =Default_Handler
+	bx	r3
+
+.LHardFault_Process:
 	mov	r0, lr
 	mrs	r1, msp
 	mrs	r2, psp

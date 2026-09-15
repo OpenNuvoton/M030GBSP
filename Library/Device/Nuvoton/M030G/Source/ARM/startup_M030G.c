@@ -178,7 +178,10 @@ __WEAK void HardFault_Handler(void)
     __ASM(
         "LDR     R3, =ProcessHardFault \n"
         "CMP     R3, #0               \n"
-        "BEQ     Default_Handler      \n"
+        "BNE     HardFault_Process    \n"
+        "LDR     R3, =Default_Handler \n"
+        "BX      R3                   \n"
+        "HardFault_Process:           \n"
         "MOV     R0, LR               \n"
         "MRS     R1, MSP              \n"
         "MRS     R2, PSP              \n"

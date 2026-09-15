@@ -99,7 +99,10 @@ Reset_Handler
 HardFault_Handler
         LDR     R3, =ProcessHardFault
         CMP     R3, #0
-        BEQ     Default_Handler
+        BNE     HardFault_Process
+        LDR     R3, =Default_Handler
+        BX      R3
+HardFault_Process
         MOV     R0, LR
         MRS     R1, MSP
         MRS     R2, PSP
